@@ -4,8 +4,10 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {afterEach, test} from 'node:test';
 import {
+  assertPortableRelativePath,
   artifactFacts,
   canonicalJson,
+  compareUtf8,
   deploymentFromProvenance,
   sha256,
   verifyArtifact,
@@ -43,6 +45,30 @@ test('uses the Website contract file ordering, routes, and digest formulas exact
     artifactSha256: '5b2ff318704836a1efa94de34f3424970e1dd5d485747b77546798f92fba32d0',
     routesSha256: '9da92a3a93820adece04268c7ca31b2997d4f0d6c43f896257973b2092e70741',
   });
+});
+
+test('matches the Website UTF-8 ordering and exact index route contract', async () => {
+  const root = await mkdtemp(path.join(tmpdir(), 'b10x-pages-order-'));
+  temporaryDirectories.push(root);
+  await mkdir(path.join(root, 'guide'), {recursive: true});
+  await Promise.all([
+    writeFile(path.join(root, 'a.html'), 'lowercase'),
+    writeFile(path.join(root, 'VISION.html'), 'uppercase'),
+    writeFile(path.join(root, 'myindex.html'), 'not a directory index'),
+    writeFile(path.join(root, 'guide/index.html'), 'directory index'),
+  ]);
+  const facts = await artifactFacts(root);
+  assert.deepEqual(facts.files.map((file) => file.path), ['VISION.html', 'a.html', 'guide/index.html', 'myindex.html']);
+  assert.deepEqual(facts.routes, ['/VISION.html', '/a.html', '/guide/', '/myindex.html']);
+  assert.deepEqual(['a', 'VISION'].sort(compareUtf8), ['VISION', 'a']);
+});
+
+test('matches the Website portable path rejection contract', () => {
+  assert.throws(() => assertPortableRelativePath('../escape.html'), /not canonical/);
+  assert.throws(() => assertPortableRelativePath('docs\\escape.html'), /not a portable relative path/);
+  assert.throws(() => assertPortableRelativePath('docs/next\u0085line.html'), /not a portable relative path/);
+  assert.throws(() => assertPortableRelativePath('docs/%2e%2e/escape.html'), /not a portable relative path/);
+  assert.throws(() => assertPortableRelativePath('.GitIgnore'), /forbidden Git metadata/);
 });
 
 test('requires byte-identical public provenance', async () => {

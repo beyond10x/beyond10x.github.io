@@ -31,6 +31,24 @@ export function canonicalJson(value) {
   return `${JSON.stringify(value, null, 2)}\n`;
 }
 
+export function compareUtf8(left, right) {
+  return Buffer.compare(Buffer.from(left, 'utf8'), Buffer.from(right, 'utf8'));
+}
+
+export function assertPortableRelativePath(value, label = 'path') {
+  if (typeof value !== 'string' || !value || value.startsWith('/') || value.includes('\\') || /[?#]/.test(value) || /%(?:2e|2f|5c)/i.test(value) || /\p{Cc}/u.test(value)) {
+    throw new Error(`${label} is not a portable relative path: ${String(value)}`);
+  }
+  const segments = value.split('/');
+  if (segments.some((segment) => !segment || segment === '.' || segment === '..')) {
+    throw new Error(`${label} is not canonical: ${value}`);
+  }
+  if (segments.some((segment) => ['.git', '.gitattributes', '.gitignore'].includes(segment.toLowerCase()))) {
+    throw new Error(`${label} contains forbidden Git metadata: ${value}`);
+  }
+  return value;
+}
+
 export function deploymentFromProvenance(provenance) {
   return {
     schema: 'b10x-docs-deployment/v1',
@@ -53,7 +71,7 @@ export async function artifactFacts(root) {
     const bytes = await readFile(file.absolute);
     files.push({path: file.relative, sha256: sha256(bytes), size: bytes.byteLength});
   }
-  files.sort((left, right) => left.path.localeCompare(right.path));
+  files.sort((left, right) => compareUtf8(left.path, right.path));
   const routes = files
     .map((file) => file.path)
     .filter((file) => file.endsWith('.html') && file !== '404.html')
@@ -62,7 +80,7 @@ export async function artifactFacts(root) {
       : file.endsWith('/index.html')
         ? `/${file.slice(0, -'index.html'.length)}`
         : `/${file}`)
-    .sort();
+    .sort(compareUtf8);
   return {
     files,
     routes,
@@ -152,11 +170,12 @@ export async function verifyArtifact(root) {
 async function walk(root, directory = root) {
   const output = [];
   const entries = await readdir(directory, {withFileTypes: true});
-  entries.sort((left, right) => left.name.localeCompare(right.name));
+  entries.sort((left, right) => compareUtf8(left.name, right.name));
   for (const entry of entries) {
     const absolute = path.join(directory, entry.name);
     const relative = path.relative(root, absolute).split(path.sep).join('/');
     if (relative === '.git') continue;
+    assertPortableRelativePath(relative, 'artifact path');
     const stat = await lstat(absolute);
     if (stat.isSymbolicLink()) throw new Error(`artifact contains a symbolic link: ${relative}`);
     if (stat.isDirectory()) output.push(...await walk(root, absolute));
@@ -196,8 +215,8 @@ function requirePlainObject(value, label) {
 }
 
 function assertExactKeys(value, expected, label) {
-  const actual = Object.keys(value).sort();
-  const wanted = [...expected].sort();
+  const actual = Object.keys(value).sort(compareUtf8);
+  const wanted = [...expected].sort(compareUtf8);
   if (actual.join('\n') !== wanted.join('\n')) {
     throw new Error(`${label} has unexpected or missing fields`);
   }
@@ -213,7 +232,7 @@ function validateSourceCommits(sourceCommits) {
   requirePlainObject(sourceCommits, 'sourceCommits');
   const repositories = Object.keys(sourceCommits);
   if (repositories.length === 0) throw new Error('sourceCommits must not be empty');
-  if (repositories.join('\n') !== [...repositories].sort().join('\n')) {
+  if (repositories.join('\n') !== [...repositories].sort(compareUtf8).join('\n')) {
     throw new Error('sourceCommits must be sorted by repository name');
   }
   for (const repository of repositories) {

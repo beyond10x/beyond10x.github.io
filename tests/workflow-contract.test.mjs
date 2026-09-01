@@ -11,25 +11,22 @@ test('deployment remains a manual bot-only action from main', () => {
   assert.match(workflow, /^on:\n  workflow_dispatch:/m);
   assert.doesNotMatch(workflow, /^\s{2}(?:push|pull_request|schedule):/m);
   assert.match(workflow, /github\.actor == 'b10x-bot\[bot\]'/);
+  assert.match(workflow, /github\.triggering_actor == 'b10x-bot\[bot\]'/);
   assert.match(workflow, /github\.ref == 'refs\/heads\/main'/);
+  assert.match(workflow, /github\.sha == inputs\.control_sha/);
 });
 
-test('all actions stay pinned to the accepted immutable revisions', () => {
-  assert.equal(count('actions/checkout@11d5960a326750d5838078e36cf38b85af677262'), 2);
-  assert.equal(count('actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b'), 1);
-  assert.equal(count('actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa'), 1);
-  assert.equal(count('actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e'), 1);
+test('the caller pins the accepted immutable Website deployment runtime', () => {
+  assert.equal(count('beyond10x/website/.github/workflows/deploy-root.yml@e82b2aaaadaac27436fc0e72528c4a47999a0395'), 1);
+  assert.equal(count('uses:'), 1);
+  assert.match(workflow, /permissions: \{\}/);
+  assert.match(workflow, /control_sha: \$\{\{ inputs\.control_sha \}\}/);
 });
 
-test('controls and immutable artifact use separate checkouts and only _site is uploaded', () => {
-  assert.match(workflow, /ref: \$\{\{ github\.sha \}\}\n\s+path: \.deployment-controls/);
-  assert.match(workflow, /ref: \$\{\{ inputs\.published_sha \}\}\n\s+path: _site/);
-  assert.match(workflow, /verify-git-boundary\.sh/);
-  assert.match(workflow, /verify-artifact\.mjs _site/);
-  assert.match(workflow, /repos\/beyond10x\/website\/commits\/\$WEBSITE_COMMIT/);
-  assert.match(workflow, /b10x-pages-verification\/website-commit\.json/);
-  assert.match(workflow, /actions\/upload-pages-artifact@[0-9a-f]{40}[\s\S]*?with:\n\s+path: _site/);
-  assert.doesNotMatch(workflow, /persist-credentials:\s+true/);
+test('the minimal caller contains no executable steps or mutable action refs', () => {
+  assert.doesNotMatch(workflow, /^\s+steps:/m);
+  assert.doesNotMatch(workflow, /\brun:/);
+  assert.doesNotMatch(workflow, /uses: .*@(main|master|v\d+)/);
 });
 
 function count(value) {
