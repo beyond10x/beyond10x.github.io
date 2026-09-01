@@ -49,7 +49,7 @@ jobs:
           test -f PROVENANCE.json
           test -f .well-known/b10x-docs.json
           test "$(git rev-parse HEAD)" = "$PUBLISHED_SHA"
-          jq -e '.website.commit | test("^[0-9a-f]{40}$")' PROVENANCE.json >/dev/null
+          jq -e '.websiteCommit | test("^[0-9a-f]{40}$")' PROVENANCE.json >/dev/null
           jq -e '.routes | type == "array" and length > 0' .well-known/b10x-docs.json >/dev/null
 
       - name: Configure Pages
