@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_beyond10x_website=self.webpackChunk_beyond10x_website||[]).push([["2853"],{90884(e,s,b){b.d(s,{createTreemapServices:()=>a.d});var a=b(16527);b(4954)}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_beyond10x_website=self.webpackChunk_beyond10x_website||[]).push([["3220"],{1912(e){e.exports=JSON.parse('{"blogBasePath":"/updates/field-notes","blogTitle":"Field notes","authorsListPath":"/updates/field-notes/authors"}')}}]);

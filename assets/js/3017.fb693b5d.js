@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_beyond10x_website=self.webpackChunk_beyond10x_website||[]).push([["3017"],{37632(e,s,b){b.d(s,{createWardleyServices:()=>a.J});var a=b(9427);b(4954)}}]);
