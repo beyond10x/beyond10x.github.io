@@ -21,8 +21,21 @@ Organization-wide policy and publication credentials remain in private Atlas.
 
 ## Gate
 
-Before dispatching deployment, verify that the selected artifact commit contains valid
-`PROVENANCE.json` and `._b10x/deployment.json`, and that their artifact and route-map digests agree.
+Run `bash scripts/gate.sh` for every deployment-control change. Before dispatching deployment, the
+workflow must verify that the requested immutable commit is the current `published` branch head,
+that GitHub and Git metadata attribute both authorship roles on both the publication and Website
+commits to `b10x-bot[bot]`, and that the declared Website commit exists in the ancestry of
+`beyond10x/website` `main`.
+
+The selected artifact must contain byte-identical canonical `PROVENANCE.json` and
+`.well-known/b10x-docs.json` plus exact `._b10x/deployment.json` metadata. Independently recompute
+the payload inventory, route inventory, and their digests; require nonempty rooted routes and
+agreement for the Website commit, source-lock digest, legacy-route digest, route digest, artifact
+digest, and all declared counts. Read `sources.lock.json` and `legacy-routes.json` from that exact
+Website commit to ground both input digests; require the accepted schemas, the exact sorted
+19-repository roster, and exact agreement between locked commits and `sourceCommits`. Bootstrap
+artifacts are not publishable.
+
 After deployment, verify `https://beyond10x.github.io/.well-known/b10x-docs.json` and the complete
 declared route set through Atlas.
 
