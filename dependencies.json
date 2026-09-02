@@ -82,6 +82,10 @@
       "label": "Workflow"
     },
     {
+      "id": "workspace",
+      "label": "Workspace"
+    },
+    {
       "id": "worktree",
       "label": "Worktree"
     }
@@ -170,6 +174,11 @@
     {
       "from": "devcenter",
       "to": "secrets",
+      "label": "uses"
+    },
+    {
+      "from": "devcenter",
+      "to": "workspace",
       "label": "uses"
     },
     {
@@ -345,6 +354,11 @@
     {
       "from": "website",
       "to": "workflow",
+      "label": "introduces"
+    },
+    {
+      "from": "website",
+      "to": "workspace",
       "label": "introduces"
     },
     {
