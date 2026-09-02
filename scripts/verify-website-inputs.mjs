@@ -10,6 +10,7 @@ export const sourceRepositories = Object.freeze([
   'aep-service',
   'agent-platform',
   'agentic-principles',
+  'agentide',
   'agentplugins',
   'connectors',
   'devcenter',
@@ -55,7 +56,7 @@ export async function verifyWebsiteInputs(provenancePath, sourcesLockPath, legac
   const actualRepositories = sourcesLock.sources.map((source) => source?.repository);
   if (actualRepositories.length !== sourceRepositories.length
     || actualRepositories.join('\n') !== sourceRepositories.join('\n')) {
-    throw new Error('Website source lock does not contain the exact sorted 21-repository roster');
+    throw new Error('Website source lock does not contain the exact sorted 22-repository roster');
   }
 
   const lockedCommits = {};
