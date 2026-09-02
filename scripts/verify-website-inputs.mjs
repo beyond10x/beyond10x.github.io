@@ -19,11 +19,13 @@ export const sourceRepositories = Object.freeze([
   'eventlog',
   'harness',
   'identity',
+  'mcp',
   'metaharness',
   'research',
   'secrets',
   'substrate',
   'workflow',
+  'workspace',
   'worktree',
 ]);
 
@@ -53,7 +55,7 @@ export async function verifyWebsiteInputs(provenancePath, sourcesLockPath, legac
   const actualRepositories = sourcesLock.sources.map((source) => source?.repository);
   if (actualRepositories.length !== sourceRepositories.length
     || actualRepositories.join('\n') !== sourceRepositories.join('\n')) {
-    throw new Error('Website source lock does not contain the exact sorted 19-repository roster');
+    throw new Error('Website source lock does not contain the exact sorted 21-repository roster');
   }
 
   const lockedCommits = {};
