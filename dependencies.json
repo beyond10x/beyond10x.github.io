@@ -18,6 +18,10 @@
       "label": "Agentic Principles"
     },
     {
+      "id": "agentide",
+      "label": "AgentIDE"
+    },
+    {
       "id": "agentplugins",
       "label": "Agent Plugins"
     },
@@ -142,6 +146,16 @@
       "label": "informs"
     },
     {
+      "from": "agentide",
+      "to": "ess",
+      "label": "uses"
+    },
+    {
+      "from": "agentide",
+      "to": "harness",
+      "label": "uses"
+    },
+    {
       "from": "agentplugins",
       "to": "aep",
       "label": "supports"
@@ -164,6 +178,21 @@
     {
       "from": "connectors",
       "to": "identity",
+      "label": "uses"
+    },
+    {
+      "from": "devcenter",
+      "to": "agent-platform",
+      "label": "uses"
+    },
+    {
+      "from": "devcenter",
+      "to": "connectors",
+      "label": "uses"
+    },
+    {
+      "from": "devcenter",
+      "to": "eventlog",
       "label": "uses"
     },
     {
@@ -279,6 +308,11 @@
     {
       "from": "website",
       "to": "agentic-principles",
+      "label": "introduces"
+    },
+    {
+      "from": "website",
+      "to": "agentide",
       "label": "introduces"
     },
     {
