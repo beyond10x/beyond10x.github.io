@@ -27,9 +27,11 @@ Run `bash scripts/gate.sh` for every deployment-control change. Before dispatchi
 pinned Website runtime must verify that the requested immutable commit is the current `published` branch head,
 that the supplied control SHA is the exact `main` commit executing the workflow and both the
 original and rerun-triggering actor are `b10x-bot[bot]`,
-that GitHub and Git metadata attribute both authorship roles on both the publication and Website
-commits to `b10x-bot[bot]`, and that the declared Website commit exists in the ancestry of
-`beyond10x/website` `main`.
+that GitHub and Git metadata attribute authorship to `b10x-bot[bot]` and attribute the committer
+either to the bot directly or to a verified two-parent `web-flow` merge authored by the bot, and
+that the declared Website commit exists in the ancestry of `beyond10x/website` `main`. The merge
+case is admitted only behind the Atlas-verified App-only branch authority; never add an empty
+attestation commit to replace it.
 
 The selected artifact must contain byte-identical canonical `PROVENANCE.json` and
 `.well-known/b10x-docs.json` plus exact `._b10x/deployment.json` metadata. Independently recompute
