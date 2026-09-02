@@ -5,19 +5,18 @@
   "feed_url": "https://beyond10x.github.io/changes/feed.json",
   "items": [
     {
-      "id": "agentplugins/0.3.3",
-      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.3",
-      "title": "Agent Plugins 0.3.3",
-      "content_text": "Agent Plugins released version 0.3.3.",
-      "date_published": "2026-09-02T02:57:02Z",
+      "id": "connectors/v0.4.1",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.4.1",
+      "title": "Connectors v0.4.1",
+      "content_text": "Connectors released version v0.4.1.",
+      "date_published": "2026-09-02T03:14:46Z",
       "tags": [
-        "agentplugins",
+        "connectors",
         "release",
         "notable",
         "releases",
         "build-agents",
-        "plan-work",
-        "specify"
+        "operate-services"
       ]
     },
     {
@@ -36,21 +35,6 @@
       ]
     },
     {
-      "id": "worktree/0.3.1",
-      "url": "https://github.com/beyond10x/worktree/releases/tag/0.3.1",
-      "title": "Worktree 0.3.1",
-      "content_text": "Worktree released version 0.3.1.",
-      "date_published": "2026-09-02T02:50:37Z",
-      "tags": [
-        "worktree",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
       "id": "agent-platform/0.5.3",
       "url": "https://github.com/beyond10x/agent-platform/releases/tag/0.5.3",
       "title": "Agent Platform 0.5.3",
@@ -61,6 +45,36 @@
         "release",
         "notable",
         "releases",
+        "build-agents",
+        "operate-services"
+      ]
+    },
+    {
+      "id": "agentplugins/workspace-hygiene-0.3.3",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.3",
+      "title": "Workspace Hygiene guides guarded stale-relocation recovery",
+      "content_text": "Agent Plugins 0.3.3 refreshes Workspace Hygiene so agents can recover a finished external legacy tree stranded by stale pre-0.3 relocation intent without bypassing exact source, destination, HEAD, proof, or confirmation gates.",
+      "date_published": "2026-09-02T02:25:27Z",
+      "tags": [
+        "agentplugins",
+        "capability",
+        "significant",
+        "impact",
+        "build-agents",
+        "operate-services"
+      ]
+    },
+    {
+      "id": "worktree/external-retirement-recovery-0.3.1",
+      "url": "https://github.com/beyond10x/worktree/releases/tag/0.3.1",
+      "title": "Worktree safely recovers stale external relocation state",
+      "content_text": "Worktree 0.3.1 lets exact-id reconciliation retire a finished external legacy tree stranded by a stale pre-0.3 relocation intent, while preserving source, destination, HEAD, proof, and confirmation gates.",
+      "date_published": "2026-09-02T02:22:14Z",
+      "tags": [
+        "worktree",
+        "release",
+        "significant",
+        "impact",
         "build-agents",
         "operate-services"
       ]

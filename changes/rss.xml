@@ -4,12 +4,12 @@
     <link>https://beyond10x.github.io/changes/</link>
     <description>Important releases, migrations, capabilities, and adopter actions across the public beyond10x ecosystem.</description>
     <item>
-      <guid isPermaLink="false">agentplugins/0.3.3</guid>
-      <title>Agent Plugins 0.3.3</title>
-      <link>https://github.com/beyond10x/agentplugins/releases/tag/0.3.3</link>
-      <pubDate>Wed, 02 Sep 2026 02:57:02 GMT</pubDate>
-      <description>Agent Plugins released version 0.3.3.</description>
-      <category>agentplugins</category>
+      <guid isPermaLink="false">connectors/v0.4.1</guid>
+      <title>Connectors v0.4.1</title>
+      <link>https://github.com/beyond10x/connectors/releases/tag/v0.4.1</link>
+      <pubDate>Wed, 02 Sep 2026 03:14:46 GMT</pubDate>
+      <description>Connectors released version v0.4.1.</description>
+      <category>connectors</category>
       <category>notable</category>
       <category>releases</category>
     </item>
@@ -24,16 +24,6 @@
       <category>releases</category>
     </item>
     <item>
-      <guid isPermaLink="false">worktree/0.3.1</guid>
-      <title>Worktree 0.3.1</title>
-      <link>https://github.com/beyond10x/worktree/releases/tag/0.3.1</link>
-      <pubDate>Wed, 02 Sep 2026 02:50:37 GMT</pubDate>
-      <description>Worktree released version 0.3.1.</description>
-      <category>worktree</category>
-      <category>notable</category>
-      <category>releases</category>
-    </item>
-    <item>
       <guid isPermaLink="false">agent-platform/0.5.3</guid>
       <title>Agent Platform 0.5.3</title>
       <link>https://github.com/beyond10x/agent-platform/releases/tag/0.5.3</link>
@@ -42,6 +32,26 @@
       <category>agent-platform</category>
       <category>notable</category>
       <category>releases</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">agentplugins/workspace-hygiene-0.3.3</guid>
+      <title>Workspace Hygiene guides guarded stale-relocation recovery</title>
+      <link>https://github.com/beyond10x/agentplugins/releases/tag/0.3.3</link>
+      <pubDate>Wed, 02 Sep 2026 02:25:27 GMT</pubDate>
+      <description>Agent Plugins 0.3.3 refreshes Workspace Hygiene so agents can recover a finished external legacy tree stranded by stale pre-0.3 relocation intent without bypassing exact source, destination, HEAD, proof, or confirmation gates.</description>
+      <category>agentplugins</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">worktree/external-retirement-recovery-0.3.1</guid>
+      <title>Worktree safely recovers stale external relocation state</title>
+      <link>https://github.com/beyond10x/worktree/releases/tag/0.3.1</link>
+      <pubDate>Wed, 02 Sep 2026 02:22:14 GMT</pubDate>
+      <description>Worktree 0.3.1 lets exact-id reconciliation retire a finished external legacy tree stranded by a stale pre-0.3 relocation intent, while preserving source, destination, HEAD, proof, and confirmation gates.</description>
+      <category>worktree</category>
+      <category>significant</category>
+      <category>impact</category>
     </item>
     <item>
       <guid isPermaLink="false">aep-service/0.1.5</guid>
