@@ -54,6 +54,10 @@
       "label": "Identity"
     },
     {
+      "id": "mcp",
+      "label": "MCP"
+    },
+    {
       "id": "metaharness",
       "label": "Metaharness"
     },
@@ -204,6 +208,16 @@
       "label": "uses"
     },
     {
+      "from": "mcp",
+      "to": "connectors",
+      "label": "supports"
+    },
+    {
+      "from": "mcp",
+      "to": "harness",
+      "label": "supports"
+    },
+    {
       "from": "metaharness",
       "to": "harness",
       "label": "drives"
@@ -301,6 +315,11 @@
     {
       "from": "website",
       "to": "identity",
+      "label": "introduces"
+    },
+    {
+      "from": "website",
+      "to": "mcp",
       "label": "introduces"
     },
     {
