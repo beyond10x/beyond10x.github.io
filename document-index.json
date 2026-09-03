@@ -333,7 +333,7 @@
       "qualifiedTitle": "Design principles | AEP",
       "project": "aep",
       "projectName": "AEP",
-      "description": "The behavioral rules AEP enforces and the limits it states explicitly.",
+      "description": "See one engineering task fail without explicit rules, then replay it through the AEP boundaries that enforce them.",
       "documentType": "explanation",
       "audiences": [
         "adopter",
@@ -2146,6 +2146,29 @@
       "sourcePath": "README.md"
     },
     {
+      "route": "/docs/devcenter/ess-deployment-model/",
+      "title": "The ESS deployment model",
+      "qualifiedTitle": "The ESS deployment model | Devcenter",
+      "project": "devcenter",
+      "projectName": "Devcenter",
+      "description": "How Devcenter turns independently released systems into one exact, reviewable deployment without rebuilding the whole stack.",
+      "documentType": "reference",
+      "audiences": [
+        "operator",
+        "evaluator"
+      ],
+      "experiences": [
+        "deploy-operate-products"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "deploy"
+      ],
+      "sourcePath": "docs/ess-deployment-model.md"
+    },
+    {
       "route": "/docs/devcenter/frontend-review/",
       "title": "Review the Devcenter frontend locally",
       "qualifiedTitle": "Review the Devcenter frontend locally | Devcenter",
@@ -3472,7 +3495,7 @@
       "qualifiedTitle": "Status and limitations | Harness",
       "project": "harness",
       "projectName": "Harness",
-      "description": "What Harness 0.11.0 can do today and which claims are not yet earned.",
+      "description": "What Harness 0.11.1 can do today and which claims are not yet earned.",
       "documentType": "status",
       "audiences": [
         "adopter",
@@ -4026,6 +4049,98 @@
         "reference"
       ],
       "sourcePath": "docs/architecture.md"
+    },
+    {
+      "route": "/docs/service-sdk/",
+      "title": "Service SDK",
+      "qualifiedTitle": "Service SDK | Service SDK",
+      "project": "service-sdk",
+      "projectName": "Service SDK",
+      "description": "Service SDK in the source-owned Service SDK documentation.",
+      "documentType": "reference",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "build-agent-systems"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "README.md"
+    },
+    {
+      "route": "/docs/service-sdk/CHANGELOG/",
+      "title": "Changelog",
+      "qualifiedTitle": "Changelog | Service SDK",
+      "project": "service-sdk",
+      "projectName": "Service SDK",
+      "description": "Changelog in the source-owned Service SDK documentation.",
+      "documentType": "reference",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "build-agent-systems"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "CHANGELOG.md"
+    },
+    {
+      "route": "/docs/service-sdk/CONTRIBUTING/",
+      "title": "Contributing",
+      "qualifiedTitle": "Contributing | Service SDK",
+      "project": "service-sdk",
+      "projectName": "Service SDK",
+      "description": "Contributing in the source-owned Service SDK documentation.",
+      "documentType": "reference",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "build-agent-systems"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "CONTRIBUTING.md"
+    },
+    {
+      "route": "/docs/service-sdk/SECURITY/",
+      "title": "Security policy",
+      "qualifiedTitle": "Security policy | Service SDK",
+      "project": "service-sdk",
+      "projectName": "Service SDK",
+      "description": "Security policy in the source-owned Service SDK documentation.",
+      "documentType": "reference",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "build-agent-systems"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "operate"
+      ],
+      "sourcePath": "SECURITY.md"
     },
     {
       "route": "/docs/substrate/",

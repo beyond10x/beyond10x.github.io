@@ -74,6 +74,10 @@
       "label": "Secrets"
     },
     {
+      "id": "service-sdk",
+      "label": "Service SDK"
+    },
+    {
       "id": "substrate",
       "label": "Substrate"
     },
@@ -207,6 +211,11 @@
     },
     {
       "from": "devcenter",
+      "to": "service-sdk",
+      "label": "uses"
+    },
+    {
+      "from": "devcenter",
       "to": "workspace",
       "label": "uses"
     },
@@ -288,6 +297,21 @@
     {
       "from": "secrets",
       "to": "identity",
+      "label": "uses"
+    },
+    {
+      "from": "service-sdk",
+      "to": "connectors",
+      "label": "supports"
+    },
+    {
+      "from": "service-sdk",
+      "to": "ess",
+      "label": "uses"
+    },
+    {
+      "from": "service-sdk",
+      "to": "eventlog",
       "label": "uses"
     },
     {
