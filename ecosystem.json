@@ -122,22 +122,6 @@
     },
     {
       "accent": "#a5d6ff",
-      "adoption": {
-        "estimatedMinutes": 12,
-        "label": "Create governed work",
-        "mode": "source-build",
-        "outcome": "Create and validate a typed planning artifact through the AEP command.",
-        "prerequisites": [
-          "Rust toolchain"
-        ],
-        "url": "https://beyond10x.github.io/docs/aep/getting-started/"
-      },
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "availability": "published",
       "canonicalUrl": "https://beyond10x.github.io/docs/aep/",
       "capabilities": [
         "aep",
@@ -145,7 +129,22 @@
         "evidence-gates",
         "contract-generation"
       ],
-      "discoverability": "public",
+      "documentDefaults": {
+        "access": "public",
+        "audiences": [
+          "adopter",
+          "developer"
+        ],
+        "experienceIds": [
+          "try-spec-driven-development",
+          "understand-safe-agentic-coding"
+        ],
+        "support": "preview"
+      },
+      "experienceIds": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
       "feeds": [
         {
           "format": "rss",
@@ -167,6 +166,10 @@
       "maturity": "development",
       "name": "AEP",
       "primaryJourney": "plan-work",
+      "publication": {
+        "availability": "published",
+        "discoverability": "public"
+      },
       "relationships": [
         {
           "kind": "specifies",
@@ -245,6 +248,12 @@
         "root": "website"
       },
       "summary": "Typed, portable, machine-executable specifications for performing and proving autonomous engineering work.",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
       "key": "aep/docs",
       "repository": {
         "displayName": "AEP",
@@ -350,26 +359,26 @@
     },
     {
       "accent": "#43cdbf",
-      "adoption": {
-        "estimatedMinutes": 8,
-        "label": "Read the principle catalog",
-        "mode": "browser",
-        "outcome": "Identify an evidence-backed principle and inspect the evidence behind it.",
-        "url": "https://beyond10x.github.io/components/agentic-principles/principles/"
-      },
-      "audiences": [
-        "evaluator",
-        "researcher",
-        "developer"
-      ],
-      "availability": "published",
       "canonicalUrl": "https://beyond10x.github.io/docs/agentic-principles/",
       "capabilities": [
         "evidence-registry",
         "principle-catalog",
         "field-notes"
       ],
-      "discoverability": "public",
+      "documentDefaults": {
+        "access": "public",
+        "audiences": [
+          "evaluator",
+          "researcher"
+        ],
+        "experienceIds": [
+          "understand-safe-agentic-coding"
+        ],
+        "support": "experimental"
+      },
+      "experienceIds": [
+        "understand-safe-agentic-coding"
+      ],
       "feeds": [
         {
           "format": "rss",
@@ -390,6 +399,10 @@
       "maturity": "experimental",
       "name": "Agentic Principles",
       "primaryJourney": "understand",
+      "publication": {
+        "availability": "published",
+        "discoverability": "public"
+      },
       "relationships": [
         {
           "kind": "informs",
@@ -450,6 +463,7 @@
             "docs/decisions/**",
             "docs/internal/**",
             "docs/plans/**",
+            "docs/research/2026-08-25T001613+0200_seed.md",
             "docs/stories/**",
             "docs/worklogs/**"
           ],
@@ -468,6 +482,12 @@
         "root": "."
       },
       "summary": "Evidence-backed principles for safe and efficient agentic work automation.",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "evaluator",
+        "researcher"
+      ],
       "key": "agentic-principles/docs",
       "repository": {
         "displayName": "Agentic Principles",
@@ -604,21 +624,6 @@
     },
     {
       "accent": "#d3a6ff",
-      "adoption": {
-        "estimatedMinutes": 5,
-        "label": "Install a focused plugin",
-        "mode": "install",
-        "outcome": "Install one scoped guidance plugin without copying its instructions.",
-        "prerequisites": [
-          "A supported agent harness"
-        ],
-        "url": "https://beyond10x.github.io/docs/agentplugins/install/"
-      },
-      "audiences": [
-        "adopter",
-        "developer"
-      ],
-      "availability": "published",
       "canonicalUrl": "https://beyond10x.github.io/docs/agentplugins/",
       "capabilities": [
         "plugin-routing",
@@ -627,7 +632,22 @@
         "development-waves",
         "schema-validation"
       ],
-      "discoverability": "public",
+      "documentDefaults": {
+        "access": "public",
+        "audiences": [
+          "adopter",
+          "developer"
+        ],
+        "experienceIds": [
+          "try-spec-driven-development",
+          "build-agent-systems"
+        ],
+        "support": "preview"
+      },
+      "experienceIds": [
+        "try-spec-driven-development",
+        "build-agent-systems"
+      ],
       "id": "docs",
       "journeys": [
         "plan-work",
@@ -639,6 +659,10 @@
       "maturity": "development",
       "name": "Agent Plugins",
       "primaryJourney": "plan-work",
+      "publication": {
+        "availability": "published",
+        "discoverability": "public"
+      },
       "relationships": [
         {
           "kind": "supports",
@@ -708,6 +732,12 @@
         "root": "website"
       },
       "summary": "Navigate and create portable plugins, or install focused AEP planning, ADP delivery, and ESS schema guidance from the curated beyond10x marketplace.",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
       "key": "agentplugins/docs",
       "repository": {
         "displayName": "Agent Plugins",
@@ -825,31 +855,26 @@
     },
     {
       "accent": "#59d89d",
-      "adoption": {
-        "estimatedMinutes": 10,
-        "label": "Review Devcenter locally",
-        "mode": "source-build",
-        "outcome": "Explore every frontend journey with local sample data and no service credentials.",
-        "prerequisites": [
-          "Node.js 22",
-          "pnpm 11"
-        ],
-        "url": "https://beyond10x.github.io/docs/devcenter/"
-      },
-      "audiences": [
-        "evaluator",
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "availability": "published",
       "canonicalUrl": "https://beyond10x.github.io/docs/devcenter/",
       "capabilities": [
         "developer-experience",
         "service-composition",
         "openapi"
       ],
-      "discoverability": "public",
+      "documentDefaults": {
+        "access": "public",
+        "audiences": [
+          "evaluator"
+        ],
+        "experienceIds": [
+          "evaluate-beyond10x-products"
+        ],
+        "support": "preview"
+      },
+      "experienceIds": [
+        "evaluate-beyond10x-products",
+        "deploy-operate-products"
+      ],
       "feeds": [],
       "id": "docs",
       "journeys": [
@@ -860,6 +885,10 @@
       "maturity": "development",
       "name": "Devcenter",
       "primaryJourney": "operate-services",
+      "publication": {
+        "availability": "published",
+        "discoverability": "public"
+      },
       "relationships": [
         {
           "kind": "uses",
@@ -903,7 +932,10 @@
       "source": {
         "documents": {
           "include": [
-            "README.md"
+            "README.md",
+            "docs/frontend-review.md",
+            "docs/source-build.md",
+            "docs/production-deployment.md"
           ]
         },
         "navigation": {
@@ -924,6 +956,11 @@
         ]
       },
       "summary": "The public application, BFF, API, and deployment composition for the beyond10x developer experience.",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "evaluator"
+      ],
       "key": "devcenter/docs",
       "repository": {
         "displayName": "Devcenter",
@@ -1181,29 +1218,26 @@
     },
     {
       "accent": "#ff9070",
-      "adoption": {
-        "estimatedMinutes": 12,
-        "label": "Compile a system specification",
-        "mode": "source-build",
-        "outcome": "Validate system intent and generate deterministic contract artifacts.",
-        "prerequisites": [
-          "Rust toolchain"
-        ],
-        "url": "https://beyond10x.github.io/docs/ess/getting-started/"
-      },
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "availability": "published",
       "canonicalUrl": "https://beyond10x.github.io/docs/ess/",
       "capabilities": [
         "system-specification",
         "contract-generation",
         "conformance"
       ],
-      "discoverability": "public",
+      "documentDefaults": {
+        "access": "public",
+        "audiences": [
+          "adopter",
+          "developer"
+        ],
+        "experienceIds": [
+          "try-spec-driven-development"
+        ],
+        "support": "preview"
+      },
+      "experienceIds": [
+        "try-spec-driven-development"
+      ],
       "feeds": [
         {
           "format": "rss",
@@ -1223,6 +1257,10 @@
       "maturity": "experimental",
       "name": "ESS",
       "primaryJourney": "specify",
+      "publication": {
+        "availability": "published",
+        "discoverability": "public"
+      },
       "relationships": [],
       "routeBase": "/docs/ess/",
       "sections": [
@@ -1295,6 +1333,12 @@
         "root": "website"
       },
       "summary": "Executable system specifications, deterministic intermediate representations, generated contracts, and conformance.",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
       "key": "ess/docs",
       "repository": {
         "displayName": "ESS",
@@ -2119,29 +2163,35 @@
     },
     {
       "accent": "#59d89d",
-      "adoption": {
-        "estimatedMinutes": 5,
-        "label": "Choose an adoption journey",
-        "mode": "browser",
-        "outcome": "Identify the project and technical reference that owns the next boundary you need to make explicit.",
-        "url": "https://beyond10x.github.io/journeys/"
-      },
-      "audiences": [
-        "evaluator",
-        "adopter",
-        "developer",
-        "operator",
-        "researcher"
-      ],
-      "availability": "published",
       "canonicalUrl": "https://beyond10x.github.io/",
       "capabilities": [
         "ecosystem-discovery",
         "unified-documentation",
-        "adoption-journeys",
+        "adoption-experiences",
         "change-impact"
       ],
-      "discoverability": "public",
+      "documentDefaults": {
+        "access": "public",
+        "audiences": [
+          "evaluator",
+          "adopter",
+          "developer",
+          "operator",
+          "researcher"
+        ],
+        "experienceIds": [
+          "understand-safe-agentic-coding"
+        ],
+        "support": "preview"
+      },
+      "experienceIds": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding",
+        "build-agent-systems",
+        "evaluate-beyond10x-products",
+        "deploy-operate-products",
+        "contribute-maintain"
+      ],
       "feeds": [
         {
           "format": "rss",
@@ -2178,6 +2228,10 @@
       "maturity": "development",
       "name": "beyond10x",
       "primaryJourney": "understand",
+      "publication": {
+        "availability": "published",
+        "discoverability": "public"
+      },
       "relationships": [
         {
           "kind": "introduces",
@@ -2282,8 +2336,8 @@
         },
         {
           "kind": "guide",
-          "label": "Journeys",
-          "url": "https://beyond10x.github.io/journeys/"
+          "label": "Paths",
+          "url": "https://beyond10x.github.io/start/"
         },
         {
           "kind": "reference",
@@ -2316,13 +2370,22 @@
           ]
         },
         "navigation": {
-          "label": "Start",
+          "label": "Website internals",
           "order": 0,
           "sidebar": "flat"
         },
         "root": "src/pages"
       },
-      "summary": "One public journey from the beyond10x vision through adoption, technical documentation, APIs, components, and ecosystem change.",
+      "summary": "One public front door for outcome-led adoption paths, source-owned technical documentation, APIs, and ecosystem change.",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "evaluator",
+        "adopter",
+        "developer",
+        "operator",
+        "researcher"
+      ],
       "key": "website/docs",
       "repository": {
         "displayName": "beyond10x",

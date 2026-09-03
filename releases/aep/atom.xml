@@ -2,8 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://beyond10x.github.io/releases/aep/atom.xml</id>
   <title>AEP releases</title>
-  <updated>2026-09-02T18:18:01Z</updated>
+  <updated>2026-09-03T00:00:00Z</updated>
   <link rel="self" href="https://beyond10x.github.io/releases/aep/atom.xml"/>
+  <entry>
+    <id>aep/rendered-plans-0.43.0</id>
+    <title>The plan renders itself, and a conformance report becomes evidence without being retyped</title>
+    <updated>2026-09-03T00:00:00Z</updated>
+    <link href="https://github.com/beyond10x/aep/releases/tag/0.43.0"/>
+    <summary>AEP 0.43.0 lets a documentation site publish plans directly — `artifact board --format markdown` renders the page, `artifact graph --format mermaid` renders the diagram, and each column reads its own ladder `descriptions:`. `artifact evidence --from` converts an `ess-conformance-report/1` into evidence using the report&apos;s recorded run instant.</summary>
+  </entry>
+  <entry>
+    <id>aep/0.44.0</id>
+    <title>AEP 0.44.0</title>
+    <updated>2026-09-02T23:29:58Z</updated>
+    <link href="https://github.com/beyond10x/aep/releases/tag/0.44.0"/>
+    <summary>AEP released version 0.44.0.</summary>
+  </entry>
   <entry>
     <id>aep/second-adopter-0.42.0</id>
     <title>aep doctor, classified ambiguities in the templates, and the install path that exists</title>
