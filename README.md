@@ -18,7 +18,7 @@ publication and caller attributed to `b10x-bot[bot]`,
 requires its declared Website commit to be in `beyond10x/website` `main` and attributed to the same
 bot, and independently verifies every payload file, public route, digest, and deployment count
 against the artifact's canonical provenance. It reads `sources.lock.json` and `legacy-routes.json`
-from that exact Website commit, hashes their bytes, validates the 22-repository source roster, and
+from that exact Website commit, hashes their bytes, validates the 23-repository source roster, and
 requires every locked source commit to match provenance. Only the verified `_site` checkout is
 uploaded to Pages.
 

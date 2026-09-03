@@ -19,7 +19,7 @@ test('grounds both claimed digests in exact files from the Website commit', asyn
   const fixture = await createFixture();
   const result = await verifyWebsiteInputs(...fixture.paths);
 
-  assert.equal(result.sourceCount, 22);
+  assert.equal(result.sourceCount, 23);
   assert.equal(result.redirectCount, 1);
   assert.equal(result.sourcesLockSha256, fixture.provenance.sourcesLockSha256);
   assert.equal(result.legacyRoutesSha256, fixture.provenance.legacyRoutesSha256);
@@ -37,10 +37,10 @@ test('rejects a legacy-route digest copied from any other bytes', async () => {
   await assert.rejects(verifyWebsiteInputs(...fixture.paths), /legacyRoutesSha256 does not match/);
 });
 
-test('requires the exact sorted 22-repository Website roster', async () => {
+test('requires the exact sorted 23-repository Website roster', async () => {
   const fixture = await createFixture({omitLastRepository: true});
 
-  await assert.rejects(verifyWebsiteInputs(...fixture.paths), /exact sorted 22-repository roster/);
+  await assert.rejects(verifyWebsiteInputs(...fixture.paths), /exact sorted 23-repository roster/);
 });
 
 test('requires every locked source commit to equal provenance', async () => {

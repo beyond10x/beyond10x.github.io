@@ -39,7 +39,7 @@ the payload inventory, route inventory, and their digests; require nonempty root
 agreement for the Website commit, source-lock digest, legacy-route digest, route digest, artifact
 digest, and all declared counts. Read `sources.lock.json` and `legacy-routes.json` from that exact
 Website commit to ground both input digests; require the accepted schemas, the exact sorted
-22-repository roster, and exact agreement between locked commits and `sourceCommits`. Bootstrap
+23-repository roster, and exact agreement between locked commits and `sourceCommits`. Bootstrap
 artifacts are not publishable. Artifact file and route inventories use UTF-8 byte-lexical order,
 collapse only the exact `index.html` and `/index.html` route forms, and reject nonportable paths or
 Git control files.
