@@ -20,8 +20,9 @@ removal; connections refuse missing endpoints, self edges, duplicates, and cycle
 freezes ordered node/edge data with a deterministic digest; published revisions are never edited.
 
 The HTTP resource audience is exactly `urn:b10x:workflow`. Reads require `workflows.read`, while
-draft authoring, publishing, and activation require `workflows.manage`. Verification and exact scope
-authorization happen before operation JSON is decoded.
+draft authoring, publishing, and activation require `workflows.manage`. Tenant library reads use
+verified conjunctive scope facts without conferring aggregate ownership; every mutation remains
+owner-bound. Verification and exact scope authorization happen before operation JSON is decoded.
 
 Build and validate the boundary that exists today:
 
