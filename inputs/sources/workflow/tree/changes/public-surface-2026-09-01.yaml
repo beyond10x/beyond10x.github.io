@@ -1,0 +1,15 @@
+schema: b10x-change/v1
+id: workflow/public-surface-2026-09-01
+repository: workflow
+publishedAt: 2026-09-01T12:00:00Z
+title: Workflow joins the public ecosystem surface
+summary: Workflow now publishes its product-neutral boundary, current maturity, adoption path, and dependencies through the shared b10x documentation contract.
+kind: capability
+impact: significant
+source:
+  url: https://github.com/beyond10x/workflow
+journeys: [build-agents, operate-services]
+affectedSurfaces: [workflow/docs]
+relations:
+  - {target: surface:agent-platform/docs, kind: depends-on, label: Uses product-neutral agent tasks}
+  - {target: surface:eventlog/docs, kind: depends-on, label: Persists durable run evidence}

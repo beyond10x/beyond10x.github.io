@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://beyond10x.github.io/updates/field-notes/</id>
+    <title>beyond10x Blog</title>
+    <updated>2026-08-26T00:45:30.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://beyond10x.github.io/updates/field-notes/"/>
+    <subtitle>beyond10x Blog</subtitle>
+    <icon>https://beyond10x.github.io/img/favicon.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[0.24.0 — the docs say what the tooling does, and a tag cuts its own release]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/the-docs-catch-up/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/the-docs-catch-up/"/>
+        <updated>2026-08-26T00:45:30.000Z</updated>
+        <summary type="html"><![CDATA[The site had drifted to the point of misdescribing the repository: since 0.13.0 the code gained 7,805 lines and the website gained three. Plus a release workflow, and a self-test that found a real defect on its first run.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.24.0 — the docs say what the tooling does, and a tag cuts its own release | AEP</span><span data-pagefind-meta="description">The site had drifted to the point of misdescribing the repository: since 0.13.0 the code gained 7,805 lines and the website gained three. Plus a release workflow, and a self-test that found a real defect on its first run.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-26-0245-the-docs-catch-up.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-26-0245-the-docs-catch-up.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>Since <code>0.13.0</code> this repository gained <strong>7,805 lines</strong> of code and its website gained <strong>three</strong>.
+<code>protocol reverse</code> — four verbs and 2,782 lines — had <strong>no mention anywhere on the site</strong>, and the
+status page still opened <em>"current as of <code>0.10.0-horizons-dogfood-lab</code>"</em>.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-page-that-was-missing">The page that was missing<a href="https://beyond10x.github.io/updates/field-notes/aep/the-docs-catch-up/#the-page-that-was-missing" class="hash-link" aria-label="Direct link to The page that was missing" title="Direct link to The page that was missing" translate="no">​</a></h2>
+<p><a class="" href="https://beyond10x.github.io/docs/aep/concepts/lifecycles/">Lifecycles, decided as data</a> — the status ladder is a YAML file decided
+by <code>entity-core</code>, a rung may cost evidence or open on a date, and every write is journalled.</p>
+<p>It also states what that kernel <strong>does not</strong> do, because <em>"entity runtime"</em> invites the reading that
+it stores something. It performs <strong>no IO at all</strong> — a scan over its own sources refuses the tokens
+for filesystem, clock, network and randomness — so <strong>every byte written here is written here</strong>. The
+dependency buys a verdict, not a store.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-rest-of-the-site">The rest of the site<a href="https://beyond10x.github.io/updates/field-notes/aep/the-docs-catch-up/#the-rest-of-the-site" class="hash-link" aria-label="Direct link to The rest of the site" title="Direct link to The rest of the site" translate="no">​</a></h2>
+<table><thead><tr><th>page</th><th>now says</th></tr></thead><tbody><tr><td><strong>CLI reference</strong></td><td><code>protocol reverse</code>, plus <code>artifact history</code> and <code>artifact evidence</code></td></tr><tr><td><strong>Where this stands</strong></td><td>current as of <code>0.23.2</code>, with the ladder, the engine's four mechanisms, and adoption from the other end</td></tr><tr><td><strong>Roadmap</strong></td><td>the delivered table ran to <code>0.10.0</code> and now runs to <code>0.24.0</code></td></tr><tr><td><strong>Limitations</strong></td><td>the store <strong>does</strong> have a journal since <code>0.19.0</code>; the contract gap is unchanged and says so</td></tr><tr><td><strong>Vocabulary</strong></td><td>kinds and statuses are open to authors, and why <code>evidence_kinds</code> is closed</td></tr><tr><td><strong>/releases</strong></td><td><strong>one post per release, all 33 of them</strong> — the backported ones marked as written retrospectively, with no invented command output</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="counts-each-re-derived-rather-than-copied-forward">Counts, each re-derived rather than copied forward<a href="https://beyond10x.github.io/updates/field-notes/aep/the-docs-catch-up/#counts-each-re-derived-rather-than-copied-forward" class="hash-link" aria-label="Direct link to Counts, each re-derived rather than copied forward" title="Direct link to Counts, each re-derived rather than copied forward" translate="no">​</a></h2>
+<p>CLI verbs 17 → <strong>20</strong>. Artifact lifecycles 8 → <strong>12</strong>. This repository's own plan 59 → <strong>101</strong>
+artifacts. The document tree 45 → <strong>49</strong> files. The gate ten → <strong>twelve</strong> steps, in five files.</p>
+<p><code>AGENTS.md</code> also still claimed the billing suite runs <strong>27</strong> scenarios where its own guard asserts
+<strong>29</strong> — a count the gap register closed in two places and missed in a third.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-tag-now-cuts-its-own-release">A tag now cuts its own release<a href="https://beyond10x.github.io/updates/field-notes/aep/the-docs-catch-up/#a-tag-now-cuts-its-own-release" class="hash-link" aria-label="Direct link to A tag now cuts its own release" title="Direct link to A tag now cuts its own release" translate="no">​</a></h2>
+<p><code>.github/workflows/release.yml</code> fires on a version tag, runs <code>ci.yml</code> <strong>itself</strong> — called rather
+than copied, so a tag cannot ship against a shorter gate than <code>main</code> does — and takes its notes from
+the tag's own section of the changelog.</p>
+<p>Release notes render as <strong>GFM</strong>, where a single newline becomes a <code>&lt;br&gt;</code>, so a file hard-wrapped at
+100 columns arrives broken after <em>"added"</em> and before <em>"the"</em>. The file stays wrapped, because that
+is the right shape for something reviewed in a diff, and only the notes are joined.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-self-test-earned-its-place-immediately">The self-test earned its place immediately<a href="https://beyond10x.github.io/updates/field-notes/aep/the-docs-catch-up/#the-self-test-earned-its-place-immediately" class="hash-link" aria-label="Direct link to The self-test earned its place immediately" title="Direct link to The self-test earned its place immediately" translate="no">​</a></h2>
+<p><code>cargo xtask notes --self-test</code> holds the eight shapes the reflow must not damage, and it runs
+<strong>before</strong> the notes are generated — because the failure it catches is silent, and nobody re-reads a
+release they already cut.</p>
+<p>On its first run it failed. <strong>A line ending in two spaces is Markdown asking for a break</strong>, and the
+reflow was ending the paragraph but dropping the two spaces. The break survived only because GFM
+turns a bare newline into <code>&lt;br&gt;</code> — standing on <strong>the exact quirk the reflow exists to remove</strong>.</p>
+<p>The same defect was in the original Python implementation in <code>entity-runtime</code>, whose own self-test
+had a case for it <strong>asserting the wrong expectation</strong>. Both are fixed.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="docs" term="docs"/>
+        <category label="ci" term="ci"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.23.2 — the first tag this repository has verified]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/the-first-verified-tag/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/the-first-verified-tag/"/>
+        <updated>2026-08-25T23:18:01.000Z</updated>
+        <summary type="html"><![CDATA[CI had been red for eleven consecutive releases behind a green local gate, because task check was missing exactly the two jobs CI also ran. One failure arrived through the lockfile with no source change at all.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.23.2 — the first tag this repository has verified | AEP</span><span data-pagefind-meta="description">CI had been red for eleven consecutive releases behind a green local gate, because task check was missing exactly the two jobs CI also ran. One failure arrived through the lockfile with no source change at all.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-26-0118-the-first-verified-tag.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-26-0118-the-first-verified-tag.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>The least comfortable release note here.</p>
+<p><strong>CI had been red for eleven consecutive releases</strong> — every tag from <code>0.13.0</code> to <code>0.23.1</code> — with a
+green local gate the whole time.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="two-causes-both-in-the-two-jobs-the-gate-did-not-run">Two causes, both in the two jobs the gate did not run<a href="https://beyond10x.github.io/updates/field-notes/aep/the-first-verified-tag/#two-causes-both-in-the-two-jobs-the-gate-did-not-run" class="hash-link" aria-label="Direct link to Two causes, both in the two jobs the gate did not run" title="Direct link to Two causes, both in the two jobs the gate did not run" translate="no">​</a></h2>
+<table><thead><tr><th>job</th><th>cause</th></tr></thead><tbody><tr><td><code>MSRV 1.85</code></td><td>a transitive dependency raised <strong>its own</strong> <code>rust-version</code>, so the declared MSRV stopped holding</td></tr><tr><td><code>Website</code></td><td>a markdown link from a documentation page into the repository tree, which the site's build resolves</td></tr></tbody></table>
+<p>The MSRV failure is the instructive one: it arrived <strong>through the lockfile</strong>. <code>idna_adapter@1.2.2</code>
+pulled in <code>icu_*@2.3.0</code>, which need rustc 1.88. <strong>No commit of ours touched a line of Rust</strong>, and
+nothing local noticed for eleven releases.</p>
+<p>The fix was to pin <code>idna_adapter</code> to a version that uses <code>unicode-normalization</code> instead — which
+also drops eight crates from the tree. The alternative was raising the declared MSRV, which would
+have quietly broken the promise the README makes to anybody building this.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-actual-defect">The actual defect<a href="https://beyond10x.github.io/updates/field-notes/aep/the-first-verified-tag/#the-actual-defect" class="hash-link" aria-label="Direct link to The actual defect" title="Direct link to The actual defect" translate="no">​</a></h2>
+<p><code>task check</code> did not run <code>msrv</code> or <code>website</code>, while <strong>its own description said "everything CI
+runs"</strong>.</p>
+<p>That is the whole mechanism by which a red CI survives eleven releases behind a green gate. <strong>A gate
+that covers less than the gate it claims to be is worse than one that admits its scope</strong> — because
+the second kind makes you go and look.</p>
+<p>It runs twelve steps now, and this list and the CI workflow are checked against each other whenever
+either changes.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-cut-a-release-for-it">Why cut a release for it<a href="https://beyond10x.github.io/updates/field-notes/aep/the-first-verified-tag/#why-cut-a-release-for-it" class="hash-link" aria-label="Direct link to Why cut a release for it" title="Direct link to Why cut a release for it" translate="no">​</a></h2>
+<p>No behavioural change at all. The tag exists so there is <strong>one commit in the history whose green is
+a fact rather than an assumption</strong>, and so every tag after it can be compared to something.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ci" term="ci"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.23.1 — the pin says what it links, and the ladder says draft]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/the-pin-says-what-it-links/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/the-pin-says-what-it-links/"/>
+        <updated>2026-08-25T22:55:19.000Z</updated>
+        <summary type="html"><![CDATA[Two corrections that are the same mistake in two places: a dependency pin recording a tag two releases behind what exists, and a new ladder starting at drafted — one letter from a built-in.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.23.1 — the pin says what it links, and the ladder says draft | AEP</span><span data-pagefind-meta="description">Two corrections that are the same mistake in two places: a dependency pin recording a tag two releases behind what exists, and a new ladder starting at drafted — one letter from a built-in.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-26-0055-the-pin-says-what-it-links.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-26-0055-the-pin-says-what-it-links.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>A small release, and both fixes are the same mistake wearing different clothes: <strong>a label that had
+drifted from the thing it names.</strong></p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-pin">The pin<a href="https://beyond10x.github.io/updates/field-notes/aep/the-pin-says-what-it-links/#the-pin" class="hash-link" aria-label="Direct link to The pin" title="Direct link to The pin" translate="no">​</a></h2>
+<p><code>aep-backend-markdown</code> pinned <code>entity-core</code> at a tag <strong>two releases behind what existed</strong>.</p>
+<p>Nothing this crate links actually moved — the source is byte-identical between the two tags, because
+the releases in between carried an examples-only change. So this changed no behaviour at all.</p>
+<p>It was still worth fixing, for a reason that is not about this pin: <strong>a pin stale by label is a pin
+nobody trusts to be current by content either.</strong> The next person reading it has to go and check
+whether the drift matters, every time, which is exactly the work a pin exists to save.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-ladder">The ladder<a href="https://beyond10x.github.io/updates/field-notes/aep/the-pin-says-what-it-links/#the-ladder" class="hash-link" aria-label="Direct link to The ladder" title="Direct link to The ladder" translate="no">​</a></h2>
+<p><code>outbound-claim</code> started at <code>drafted</code>, not <code>draft</code>.</p>
+<p>Every other shipped ladder starts at the built-in <code>draft</code>. An invented rung <strong>one letter from a
+built-in</strong> is a typo wearing a vocabulary's clothes — and it would have been inherited by everybody
+who copied the file.</p>
+<p>This is the boundary the open vocabulary was designed to hold. <strong>The vocabulary is open to authors,
+not to near-misses.</strong> A status is accepted because <em>some ladder declares it</em>, never because it
+parses — but a ladder can still declare something its author did not mean to, and the first shipped
+example doing so is the one that teaches it to everybody else.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="planning" term="planning"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.23.0 — a claim that left the boundary]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/a-claim-that-left-the-boundary/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/a-claim-that-left-the-boundary/"/>
+        <updated>2026-08-25T22:49:54.000Z</updated>
+        <summary type="html"><![CDATA[Every other ladder here models evidence flowing inward. An outbound claim runs the other way — a number already in a customer's inbox — and sending is not undoable. Added as a YAML file with no Rust change at all, which is what the whole entity-runtime programme was for.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.23.0 — a claim that left the boundary | AEP</span><span data-pagefind-meta="description">Every other ladder here models evidence flowing inward. An outbound claim runs the other way — a number already in a customer's inbox — and sending is not undoable. Added as a YAML file with no Rust change at all, which is what the whole entity-runtime programme was for.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-26-0049-a-claim-that-left-the-boundary.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-26-0049-a-claim-that-left-the-boundary.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>Every ladder in this repository models evidence flowing <strong>inward</strong>: something was observed, and an
+artifact's status records what we now know.</p>
+<p>An outbound claim runs the other way. A number in a customer's inbox. A status page saying
+"resolved". An availability figure in a renewal deck. Those are assertions that <strong>already left the
+boundary</strong>, and nothing here modelled them.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-ladder">The ladder<a href="https://beyond10x.github.io/updates/field-notes/aep/a-claim-that-left-the-boundary/#the-ladder" class="hash-link" aria-label="Direct link to The ladder" title="Direct link to The ladder" translate="no">​</a></h2>
+<div class="language-shell-session codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-shell-session codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token command shell-symbol important">$</span><span class="token command"> </span><span class="token command bash language-bash">protocol artifact lifecycle outbound-claim</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token output">outbound-claim starts at draft</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  cleared -&gt; sent</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  corrected -&gt; nothing</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  correction-owed -&gt; corrected</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  draft -&gt; cleared</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  sent -&gt; correction-owed, standing</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  standing -&gt; correction-owed</span><br></div></code></pre></div></div>
+<p><strong>Sending is not undoable, and the ladder says so:</strong></p>
+<div class="language-shell-session codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-shell-session codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token command shell-symbol important">$</span><span class="token command"> </span><span class="token command bash language-bash">protocol artifact move outbound-claim:q3-uptime </span><span class="token command bash language-bash parameter variable" style="color:#36acaa">--to</span><span class="token command bash language-bash"> sent</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token output">outbound-claim:q3-uptime moved cleared -&gt; sent (revision 3)</span><br></div><div class="token-line" style="color:#393A34"><span class="token output"></span><br></div><div class="token-line" style="color:#393A34"><span class="token output"></span><span class="token command shell-symbol important">$</span><span class="token command"> </span><span class="token command bash language-bash">protocol artifact move outbound-claim:q3-uptime </span><span class="token command bash language-bash parameter variable" style="color:#36acaa">--to</span><span class="token command bash language-bash"> draft</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token output">outbound-claim:q3-uptime is sent; an outbound-claim may move to: correction-owed, standing</span><br></div></code></pre></div></div>
+<p>There is no path from <code>sent</code> back to <code>draft</code>. A ladder that allowed one would model retraction as an
+<strong>edit</strong> — the claim would simply stop having been made — and the customer would still have the
+email.</p>
+<p>So a wrong claim moves <strong>forward</strong>, never back. <code>correction-owed</code>, then <code>corrected</code>, which is a <em>new
+outbound act</em> with its own evidence, costing <strong>two</strong> approvals where the original cost one. <strong>Fixing
+a claim costs a second claim.</strong> That is true in the world, and the ladder should not be kinder than
+the world.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-correction-owed-is-a-rung-and-not-a-flag">Why <code>correction-owed</code> is a rung and not a flag<a href="https://beyond10x.github.io/updates/field-notes/aep/a-claim-that-left-the-boundary/#why-correction-owed-is-a-rung-and-not-a-flag" class="hash-link" aria-label="Direct link to why-correction-owed-is-a-rung-and-not-a-flag" title="Direct link to why-correction-owed-is-a-rung-and-not-a-flag" translate="no">​</a></h2>
+<p>The rung names the state precisely: <strong>sent, known wrong, audience not yet told.</strong></p>
+<p>It is the most expensive state an organisation can be in and the easiest one to leave undocumented,
+because nobody wants to write it down. A rung is a column <code>protocol artifact board</code> prints; a flag
+is a field nobody queries.</p>
+<p>It is deliberately <strong>not terminal</strong> and deliberately <strong>not counted as approved</strong> — a claim in
+<code>correction-owed</code> is a live obligation, and anything treating it as finished would let the most
+important case disappear from a report.</p>
+<p>There is no <code>retracted</code>. A retraction is itself an outbound claim — <strong>you have to tell somebody</strong> —
+so it is a <code>corrected</code> whose content is a withdrawal, not a rung that quietly makes the original
+stop counting.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-part-that-is-actually-the-headline">The part that is actually the headline<a href="https://beyond10x.github.io/updates/field-notes/aep/a-claim-that-left-the-boundary/#the-part-that-is-actually-the-headline" class="hash-link" aria-label="Direct link to The part that is actually the headline" title="Direct link to The part that is actually the headline" translate="no">​</a></h2>
+<p><strong>A whole new kind of artifact, with six rungs and two evidence requirements, arrived as one YAML
+file and no Rust change at all.</strong></p>
+<p>That is the sentence the entity-runtime programme was for. Ten releases earlier it would have been a
+pull request against this repository, a review, a release, and an upgrade for everybody. Now it is a
+file you write in your own tree.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="planning" term="planning"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.22.0 — a second harness, and what it immediately found]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/a-second-transcript-shape/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/a-second-transcript-shape/"/>
+        <updated>2026-08-25T22:45:27.000Z</updated>
+        <summary type="html"><![CDATA[One trace-spec/1 specification now decides two transcript shapes, so harness neutrality stops being a claim with one case behind it. Plus three prose counts re-derived from the commands that print them.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.22.0 — a second harness, and what it immediately found | AEP</span><span data-pagefind-meta="description">One trace-spec/1 specification now decides two transcript shapes, so harness neutrality stops being a claim with one case behind it. Plus three prose counts re-derived from the commands that print them.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-26-0045-a-second-transcript-shape.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-26-0045-a-second-transcript-shape.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>Every behavioural document here is published as <strong>harness-neutral</strong>, and until this release exactly
+one transcript adapter existed. So <em>"neutral"</em> was a claim with <strong>no second case behind it</strong>.</p>
+<p>A vocabulary tested against one harness is a vocabulary shaped like that harness, and <strong>nobody can
+tell which from the inside</strong>.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-second-case">The second case<a href="https://beyond10x.github.io/updates/field-notes/aep/a-second-transcript-shape/#the-second-case" class="hash-link" aria-label="Direct link to The second case" title="Direct link to The second case" translate="no">​</a></h2>
+<p>A reader for a second transcript shape, so one <code>trace-spec/1</code> specification now decides both. The
+specification did not change to accommodate it, which is the result the exercise was for.</p>
+<p>Two things stated plainly rather than implied, because the difference matters:</p>
+<ul>
+<li class="">the committed fixtures are <strong>synthetic</strong>, and every place they are used says so;</li>
+<li class="">the <strong>verified</strong> reader for that harness's transcripts lives in
+<a href="https://github.com/beyond10x/metaharness" target="_blank" rel="noopener noreferrer" class="">metaharness</a>, checked against thousands of real
+rollout files. This one is a <strong>neutrality probe on constructed bytes</strong> — it answers the vocabulary
+question and does not claim to read anybody's transcripts in production.</li>
+</ul>
+<p>The claim this release earns is precise: <strong>the vocabulary is neutral.</strong> The <em>driving</em> path still has
+never met a second harness, and the limitations page says so.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="three-counts-re-derived">Three counts, re-derived<a href="https://beyond10x.github.io/updates/field-notes/aep/a-second-transcript-shape/#three-counts-re-derived" class="hash-link" aria-label="Direct link to Three counts, re-derived" title="Direct link to Three counts, re-derived" translate="no">​</a></h2>
+<p>Three prose literals had drifted from the counts their own gates print. Each was corrected by
+<strong>running the command beside it</strong> rather than by picking the number that looked right:</p>
+<table><thead><tr><th>claim</th><th>was</th><th>is</th></tr></thead><tbody><tr><td>billing suite scenarios</td><td>27</td><td><strong>29</strong></td></tr><tr><td>browser boundary claims held</td><td>17</td><td><strong>counted at run time</strong></td></tr><tr><td>revision-pair scenarios</td><td>nine</td><td><strong>ten</strong></td></tr></tbody></table>
+<p>The middle one is the fix worth copying: <code>smoke.mjs</code> now <strong>increments a counter in its own check
+function</strong> and prints what it actually checked. It cannot drift again, because there is no second
+copy of the number to drift from.</p>
+<p>For the first, a new guard reads the count <strong>out of the suite's own source</strong> and fails if the prose
+disagrees — because correcting two copies without tying them together only resets the clock.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="trace" term="trace"/>
+        <category label="portability" term="portability"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.21.0 — four mechanisms the engine and driver were missing]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/the-engines-mechanisms/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/the-engines-mechanisms/"/>
+        <updated>2026-08-25T22:25:17.000Z</updated>
+        <summary type="html"><![CDATA[Evidence names its subject, so a green run for one story can no longer discharge another story's gate. An advisory tier that reports and gates nothing. A circuit breaker on step dependencies. And the driver writes down what a step was not allowed to do.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.21.0 — four mechanisms the engine and driver were missing | AEP</span><span data-pagefind-meta="description">Evidence names its subject, so a green run for one story can no longer discharge another story's gate. An advisory tier that reports and gates nothing. A circuit breaker on step dependencies. And the driver writes down what a step was not allowed to do.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-26-0025-the-engines-mechanisms.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-26-0025-the-engines-mechanisms.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>Four mechanisms, each closing a gap where the rule existed and nothing enforced it.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="evidence-names-its-subject">Evidence names its subject<a href="https://beyond10x.github.io/updates/field-notes/aep/the-engines-mechanisms/#evidence-names-its-subject" class="hash-link" aria-label="Direct link to Evidence names its subject" title="Direct link to Evidence names its subject" translate="no">​</a></h2>
+<p>A record may declare what it is about. If the declared subject does not match the task it is
+submitted against, it is refused — <strong>before the record is constructed</strong>, not after.</p>
+<p>In a sentence: <strong>a green test run for one story can no longer discharge a different story's gate.</strong>
+That was possible before, it was silent, and the audit trail would have looked correct.</p>
+<p>Placing the guard before construction is deliberate. A refused record that got built is a refused
+record that can be logged, cached, or passed on by something that did not check the verdict.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="an-advisory-enforcement-tier">An advisory enforcement tier<a href="https://beyond10x.github.io/updates/field-notes/aep/the-engines-mechanisms/#an-advisory-enforcement-tier" class="hash-link" aria-label="Direct link to An advisory enforcement tier" title="Direct link to An advisory enforcement tier" translate="no">​</a></h2>
+<p>A requirement may be declared <strong>advisory</strong>, with an owner and an exit criterion. It is evaluated,
+reported and counted — and it <strong>gates nothing</strong>.</p>
+<p>This exists because the realistic alternative to a soft rule is not a hard rule; it is <strong>prose in a
+wiki</strong>. A team can now measure how often a proposed rule <em>would</em> have fired, on real work, before
+anybody's build turns red.</p>
+<p>The owner and the exit criterion are <strong>required at parse time</strong>, so an advisory requirement cannot
+quietly become permanent through nobody remembering to revisit it. A rule with no exit criterion is
+a rule that never graduates and never dies.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-dependency-that-keeps-failing-stops-being-called">A dependency that keeps failing stops being called<a href="https://beyond10x.github.io/updates/field-notes/aep/the-engines-mechanisms/#a-dependency-that-keeps-failing-stops-being-called" class="hash-link" aria-label="Direct link to A dependency that keeps failing stops being called" title="Direct link to A dependency that keeps failing stops being called" translate="no">​</a></h2>
+<p>A step map may declare <code>depends_on</code> and a circuit breaker. A repeatedly failing dependency <strong>opens
+the breaker</strong> instead of being retried, and the run says the breaker is open rather than producing
+the tenth identical timeout.</p>
+<p>Retry and circuit-breaking had been prose in every step map — which is to say, enforced by whoever
+read it.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-driver-writes-what-a-step-was-not-allowed-to-do">The driver writes what a step was <strong>not</strong> allowed to do<a href="https://beyond10x.github.io/updates/field-notes/aep/the-engines-mechanisms/#the-driver-writes-what-a-step-was-not-allowed-to-do" class="hash-link" aria-label="Direct link to the-driver-writes-what-a-step-was-not-allowed-to-do" title="Direct link to the-driver-writes-what-a-step-was-not-allowed-to-do" translate="no">​</a></h2>
+<p>Refusals are emitted as their own <code>trace-spec/1</code> document, with <code>tool.absent</code> expectations. <strong>The
+absence of a tool call becomes a checkable fact rather than a silence.</strong></p>
+<p>This closes a real hole in reasoning about a governed run: <em>"the agent did not shell out"</em> and
+<em>"the transcript contains no record either way"</em> look identical in a log, and only one of them is a
+finding.</p>
+<p>If a run refused nothing, <strong>no document is written at all</strong> — an empty specification is refused by
+the format itself, and a file asserting nothing is worse than no file.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="driver" term="driver"/>
+        <category label="evidence" term="evidence"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.20.0 — evidence you record, and provenance for a decision]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/evidence-names-what-it-is-about/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/evidence-names-what-it-is-about/"/>
+        <updated>2026-08-25T22:03:33.000Z</updated>
+        <summary type="html"><![CDATA[protocol artifact evidence records an observation against an artifact so a later move can be decided on it. And a move now separates evidence that was recorded from evidence that was asserted — saying so at the moment it leans on the weaker one.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.20.0 — evidence you record, and provenance for a decision | AEP</span><span data-pagefind-meta="description">protocol artifact evidence records an observation against an artifact so a later move can be decided on it. And a move now separates evidence that was recorded from evidence that was asserted — saying so at the moment it leans on the weaker one.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-26-0003-evidence-names-what-it-is-about.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-26-0003-evidence-names-what-it-is-about.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p><code>0.15.0</code> let a rung cost evidence. This release is how the evidence gets there.</p>
+<div class="language-shell-session codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-shell-session codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token command shell-symbol important">$</span><span class="token command"> </span><span class="token command bash language-bash">protocol artifact evidence outbound-claim:q3-uptime </span><span class="token command bash language-bash punctuation" style="color:#393A34">\</span><span class="token command bash language-bash"></span><br></div><div class="token-line" style="color:#393A34"><span class="token command bash language-bash">    </span><span class="token command bash language-bash parameter variable" style="color:#36acaa">--kind</span><span class="token command bash language-bash"> approval </span><span class="token command bash language-bash parameter variable" style="color:#36acaa">--source</span><span class="token command bash language-bash"> </span><span class="token command bash language-bash string" style="color:#e3116c">"legal review"</span><span class="token command bash language-bash"> </span><span class="token command bash language-bash parameter variable" style="color:#36acaa">--ref</span><span class="token command bash language-bash"> https://example.invalid/approvals/814</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token output">outbound-claim:q3-uptime: approval recorded from legal review</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  on hand: approval=1</span><br></div><div class="token-line" style="color:#393A34"><span class="token output"></span><br></div><div class="token-line" style="color:#393A34"><span class="token output"></span><span class="token command shell-symbol important">$</span><span class="token command"> </span><span class="token command bash language-bash">protocol artifact move outbound-claim:q3-uptime </span><span class="token command bash language-bash parameter variable" style="color:#36acaa">--to</span><span class="token command bash language-bash"> cleared</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token output">outbound-claim:q3-uptime moved draft -&gt; cleared (revision 2)</span><br></div></code></pre></div></div>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-record-carries-when-somebody-looked">The record carries when somebody looked<a href="https://beyond10x.github.io/updates/field-notes/aep/evidence-names-what-it-is-about/#the-record-carries-when-somebody-looked" class="hash-link" aria-label="Direct link to The record carries when somebody looked" title="Direct link to The record carries when somebody looked" translate="no">​</a></h2>
+<p><code>--at</code> defaults to now, <strong>read at the edge</strong> and written into the record — so the observation
+carries when somebody <em>looked</em>, not when the file was parsed. That is the same <code>observed_at</code> rule
+the engine has used since <code>0.10.0</code>, now available from the planning side.</p>
+<p><code>--source</code> and <code>--ref</code> are how a record stops being an assertion: <em>where it came from</em> and <em>where to
+go and look</em>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="provenance-recorded-versus-asserted">Provenance: recorded versus asserted<a href="https://beyond10x.github.io/updates/field-notes/aep/evidence-names-what-it-is-about/#provenance-recorded-versus-asserted" class="hash-link" aria-label="Direct link to Provenance: recorded versus asserted" title="Direct link to Provenance: recorded versus asserted" translate="no">​</a></h2>
+<p>A move now records the <strong>provenance</strong> of what decided it, separating evidence that was <strong>recorded</strong>
+from evidence that was <strong>asserted</strong> at the moment of the move — and <strong>a move leaning on an assertion
+says so as it happens</strong>.</p>
+<p>The consequence is about a specific future moment: somebody auditing, months later, why a gate
+opened. Without this, both cases look identical in the trail. With it, the weaker claim is visible
+<strong>at the point of decision</strong> — where somebody could still have objected — rather than discoverable
+afterwards, when the only options are accept or unwind.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="planning" term="planning"/>
+        <category label="evidence" term="evidence"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.19.0 — the plan has a history]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/the-plan-has-a-history/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/the-plan-has-a-history/"/>
+        <updated>2026-08-25T21:54:35.000Z</updated>
+        <summary type="html"><![CDATA[The markdown store gains an append-only journal, so what happened to an artifact becomes a question you can ask rather than a git log you reconstruct. A corrupt line is skipped and counted, never silently dropped.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.19.0 — the plan has a history | AEP</span><span data-pagefind-meta="description">The markdown store gains an append-only journal, so what happened to an artifact becomes a question you can ask rather than a git log you reconstruct. A corrupt line is skipped and counted, never silently dropped.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-25-2354-the-plan-has-a-history.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-25-2354-the-plan-has-a-history.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>The planning store is markdown files in git, so its history was always <em>there</em> — as <code>git log</code>, in a
+form you had to reconstruct. This release makes it a question you can ask.</p>
+<div class="language-shell-session codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-shell-session codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token command shell-symbol important">$</span><span class="token command"> </span><span class="token command bash language-bash">protocol artifact </span><span class="token command bash language-bash function" style="color:#d73a49">history</span><span class="token command bash language-bash"> outbound-claim:q3-uptime</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token output">2026-08-26T00:08:16Z  operator  created as draft (revision 1)</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">2026-08-26T00:08:20Z  operator  approval recorded from legal review (https://example.invalid/approvals/814) (revision 1)</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">2026-08-26T00:08:20Z  operator  moved draft -&gt; cleared (revision 2)</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">2026-08-26T00:08:20Z  operator  moved cleared -&gt; sent (revision 3)</span><br></div></code></pre></div></div>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="two-details-are-the-design">Two details are the design<a href="https://beyond10x.github.io/updates/field-notes/aep/the-plan-has-a-history/#two-details-are-the-design" class="hash-link" aria-label="Direct link to Two details are the design" title="Direct link to Two details are the design" translate="no">​</a></h2>
+<p><strong>A corrupt line is skipped <em>and counted</em>.</strong> A history that quietly shortens is worse than one that
+says it is damaged: the second is a bug report, the first is a wrong answer nobody questions.</p>
+<p><strong>Append-only, and not a cache.</strong> The journal cannot be regenerated from the files — which is
+exactly why it can answer questions the files cannot, such as what an artifact's status was before
+somebody corrected it. A derived index would lose that on its first rebuild.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-it-does-not-close">What it does not close<a href="https://beyond10x.github.io/updates/field-notes/aep/the-plan-has-a-history/#what-it-does-not-close" class="hash-link" aria-label="Direct link to What it does not close" title="Direct link to What it does not close" translate="no">​</a></h2>
+<p>This is the markdown store's own journal, not the AEP storage contract's. The sixteen conformance
+suites still do not run against this store, and this release does not move that. Worth saying,
+because "the durable store now has a journal" reads like it might have.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="planning" term="planning"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.18.0 — the typed blocker, and a vocabulary that says why it is closed]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/the-typed-blocker/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/the-typed-blocker/"/>
+        <updated>2026-08-25T21:48:17.000Z</updated>
+        <summary type="html"><![CDATA[Two rungs, and the value is entirely in the type: a blocker is typed by what would clear it, so "blocked" stops being a label on a card. Plus an audit of every adopter-facing vocabulary — open or closed, and what each closure buys.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.18.0 — the typed blocker, and a vocabulary that says why it is closed | AEP</span><span data-pagefind-meta="description">Two rungs, and the value is entirely in the type: a blocker is typed by what would clear it, so "blocked" stops being a label on a card. Plus an audit of every adopter-facing vocabulary — open or closed, and what each closure buys.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-25-2348-the-typed-blocker.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-25-2348-the-typed-blocker.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<div class="language-shell-session codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-shell-session codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token command shell-symbol important">$</span><span class="token command"> </span><span class="token command bash language-bash">protocol artifact lifecycle blocker</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token output">blocker starts at open</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  cleared -&gt; nothing</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  open -&gt; cleared</span><br></div></code></pre></div></div>
+<p>Two rungs. The value is entirely in the <strong>type</strong>: a blocker is <strong>typed by what would clear it</strong>, so
+<em>blocked</em> stops being a label on a card and becomes a statement with a named exit.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-other-half-an-audit-of-what-is-closed">The other half: an audit of what is closed<a href="https://beyond10x.github.io/updates/field-notes/aep/the-typed-blocker/#the-other-half-an-audit-of-what-is-closed" class="hash-link" aria-label="Direct link to The other half: an audit of what is closed" title="Direct link to The other half: an audit of what is closed" translate="no">​</a></h2>
+<p>The same release published an audit of <strong>every adopter-facing vocabulary</strong> — which are open, which
+are closed, and <strong>what each closure buys</strong>.</p>
+<p>Opening a vocabulary is not automatically the better answer. <code>evidence_kinds</code> stays <strong>closed on
+purpose</strong>: an open evidence vocabulary would let a caller invent the kind of proof a gate is asking
+for. That is not extensibility, it is a hole.</p>
+<p>The output of the audit is not <em>open everything</em>. It is that <strong>no vocabulary is closed by accident,
+and the reason is written where an adopter reads it</strong>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-that-is-a-deliverable">Why that is a deliverable<a href="https://beyond10x.github.io/updates/field-notes/aep/the-typed-blocker/#why-that-is-a-deliverable" class="hash-link" aria-label="Direct link to Why that is a deliverable" title="Direct link to Why that is a deliverable" translate="no">​</a></h2>
+<p>The failure mode it prevents is specific and common. An adopter hits a closed vocabulary, cannot
+tell whether the closure is a decision or an oversight, and either works around it — building
+something on a shape that was never intended — or files an issue and waits.</p>
+<p>A table saying <em>closed, and here is what that buys you</em> turns both of those into a one-minute read.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="planning" term="planning"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.17.0 — obligation, a commitment on a clock nobody here controls]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/obligation/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/obligation/"/>
+        <updated>2026-08-25T21:42:16.000Z</updated>
+        <summary type="html"><![CDATA[A second ladder, and the rule attached to it is the point: an obligation must never gate a transition. A missed external deadline is a fact to report, not a permission to withhold.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.17.0 — obligation, a commitment on a clock nobody here controls | AEP</span><span data-pagefind-meta="description">A second ladder, and the rule attached to it is the point: an obligation must never gate a transition. A missed external deadline is a fact to report, not a permission to withhold.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-25-2342-obligation.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-25-2342-obligation.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>An <code>obligation</code> is a commitment on a clock <strong>nobody here controls</strong>: a customer's deadline, a
+regulator's window, a partner's delivery date.</p>
+<div class="language-shell-session codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-shell-session codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token command shell-symbol important">$</span><span class="token command"> </span><span class="token command bash language-bash">protocol artifact lifecycle obligation</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token output">obligation starts at open</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  met -&gt; nothing</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  open -&gt; met, slipped</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  slipped -&gt; met</span><br></div></code></pre></div></div>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-rung-that-justifies-the-kind">The rung that justifies the kind<a href="https://beyond10x.github.io/updates/field-notes/aep/obligation/#the-rung-that-justifies-the-kind" class="hash-link" aria-label="Direct link to The rung that justifies the kind" title="Direct link to The rung that justifies the kind" translate="no">​</a></h2>
+<p><code>slipped</code>. And the rule attached to it is the point of the whole release: <strong>an obligation must never
+gate a transition.</strong></p>
+<p>A missed external deadline is a <strong>fact to report</strong>, not a <strong>permission to withhold</strong>. A tool that
+let a slipped obligation block your work would have turned somebody else's missed date into your
+blocked pull request — which is both unfair and useless, because you cannot fix it from here.</p>
+<p>This is also why it is a second ladder rather than a widening of the existing status vocabulary.
+<code>slipped</code> on <code>ArtifactStatus</code> would have been available to every kind, and something would
+eventually have gated on it.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-slipped---met-exists">Why <code>slipped -&gt; met</code> exists<a href="https://beyond10x.github.io/updates/field-notes/aep/obligation/#why-slipped---met-exists" class="hash-link" aria-label="Direct link to why-slipped---met-exists" title="Direct link to why-slipped---met-exists" translate="no">​</a></h2>
+<p>An obligation you missed and then satisfied is a real and common history. A ladder that made
+<code>slipped</code> terminal would push people to avoid recording it in the first place — and the state you
+most want recorded is the one nobody wants to write down.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-it-cost-to-add">What it cost to add<a href="https://beyond10x.github.io/updates/field-notes/aep/obligation/#what-it-cost-to-add" class="hash-link" aria-label="Direct link to What it cost to add" title="Direct link to What it cost to add" translate="no">​</a></h2>
+<p>A YAML file. No Rust change. This is the second kind added that way, and by this point the claim
+<code>0.13.0</code> made has two releases of evidence behind it.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="planning" term="planning"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.16.0 — a rung may open on a date, and the clock is read at the edge]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/a-rung-may-open-on-a-date/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/a-rung-may-open-on-a-date/"/>
+        <updated>2026-08-25T21:37:16.000Z</updated>
+        <summary type="html"><![CDATA[Date and duration operators join the condition language, so a rung can be shut until a date arrives. The kernel still has no clock: the instant is read at the edge and passed in, which is what makes a recorded decision re-checkable by somebody who was not there.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.16.0 — a rung may open on a date, and the clock is read at the edge | AEP</span><span data-pagefind-meta="description">Date and duration operators join the condition language, so a rung can be shut until a date arrives. The kernel still has no clock: the instant is read at the edge and passed in, which is what makes a recorded decision re-checkable by somebody who was not there.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-25-2337-a-rung-may-open-on-a-date.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-25-2337-a-rung-may-open-on-a-date.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>Some rungs should not open yet. A review window. A cooling-off period. A notice period somebody
+agreed to in a contract.</p>
+<p>This release adds <strong>date and duration operators</strong> to the condition language, so a ladder can say so.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-clock-stays-outside">The clock stays outside<a href="https://beyond10x.github.io/updates/field-notes/aep/a-rung-may-open-on-a-date/#the-clock-stays-outside" class="hash-link" aria-label="Direct link to The clock stays outside" title="Direct link to The clock stays outside" translate="no">​</a></h2>
+<p>The interesting part is where the time comes from. The kernel deciding the move <strong>has no clock at
+all</strong> — reading one is banned by a scan over its own sources. The instant is read <strong>at the edge</strong> and
+handed in as an argument.</p>
+<p>That is not fastidiousness. It is what makes the same inputs give the same verdict <strong>forever</strong>, so a
+decision recorded today can be re-checked next year by somebody who was not there, and the answer
+does not depend on when they asked.</p>
+<p>A kernel that read its own clock would give different verdicts at different moments for identical
+inputs, and every recorded decision would become unfalsifiable.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="growing-a-language-one-operator-at-a-time">Growing a language one operator at a time<a href="https://beyond10x.github.io/updates/field-notes/aep/a-rung-may-open-on-a-date/#growing-a-language-one-operator-at-a-time" class="hash-link" aria-label="Direct link to Growing a language one operator at a time" title="Direct link to Growing a language one operator at a time" translate="no">​</a></h2>
+<p>The condition language is data, and the standing rule is that it grows <strong>operator by operator, never
+into a language</strong>. Two comparison operators over instants is a step; an expression evaluator would
+be a different product.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-part-that-had-to-be-got-right">The part that had to be got right<a href="https://beyond10x.github.io/updates/field-notes/aep/a-rung-may-open-on-a-date/#the-part-that-had-to-be-got-right" class="hash-link" aria-label="Direct link to The part that had to be got right" title="Direct link to The part that had to be got right" translate="no">​</a></h2>
+<p>Date <strong>parsing</strong> now lives inside a decision path, which means it has to be <strong>total</strong>. A malformed
+date is <code>False</code> — not a panic, not a default, not "probably fine". Anything that can be reached by a
+gate has to have an answer for every input, including the input nobody expected.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="planning" term="planning"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.15.0 — a rung may cost evidence, and the refusal says which kind of no]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/a-rung-may-cost-evidence/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/a-rung-may-cost-evidence/"/>
+        <updated>2026-08-25T20:58:08.000Z</updated>
+        <summary type="html"><![CDATA[A ladder that only says what may follow what models permission, not earning. requires: names what a rung costs, and the refusal distinguishes "on the ladder and not yet earned" from "not on the ladder" — two sentences that lead to different next actions.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.15.0 — a rung may cost evidence, and the refusal says which kind of no | AEP</span><span data-pagefind-meta="description">A ladder that only says what may follow what models permission, not earning. requires: names what a rung costs, and the refusal distinguishes "on the ladder and not yet earned" from "not on the ladder" — two sentences that lead to different next actions.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-25-2258-a-rung-may-cost-evidence.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-25-2258-a-rung-may-cost-evidence.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p><code>0.13.0</code> made the status ladder data. This is the first release that spends it.</p>
+<p>A ladder that only says <em>what may follow what</em> models <strong>permission</strong>, not <strong>earning</strong>. Anybody could
+move a story to <code>implemented</code>; the ladder had no opinion about whether anything was implemented.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-a-rung-costs">What a rung costs<a href="https://beyond10x.github.io/updates/field-notes/aep/a-rung-may-cost-evidence/#what-a-rung-costs" class="hash-link" aria-label="Direct link to What a rung costs" title="Direct link to What a rung costs" translate="no">​</a></h2>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">requires</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">cleared</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">   </span><span class="token punctuation" style="color:#393A34">[</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">evidence</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> approval</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">at_least</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">1</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">corrected</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">evidence</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> approval</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">at_least</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">2</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">]</span><br></div></code></pre></div></div>
+<p>And the refusal <strong>says which kind of no it is</strong>, which is the whole design:</p>
+<div class="language-shell-session codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-shell-session codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token command shell-symbol important">$</span><span class="token command"> </span><span class="token command bash language-bash">protocol artifact move outbound-claim:q3-uptime </span><span class="token command bash language-bash parameter variable" style="color:#36acaa">--to</span><span class="token command bash language-bash"> cleared</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token output">outbound-claim:q3-uptime is draft; cleared is on the ladder and not yet earned: reaching cleared</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">needs at least 1 approval record(s). Nothing was presented at $args.evidence.approval</span><br></div></code></pre></div></div>
+<p><em>On the ladder and not yet earned</em> is a different sentence from <em>not on the ladder</em>, and the two
+lead to different next actions. One is "go and get the approval." The other is "you are trying to do
+something this kind of work does not do."</p>
+<p>A tool that collapses both into <code>refused</code> has handed you the job of guessing which.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="three-valued-like-everything-else">Three-valued, like everything else<a href="https://beyond10x.github.io/updates/field-notes/aep/a-rung-may-cost-evidence/#three-valued-like-everything-else" class="hash-link" aria-label="Direct link to Three-valued, like everything else" title="Direct link to Three-valued, like everything else" translate="no">​</a></h2>
+<p>The condition is <code>True</code> / <code>False</code> / <strong><code>Unknown</code></strong>. A rung whose requirement cannot be observed
+refuses as <code>Unknown</code>, never as <code>False</code>.</p>
+<p><em>Nobody looked</em> is not the same answer as <em>somebody looked and it failed</em>, and neither of them is a
+pass.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-it-does-not-do">What it does not do<a href="https://beyond10x.github.io/updates/field-notes/aep/a-rung-may-cost-evidence/#what-it-does-not-do" class="hash-link" aria-label="Direct link to What it does not do" title="Direct link to What it does not do" translate="no">​</a></h2>
+<p>The shipped <code>story</code> ladder <strong>does not</strong> declare a cost. The mechanism exists; this repository has
+not yet spent it on its own most-used kind. That is a choice you can now make in your own tree
+without waiting for us.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="planning" term="planning"/>
+        <category label="evidence" term="evidence"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.14 — the protocol reads a repository that already exists]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/a-repository-that-already-exists/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/a-repository-that-already-exists/"/>
+        <updated>2026-08-25T14:05:51.000Z</updated>
+        <summary type="html"><![CDATA[Release 0.14.0 adds protocol reverse: four verbs that point the tooling at a repository written with none of this in mind. Three of the four write nothing, so you can run them against your own code before deciding anything.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.14 — the protocol reads a repository that already exists | AEP</span><span data-pagefind-meta="description">Release 0.14.0 adds protocol reverse: four verbs that point the tooling at a repository written with none of this in mind. Three of the four write nothing, so you can run them against your own code before deciding anything.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-25-1605-a-repository-that-already-exists.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-25-1605-a-repository-that-already-exists.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>Every worked example on this site starts from documents that already exist. That is the wrong end
+for anybody deciding whether to adopt: your repository has a README, a test layout, a CI file and
+six years of git history, and none of it was written with a protocol in mind.</p>
+<p><code>0.14.0</code> adds <code>protocol reverse</code> — four verbs that read what a repository <em>already says about
+itself</em>. <strong>Three of the four write nothing at all</strong>, which is the part that matters when you are
+evaluating a tool you do not trust yet: the worst case is a report you disagree with.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="reverse-scan--what-the-repository-says-about-itself"><code>reverse scan</code> — what the repository says about itself<a href="https://beyond10x.github.io/updates/field-notes/aep/a-repository-that-already-exists/#reverse-scan--what-the-repository-says-about-itself" class="hash-link" aria-label="Direct link to reverse-scan--what-the-repository-says-about-itself" title="Direct link to reverse-scan--what-the-repository-says-about-itself" translate="no">​</a></h2>
+<div class="language-shell-session codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-shell-session codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token command shell-symbol important">$</span><span class="token command"> </span><span class="token command bash language-bash">protocol reverse scan </span><span class="token command bash language-bash builtin class-name">.</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token output">aep.reverse-scan/1</span><br></div><div class="token-line" style="color:#393A34"><span class="token output"></span><br></div><div class="token-line" style="color:#393A34"><span class="token output">readme headings: 119</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  README.md:1  aep</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  README.md:19    Two halves, one seam</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  README.md:34    What that looks like</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  README.md:76    Is this for you</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  README.md:89    Where it sits</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  README.md:104    Status</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  ...</span><br></div></code></pre></div></div>
+<p>Headings, declared toolchains, gates, test layout — assembled into an <code>aep.reverse-scan/1</code> bundle
+that renders as <code>text</code>, <code>yaml</code> or <code>json</code>. Nothing is written.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="reverse-history--what-the-git-history-says"><code>reverse history</code> — what the git history says<a href="https://beyond10x.github.io/updates/field-notes/aep/a-repository-that-already-exists/#reverse-history--what-the-git-history-says" class="hash-link" aria-label="Direct link to reverse-history--what-the-git-history-says" title="Direct link to reverse-history--what-the-git-history-says" translate="no">​</a></h2>
+<p>This is the one that surprises people. Run against this repository:</p>
+<div class="language-shell-session codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-shell-session codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token command shell-symbol important">$</span><span class="token command"> </span><span class="token command bash language-bash">protocol reverse </span><span class="token command bash language-bash function" style="color:#d73a49">history</span><span class="token command bash language-bash"> </span><span class="token command bash language-bash builtin class-name">.</span><span class="token command bash language-bash"> </span><span class="token command bash language-bash parameter variable" style="color:#36acaa">--top</span><span class="token command bash language-bash"> </span><span class="token command bash language-bash number" style="color:#36acaa">5</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token output">aep.reverse-history/1</span><br></div><div class="token-line" style="color:#393A34"><span class="token output"></span><br></div><div class="token-line" style="color:#393A34"><span class="token output">span: 213 commits, 1 author(s), 2026-08-19 -&gt; 2026-08-26</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">tags: 33  [0.23.2, 0.23.1, 0.23.0, 0.22.0, 0.21.0]</span><br></div><div class="token-line" style="color:#393A34"><span class="token output"></span><br></div><div class="token-line" style="color:#393A34"><span class="token output">commit types: feat 95  docs 66  fix 22  chore 18  ci 3  refactor 3  test 3  style 2</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">tickets: 4</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  W4-2  5 commit(s), last 2026-08-24</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  W4-1  3 commit(s), last 2026-08-22</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">reverted: 0</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">stated expiry: 1</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  2026-08-20 87310c3  refactor(conformance): drop the per-suite workaround for colliding identifiers</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">churn: 5</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  CHANGELOG.md  109 commit(s), 1 author(s), last 2026-08-26</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  AGENTS.md  39 commit(s), 1 author(s), last 2026-08-25</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  crates/protocol-cli/src/app.rs  36 commit(s), 1 author(s), last 2026-08-25</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">dormant: 0</span><br></div></code></pre></div></div>
+<p><strong>Churn</strong> is where change concentrates. <strong>Dormant</strong> is what nobody has touched recently — a
+different question from what is untested, and often a more useful one. <strong>Stated expiry</strong> finds
+commits that said something was temporary, which is the class of comment that outlives its author's
+memory of it.</p>
+<p><code>--recent</code> sets how many commits count as recent for dormancy; <code>--top</code> sets how many entries each
+ranked section reports.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="reverse-openapi--a-specification-you-already-published"><code>reverse openapi</code> — a specification you already published<a href="https://beyond10x.github.io/updates/field-notes/aep/a-repository-that-already-exists/#reverse-openapi--a-specification-you-already-published" class="hash-link" aria-label="Direct link to reverse-openapi--a-specification-you-already-published" title="Direct link to reverse-openapi--a-specification-you-already-published" translate="no">​</a></h2>
+<div class="language-shell-session codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-shell-session codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token command shell-symbol important">$</span><span class="token command"> </span><span class="token command bash language-bash">protocol reverse openapi openapi.yaml </span><span class="token command bash language-bash parameter variable" style="color:#36acaa">--domain</span><span class="token command bash language-bash"> acme.billing</span><br></div></code></pre></div></div>
+<p>Drafts an <code>ess/1</code> domain from an OpenAPI document that already exists. Standard output when <code>--out</code>
+is absent, because a verb that scatters files over a working tree the first time somebody tries it
+is a verb nobody tries twice.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="reverse-init--the-one-that-writes"><code>reverse init</code> — the one that writes<a href="https://beyond10x.github.io/updates/field-notes/aep/a-repository-that-already-exists/#reverse-init--the-one-that-writes" class="hash-link" aria-label="Direct link to reverse-init--the-one-that-writes" title="Direct link to reverse-init--the-one-that-writes" translate="no">​</a></h2>
+<div class="language-shell-session codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-shell-session codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token command shell-symbol important">$</span><span class="token command"> </span><span class="token command bash language-bash">protocol reverse init </span><span class="token command bash language-bash punctuation" style="color:#393A34">\</span><span class="token command bash language-bash"></span><br></div><div class="token-line" style="color:#393A34"><span class="token command bash language-bash">    </span><span class="token command bash language-bash parameter variable" style="color:#36acaa">--protocols</span><span class="token command bash language-bash"> git+https://github.com/beyond10x/aep</span><span class="token command bash language-bash comment" style="color:#999988;font-style:italic">#&lt;40-hex&gt; \</span><span class="token command bash language-bash"></span><br></div><div class="token-line" style="color:#393A34"><span class="token command bash language-bash">    </span><span class="token command bash language-bash parameter variable" style="color:#36acaa">--profile</span><span class="token command bash language-bash"> development.standard</span><br></div></code></pre></div></div>
+<p>Writes the <code>project.yaml</code> that makes a repository an adopting project, and resolves the protocol
+source first unless <code>--no-verify</code> says not to.</p>
+<p><code>--protocols</code> takes a path <strong>or a pinned git locator</strong>, and the pin is not decoration: a governing
+document tree that could move under you is a gate whose meaning changes without a commit in your
+repository.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="where-to-go-next">Where to go next<a href="https://beyond10x.github.io/updates/field-notes/aep/a-repository-that-already-exists/#where-to-go-next" class="hash-link" aria-label="Direct link to Where to go next" title="Direct link to Where to go next" translate="no">​</a></h2>
+<p>The walkthrough is
+<a href="https://github.com/beyond10x/aep/blob/main/docs/guide/adopting.md" target="_blank" rel="noopener noreferrer" class="">Adopting a repository that already exists</a>,
+and the verb-by-verb tables are in the <a class="" href="https://beyond10x.github.io/docs/aep/reference/cli/">CLI reference</a>.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="adoption" term="adoption"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.13 — the ladder is data]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/the-ladder-is-data/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/the-ladder-is-data/"/>
+        <updated>2026-08-25T12:44:15.000Z</updated>
+        <summary type="html"><![CDATA[Release 0.13.0 takes the status ladder every plan item climbs out of Rust and puts it in a YAML file, decided by entity-core — a separate, IO-free kernel. The consequence: modelling a kind of work this repository never anticipated stops needing a pull request here and a release.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.13 — the ladder is data | AEP</span><span data-pagefind-meta="description">Release 0.13.0 takes the status ladder every plan item climbs out of Rust and puts it in a YAML file, decided by entity-core — a separate, IO-free kernel. The consequence: modelling a kind of work this repository never anticipated stops needing a pull request here and a release.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-25-1444-the-ladder-is-data.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-25-1444-the-ladder-is-data.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>Every plan item in the planning store sits at a <strong>status</strong> and climbs a <strong>ladder</strong>: <code>draft</code> →
+<code>proposed</code> → <code>active</code> → <code>implemented</code> → <code>accepted</code>. Until <code>0.13.0</code> that ladder was a hand-written
+lookup in Rust, and the consequence for anybody using the tool was concrete and annoying: <strong>a team
+whose work does not fit the shapes we happened to think of had to send a pull request to this
+repository and wait for a release.</strong></p>
+<p>It is a YAML file now.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-changed">What changed<a href="https://beyond10x.github.io/updates/field-notes/aep/the-ladder-is-data/#what-changed" class="hash-link" aria-label="Direct link to What changed" title="Direct link to What changed" translate="no">​</a></h2>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># artifacts/lifecycles/story.yaml</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">kind</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> story</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">initial</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> draft</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">transitions</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">draft</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">       </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain">proposed</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">proposed</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain">active</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">active</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain">implemented</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">implemented</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain">accepted</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">accepted</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">[</span><span class="token punctuation" style="color:#393A34">]</span><br></div></code></pre></div></div>
+<p>Put a <code>&lt;kind&gt;.yaml</code> in your own document tree, point <code>--root</code> at it, and <code>new</code>, <code>move</code>, <code>board</code>,
+<code>lifecycle</code> and <code>validate</code> all understand the kind. No crate changes on either side.</p>
+<div class="language-shell-session codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-shell-session codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token command shell-symbol important">$</span><span class="token command"> </span><span class="token command bash language-bash">protocol artifact lifecycle blocker</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token output">blocker starts at open</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  cleared -&gt; nothing</span><br></div><div class="token-line" style="color:#393A34"><span class="token output">  open -&gt; cleared</span><br></div></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="who-decides">Who decides<a href="https://beyond10x.github.io/updates/field-notes/aep/the-ladder-is-data/#who-decides" class="hash-link" aria-label="Direct link to Who decides" title="Direct link to Who decides" translate="no">​</a></h2>
+<p>Not this repository. <code>crates/plan/aep-backend-markdown/src/kernel.rs</code> hands the definition and the
+attempted move to <a href="https://github.com/beyond10x/entity-runtime" target="_blank" rel="noopener noreferrer" class=""><code>entity-core</code></a>, a kernel that lives
+in a separate repository and is taken here as a <strong>git-pinned</strong> dependency.</p>
+<p><code>entity-core</code> is IO-free <strong>by test, not by convention</strong>. A banned-token scan over its own sources
+refuses the tokens for filesystem, network, clock, process, thread and randomness, and its entire
+dependency list is <code>serde</code> and <code>serde_json</code>. It cannot open a file, read a clock or reach a network.</p>
+<p>It is worth saying what that does <em>not</em> mean, because the phrase "runtime" invites the wrong
+reading:</p>
+<table><thead><tr><th>entity-core does</th><th>entity-core does <strong>not</strong> do</th></tr></thead><tbody><tr><td>take an entity type as data and answer <em>is this move permitted</em></td><td>store anything — every byte the planning store writes is written here, by <code>aep-backend-markdown</code></td></tr><tr><td>evaluate a rung's conditions against values handed to it</td><td>read a clock — the instant is read at the edge and passed in as an argument</td></tr><tr><td>refuse an undeclared status by name</td><td>know what other artifacts exist, or resolve a reference</td></tr></tbody></table>
+<p>The arrow points one way and never back: nothing from this repository appears in a manifest of
+<code>entity-runtime</code>'s, at any version. A kernel that depended on its adopter could be shaped by one,
+and its verdicts would stop being a general answer.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-this-was-safe-to-do">Why this was safe to do<a href="https://beyond10x.github.io/updates/field-notes/aep/the-ladder-is-data/#why-this-was-safe-to-do" class="hash-link" aria-label="Direct link to Why this was safe to do" title="Direct link to Why this was safe to do" translate="no">​</a></h2>
+<p>Because it is reversible, and that was built before the dependency was taken.</p>
+<p><code>crates/plan/aep-backend-markdown/tests/kernel_equivalence.rs</code> holds the kernel's verdict identical to
+the hand-written lookup it replaced, across every kind-and-status pair. Delete the module and the
+lookup is still standing behind it. A dependency you cannot undo is a decision somebody else gets to
+make later.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-vocabulary-is-open-to-authors-not-to-typos">The vocabulary is open to authors, not to typos<a href="https://beyond10x.github.io/updates/field-notes/aep/the-ladder-is-data/#the-vocabulary-is-open-to-authors-not-to-typos" class="hash-link" aria-label="Direct link to The vocabulary is open to authors, not to typos" title="Direct link to The vocabulary is open to authors, not to typos" translate="no">​</a></h2>
+<p><code>ArtifactKind</code> and <code>ArtifactStatus</code> both gained an <code>Other(String)</code> variant, so a ladder may declare
+rungs nobody here named. It is deliberately <strong>not</strong> open to any string: a status is accepted because
+<em>some ladder declares it</em>, not because it parses.</p>
+<p>That distinction earned its keep two releases later, when a new ladder was written starting at
+<code>drafted</code> — one letter from the built-in <code>draft</code>, a typo wearing a vocabulary's clothes. It was
+caught and corrected in <code>0.23.1</code>.</p>
+<p>Openness is also not the default answer everywhere. <code>evidence_kinds</code> stays <strong>closed</strong> on purpose: an
+open evidence vocabulary would let a caller invent the kind of proof a gate is asking for. Which
+vocabularies are open, which are closed, and what each closure buys is written down rather than
+inferred.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-this-bought">What this bought<a href="https://beyond10x.github.io/updates/field-notes/aep/the-ladder-is-data/#what-this-bought" class="hash-link" aria-label="Direct link to What this bought" title="Direct link to What this bought" translate="no">​</a></h2>
+<p>Everything in the eleven releases after it. A rung that costs evidence, a rung that opens on a date,
+three new ladders — and, in <code>0.23.0</code>, a whole new kind of artifact added as <strong>a YAML file with no
+Rust change at all</strong>, which was the point of the exercise.</p>
+<p>See <a class="" href="https://beyond10x.github.io/docs/aep/concepts/lifecycles/">Lifecycles, decided as data</a> for the full model.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="planning" term="planning"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[We read 100 agent sessions to find out what the human actually contributes]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/"/>
+        <updated>2026-08-25T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[A transcript study of 1,567 human turns in coding-agent sessions, separating the turns that carried information from the turns that only carried permission.]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">We read 100 agent sessions to find out what the human actually contributes | Agentic Principles</span><span data-pagefind-meta="description">A transcript study of 1,567 human turns in coding-agent sessions, separating the turns that carried information from the turns that only carried permission.</span><span data-pagefind-meta="project">Agentic Principles</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">agentic-principles</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">evaluator</span><span data-pagefind-filter="audience">researcher</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/agentic-principles/blob/9d6e7a5663c7dbc6cb76252d69ebfd87b93bf5ea/blog/2026-08-25-what-the-operator-actually-contributes.md" target="_blank" rel="noopener noreferrer" class="">blog/2026-08-25-what-the-operator-actually-contributes.md</a> · revision <code class="b10x-revision" title="9d6e7a5663c7dbc6cb76252d69ebfd87b93bf5ea">9d6e7a5663c7</code></p>
+</blockquote></div>
+<p>The median instruction given to a coding agent in our sample is <strong>eleven words long</strong> and sets off
+<strong>eight tool calls</strong>. That ratio is the whole economics of agentic work in one line: a very small
+amount of human input steering a very large amount of machine work.</p>
+<p>So we went looking for the obvious follow-up question. Of those eleven words — how many mattered?</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-question">The question<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#the-question" class="hash-link" aria-label="Direct link to The question" title="Direct link to The question" translate="no">​</a></h2>
+<p>Any team running agents at volume eventually asks where to put the automation boundary. The honest
+version of the question is uncomfortable: <strong>which of the human's turns carry information the agent
+could not have obtained, and which are ceremony — permission, nudging, repetition — that a script or
+a fixed policy could emit instead?</strong></p>
+<p>We can now answer it with numbers rather than vibes, because agent harnesses record everything.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-we-measured">What we measured<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#what-we-measured" class="hash-link" aria-label="Direct link to What we measured" title="Direct link to What we measured" translate="no">​</a></h2>
+<p>We took the 100 most recently active Claude Code sessions from one heavy operator's machine, spanning
+twelve days and 22 working directories, and rebuilt each one as a sequence of
+<code>human turn → agent operations → outcome</code>.</p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>sessions</td><td>100 (18 of them already fully headless)</td></tr><tr><td>human turns</td><td>1,567</td></tr><tr><td>agent messages</td><td>33,327</td></tr><tr><td>tool calls</td><td>33,293</td></tr><tr><td>wall-clock</td><td>673 h elapsed, 222 h with gaps over 5 min removed</td></tr><tr><td>compute</td><td>~$10,200 at API list prices (these ran on a subscription; this is an equivalence, not a bill)</td></tr></tbody></table>
+<p>Two things in that table are worth pausing on. Agent messages and tool calls are nearly <strong>1:1</strong> —
+almost every turn the model takes, it takes an action. And 18 sessions had no human in them at all;
+that is the automation baseline this operator had already built before anyone measured anything.</p>
+<p><strong>On method.</strong> Counts, costs, latencies and sequence motifs are <em>observed</em> — read directly off the
+transcripts. The labels on each human turn (intent, motivation, what information it carried, whether
+it could be replaced) are <em>inferred</em> by an LLM classifier over a closed taxonomy, and they are
+judgements, not measurements. We keep the two apart everywhere below, and we spot-checked labels
+against raw turn text before trusting them.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-shape-of-a-turn">The shape of a turn<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#the-shape-of-a-turn" class="hash-link" aria-label="Direct link to The shape of a turn" title="Direct link to The shape of a turn" translate="no">​</a></h2>
+<table><thead><tr><th>metric</th><th>value</th></tr></thead><tbody><tr><td>median human turn</td><td>11 words / 65 characters</td></tr><tr><td>turns under 10 words</td><td>44%</td></tr><tr><td>median tool calls triggered</td><td>8</td></tr><tr><td>turns triggering no tool at all</td><td>15%</td></tr><tr><td>turns that interrupted a running agent</td><td>1%</td></tr></tbody></table>
+<p>And the number that reframes the problem:</p>
+<blockquote>
+<p>The agent spent <strong>229 hours idle waiting for a human to reply</strong> — <strong>34% of all session wall-clock</strong>.
+Median wait after the agent stops: <strong>2 minutes</strong>. Ninth decile: <strong>21 minutes</strong>.</p>
+</blockquote>
+<p>A third of the elapsed time of agentic work, in this sample, was the machine waiting for a person to
+read something and type a short reply. That is the cost being paid for whatever the human turns
+contribute. So: what do they contribute?</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-the-turns-were">What the turns were<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#what-the-turns-were" class="hash-link" aria-label="Direct link to What the turns were" title="Direct link to What the turns were" translate="no">​</a></h2>
+<table><thead><tr><th>intent</th><th>share</th></tr></thead><tbody><tr><td>open new work</td><td>21%</td></tr><tr><td>approve / green-light</td><td>12%</td></tr><tr><td>narrow or expand scope</td><td>9%</td></tr><tr><td>manage the agent itself (context, config, tooling)</td><td>9%</td></tr><tr><td>ask a question</td><td>8%</td></tr><tr><td>correct an agent error</td><td>8%</td></tr><tr><td>supply outside information</td><td>8%</td></tr><tr><td>commit / push / release chores</td><td>6%</td></tr><tr><td>"keep going"</td><td>4%</td></tr><tr><td>ask for status</td><td>4%</td></tr></tbody></table>
+<p>Then we asked a sharper question of each turn: <em>did it carry anything the agent did not already
+have?</em></p>
+<table><thead><tr><th>information contributed</th><th>share</th></tr></thead><tbody><tr><td><strong>nothing new</strong></td><td><strong>42%</strong></td></tr><tr><td>a new goal</td><td>16%</td></tr><tr><td>state only a human could see</td><td>12%</td></tr><tr><td>a taste or priority preference</td><td>11%</td></tr><tr><td>a judgement between options the agent had already surfaced</td><td>10%</td></tr><tr><td>domain knowledge the agent lacked</td><td>8%</td></tr></tbody></table>
+<p>Nearly half of all human turns added no information to the conversation. Widen it slightly — include
+pure approvals, status requests and continuation nudges — and <strong>48% of turns (748 of 1,567) carried
+no new information</strong>, arriving in 355 consecutive runs, the longest of them nine turns deep.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="which-turns-could-be-replaced">Which turns could be replaced<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#which-turns-could-be-replaced" class="hash-link" aria-label="Direct link to Which turns could be replaced" title="Direct link to Which turns could be replaced" translate="no">​</a></h2>
+<p>The classifier judged each turn against four options: a deterministic rule could have emitted it, a
+fixed agent policy could have, another AI with context could have, or it genuinely needed the human.</p>
+<table><thead><tr><th>replaceable by</th><th>share</th></tr></thead><tbody><tr><td>human only</td><td>44%</td></tr><tr><td>a fixed agent policy</td><td>23%</td></tr><tr><td>a deterministic rule</td><td>20%</td></tr><tr><td>another AI with context</td><td>14%</td></tr></tbody></table>
+<p><strong>43% of human turns could be produced by a rule or a policy.</strong> Not "eventually" — from the
+transcript alone, with the trigger visible.</p>
+<p>The interesting part is <em>which</em> intents concentrate the removable turns:</p>
+<table><thead><tr><th>intent</th><th>n</th><th>% a rule or policy could emit</th></tr></thead><tbody><tr><td>manage the agent itself</td><td>136</td><td><strong>73%</strong></td></tr><tr><td>approve / green-light</td><td>190</td><td><strong>61%</strong></td></tr><tr><td>ask a question</td><td>130</td><td>35%</td></tr><tr><td>open new work</td><td>324</td><td>19%</td></tr><tr><td>narrow or expand scope</td><td>145</td><td>8%</td></tr></tbody></table>
+<p>Two clusters are almost pure overhead. <strong>Context management</strong> — compacting, clearing, re-orienting the
+agent after it lost the thread — is the agent's own housekeeping, delegated upward to a human who
+notices before it does. And <strong>approval</strong> is mostly a human saying yes to something they were always
+going to say yes to.</p>
+<p>Scope refinement goes the other way: only 8% of those turns reduce to a rule or a policy, and 70%
+were judged to need the human outright. That is the reassuring half of the result. Deciding <em>what</em>
+and <em>how much</em> survives automation. Deciding <em>whether to proceed with the thing you already asked
+for</em> does not.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-repair-tax">The repair tax<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#the-repair-tax" class="hash-link" aria-label="Direct link to The repair tax" title="Direct link to The repair tax" translate="no">​</a></h2>
+<p><strong>20% of human turns (313) existed only because the agent erred or stopped short.</strong> The dominant
+cause was not wrong answers:</p>
+<table><thead><tr><th>friction</th><th>share of turns</th></tr></thead><tbody><tr><td>agent stopped short of the task</td><td>18%</td></tr><tr><td>agent got something wrong</td><td>7%</td></tr><tr><td>missing context</td><td>3%</td></tr><tr><td>tool failure</td><td>3%</td></tr><tr><td>ambiguous instruction</td><td>1%</td></tr></tbody></table>
+<p>Omission outweighs error two and a half to one. The operator's most common corrective act is not "that's wrong",
+it is "you didn't finish". Tone tracks this: 44% of turns read as terse and pressing, 5% as
+frustrated.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="does-more-human-involvement-produce-better-outcomes">Does more human involvement produce better outcomes?<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#does-more-human-involvement-produce-better-outcomes" class="hash-link" aria-label="Direct link to Does more human involvement produce better outcomes?" title="Direct link to Does more human involvement produce better outcomes?" translate="no">​</a></h2>
+<table><thead><tr><th>human turns in session</th><th>n</th><th>success</th><th>partial</th><th>abandoned / failed</th><th>open-ended</th></tr></thead><tbody><tr><td>0 (headless)</td><td>18</td><td>10</td><td>–</td><td>6</td><td>2</td></tr><tr><td>1–3</td><td>26</td><td>17</td><td>–</td><td>8</td><td>1</td></tr><tr><td>4–10</td><td>16</td><td>6</td><td>9</td><td>1</td><td>–</td></tr><tr><td>11–30</td><td>21</td><td>6</td><td>13</td><td>2</td><td>–</td></tr><tr><td>31+</td><td>19</td><td><strong>2</strong></td><td><strong>17</strong></td><td>–</td><td>–</td></tr></tbody></table>
+<p>Sessions with more than thirty human turns finished cleanly twice out of nineteen.</p>
+<p>We are <strong>not</strong> claiming that talking to the agent more makes it worse. The obvious competing
+explanation is confounding by difficulty: hard, sprawling, poorly specified work attracts both more
+human turns and worse outcomes. That explanation is at least as consistent with this table as any
+causal story, and this study cannot separate them.</p>
+<p>What the table does support is narrower and still useful: <strong>a long human-turn count is an early
+distress signal</strong>, not a sign of diligence. A session past its twentieth human turn is, empirically,
+a session in trouble — and something should notice that and say so.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="from-turns-to-workflows">From turns to workflows<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#from-turns-to-workflows" class="hash-link" aria-label="Direct link to From turns to workflows" title="Direct link to From turns to workflows" translate="no">​</a></h2>
+<p>Grouping sessions by the shape of the work gives a small, repeating catalogue: incident
+investigation, agent-harness tuning, greenfield scaffolding, refactor sweeps, review-and-gate runs,
+backlog grooming, multi-agent fan-out, release cuts. Thirteen named archetypes plus a catch-all
+cover all 100 sessions; the six largest named ones cover 63 of them.</p>
+<p>Judged per session, <strong>64 of 100 could run unattended or with a small number of gates</strong>. The gates
+that survive scrutiny fall into exactly four categories, and they are worth naming because they are
+the actual specification for a human-in-the-loop design:</p>
+<ol>
+<li class=""><strong>Irreversible writes</strong> — production changes, published artifacts, anything with no undo.</li>
+<li class=""><strong>Outward-facing communication</strong> — a message that goes to a customer or a colleague under someone's name.</li>
+<li class=""><strong>Priority and taste calls</strong> — which of these three defensible options we want.</li>
+<li class=""><strong>Facts from outside the machine</strong> — what a person said, what a dashboard showed, what the device did.</li>
+</ol>
+<p>Everything else in the observed recipes — resolving the trigger, gathering context, running the gate,
+reading the failure, patching, re-running, committing, reporting — appeared in the transcripts as
+mechanical work that a human was narrating rather than performing.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="limitations">Limitations<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#limitations" class="hash-link" aria-label="Direct link to Limitations" title="Direct link to Limitations" translate="no">​</a></h2>
+<p>One operator, one harness, twelve days, one machine's habits. The corpus skews toward infrastructure
+and agent-tooling work and contains almost no greenfield product code. The replaceability labels are
+an LLM's opinion about a single turn in context; that classifier does not know what an automated
+replacement would have cost, or what it would have broken. The outcome-versus-turn-count table is
+confounded as described. And the analysis of these sessions was itself performed by an agent of the
+same family as the one under study — which is either efficient or a conflict of interest, depending
+on how the next replication goes.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-we-would-test-next">What we would test next<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#what-we-would-test-next" class="hash-link" aria-label="Direct link to What we would test next" title="Direct link to What we would test next" translate="no">​</a></h2>
+<p>The cheapest falsification is a <strong>turn-count tripwire</strong>: have the harness announce, at the twentieth
+human turn, that this session is now in the population that historically finishes partial, and offer
+to restate the goal from scratch. If outcomes do not move, the distress-signal reading is wrong and
+the confound was the whole story.</p>
+<p>The second is a <strong>default-approval policy</strong> for the 61% of approvals the classifier called removable:
+state the intended action with its default, act after a fixed pause unless contradicted, and keep a
+hard stop on the four gate categories above. That converts approval from a blocking request into a
+revocable one — and reclaims most of a third of the wall-clock.</p>]]></content>
+        <category label="transcripts" term="transcripts"/>
+        <category label="automation" term="automation"/>
+        <category label="human-in-the-loop" term="human-in-the-loop"/>
+        <category label="measurement" term="measurement"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.12.0 — a workflow declares where a run may write]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/where-a-run-may-write/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/where-a-run-may-write/"/>
+        <updated>2026-08-24T14:18:54.000Z</updated>
+        <summary type="html"><![CDATA[A step now declares the files it is handed and the paths it may write, with partial-only as the word that earns the shape. Measured on four live runs rather than asserted — and the toolset stopped a run the prose had only warned about.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.12.0 — a workflow declares where a run may write | AEP</span><span data-pagefind-meta="description">A step now declares the files it is handed and the paths it may write, with partial-only as the word that earns the shape. Measured on four live runs rather than asserted — and the toolset stopped a run the prose had only warned about.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-24-1618-where-a-run-may-write.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-24-1618-where-a-run-may-write.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>A workflow step now declares two things it never could: <strong>the files it is given</strong>, and <strong>the paths
+it may write</strong>.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-shape">The shape<a href="https://beyond10x.github.io/updates/field-notes/aep/where-a-run-may-write/#the-shape" class="hash-link" aria-label="Direct link to The shape" title="Direct link to The shape" translate="no">​</a></h2>
+<p><code>context:</code> names files a run is <strong>handed</strong> rather than has to find. <code>scope:</code> is an ordered list of
+paths and one of three words — <code>allowed</code>, <code>partial-only</code>, <code>denied</code> — <strong>first match wins</strong>, and <strong>the
+last rule must name <code>**</code></strong>, so a path nobody thought of has an answer rather than a default.</p>
+<p>Requiring the catch-all is the small decision that matters. A default is a policy nobody wrote; a
+required final rule is a policy somebody had to type.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-partial-only-earns-the-shape">Why <code>partial-only</code> earns the shape<a href="https://beyond10x.github.io/updates/field-notes/aep/where-a-run-may-write/#why-partial-only-earns-the-shape" class="hash-link" aria-label="Direct link to why-partial-only-earns-the-shape" title="Direct link to why-partial-only-earns-the-shape" translate="no">​</a></h2>
+<p>It is the planning store's own rule. <strong>The CLI owns the frontmatter</strong>, so a body edit is legitimate
+and a whole-file rewrite re-types it by hand.</p>
+<p><strong>No set of operations can express that</strong>, because a file write and a file edit are both writes. So
+the document speaks <strong>granularity, not identity</strong> — and which of an adapter's operations replace a
+file whole stays the adapter's own fact.</p>
+<p>The rule already existed, in the driver's <code>store_integrity</code> check, <strong>written in one vendor's tool
+names</strong> — so every arm but one walked past it for a year. A policy written in one harness's
+vocabulary is a policy that only holds for that harness.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-corpus-stopped-naming-vendors">The corpus stopped naming vendors<a href="https://beyond10x.github.io/updates/field-notes/aep/where-a-run-may-write/#the-corpus-stopped-naming-vendors" class="hash-link" aria-label="Direct link to The corpus stopped naming vendors" title="Direct link to The corpus stopped naming vendors" translate="no">​</a></h2>
+<p>A call selector now takes a set of tools, an operation set and a subject, so a row meaning <em>"the
+test was written before the code"</em> <strong>decides on any harness</strong> instead of being blind to the one that
+used a differently-named edit verb.</p>
+<p>The three-arm programme became four. The fourth is our own loop, <strong>where there is no decision seam
+at all and the published toolset is the policy</strong>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="measured-not-asserted">Measured, not asserted<a href="https://beyond10x.github.io/updates/field-notes/aep/where-a-run-may-write/#measured-not-asserted" class="hash-link" aria-label="Direct link to Measured, not asserted" title="Direct link to Measured, not asserted" translate="no">​</a></h2>
+<p>Four live runs, recorded with their transcript digests:</p>
+<table><thead><tr><th>run</th><th>result</th></tr></thead><tbody><tr><td>unscoped</td><td>10 of 11 expectations held; <strong>three artifact files rewritten whole</strong></td></tr><tr><td>scoped and stated</td><td>11 held; discovery calls down from <strong>ten of fifty-two to three of forty-nine</strong></td></tr><tr><td>scoped and unstated</td><td><strong>five calls refused and the rule still held</strong></td></tr></tbody></table>
+<p>The last one is the only run that measures this feature's own claim: with the prose warning removed,
+<strong>the toolset stopped the run</strong> rather than the instructions doing it. Everything else could have
+been the model being agreeable.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="and-the-gate">And the gate<a href="https://beyond10x.github.io/updates/field-notes/aep/where-a-run-may-write/#and-the-gate" class="hash-link" aria-label="Direct link to And the gate" title="Direct link to And the gate" translate="no">​</a></h2>
+<p>Green for the first time that session, <strong>read from its own exit status rather than a pipeline's</strong> —
+the same mistake this repository already paid for once and wrote down.</p>
+<hr>
+<p><em>Written retrospectively from this release's <code>CHANGELOG.md</code> section and its annotated tag; no
+re-run command output.</em></p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="driver" term="driver"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.11.0 — the corpus becomes ground truth, and a gate that lied gets caught]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/ground-truth-and-docs/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/ground-truth-and-docs/"/>
+        <updated>2026-08-21T23:05:33.000Z</updated>
+        <summary type="html"><![CDATA[An outside adopter re-issued the horizons corpus as ground truth, and the scanner followed. Plus the process lesson that cost the most: two gates that aborted at their first step were read as green through a piped exit status.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.11.0 — the corpus becomes ground truth, and a gate that lied gets caught | AEP</span><span data-pagefind-meta="description">An outside adopter re-issued the horizons corpus as ground truth, and the scanner followed. Plus the process lesson that cost the most: two gates that aborted at their first step were read as green through a piped exit status.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-22-0105-ground-truth-and-docs.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-22-0105-ground-truth-and-docs.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>The most useful thing in this release is a mistake it documents.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-corpus-becomes-ground-truth">The corpus becomes ground truth<a href="https://beyond10x.github.io/updates/field-notes/aep/ground-truth-and-docs/#the-corpus-becomes-ground-truth" class="hash-link" aria-label="Direct link to The corpus becomes ground truth" title="Direct link to The corpus becomes ground truth" translate="no">​</a></h2>
+<p>The adopter fixed <strong>their</strong> reference against this repository's scanner and re-issued
+<code>expected.json</code>: <strong>43 raw, 43 parsed, <code>missed_by_reference</code> zero</strong> — adding a seventh position and a
+rule running the other way. <strong>An annotation inside a fenced code block is an illustration</strong>,
+excluded from parsing <em>and</em> from the coverage denominator both.</p>
+<p>The scanner follows, with the <strong>fence-stripping implemented twice on purpose</strong> so the denominator
+stays independent evidence. Two implementations agreeing is evidence; one implementation checking
+itself is a tautology.</p>
+<p>This is what ground truth is supposed to look like: the corpus is not ours, and it corrected us as
+often as we corrected it.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-gate-that-was-read-as-green">The gate that was read as green<a href="https://beyond10x.github.io/updates/field-notes/aep/ground-truth-and-docs/#the-gate-that-was-read-as-green" class="hash-link" aria-label="Direct link to The gate that was read as green" title="Direct link to The gate that was read as green" translate="no">​</a></h2>
+<p>Two gates had <strong>aborted at their first step</strong> and were misread as green <strong>through a piped exit
+status</strong> — <code>$?</code> was the pipeline's, not the gate's.</p>
+<p>The record is corrected <strong>in git notes</strong> rather than by rewriting history, and <strong>the first honestly
+captured gate immediately caught a stale test</strong>. Which is the point: the reason to fix the reading
+is not tidiness, it is that the gate had something to say and nobody heard it.</p>
+<p>The rule that came out of it — <em>read the gate's own exit code, never a pipeline's</em> — has been
+applied on every gate run since, including the one that cut this release.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="also">Also<a href="https://beyond10x.github.io/updates/field-notes/aep/ground-truth-and-docs/#also" class="hash-link" aria-label="Direct link to Also" title="Direct link to Also" translate="no">​</a></h2>
+<p><code>protocol evidence inspect</code> no longer refuses a record <strong>the day it is written</strong>: the future check
+now runs at the reference date's own granularity.</p>
+<p>And the documentation caught up with the tree under one rule: <strong>every number from a command, every
+reference resolving, every quoted output reproduced.</strong></p>
+<hr>
+<p><em>Written retrospectively from this release's <code>CHANGELOG.md</code> section and its annotated tag; no
+re-run command output.</em></p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="evidence" term="evidence"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.10.0 — evidence gets a shelf life, and the first governed run stops]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/horizons-and-the-first-governed-run/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/horizons-and-the-first-governed-run/"/>
+        <updated>2026-08-21T21:43:54.000Z</updated>
+        <summary type="html"><![CDATA[A fact decays to Unknown past its horizon, never to False, and no API can extend one. Then the protocol governs a real story out of this repository's own backlog — and blocks four states short of where it was meant to.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.10.0 — evidence gets a shelf life, and the first governed run stops | AEP</span><span data-pagefind-meta="description">A fact decays to Unknown past its horizon, never to False, and no API can extend one. Then the protocol governs a real story out of this repository's own backlog — and blocks four states short of where it was meant to.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-21-2343-horizons-and-the-first-governed-run.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-21-2343-horizons-and-the-first-governed-run.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>Two things, and the second is the one that matters.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="evidence-horizons">Evidence horizons<a href="https://beyond10x.github.io/updates/field-notes/aep/horizons-and-the-first-governed-run/#evidence-horizons" class="hash-link" aria-label="Direct link to Evidence horizons" title="Direct link to Evidence horizons" translate="no">​</a></h2>
+<p>An evidence record carries <code>observed_at</code> as <strong>the identity of the fact</strong> — not metadata about it. A
+requirement may declare a <strong>horizon</strong>, past which the fact decays to <strong><code>Unknown</code>, and never to
+<code>False</code></strong>.</p>
+<p>That asymmetry is the design. A lapsed check has not failed; <strong>nobody has run it</strong>. A tool that
+reported a stale pass as a failure would train people to re-run things to clear noise; one that
+reported it as a pass would be lying.</p>
+<p><strong>No API can extend a horizon.</strong> There is deliberately no <code>extend</code> verb: if extending were as easy
+to call as re-checking, it is the one that gets called by whoever is trying to get a gate green.</p>
+<p>Against the adopter's vendored corpus: <strong>42 of 42</strong>, with self-reported coverage. It closed the
+first adopter's ranked-first finding, and was designed and adversarially reviewed the same day it
+was built.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-first-governed-run--and-it-stopped">The first governed run — and it stopped<a href="https://beyond10x.github.io/updates/field-notes/aep/horizons-and-the-first-governed-run/#the-first-governed-run--and-it-stopped" class="hash-link" aria-label="Direct link to The first governed run — and it stopped" title="Direct link to The first governed run — and it stopped" translate="no">​</a></h2>
+<p><code>protocol drive</code> walked a real story out of this repository's own store under <code>development.driven</code>.
+Four headless model sessions, hooks as the enforcement arm, <strong>80 decisions, 11 denies one-for-one
+with the transcripts</strong>.</p>
+<p><strong>It blocked in <code>establish_verifiers</code>, four states short of the person it was meant to stop at.</strong></p>
+<p>Both reasons the engine printed were correct refusals. The model wrote its failing checks as shell
+scripts — the idiom the story's own acceptance is written in — while the map it was driving under
+ran <code>cargo</code> in every state naming a verifier, so the suite came back green and <code>test-driven</code> refused
+to advance.</p>
+<p><strong>Nothing was changed to make the run go through.</strong> The run is the finding: four new gap-register
+rows, none patched to pass.</p>
+<p>That is the whole reason to dogfood. A run engineered into a pass measures the engineering.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-lab">The lab<a href="https://beyond10x.github.io/updates/field-notes/aep/horizons-and-the-first-governed-run/#the-lab" class="hash-link" aria-label="Direct link to The lab" title="Direct link to The lab" translate="no">​</a></h2>
+<p><code>/lab</code> executes the synthesised billing realization as WebAssembly over its real boundary —
+deterministic, asserted outside a browser, and <strong>a page without a module says so instead of
+pretending</strong>.</p>
+<hr>
+<p><em>Written retrospectively from this release's <code>CHANGELOG.md</code> section and its annotated tag; no
+re-run command output.</em></p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="evidence" term="evidence"/>
+        <category label="driver" term="driver"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.9.0 — something walks the workflow, on evidence alone]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/the-reference-driver/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/the-reference-driver/"/>
+        <updated>2026-08-21T19:20:50.000Z</updated>
+        <summary type="html"><![CDATA[The reference driver exists: protocol drive walks a workflow, blocks with the engine's reasons verbatim, and is held to the protocol verbs by enforcement hooks. Preceded by an adversarial review of six architecture decisions, with all seventeen corrections applied before a line was built.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.9.0 — something walks the workflow, on evidence alone | AEP</span><span data-pagefind-meta="description">The reference driver exists: protocol drive walks a workflow, blocks with the engine's reasons verbatim, and is held to the protocol verbs by enforcement hooks. Preceded by an adversarial review of six architecture decisions, with all seventeen corrections applied before a line was built.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-21-2120-the-reference-driver.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-21-2120-the-reference-driver.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>Everything before this release <em>answered questions</em>. This one <strong>walks a workflow</strong> — and the design
+of it was argued out and corrected before any of it was written.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="wave-2-the-decisions-judged-before-the-build">Wave 2: the decisions, judged before the build<a href="https://beyond10x.github.io/updates/field-notes/aep/the-reference-driver/#wave-2-the-decisions-judged-before-the-build" class="hash-link" aria-label="Direct link to Wave 2: the decisions, judged before the build" title="Direct link to Wave 2: the decisions, judged before the build" translate="no">​</a></h2>
+<p>The driver's six open architecture questions became taken decisions, and an <strong>adversarial
+feasibility review judged every one against the code</strong>: 23 confirmed, 14 needs-change, 3 infeasible.
+<strong>All seventeen corrections were applied before a line was built.</strong></p>
+<p>Seventeen corrections is what a design document costs when somebody is genuinely trying to break it.
+Paying that before implementation is the whole argument for having the document.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="wave-3-the-driver">Wave 3: the driver<a href="https://beyond10x.github.io/updates/field-notes/aep/the-reference-driver/#wave-3-the-driver" class="hash-link" aria-label="Direct link to Wave 3: the driver" title="Direct link to Wave 3: the driver" translate="no">​</a></h2>
+<ul>
+<li class=""><code>aep-driver-spec</code> and <code>aep-driver</code>, with step maps under <code>drivers/</code>.</li>
+<li class=""><strong><code>protocol drive</code> walks a workflow on evidence alone</strong>, and blocks <strong>with the engine's reasons
+verbatim</strong>. Not summarised, not re-worded — the driver is not allowed to become a second place
+where the meaning of a refusal is decided.</li>
+<li class=""><strong>Enforcement hooks</strong> holding the planning store's frontmatter and a driven shell to the protocol
+verbs, <strong>with every adjudication logged</strong>.</li>
+<li class="">A <strong>driven eval</strong> running a live session under the hooks, answering an open question empirically
+rather than by argument.</li>
+<li class="">The <code>development.driven</code> profile — the only one that grants a shell, and it is held to the
+<code>protocol</code> CLI by the driver's own per-call policy.</li>
+<li class=""><code>env.tool_available</code> as the fiftieth trace expectation kind.</li>
+<li class=""><strong><code>protocol workflow render</code></strong>, drawing a workflow and its live run in four formats.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-split-that-makes-it-safe">The split that makes it safe<a href="https://beyond10x.github.io/updates/field-notes/aep/the-reference-driver/#the-split-that-makes-it-safe" class="hash-link" aria-label="Direct link to The split that makes it safe" title="Direct link to The split that makes it safe" translate="no">​</a></h2>
+<p><strong>Gates are evaluated only by the engine. The driver asks and does what it is told.</strong> A driver that
+could evaluate a gate would be a second protocol implementation, and the two would disagree —
+eventually, quietly, on the case that mattered.</p>
+<p>Also in this release: the repository begins <strong>planning itself</strong> in <code>.engineering/</code>.</p>
+<hr>
+<p><em>Written retrospectively from this release's <code>CHANGELOG.md</code> section and its annotated tag; no
+re-run command output.</em></p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="driver" term="driver"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.8.0 — the repository starts planning itself, and a transcript gets judged]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/aep/the-plan-and-the-transcript/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/aep/the-plan-and-the-transcript/"/>
+        <updated>2026-08-21T15:08:47.000Z</updated>
+        <summary type="html"><![CDATA[Planning artifacts become markdown in the repository, moved only through lifecycle-validated verbs. And an agent transcript normalises into an event IR judged against a typed specification — the third observation domain after a specification and a cluster.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.8.0 — the repository starts planning itself, and a transcript gets judged | AEP</span><span data-pagefind-meta="description">Planning artifacts become markdown in the repository, moved only through lifecycle-validated verbs. And an agent transcript normalises into an event IR judged against a typed specification — the third observation domain after a specification and a cluster.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/716b77e36d1f4b365c4f017325dd8e9cf3bf01ba/website/blog/2026-08-21-1708-the-plan-and-the-transcript.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-21-1708-the-plan-and-the-transcript.md</a> · revision <code class="b10x-revision" title="716b77e36d1f4b365c4f017325dd8e9cf3bf01ba">716b77e36d1f</code></p>
+</blockquote></div>
+<p>Two waves in one release, and they are the same idea applied twice: <strong>take something that was prose
+and make it a typed thing a program can refuse.</strong></p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="harness-wave-1--the-plan-becomes-data">Harness wave 1 — the plan becomes data<a href="https://beyond10x.github.io/updates/field-notes/aep/the-plan-and-the-transcript/#harness-wave-1--the-plan-becomes-data" class="hash-link" aria-label="Direct link to Harness wave 1 — the plan becomes data" title="Direct link to Harness wave 1 — the plan becomes data" translate="no">​</a></h2>
+<p>Planning artifacts live in the repository as markdown under <code>.engineering/planning/</code>, and are
+<strong>moved only through lifecycle-validated CLI verbs</strong>. The consequence of choosing markdown over a
+database is concrete: the diff of a status move is one line, and <code>git log</code> already knows who made
+it.</p>
+<p>A <strong>Claude Code plugin</strong> — one skill, two agents, no hooks at this point — teaches the store's rules
+and <strong>discovers its vocabulary at use time</strong> rather than hard-coding it, so the plugin does not go
+stale when the vocabulary grows.</p>
+<p>And a <strong>repeatable hermetic eval</strong> checks the plugin's behaviour with mechanical assertions, run
+metrics, and an advisory adversarial review.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="trace-wave-1--a-run-becomes-a-judgeable-object">Trace wave 1 — a run becomes a judgeable object<a href="https://beyond10x.github.io/updates/field-notes/aep/the-plan-and-the-transcript/#trace-wave-1--a-run-becomes-a-judgeable-object" class="hash-link" aria-label="Direct link to Trace wave 1 — a run becomes a judgeable object" title="Direct link to Trace wave 1 — a run becomes a judgeable object" translate="no">​</a></h2>
+<p>A harness transcript normalises into a <strong>content-addressed event IR</strong> and is judged against a
+<code>trace-spec/1</code> document: <strong>forty-nine expectation kinds</strong>, verdicts <code>ok</code> / <code>gap</code> / <code>unk</code>, exit codes
+0 / 1 / 3.</p>
+<p>The third value earns its place here more than anywhere: <code>unk</code> means <strong>the adapter did not
+understand the event</strong>, which is a different thing from the expectation failing, and a checker that
+reported those as failures would be unusable against any harness it did not fully model.</p>
+<p>A passing check <strong>mints <code>trace_conformance</code> evidence the engine admits</strong>, produced by the
+<code>trace-checker</code> verifier class and fed back through <code>protocol evaluate --evidence</code>. That is the same
+join as the ESS half: an observation becomes a fact a completion rule can read.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="and-a-narrowing-stated">And a narrowing, stated<a href="https://beyond10x.github.io/updates/field-notes/aep/the-plan-and-the-transcript/#and-a-narrowing-stated" class="hash-link" aria-label="Direct link to And a narrowing, stated" title="Direct link to And a narrowing, stated" translate="no">​</a></h2>
+<p>The vision's refusal of "a workflow engine" was <strong>narrowed to admit a reference driver</strong> — decided
+and designed, not built. A boundary that moves should move in writing, with the reason attached, or
+it looks later like it was never there.</p>
+<hr>
+<p><em>Written retrospectively from this release's <code>CHANGELOG.md</code> section and its annotated tag; no
+re-run command output.</em></p>]]></content>
+        <category label="release" term="release"/>
+        <category label="aep" term="aep"/>
+        <category label="planning" term="planning"/>
+        <category label="trace" term="trace"/>
+    </entry>
+</feed>

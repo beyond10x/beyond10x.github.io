@@ -1,0 +1,3699 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Devcenter API",
+    "version": "0.8.14",
+    "description": "Authenticated browser/BFF surface for identity, connector custody, agents, workflows, and tasks."
+  },
+  "paths": {
+    "/auth/sso/start": {
+      "get": {
+        "operationId": "startBrowserLogin",
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "query",
+            "description": "Opaque configured Identity provider ID",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "307": {
+            "description": "Redirect to the configured identity provider"
+          },
+          "400": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/auth/sso/callback": {
+      "get": {
+        "operationId": "finishBrowserLogin",
+        "parameters": [
+          { "name": "code", "in": "query", "schema": { "type": "string" } },
+          { "name": "state", "in": "query", "schema": { "type": "string" } },
+          { "name": "error", "in": "query", "schema": { "type": "string" } },
+          {
+            "name": "error_description",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "error_uri",
+            "in": "query",
+            "schema": { "type": "string", "format": "uri" }
+          },
+          {
+            "name": "iss",
+            "in": "query",
+            "schema": { "type": "string", "format": "uri" }
+          }
+        ],
+        "responses": {
+          "303": { "description": "Opaque browser session established" },
+          "400": { "$ref": "#/components/responses/Problem" },
+          "401": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "operationId": "logoutBrowserSession",
+        "security": [{ "browserSession": [] }],
+        "responses": {
+          "204": {
+            "description": "Browser session cookie cleared; persistent MCP authorizations are unchanged"
+          },
+          "403": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/auth/providers": {
+      "get": {
+        "operationId": "listIdentityProviders",
+        "responses": {
+          "200": {
+            "description": "Deployment-configured provider choices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/IdentityProvider" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/session": {
+      "get": {
+        "operationId": "getSession",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Current principal",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Session" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/connectors/claude-code": {
+      "get": {
+        "operationId": "getClaudeCodeConnection",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Connection status",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ConnectionStatus" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" }
+        }
+      },
+      "put": {
+        "deprecated": true,
+        "operationId": "connectClaudeCodeWithCredential",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ConnectClaudeCode" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Compatibility credential accepted into connector custody",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ConnectionStatus" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" }
+        }
+      },
+      "delete": {
+        "operationId": "disconnectClaudeCode",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": { "description": "Connection removed" },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/connectors/claude-code/oauth/start": {
+      "post": {
+        "operationId": "startClaudeCodeOAuth",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Bounded provider authorization step",
+            "headers": {
+              "Cache-Control": { "schema": { "const": "no-store" } }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ClaudeOAuthStart" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/connectors/claude-code/oauth/complete": {
+      "post": {
+        "operationId": "completeClaudeCodeOAuth",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CompleteClaudeOAuth" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Provider credentials accepted into connector custody",
+            "headers": {
+              "Cache-Control": { "schema": { "const": "no-store" } }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ConnectionStatus" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/connectors/catalog": {
+      "get": {
+        "operationId": "searchConnectorCatalog",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": { "type": "string", "maxLength": 512, "default": "" }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65535,
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 64,
+              "default": 24
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stable page of credential-free Connector provider summaries",
+            "headers": {
+              "Cache-Control": { "schema": { "const": "no-store" } }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConnectorCatalogPage"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "502": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/connectors/catalog/{provider_ref}": {
+      "get": {
+        "operationId": "describeConnectorCatalogProvider",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [
+          {
+            "name": "provider_ref",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "minLength": 1, "maxLength": 256 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Complete credential-free Connector provider description",
+            "headers": {
+              "Cache-Control": { "schema": { "const": "no-store" } }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConnectorProviderDescription"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "502": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/services": {
+      "get": {
+        "operationId": "listGeneratedServices",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Exact generated services activated in this composition",
+            "headers": {
+              "Cache-Control": { "schema": { "const": "no-store" } }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GeneratedServicePage"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "502": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/services/catalog": {
+      "post": {
+        "operationId": "getGeneratedServiceCatalog",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneratedServiceCatalogRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Exact SDK-generated service-catalog/1 document",
+            "headers": {
+              "Cache-Control": { "schema": { "const": "no-store" } }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GeneratedServiceCatalog"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "502": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/services/invoke": {
+      "post": {
+        "operationId": "invokeGeneratedService",
+        "description": "Describe and invoke one catalog-admitted operation while Connector leases, access tokens, and approval evidence remain server-side.",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneratedServiceInvokeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Credential-free generated service result",
+            "headers": {
+              "Cache-Control": { "schema": { "const": "no-store" } }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GeneratedServiceInvocation"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "502": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/connections": {
+      "get": {
+        "operationId": "listConnections",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Connections visible through the current Connector grants",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConnectorConnection"
+                  }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      },
+      "post": {
+        "operationId": "startConnection",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/StartConnection" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Connector-owned acquisition session",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ConnectSession" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/connect-sessions/{connect_session_ref}": {
+      "get": {
+        "operationId": "getConnectSession",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [
+          {
+            "name": "connect_session_ref",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Current Connector acquisition state",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ConnectSession" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/capabilities": {
+      "get": {
+        "operationId": "listCapabilities",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Callable operations under current Connector grants",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Capability" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/capability-profiles": {
+      "get": {
+        "operationId": "listCapabilityProfiles",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Revisioned Agent Platform capability profiles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/CapabilityProfile" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      },
+      "post": {
+        "operationId": "createCapabilityProfile",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCapabilityProfile"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Profile compiled from current credential-free Connector descriptions",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CapabilityProfile" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/capability-profiles/{profile_id}": {
+      "patch": {
+        "operationId": "updateCapabilityProfile",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCapabilityProfile"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "New compare-and-swap profile revision",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CapabilityProfile" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/agents": {
+      "get": {
+        "operationId": "listAgents",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Tenant-scoped agents",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Agent" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" }
+        }
+      },
+      "post": {
+        "operationId": "createManagedAgent",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateAgent" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Agent created with an active first revision",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Agent" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/agents/{agent_id}/tasks": {
+      "get": {
+        "operationId": "listAgentTasks",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/AgentId" }],
+        "responses": {
+          "200": {
+            "description": "Personal task history for this agent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Task" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" }
+        }
+      },
+      "post": {
+        "operationId": "submitAgentTask",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/AgentId" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SubmitTask" }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Task accepted",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Task" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/tasks/{task_id}": {
+      "get": {
+        "operationId": "getTask",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/TaskId" }],
+        "responses": {
+          "200": {
+            "description": "Task state",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Task" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/tasks/{task_id}/events": {
+      "get": {
+        "operationId": "streamTaskEvents",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/TaskId" }],
+        "responses": {
+          "200": {
+            "description": "Ordered, attempt-bound task event stream",
+            "content": {
+              "text/event-stream": { "schema": { "type": "string" } }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/tasks/{task_id}/approvals": {
+      "get": {
+        "operationId": "listTaskApprovals",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/TaskId" }],
+        "responses": {
+          "200": {
+            "description": "Exact Connector calls awaiting this person's decision",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/TaskApproval" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/tasks/{task_id}/approvals/{approval_id}": {
+      "post": {
+        "operationId": "resolveTaskApproval",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [
+          { "$ref": "#/components/parameters/TaskId" },
+          { "$ref": "#/components/parameters/TaskApprovalId" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/TaskApprovalDecision" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The exact pending call accepted this human decision",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TaskApproval" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/mcp/publications": {
+      "get": {
+        "operationId": "listMcpPublications",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Publications owned by the stable internal subject",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Publication" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" }
+        }
+      },
+      "post": {
+        "operationId": "publishCapabilityProfile",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["profile_id"],
+                "properties": { "profile_id": { "type": "string" } },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Immutable profile revision published",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Publication" }
+              }
+            }
+          },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/mcp/publications/{publication_id}": {
+      "get": {
+        "operationId": "getMcpPublication",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/PublicationId" }],
+        "responses": {
+          "200": {
+            "description": "Owned publication",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Publication" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/Problem" }
+        }
+      },
+      "patch": {
+        "operationId": "changeMcpPublicationState",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/PublicationId" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["state"],
+                "properties": {
+                  "state": { "$ref": "#/components/schemas/PublicationState" }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Publication state changed",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Publication" }
+              }
+            }
+          },
+          "409": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/mcp/publications/{publication_id}/clients": {
+      "get": {
+        "operationId": "listMcpClientAuthorizations",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/PublicationId" }],
+        "responses": {
+          "200": {
+            "description": "Credential-free OAuth client authorizations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClientAuthorization"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mcp/publications/{publication_id}/clients/{authorization_id}": {
+      "delete": {
+        "operationId": "revokeMcpClientAuthorization",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [
+          { "$ref": "#/components/parameters/PublicationId" },
+          {
+            "name": "authorization_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "One client authorization revoked" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/mcp/publications/{publication_id}/approvals": {
+      "get": {
+        "operationId": "listMcpApprovals",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/PublicationId" }],
+        "responses": {
+          "200": {
+            "description": "Pending exact-input approvals",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Approval" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mcp/publications/{publication_id}/approvals/{approval_id}": {
+      "post": {
+        "operationId": "decideMcpApproval",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [
+          { "$ref": "#/components/parameters/PublicationId" },
+          {
+            "name": "approval_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["decision"],
+                "properties": {
+                  "decision": { "type": "string", "enum": ["approve", "deny"] }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Exact pending tool call approved or denied"
+          },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/workflows": {
+      "get": {
+        "operationId": "listWorkflowLibrary",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Standalone Workflow definitions visible to the current actor",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/WorkflowLibraryPage" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/workflows/{workflow_id}": {
+      "get": {
+        "operationId": "getWorkflowLibraryItem",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [
+          {
+            "name": "workflow_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Standalone Workflow definition with drafts and immutable revisions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowLibraryDetail"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/repositories": {
+      "get": {
+        "operationId": "listRepositories",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Optional provider-side repository name or path search",
+            "schema": { "type": "string", "maxLength": 512 }
+          }
+        ],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Repositories visible through current Connector Grants",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RepositoryCandidate"
+                  }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/projects": {
+      "post": {
+        "operationId": "openRepositoryProject",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OpenProject" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Canonical project opened after live revalidation",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Project" }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/projects/{project_id}": {
+      "get": {
+        "operationId": "getRepositoryProject",
+        "parameters": [{ "$ref": "#/components/parameters/ProjectId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Current accessible project",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Project" }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/projects/{project_id}/branches": {
+      "get": {
+        "operationId": "listProjectBranches",
+        "parameters": [{ "$ref": "#/components/parameters/ProjectId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Currently visible branch heads",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Branch" }
+                }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/projects/{project_id}/sessions": {
+      "get": {
+        "operationId": "listCodingSessions",
+        "parameters": [{ "$ref": "#/components/parameters/ProjectId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Owned coding sessions backed by Workspace materializations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/CodingSession" }
+                }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      },
+      "post": {
+        "operationId": "createCodingSession",
+        "parameters": [{ "$ref": "#/components/parameters/ProjectId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateCodingSession" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Exact project revision materialized by Workspace into Substrate",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HostedCodingSession" }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-sessions/{session_id}": {
+      "parameters": [{ "$ref": "#/components/parameters/CodingSessionId" }],
+      "get": {
+        "operationId": "getCodingSession",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Live-revalidated owned coding session",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CodingSession" }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      },
+      "delete": {
+        "operationId": "closeCodingSession",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Session closed and its Substrate materializations cleaned up",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HostedCodingSession" }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-sessions/{session_id}/resume": {
+      "post": {
+        "operationId": "resumeCodingSession",
+        "parameters": [{ "$ref": "#/components/parameters/CodingSessionId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Workspace session with automatically ensured AgentIDE coordination",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HostedCodingSession" }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-sessions/{session_id}/coordination": {
+      "get": {
+        "operationId": "getCodingCoordination",
+        "parameters": [{ "$ref": "#/components/parameters/CodingSessionId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Actor-authorized AgentIDE projections and aggregate revision",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodingCoordinationView"
+                }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-sessions/{session_id}/coordination/pins": {
+      "post": {
+        "operationId": "pinCodingContext",
+        "parameters": [{ "$ref": "#/components/parameters/CodingSessionId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PinCodingContext" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Context reference pinned through AgentIDE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodingCoordinationView"
+                }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-sessions/{session_id}/coordination/pins/{pin_id}": {
+      "delete": {
+        "operationId": "removeCodingContextPin",
+        "parameters": [
+          { "$ref": "#/components/parameters/CodingSessionId" },
+          { "$ref": "#/components/parameters/ContextPinId" }
+        ],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Context reference removed through AgentIDE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodingCoordinationView"
+                }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-sessions/{session_id}/coordination/grants": {
+      "post": {
+        "operationId": "createCodingGrant",
+        "parameters": [{ "$ref": "#/components/parameters/CodingSessionId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateCodingGrant" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Bounded coding grant created through AgentIDE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodingCoordinationView"
+                }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-sessions/{session_id}/coordination/grants/{grant_id}": {
+      "delete": {
+        "operationId": "revokeCodingGrant",
+        "parameters": [
+          { "$ref": "#/components/parameters/CodingSessionId" },
+          { "$ref": "#/components/parameters/GrantId" }
+        ],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Grant revoked through AgentIDE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodingCoordinationView"
+                }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-sessions/{session_id}/coordination/checkpoints/{checkpoint_id}": {
+      "post": {
+        "operationId": "decideCodingCheckpoint",
+        "parameters": [
+          { "$ref": "#/components/parameters/CodingSessionId" },
+          { "$ref": "#/components/parameters/CheckpointId" }
+        ],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecideCodingCheckpoint"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Exact-plan checkpoint decided through AgentIDE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodingCoordinationView"
+                }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-sessions/{session_id}/agents/{agent_id}/turns": {
+      "post": {
+        "operationId": "submitCodingSessionTurn",
+        "parameters": [
+          { "$ref": "#/components/parameters/CodingSessionId" },
+          { "$ref": "#/components/parameters/AgentId" }
+        ],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SubmitCodingTurn" }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Coding turn bound to the ready Workspace and AgentIDE sessions",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Task" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-sessions/{session_id}/tree": {
+      "get": {
+        "operationId": "getCodingTree",
+        "parameters": [
+          { "$ref": "#/components/parameters/CodingSessionId" },
+          {
+            "name": "query",
+            "in": "query",
+            "schema": { "type": "string", "maxLength": 512 }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000,
+              "default": 500
+            }
+          }
+        ],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Bounded searchable working tree with explicit omitted state",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodingTreeProjection"
+                }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-sessions/{session_id}/files/{path}": {
+      "parameters": [
+        { "$ref": "#/components/parameters/CodingSessionId" },
+        {
+          "name": "path",
+          "in": "path",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "get": {
+        "operationId": "getCodingFile",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Complete file and Workspace-derived revision identity",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/FileProjection" }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      },
+      "put": {
+        "operationId": "writeCodingFile",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/WriteFile" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Exact compare-and-swap file replacement",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/FileProjection" }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "409": {
+            "description": "Loaded file digest is stale",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/FileConflict" }
+              }
+            }
+          },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-sessions/{session_id}/diff": {
+      "post": {
+        "operationId": "resolveCodingDiff",
+        "parameters": [{ "$ref": "#/components/parameters/CodingSessionId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ResolveDiff" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Canonical server-resolved diff projection",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DiffProjection" }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-sessions/{session_id}/terminal-profiles": {
+      "get": {
+        "operationId": "listCodingTerminalProfiles",
+        "parameters": [{ "$ref": "#/components/parameters/CodingSessionId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Deployment-declared terminal profiles admitted for this workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/TerminalProfile" }
+                }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-sessions/{session_id}/terminals": {
+      "parameters": [{ "$ref": "#/components/parameters/CodingSessionId" }],
+      "get": {
+        "operationId": "listCodingTerminals",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Owned durable terminal lifecycle records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/TerminalSession" }
+                }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      },
+      "post": {
+        "operationId": "createCodingTerminal",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateTerminal" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Confined Substrate PTY created under the exact human grant",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TerminalSession" }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" },
+          "422": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-terminals/{terminal_id}": {
+      "parameters": [{ "$ref": "#/components/parameters/TerminalId" }],
+      "get": {
+        "operationId": "getCodingTerminal",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Owned terminal lifecycle record",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TerminalSession" }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      },
+      "delete": {
+        "operationId": "terminateCodingTerminal",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Terminal explicitly terminated; closing a browser pane never calls this operation",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TerminalSession" }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/project-terminals/{terminal_id}/attach": {
+      "get": {
+        "operationId": "attachCodingTerminal",
+        "parameters": [
+          { "$ref": "#/components/parameters/TerminalId" },
+          {
+            "name": "from_sequence",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 0 }
+          }
+        ],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "101": {
+            "description": "Same-origin WebSocket carrying binary sequenced PTY output and JSON lifecycle frames"
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Unavailable" }
+        }
+      }
+    },
+    "/api/projects/{project_id}/tree": {
+      "get": {
+        "operationId": "listProjectTree",
+        "parameters": [{ "$ref": "#/components/parameters/ProjectId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Read-only root entries at the exact pinned commit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/RepositoryEntry" }
+                }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/projects/{project_id}/engineering-artifacts": {
+      "get": {
+        "operationId": "listProjectEngineeringArtifacts",
+        "parameters": [{ "$ref": "#/components/parameters/ProjectId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Bounded central AEP entities indexed to this project",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EngineeringArtifactPage"
+                }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Problem" },
+          "502": { "$ref": "#/components/responses/Problem" },
+          "503": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/projects/{project_id}/branch": {
+      "post": {
+        "operationId": "selectProjectBranch",
+        "parameters": [{ "$ref": "#/components/parameters/ProjectId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SelectBranch" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Explicitly refreshed project snapshot",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Project" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/Problem" },
+          "409": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/projects/{project_id}/threads": {
+      "get": {
+        "operationId": "listProjectThreads",
+        "parameters": [{ "$ref": "#/components/parameters/ProjectId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Personal project threads",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ProjectThread" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createProjectThread",
+        "parameters": [{ "$ref": "#/components/parameters/ProjectId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateProjectThread" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Personal branch-bound thread",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ProjectThread" }
+              }
+            }
+          },
+          "409": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/threads/{thread_id}/messages": {
+      "get": {
+        "operationId": "listThreadMessages",
+        "parameters": [{ "$ref": "#/components/parameters/ThreadId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Personal durable messages",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ProjectMessage" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createThreadMessage",
+        "parameters": [{ "$ref": "#/components/parameters/ThreadId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateProjectMessage" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Commit-attributed user message",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ProjectMessage" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/threads/{thread_id}/messages/{message_sequence}/events": {
+      "get": {
+        "operationId": "streamProjectMessageEvents",
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "parameters": [
+          { "$ref": "#/components/parameters/ThreadId" },
+          { "$ref": "#/components/parameters/MessageSequence" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ordered Agent Platform events for one owned project-chat turn",
+            "content": {
+              "text/event-stream": { "schema": { "type": "string" } }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "404": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/api/projects/{project_id}/workflows": {
+      "get": {
+        "operationId": "listProjectWorkflows",
+        "parameters": [{ "$ref": "#/components/parameters/ProjectId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Enabled immutable workflow definitions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/WorkflowDefinition" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/projects/{project_id}/workflow-runs": {
+      "get": {
+        "operationId": "listProjectWorkflowRuns",
+        "parameters": [{ "$ref": "#/components/parameters/ProjectId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Current actor's durable workflow runs for this project",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/WorkflowRun" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "startProjectWorkflow",
+        "parameters": [{ "$ref": "#/components/parameters/ProjectId" }],
+        "security": [{ "browserSession": [] }, { "identityBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/StartWorkflow" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Exact-snapshot workflow run admitted idempotently",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRun" }
+              }
+            }
+          },
+          "409": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
+    "/healthz": {
+      "get": {
+        "operationId": "health",
+        "responses": { "200": { "description": "Process is alive" } }
+      }
+    },
+    "/readyz": {
+      "get": {
+        "operationId": "readiness",
+        "responses": {
+          "200": { "description": "Required service clients are configured" },
+          "503": { "description": "Configuration is incomplete" }
+        }
+      }
+    },
+    "/metrics": {
+      "get": {
+        "operationId": "metrics",
+        "responses": { "200": { "description": "Prometheus metrics" } }
+      }
+    },
+    "/openapi.json": {
+      "get": {
+        "operationId": "openapi",
+        "responses": { "200": { "description": "This document" } }
+      }
+    },
+    "/.well-known/oauth-protected-resource": {
+      "get": {
+        "operationId": "mcpRootProtectedResourceMetadata",
+        "responses": {
+          "200": {
+            "description": "RFC 9728 metadata for the Devcenter MCP resource root"
+          }
+        }
+      }
+    },
+    "/.well-known/oauth-protected-resource/mcp/{publication_id}": {
+      "get": {
+        "operationId": "mcpProtectedResourceMetadata",
+        "parameters": [{ "$ref": "#/components/parameters/PublicationId" }],
+        "responses": {
+          "200": {
+            "description": "RFC 9728 metadata for the exact publication resource"
+          },
+          "404": { "description": "Malformed publication ID" }
+        }
+      }
+    },
+    "/mcp/{publication_id}": {
+      "post": {
+        "operationId": "mcp",
+        "parameters": [{ "$ref": "#/components/parameters/PublicationId" }],
+        "security": [{ "mcpBearer": ["mcp.tools.call"] }],
+        "responses": {
+          "200": { "description": "MCP Streamable HTTP JSON-RPC response" },
+          "202": { "description": "MCP notification accepted" },
+          "401": { "$ref": "#/components/responses/Problem" },
+          "403": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "browserSession": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "__Host-devcenter_session"
+      },
+      "identityBearer": { "type": "http", "scheme": "bearer" },
+      "mcpBearer": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "/identity/oauth/authorize",
+            "tokenUrl": "/identity/oauth/token",
+            "scopes": {
+              "mcp.tools.call": "Invoke tools in one exact publication"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "AgentId": {
+        "name": "agent_id",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string" }
+      },
+      "TaskId": {
+        "name": "task_id",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string" }
+      },
+      "TaskApprovalId": {
+        "name": "approval_id",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string" }
+      },
+      "PublicationId": {
+        "name": "publication_id",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string", "maxLength": 128 }
+      },
+      "ProjectId": {
+        "name": "project_id",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string", "maxLength": 128 }
+      },
+      "CodingSessionId": {
+        "name": "session_id",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string", "maxLength": 128 }
+      },
+      "ContextPinId": {
+        "name": "pin_id",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string", "maxLength": 128 }
+      },
+      "GrantId": {
+        "name": "grant_id",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string", "maxLength": 128 }
+      },
+      "CheckpointId": {
+        "name": "checkpoint_id",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string", "maxLength": 128 }
+      },
+      "TerminalId": {
+        "name": "terminal_id",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string", "maxLength": 128 }
+      },
+      "ThreadId": {
+        "name": "thread_id",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string", "maxLength": 128 }
+      },
+      "MessageSequence": {
+        "name": "message_sequence",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "responses": {
+      "Problem": {
+        "description": "Request refused",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Problem" }
+          }
+        }
+      },
+      "Unavailable": {
+        "description": "A required inner service is unavailable",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Problem" }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Problem": {
+        "type": "object",
+        "required": ["code"],
+        "properties": { "code": { "type": "string" } },
+        "additionalProperties": false
+      },
+      "Session": {
+        "type": "object",
+        "required": [
+          "tenant_id",
+          "subject",
+          "groups",
+          "connectors_docs_available",
+          "agentide_workspace_enabled"
+        ],
+        "properties": {
+          "tenant_id": { "type": "string" },
+          "subject": { "type": "string" },
+          "email": { "type": ["string", "null"] },
+          "groups": { "type": "array", "items": { "type": "string" } },
+          "connectors_docs_available": { "type": "boolean" },
+          "agentide_workspace_enabled": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      },
+      "IdentityProvider": {
+        "type": "object",
+        "required": ["id", "display_name"],
+        "properties": {
+          "id": { "type": "string" },
+          "display_name": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "PublicationState": {
+        "type": "string",
+        "enum": ["active", "suspended", "revoked"]
+      },
+      "Publication": {
+        "type": "object",
+        "required": [
+          "publication_id",
+          "tenant_id",
+          "owner_subject",
+          "profile_id",
+          "active_revision",
+          "toolset_digest",
+          "state",
+          "created_at_ms",
+          "updated_at_ms"
+        ],
+        "properties": {
+          "publication_id": { "type": "string" },
+          "tenant_id": { "type": "string" },
+          "owner_subject": { "type": "string" },
+          "profile_id": { "type": "string" },
+          "active_revision": { "type": "integer" },
+          "toolset_digest": { "type": "string" },
+          "state": { "$ref": "#/components/schemas/PublicationState" },
+          "created_at_ms": { "type": "integer" },
+          "updated_at_ms": { "type": "integer" }
+        },
+        "additionalProperties": false
+      },
+      "ClientAuthorization": {
+        "type": "object",
+        "required": [
+          "authorization_id",
+          "publication_id",
+          "subject",
+          "client_id",
+          "display_name",
+          "state",
+          "first_used_at_ms",
+          "last_used_at_ms"
+        ],
+        "properties": {
+          "authorization_id": { "type": "string" },
+          "publication_id": { "type": "string" },
+          "subject": { "type": "string" },
+          "client_id": { "type": "string" },
+          "display_name": { "type": "string" },
+          "state": { "type": "string", "enum": ["active", "revoked"] },
+          "first_used_at_ms": { "type": "integer" },
+          "last_used_at_ms": { "type": "integer" }
+        },
+        "additionalProperties": false
+      },
+      "Approval": {
+        "type": "object",
+        "required": [
+          "approval_id",
+          "publication_id",
+          "authorization_id",
+          "subject",
+          "client_id",
+          "tool_name",
+          "operation_ref",
+          "connection_id",
+          "input_digest",
+          "state",
+          "expires_at_ms",
+          "created_at_ms",
+          "updated_at_ms"
+        ],
+        "properties": {
+          "approval_id": { "type": "string" },
+          "publication_id": { "type": "string" },
+          "authorization_id": { "type": "string" },
+          "subject": { "type": "string" },
+          "client_id": { "type": "string" },
+          "tool_name": { "type": "string" },
+          "operation_ref": { "type": "string" },
+          "connection_id": { "type": "string" },
+          "input_digest": { "type": "string" },
+          "state": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "denied",
+              "consumed",
+              "expired",
+              "outcome_unknown"
+            ]
+          },
+          "expires_at_ms": { "type": "integer" },
+          "audit_ref": { "type": ["string", "null"] },
+          "created_at_ms": { "type": "integer" },
+          "updated_at_ms": { "type": "integer" }
+        },
+        "additionalProperties": false
+      },
+      "ConnectionStatus": {
+        "type": "object",
+        "required": ["provider", "connected"],
+        "properties": {
+          "provider": { "const": "claude-code" },
+          "connected": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      },
+      "ConnectClaudeCode": {
+        "type": "object",
+        "required": ["credential"],
+        "properties": {
+          "credential": {
+            "type": "string",
+            "format": "password",
+            "writeOnly": true,
+            "maxLength": 65536
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClaudeOAuthStart": {
+        "type": "object",
+        "required": ["authorization_url", "flow_id", "expires_at"],
+        "properties": {
+          "authorization_url": { "type": "string", "format": "uri" },
+          "flow_id": { "type": "string", "maxLength": 512 },
+          "expires_at": { "type": "integer" }
+        },
+        "additionalProperties": false
+      },
+      "CompleteClaudeOAuth": {
+        "type": "object",
+        "required": ["flow_id", "code"],
+        "properties": {
+          "flow_id": { "type": "string", "maxLength": 512 },
+          "code": {
+            "type": "string",
+            "format": "password",
+            "writeOnly": true,
+            "maxLength": 12288
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConnectorSetupProfile": {
+        "type": "object",
+        "required": ["auth_profile", "actor"],
+        "properties": {
+          "auth_profile": { "type": "string" },
+          "actor": { "type": "string", "enum": ["person", "application"] }
+        },
+        "additionalProperties": false
+      },
+      "ConnectorProviderSummary": {
+        "type": "object",
+        "required": [
+          "provider_ref",
+          "vendor",
+          "description",
+          "audiences",
+          "services",
+          "operation_count",
+          "configurable",
+          "setup_profiles"
+        ],
+        "properties": {
+          "provider_ref": { "type": "string" },
+          "authority": { "type": ["string", "null"] },
+          "vendor": { "type": "string" },
+          "description": { "type": "string" },
+          "audiences": { "type": "array", "items": { "type": "string" } },
+          "services": { "type": "array", "items": { "type": "string" } },
+          "operation_count": { "type": "integer", "minimum": 0 },
+          "configurable": { "type": "boolean" },
+          "setup_profiles": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ConnectorSetupProfile" }
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConnectorCatalogPage": {
+        "type": "object",
+        "required": ["providers"],
+        "properties": {
+          "providers": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ConnectorProviderSummary" }
+          },
+          "next_offset": { "type": ["integer", "null"], "minimum": 0 }
+        },
+        "additionalProperties": false
+      },
+      "ConnectorCatalogOperation": {
+        "type": "object",
+        "required": [
+          "operation_ref",
+          "service",
+          "description",
+          "risk",
+          "exposed"
+        ],
+        "properties": {
+          "operation_ref": { "type": "string" },
+          "service": { "type": "string" },
+          "description": { "type": "string" },
+          "risk": { "type": "string" },
+          "exposed": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      },
+      "ConnectorProviderDescription": {
+        "type": "object",
+        "required": ["provider", "operations"],
+        "properties": {
+          "provider": {
+            "$ref": "#/components/schemas/ConnectorProviderSummary"
+          },
+          "operations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectorCatalogOperation"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeneratedServiceSummary": {
+        "type": "object",
+        "required": ["service_ref", "display_name", "description", "digest"],
+        "properties": {
+          "service_ref": {
+            "type": "string",
+            "pattern": "^service:[a-z0-9_-]+$"
+          },
+          "display_name": { "type": "string" },
+          "description": { "type": "string" },
+          "digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        },
+        "additionalProperties": false
+      },
+      "GeneratedServicePage": {
+        "type": "object",
+        "required": ["services"],
+        "properties": {
+          "services": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/GeneratedServiceSummary" }
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeneratedServiceCatalogRequest": {
+        "type": "object",
+        "required": ["service_ref"],
+        "properties": {
+          "service_ref": {
+            "type": "string",
+            "pattern": "^service:[a-z0-9_-]+$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeneratedServiceCatalog": {
+        "type": "object",
+        "required": [
+          "format",
+          "service_ref",
+          "display_name",
+          "description",
+          "semantic_catalog",
+          "authentication",
+          "operations"
+        ],
+        "properties": {
+          "format": { "const": "service-catalog/1" },
+          "service_ref": {
+            "type": "string",
+            "pattern": "^service:[a-z0-9_-]+$"
+          },
+          "display_name": { "type": "string" },
+          "description": { "type": "string" },
+          "semantic_catalog": {
+            "type": "object",
+            "required": ["format"],
+            "properties": { "format": { "const": "ess-browser-catalog/1" } },
+            "additionalProperties": true
+          },
+          "authentication": {
+            "type": "object",
+            "required": ["source", "realm_policy"],
+            "properties": {
+              "source": { "const": "session" },
+              "realm_policy": {
+                "type": "string",
+                "enum": ["required", "optional", "forbidden"]
+              }
+            },
+            "additionalProperties": false
+          },
+          "operations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "operation_ref",
+                "semantic_ref",
+                "kind",
+                "effect",
+                "input_schema",
+                "output_schema"
+              ],
+              "properties": {
+                "name": { "type": "string" },
+                "operation_ref": { "type": "string" },
+                "semantic_ref": { "type": "string" },
+                "kind": { "type": "string", "enum": ["intent", "query"] },
+                "effect": { "type": "string", "enum": ["read", "write"] },
+                "input_schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                },
+                "output_schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeneratedServiceInvokeRequest": {
+        "type": "object",
+        "required": ["operation_ref", "input", "confirmed"],
+        "properties": {
+          "operation_ref": { "type": "string", "maxLength": 512 },
+          "input": { "type": "object", "additionalProperties": true },
+          "confirmed": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      },
+      "GeneratedServiceInvocation": {
+        "type": "object",
+        "required": ["output", "connector_audit_ref"],
+        "properties": {
+          "output": true,
+          "connector_audit_ref": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "StartConnection": {
+        "type": "object",
+        "required": ["integration_ref", "label"],
+        "properties": {
+          "integration_ref": { "type": "string" },
+          "label": { "type": "string" },
+          "auth_profile": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      },
+      "ConnectSession": {
+        "type": "object",
+        "required": [
+          "connect_session_ref",
+          "integration_ref",
+          "state",
+          "expires_at_unix_ms"
+        ],
+        "properties": {
+          "connect_session_ref": { "type": "string" },
+          "integration_ref": { "type": "string" },
+          "state": {
+            "type": "string",
+            "enum": ["pending", "completed", "expired", "failed"]
+          },
+          "expires_at_unix_ms": { "type": "integer", "minimum": 0 },
+          "completion_endpoint": { "type": ["string", "null"] },
+          "browser_completion_url": {
+            "type": ["string", "null"],
+            "format": "uri"
+          },
+          "connection_ref": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      },
+      "ConnectorConnection": {
+        "type": "object",
+        "required": [
+          "connection_ref",
+          "integration_ref",
+          "label",
+          "state",
+          "initiation",
+          "route"
+        ],
+        "properties": {
+          "connection_ref": { "type": "string" },
+          "integration_ref": { "type": "string" },
+          "label": { "type": "string" },
+          "state": {
+            "type": "string",
+            "enum": ["created", "authorized", "callable", "degraded", "revoked"]
+          },
+          "initiation": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["b10x", "provider"] }
+          },
+          "route": { "type": "object" },
+          "scope": {
+            "type": ["string", "null"],
+            "enum": ["tenant", "principal", null]
+          },
+          "actor": {
+            "type": ["string", "null"],
+            "enum": ["app", "user", null]
+          },
+          "auth_profile": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      },
+      "CapabilityConnection": {
+        "type": "object",
+        "required": ["connection_ref", "label", "provider", "audiences"],
+        "properties": {
+          "connection_ref": { "type": "string" },
+          "label": { "type": "string" },
+          "provider": { "type": "string" },
+          "audiences": { "type": "array", "items": { "type": "string" } },
+          "purpose": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      },
+      "Capability": {
+        "type": "object",
+        "required": [
+          "operation_ref",
+          "title",
+          "effect",
+          "approval",
+          "connections"
+        ],
+        "properties": {
+          "operation_ref": { "type": "string" },
+          "title": { "type": "string" },
+          "effect": {
+            "type": "string",
+            "enum": ["read_only", "mutating", "destructive"]
+          },
+          "approval": {
+            "type": "string",
+            "enum": ["not_required", "required"]
+          },
+          "connections": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/CapabilityConnection" }
+          }
+        },
+        "additionalProperties": false
+      },
+      "CapabilityMapping": {
+        "type": "object",
+        "required": ["operation_ref", "tool_name", "posture"],
+        "properties": {
+          "operation_ref": { "type": "string" },
+          "tool_name": { "type": "string" },
+          "connection_ref": { "type": ["string", "null"] },
+          "context": { "type": ["string", "null"] },
+          "posture": {
+            "type": "string",
+            "enum": ["allow", "approval_required", "deny"]
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateCapabilityProfile": {
+        "type": "object",
+        "required": ["name", "audience", "mappings"],
+        "properties": {
+          "name": { "type": "string" },
+          "audience": {
+            "type": "string",
+            "enum": ["personal", "tenant"]
+          },
+          "mappings": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/CapabilityMapping" }
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateCapabilityProfile": {
+        "type": "object",
+        "required": ["expected_revision", "name", "mappings"],
+        "properties": {
+          "expected_revision": { "type": "integer", "minimum": 1 },
+          "name": { "type": "string" },
+          "mappings": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/CapabilityMapping" }
+          }
+        },
+        "additionalProperties": false
+      },
+      "CapabilityProfile": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenant_id",
+          "name",
+          "audience",
+          "revision",
+          "mappings",
+          "compiled",
+          "created_by",
+          "created_at_ms",
+          "updated_at_ms"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "tenant_id": { "type": "string" },
+          "name": { "type": "string" },
+          "audience": {
+            "type": "string",
+            "enum": ["personal", "tenant"]
+          },
+          "revision": { "type": "integer", "minimum": 1 },
+          "mappings": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/CapabilityMapping" }
+          },
+          "compiled": { "type": "object" },
+          "created_by": { "type": "string" },
+          "created_at_ms": { "type": "integer", "minimum": 0 },
+          "updated_at_ms": { "type": "integer", "minimum": 0 }
+        },
+        "additionalProperties": false
+      },
+      "RepositoryCandidate": {
+        "type": "object",
+        "required": [
+          "forge_instance_ref",
+          "project_ref",
+          "path_with_namespace",
+          "name",
+          "visibility",
+          "web_url"
+        ],
+        "properties": {
+          "forge_instance_ref": { "type": "string" },
+          "project_ref": { "type": "string" },
+          "path_with_namespace": { "type": "string" },
+          "name": { "type": "string" },
+          "default_branch": { "type": ["string", "null"] },
+          "visibility": { "type": "string" },
+          "web_url": { "type": "string" },
+          "opened_project_id": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      },
+      "OpenProject": {
+        "type": "object",
+        "required": ["forge_instance_ref", "project_ref"],
+        "properties": {
+          "forge_instance_ref": { "type": "string" },
+          "project_ref": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "Project": {
+        "type": "object",
+        "required": [
+          "id",
+          "forge_instance_ref",
+          "project_ref",
+          "path_with_namespace",
+          "name",
+          "selected_branch",
+          "web_url"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "forge_instance_ref": { "type": "string" },
+          "project_ref": { "type": "string" },
+          "path_with_namespace": { "type": "string" },
+          "name": { "type": "string" },
+          "default_branch": { "type": ["string", "null"] },
+          "selected_branch": { "type": "string" },
+          "pinned_commit": { "type": ["string", "null"] },
+          "web_url": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "Branch": {
+        "type": "object",
+        "required": ["name", "commit", "provider_default", "protected"],
+        "properties": {
+          "name": { "type": "string" },
+          "commit": { "type": "string" },
+          "provider_default": { "type": "boolean" },
+          "protected": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      },
+      "RepositoryEntry": {
+        "type": "object",
+        "required": ["object_id", "name", "path", "kind", "mode"],
+        "properties": {
+          "object_id": { "type": "string" },
+          "name": { "type": "string" },
+          "path": { "type": "string" },
+          "kind": { "type": "string", "enum": ["blob", "tree"] },
+          "mode": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "CodingSession": {
+        "type": "object",
+        "required": [
+          "id",
+          "project_id",
+          "source_revision",
+          "state",
+          "limits",
+          "created_at_ms",
+          "updated_at_ms"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "project_id": { "type": "string" },
+          "source_revision": { "type": "string" },
+          "base_materialization_ref": { "type": ["string", "null"] },
+          "working_materialization_ref": { "type": ["string", "null"] },
+          "manifest_sha256": { "type": ["string", "null"] },
+          "state": {
+            "type": "string",
+            "enum": [
+              "preparing",
+              "ready",
+              "refused",
+              "unknown",
+              "closing",
+              "closed"
+            ]
+          },
+          "failure_code": { "type": ["string", "null"] },
+          "limits": {
+            "type": "object",
+            "required": ["max_files", "max_total_bytes", "max_file_bytes"],
+            "properties": {
+              "max_files": { "type": "integer", "minimum": 0 },
+              "max_total_bytes": { "type": "integer", "minimum": 0 },
+              "max_file_bytes": { "type": "integer", "minimum": 0 }
+            },
+            "additionalProperties": false
+          },
+          "created_at_ms": { "type": "integer", "minimum": 0 },
+          "updated_at_ms": { "type": "integer", "minimum": 0 },
+          "coordination": { "$ref": "#/components/schemas/CoordinationSummary" }
+        },
+        "additionalProperties": false
+      },
+      "HostedCodingSession": {
+        "allOf": [
+          { "$ref": "#/components/schemas/CodingSession" },
+          { "type": "object", "required": ["coordination"] }
+        ]
+      },
+      "CoordinationSummary": {
+        "type": "object",
+        "required": ["state", "through_version", "failure_code", "retryable"],
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": ["ready", "degraded", "closed"]
+          },
+          "through_version": { "type": ["integer", "null"], "minimum": 0 },
+          "failure_code": { "type": ["string", "null"] },
+          "retryable": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      },
+      "CodingCoordinationView": {
+        "type": "object",
+        "required": ["summary", "session", "grants", "pins", "checkpoints"],
+        "properties": {
+          "summary": { "$ref": "#/components/schemas/CoordinationSummary" },
+          "session": { "type": "object", "additionalProperties": true },
+          "grants": {
+            "type": "array",
+            "items": { "type": "object", "additionalProperties": true }
+          },
+          "pins": {
+            "type": "array",
+            "items": { "type": "object", "additionalProperties": true }
+          },
+          "checkpoints": {
+            "type": "array",
+            "items": { "type": "object", "additionalProperties": true }
+          }
+        },
+        "additionalProperties": false
+      },
+      "PinCodingContext": {
+        "type": "object",
+        "required": ["kind", "reference", "sha256", "idempotency_key"],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["Editor", "DiffHunk", "Terminal", "Process", "Evidence"]
+          },
+          "reference": { "type": "string", "maxLength": 4096 },
+          "start_line": { "type": ["integer", "null"], "minimum": 0 },
+          "end_line": { "type": ["integer", "null"], "minimum": 0 },
+          "sha256": { "type": "string", "minLength": 64, "maxLength": 64 },
+          "idempotency_key": { "type": "string", "maxLength": 128 }
+        },
+        "additionalProperties": false
+      },
+      "CreateCodingGrant": {
+        "type": "object",
+        "required": ["grantee", "idempotency_key"],
+        "properties": {
+          "grantee": { "type": "string", "maxLength": 128 },
+          "idempotency_key": { "type": "string", "maxLength": 128 }
+        },
+        "additionalProperties": false
+      },
+      "DecideCodingCheckpoint": {
+        "type": "object",
+        "required": ["decision", "idempotency_key"],
+        "properties": {
+          "decision": { "type": "string", "enum": ["approve", "deny"] },
+          "idempotency_key": { "type": "string", "maxLength": 128 }
+        },
+        "additionalProperties": false
+      },
+      "CreateCodingSession": {
+        "type": "object",
+        "required": ["source_revision", "idempotency_key"],
+        "properties": {
+          "source_revision": { "type": "string" },
+          "idempotency_key": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "CodingTreeProjection": {
+        "type": "object",
+        "required": ["format", "entries", "truncated"],
+        "properties": {
+          "format": { "type": "string" },
+          "entries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["path", "kind"],
+              "properties": {
+                "path": { "type": "string" },
+                "kind": { "type": "string" },
+                "size": { "type": ["integer", "null"], "minimum": 0 },
+                "sha256": { "type": ["string", "null"] }
+              },
+              "additionalProperties": false
+            }
+          },
+          "truncated": { "type": "boolean" },
+          "omitted": { "type": ["integer", "null"], "minimum": 0 }
+        },
+        "additionalProperties": false
+      },
+      "FileProjection": {
+        "type": "object",
+        "required": ["format", "revision", "binary", "truncated"],
+        "properties": {
+          "format": { "type": "string" },
+          "revision": {
+            "type": "object",
+            "required": ["path", "sha256", "size", "modification"],
+            "properties": {
+              "path": { "type": "string" },
+              "sha256": { "type": "string" },
+              "size": { "type": "integer", "minimum": 0 },
+              "language": { "type": ["string", "null"] },
+              "modification": {
+                "type": "string",
+                "enum": ["unchanged", "added", "modified"]
+              }
+            },
+            "additionalProperties": false
+          },
+          "content": { "type": ["string", "null"] },
+          "binary": { "type": "boolean" },
+          "truncated": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      },
+      "WriteFile": {
+        "type": "object",
+        "required": ["content", "expected", "create_parents", "operation_id"],
+        "properties": {
+          "content": { "type": "string" },
+          "expected": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": ["state"],
+                "properties": { "state": { "const": "absent" } },
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "required": ["state", "sha256"],
+                "properties": {
+                  "state": { "const": "sha256" },
+                  "sha256": { "type": "string" }
+                },
+                "additionalProperties": false
+              }
+            ]
+          },
+          "create_parents": { "type": "boolean" },
+          "operation_id": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "FileConflict": {
+        "type": "object",
+        "required": ["code", "latest"],
+        "properties": {
+          "code": { "const": "workspace_file_conflict" },
+          "base": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/FileProjection" },
+              { "type": "null" }
+            ]
+          },
+          "latest": { "$ref": "#/components/schemas/FileProjection" }
+        },
+        "additionalProperties": false
+      },
+      "ResolveDiff": {
+        "type": "object",
+        "required": ["selector", "mode"],
+        "properties": {
+          "selector": { "$ref": "#/components/schemas/ChangeSelector" },
+          "mode": { "type": "string", "enum": ["patch", "stat", "files_only"] }
+        },
+        "additionalProperties": false
+      },
+      "DiffProjection": {
+        "type": "object",
+        "required": [
+          "format",
+          "selector",
+          "mode",
+          "digest",
+          "source_revision",
+          "files",
+          "additions",
+          "deletions",
+          "partial"
+        ],
+        "properties": {
+          "format": { "type": "string" },
+          "selector": { "type": "object" },
+          "mode": { "type": "string", "enum": ["patch", "stat", "files_only"] },
+          "digest": { "type": "string" },
+          "source_revision": { "type": "string" },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["status", "hunks", "attribution"],
+              "properties": {
+                "old_path": { "type": ["string", "null"] },
+                "new_path": { "type": ["string", "null"] },
+                "status": { "type": "string" },
+                "additions": { "type": ["integer", "null"], "minimum": 0 },
+                "deletions": { "type": ["integer", "null"], "minimum": 0 },
+                "old_sha256": { "type": ["string", "null"] },
+                "new_sha256": { "type": ["string", "null"] },
+                "attribution": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "hunks": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["id", "old", "new", "lines"],
+                    "properties": {
+                      "id": { "type": "string" },
+                      "old": { "$ref": "#/components/schemas/DiffRange" },
+                      "new": { "$ref": "#/components/schemas/DiffRange" },
+                      "heading": { "type": ["string", "null"] },
+                      "lines": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/DiffLine" }
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additions": { "type": "integer", "minimum": 0 },
+          "deletions": { "type": "integer", "minimum": 0 },
+          "partial": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      },
+      "TerminalLimits": {
+        "type": "object",
+        "required": [
+          "timeout_ms",
+          "cpu_millis",
+          "memory_bytes",
+          "processes",
+          "output_bytes",
+          "input_bytes",
+          "frame_bytes",
+          "queued_frames",
+          "lease_ttl_ms"
+        ],
+        "properties": {
+          "timeout_ms": { "type": "integer", "minimum": 1 },
+          "cpu_millis": { "type": "integer", "minimum": 1 },
+          "memory_bytes": { "type": "integer", "minimum": 1 },
+          "processes": { "type": "integer", "minimum": 1 },
+          "output_bytes": { "type": "integer", "minimum": 1 },
+          "input_bytes": { "type": "integer", "minimum": 1 },
+          "frame_bytes": { "type": "integer", "minimum": 1 },
+          "queued_frames": { "type": "integer", "minimum": 1 },
+          "lease_ttl_ms": { "type": "integer", "minimum": 1 }
+        },
+        "additionalProperties": false
+      },
+      "TerminalProfile": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "runtime_ref",
+          "shell",
+          "arguments",
+          "working_directory",
+          "environment",
+          "workspace_access",
+          "network",
+          "limits"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "runtime_ref": { "type": "string" },
+          "shell": { "type": "string" },
+          "arguments": { "type": "array", "items": { "type": "string" } },
+          "working_directory": { "type": "string" },
+          "environment": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "workspace_access": {
+            "type": "string",
+            "enum": ["read_only", "read_write"]
+          },
+          "network": { "type": "string", "enum": ["none"] },
+          "limits": { "$ref": "#/components/schemas/TerminalLimits" }
+        },
+        "additionalProperties": false
+      },
+      "CreateTerminal": {
+        "type": "object",
+        "required": ["profile_id", "columns", "rows", "idempotency_key"],
+        "properties": {
+          "profile_id": { "type": "string" },
+          "columns": { "type": "integer", "minimum": 2, "maximum": 1000 },
+          "rows": { "type": "integer", "minimum": 2, "maximum": 1000 },
+          "idempotency_key": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "TerminalExit": {
+        "type": "object",
+        "properties": {
+          "code": { "type": ["integer", "null"] },
+          "signal": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      },
+      "TerminalSession": {
+        "type": "object",
+        "required": [
+          "id",
+          "coding_session_id",
+          "agentide_session_id",
+          "authority_grant_id",
+          "profile",
+          "actor",
+          "state",
+          "created_at_ms",
+          "updated_at_ms"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "coding_session_id": { "type": "string" },
+          "agentide_session_id": { "type": "string" },
+          "authority_grant_id": { "type": "string" },
+          "profile": { "$ref": "#/components/schemas/TerminalProfile" },
+          "actor": { "type": "string" },
+          "process_id": { "type": ["string", "null"] },
+          "state": {
+            "type": "string",
+            "enum": [
+              "preparing",
+              "running",
+              "exited",
+              "terminated",
+              "refused",
+              "unknown"
+            ]
+          },
+          "exit": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/TerminalExit" },
+              { "type": "null" }
+            ]
+          },
+          "failure_code": { "type": ["string", "null"] },
+          "created_at_ms": { "type": "integer", "minimum": 0 },
+          "updated_at_ms": { "type": "integer", "minimum": 0 }
+        },
+        "additionalProperties": false
+      },
+      "DiffRange": {
+        "type": "object",
+        "required": ["start", "lines"],
+        "properties": {
+          "start": { "type": "integer", "minimum": 0 },
+          "lines": { "type": "integer", "minimum": 0 }
+        },
+        "additionalProperties": false
+      },
+      "DiffLine": {
+        "type": "object",
+        "required": ["kind", "content"],
+        "properties": {
+          "kind": { "type": "string" },
+          "old_line": { "type": ["integer", "null"], "minimum": 0 },
+          "new_line": { "type": ["integer", "null"], "minimum": 0 },
+          "content": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "EngineeringArtifact": {
+        "type": "object",
+        "required": [
+          "id",
+          "locator",
+          "entity_type",
+          "revision",
+          "updated_at_ms"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "locator": { "type": "string" },
+          "entity_type": { "type": "string" },
+          "revision": { "type": "integer" },
+          "title": { "type": ["string", "null"] },
+          "status": { "type": ["string", "null"] },
+          "updated_at_ms": { "type": "integer" },
+          "source_revision": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      },
+      "EngineeringArtifactPage": {
+        "type": "object",
+        "required": ["artifacts", "has_more"],
+        "properties": {
+          "artifacts": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/EngineeringArtifact" }
+          },
+          "has_more": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      },
+      "SelectBranch": {
+        "type": "object",
+        "required": ["branch"],
+        "properties": { "branch": { "type": "string" } },
+        "additionalProperties": false
+      },
+      "ProjectThread": {
+        "type": "object",
+        "required": [
+          "id",
+          "project_id",
+          "branch",
+          "pinned_commit",
+          "title",
+          "created_at_ms"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "project_id": { "type": "string" },
+          "branch": { "type": "string" },
+          "pinned_commit": { "type": "string" },
+          "title": { "type": "string" },
+          "created_at_ms": { "type": "integer" }
+        },
+        "additionalProperties": false
+      },
+      "CreateProjectThread": {
+        "type": "object",
+        "required": ["branch", "pinned_commit", "title"],
+        "properties": {
+          "branch": { "type": "string" },
+          "pinned_commit": { "type": "string" },
+          "title": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "ProjectMessage": {
+        "type": "object",
+        "required": [
+          "sequence",
+          "role",
+          "content",
+          "branch",
+          "commit",
+          "created_at_ms"
+        ],
+        "properties": {
+          "sequence": { "type": "integer" },
+          "role": { "type": "string", "enum": ["user", "assistant", "system"] },
+          "content": { "type": "string" },
+          "branch": { "type": "string" },
+          "commit": { "type": "string" },
+          "created_at_ms": { "type": "integer" }
+        },
+        "additionalProperties": false
+      },
+      "CreateProjectMessage": {
+        "type": "object",
+        "required": ["content"],
+        "properties": { "content": { "type": "string" } },
+        "additionalProperties": false
+      },
+      "WorkflowLibrarySummary": {
+        "type": "object",
+        "required": ["id", "name", "state", "active_revision_id"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "state": { "type": "string" },
+          "active_revision_id": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      },
+      "WorkflowDraftSummary": {
+        "type": "object",
+        "required": ["id", "name", "state", "based_on_revision_id"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "state": { "type": "string" },
+          "based_on_revision_id": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      },
+      "WorkflowRevisionSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "draft_id",
+          "state",
+          "digest",
+          "node_count",
+          "edge_count",
+          "nodes",
+          "edges"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "draft_id": { "type": "string" },
+          "state": { "type": "string" },
+          "digest": { "type": "string" },
+          "node_count": { "type": "integer" },
+          "edge_count": { "type": "integer" },
+          "nodes": { "type": "array", "items": {} },
+          "edges": { "type": "array", "items": {} }
+        },
+        "additionalProperties": false
+      },
+      "WorkflowLibraryPage": {
+        "type": "object",
+        "required": ["workflows", "partial"],
+        "properties": {
+          "workflows": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowLibrarySummary" }
+          },
+          "partial": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      },
+      "WorkflowLibraryDetail": {
+        "type": "object",
+        "required": ["workflow", "drafts", "revisions", "partial"],
+        "properties": {
+          "workflow": { "$ref": "#/components/schemas/WorkflowLibrarySummary" },
+          "drafts": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowDraftSummary" }
+          },
+          "revisions": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowRevisionSummary" }
+          },
+          "partial": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      },
+      "WorkflowDefinition": {
+        "type": "object",
+        "required": ["id", "name", "description"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "StartWorkflow": {
+        "type": "object",
+        "required": ["definition_id", "branch", "commit", "idempotency_key"],
+        "properties": {
+          "definition_id": { "type": "string" },
+          "branch": { "type": "string" },
+          "commit": { "type": "string" },
+          "idempotency_key": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "WorkflowRun": {
+        "type": "object",
+        "required": [
+          "id",
+          "definition_id",
+          "project_id",
+          "branch",
+          "commit",
+          "state",
+          "created_at_ms"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "definition_id": { "type": "string" },
+          "project_id": { "type": "string" },
+          "branch": { "type": "string" },
+          "commit": { "type": "string" },
+          "state": {
+            "type": "string",
+            "enum": ["accepted", "running", "succeeded", "failed", "refused"]
+          },
+          "failure_code": { "type": ["string", "null"] },
+          "output": {
+            "type": ["string", "null"],
+            "description": "Final Markdown result when the workflow succeeded"
+          },
+          "created_at_ms": { "type": "integer" }
+        },
+        "additionalProperties": false
+      },
+      "CreateAgent": {
+        "type": "object",
+        "required": ["name", "instructions", "model"],
+        "properties": {
+          "name": { "type": "string" },
+          "instructions": { "type": "string" },
+          "model": { "type": "string" },
+          "capability_profile_id": {
+            "type": "string",
+            "description": "Existing immutable capability profile assigned to the first agent revision"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Agent": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenant_id",
+          "name",
+          "latest_revision",
+          "created_by",
+          "created_at_ms"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "tenant_id": { "type": "string" },
+          "name": { "type": "string" },
+          "active_revision": { "type": ["integer", "null"] },
+          "latest_revision": { "type": "integer" },
+          "created_by": { "type": "string" },
+          "created_at_ms": { "type": "integer" }
+        }
+      },
+      "SubmitTask": {
+        "type": "object",
+        "required": ["prompt", "idempotency_key"],
+        "properties": {
+          "prompt": { "type": "string" },
+          "idempotency_key": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "ConversationMessage": {
+        "type": "object",
+        "required": ["role", "content"],
+        "properties": {
+          "role": { "type": "string", "enum": ["user", "assistant", "system"] },
+          "content": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "ContextSelectionDraft": {
+        "type": "object",
+        "required": [
+          "format",
+          "id",
+          "kind",
+          "reference",
+          "content",
+          "sha256",
+          "truncated"
+        ],
+        "properties": {
+          "format": { "const": "agentide.context-selection-draft/1" },
+          "id": { "type": "string" },
+          "kind": {
+            "type": "string",
+            "enum": ["editor", "diff_hunk", "terminal", "process", "evidence"]
+          },
+          "reference": { "type": "string" },
+          "start_line": { "type": ["integer", "null"], "minimum": 1 },
+          "end_line": { "type": ["integer", "null"], "minimum": 1 },
+          "content": { "type": "string", "maxLength": 32768 },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "truncated": { "type": "boolean", "const": false }
+        },
+        "additionalProperties": false
+      },
+      "OpenFileReference": {
+        "type": "object",
+        "required": ["path", "sha256", "dirty"],
+        "properties": {
+          "path": { "type": "string", "maxLength": 4096 },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "cursor": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": ["line", "column"],
+                "properties": {
+                  "line": { "type": "integer", "minimum": 1 },
+                  "column": { "type": "integer", "minimum": 1 }
+                },
+                "additionalProperties": false
+              },
+              { "type": "null" }
+            ]
+          },
+          "dirty": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      },
+      "ChangeSelector": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": ["kind"],
+            "properties": { "kind": { "const": "workspace" } },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": ["kind", "digest"],
+            "properties": {
+              "kind": { "const": "plan" },
+              "digest": { "type": "string" }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": ["kind", "attempt_id"],
+            "properties": {
+              "kind": { "const": "agent_attempt" },
+              "attempt_id": { "type": "string" }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": ["kind", "publication_id"],
+            "properties": {
+              "kind": { "const": "publication" },
+              "publication_id": { "type": "string" }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": ["kind", "old", "new"],
+            "properties": {
+              "kind": { "const": "revision_pair" },
+              "old": { "type": "string" },
+              "new": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "SubmitCodingTurn": {
+        "type": "object",
+        "required": [
+          "prompt",
+          "messages",
+          "focused_selections",
+          "open_files",
+          "idempotency_key"
+        ],
+        "properties": {
+          "prompt": { "type": "string", "minLength": 1, "maxLength": 131072 },
+          "messages": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ConversationMessage" }
+          },
+          "focused_selections": {
+            "type": "array",
+            "maxItems": 8,
+            "items": { "$ref": "#/components/schemas/ContextSelectionDraft" }
+          },
+          "open_files": {
+            "type": "array",
+            "maxItems": 128,
+            "items": { "$ref": "#/components/schemas/OpenFileReference" }
+          },
+          "active_diff": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/ChangeSelector" },
+              { "type": "null" }
+            ]
+          },
+          "idempotency_key": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "Task": {
+        "type": "object",
+        "required": [
+          "id",
+          "agent_id",
+          "status",
+          "attempt_id",
+          "prompt",
+          "accepted_at_ms"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "agent_id": { "type": "string" },
+          "status": { "type": "string" },
+          "attempt_id": { "type": "string" },
+          "prompt": { "type": "string" },
+          "output": { "type": ["string", "null"] },
+          "failure_code": { "type": ["string", "null"] },
+          "failure_message": { "type": ["string", "null"] },
+          "accepted_at_ms": { "type": "integer", "minimum": 0 },
+          "completed_at_ms": { "type": ["integer", "null"], "minimum": 0 },
+          "workspace_session_id": { "type": ["string", "null"] },
+          "agentide_session_id": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      },
+      "ConnectorOwnerContext": {
+        "type": "object",
+        "required": [
+          "tenant_id",
+          "agent_id",
+          "agent_revision",
+          "authority_snapshot_id",
+          "authority_snapshot_sha256"
+        ],
+        "properties": {
+          "tenant_id": { "type": "string" },
+          "agent_id": { "type": "string" },
+          "agent_revision": { "type": "integer", "minimum": 1 },
+          "authority_snapshot_id": { "type": "string" },
+          "authority_snapshot_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TaskApproval": {
+        "type": "object",
+        "required": [
+          "id",
+          "task_id",
+          "attempt_id",
+          "call_id",
+          "tool_name",
+          "operation_ref",
+          "connection_ref",
+          "description_ref",
+          "input",
+          "context",
+          "requested_at_ms"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "task_id": { "type": "string" },
+          "attempt_id": { "type": "string" },
+          "call_id": { "type": "string" },
+          "tool_name": { "type": "string" },
+          "operation_ref": { "type": "string" },
+          "connection_ref": { "type": "string" },
+          "description_ref": { "type": "string" },
+          "input": true,
+          "context": { "$ref": "#/components/schemas/ConnectorOwnerContext" },
+          "requested_at_ms": { "type": "integer", "minimum": 0 }
+        },
+        "additionalProperties": false
+      },
+      "TaskApprovalDecision": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": ["decision"],
+            "properties": { "decision": { "const": "approve" } },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": ["decision", "reason"],
+            "properties": {
+              "decision": { "const": "deny" },
+              "reason": { "type": "string", "minLength": 1, "maxLength": 4096 }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  }
+}

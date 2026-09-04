@@ -1,0 +1,84 @@
+{
+  "schema": "b10x-docs-collection/v1",
+  "repository": {
+    "displayName": "Docs System",
+    "id": "docs-system",
+    "url": "https://github.com/beyond10x/docs-system"
+  },
+  "files": [
+    {
+      "repository": "docs-system",
+      "surface": "docs",
+      "kind": "document",
+      "sourcePath": "CHANGELOG.md",
+      "outputPath": "docs-system/docs/document/CHANGELOG.md",
+      "sha256": "ac765c214a1c9f6ee200b06b47b5037a4470ef877b16e4ad57a03d477ede5226",
+      "size": 6205
+    },
+    {
+      "repository": "docs-system",
+      "surface": "docs",
+      "kind": "document",
+      "sourcePath": "README.md",
+      "outputPath": "docs-system/docs/document/README.md",
+      "sha256": "6e4898411bab726049a464bd08f21a3289dca48da5afb604f20510888318799d",
+      "size": 13311
+    },
+    {
+      "repository": "docs-system",
+      "surface": "docs",
+      "kind": "json-schema",
+      "sourcePath": "schema/b10x.change.v2.schema.json",
+      "outputPath": "docs-system/docs/json-schema/schema/b10x.change.v2.schema.json",
+      "sha256": "dff551fb5e950daaa9edd1c6b0a88b9b332b9908a47a5180ae31764ed7f9b771",
+      "size": 3266,
+      "specificationId": "change-v2",
+      "route": "/api/docs-system/change-v2/"
+    },
+    {
+      "repository": "docs-system",
+      "surface": "docs",
+      "kind": "json-schema",
+      "sourcePath": "schema/b10x.docs.bundle.v1.schema.json",
+      "outputPath": "docs-system/docs/json-schema/schema/b10x.docs.bundle.v1.schema.json",
+      "sha256": "6078559d01deca7dd32af218bea972b386f73767a89ade5da238287f2372afa4",
+      "size": 2107,
+      "specificationId": "bundle-v1",
+      "route": "/api/docs-system/bundle-v1/"
+    },
+    {
+      "repository": "docs-system",
+      "surface": "docs",
+      "kind": "json-schema",
+      "sourcePath": "schema/b10x.docs.v3.schema.json",
+      "outputPath": "docs-system/docs/json-schema/schema/b10x.docs.v3.schema.json",
+      "sha256": "ad456e1b77dedbf734522e77b95a2110c0308ddf4192a29eaca84a1d489027ae",
+      "size": 8865,
+      "specificationId": "manifest-v3",
+      "route": "/api/docs-system/manifest-v3/"
+    },
+    {
+      "repository": "docs-system",
+      "surface": "docs",
+      "kind": "json-schema",
+      "sourcePath": "schema/b10x.redirects.schema.json",
+      "outputPath": "docs-system/docs/json-schema/schema/b10x.redirects.schema.json",
+      "sha256": "2e2382a05c85e0404d264d315267386cd1c7b0eeb5065b3207e765995a1659e7",
+      "size": 1429,
+      "specificationId": "redirects",
+      "route": "/api/docs-system/redirects/"
+    },
+    {
+      "repository": "docs-system",
+      "surface": "docs",
+      "kind": "json-schema",
+      "sourcePath": "schema/b10x.sources.schema.json",
+      "outputPath": "docs-system/docs/json-schema/schema/b10x.sources.schema.json",
+      "sha256": "5ee49f6ebe8e97c850c8e2d77d9f1e3a40daacd5ef1086bde6345e63af669489",
+      "size": 1144,
+      "specificationId": "source-lock",
+      "route": "/api/docs-system/source-lock/"
+    }
+  ],
+  "contentSha256": "b7457c56eec783d2fb2c1132681eac7ca8d92cc29bdb29d9311396de008e5e6d"
+}
