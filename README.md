@@ -14,13 +14,15 @@ repository that owns the technical documentation.
 
 Atlas dispatches the Pages workflow from `main` with the full commit SHA of both the current
 `published` branch head and the exact caller commit. The pinned Website runtime accepts only a
-publication and caller attributed to `b10x-bot[bot]`,
-requires its declared Website commit to be in `beyond10x/website` `main` and attributed to the same
-bot, and independently verifies every payload file, public route, digest, and deployment count
-against the artifact's canonical provenance. It reads `sources.lock.json` and `legacy-routes.json`
-from that exact Website commit, hashes their bytes, validates the 23-repository source roster, and
-requires every locked source commit to match provenance. Only the verified `_site` checkout is
-uploaded to Pages.
+publication and caller attributed to `b10x-bot[bot]`, requires its declared Website commit to be in
+`beyond10x/website` `main` and attributed to the same bot, and independently verifies every payload
+file, public route, digest, and deployment count against canonical provenance.
+
+New publications use `b10x-publication-layout/v2`: `site/` is the deployable tree and `inputs/`
+contains the exact `b10x-docs-source-set/v1`, normalized source bundles, and Atlas bootstrap data
+needed to audit or roll back it. The verifier revalidates all bundle identities and digests and
+uploads only `site/` to Pages. Legacy flat publications remain readable solely for rollback during
+migration.
 
 The three generated metadata files have distinct serving purposes but one contract:
 
@@ -28,7 +30,7 @@ The three generated metadata files have distinct serving purposes but one contra
 - `.well-known/b10x-docs.json` must be byte-for-byte identical to it and is the public discovery
   endpoint.
 - `._b10x/deployment.json` is the compact deployment record and must exactly mirror the verified
-  Website commit, four digests, and inventory counts.
+  Website/source-set identity, digests, and inventory counts.
 
 Run the deployment-control gate locally with:
 

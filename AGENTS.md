@@ -13,7 +13,8 @@ Organization-wide policy and publication credentials remain in private Atlas.
 - Authored website content, source ingestion, components, and presentation live in
   `beyond10x/website`.
 - `main` contains only deployment controls and this repository's operating documentation.
-- `published` contains generated static artifacts and `PROVENANCE.json`; never hand-edit it.
+- `published` contains self-contained generated publication layouts. In v2, only `site/` is served;
+  `inputs/` retains the exact source set, bundles, and bootstrap data. Never hand-edit it.
 - A root deployment accepts only an immutable artifact commit produced from `website/main` and
   published by the b10x bot.
 - `.github/workflows/pages.yml` is an Atlas-generated minimal caller pinned to an immutable Website
@@ -33,16 +34,16 @@ that the declared Website commit exists in the ancestry of `beyond10x/website` `
 case is admitted only behind the Atlas-verified App-only branch authority; never add an empty
 attestation commit to replace it.
 
-The selected artifact must contain byte-identical canonical `PROVENANCE.json` and
-`.well-known/b10x-docs.json` plus exact `._b10x/deployment.json` metadata. Independently recompute
-the payload inventory, route inventory, and their digests; require nonempty rooted routes and
-agreement for the Website commit, source-lock digest, legacy-route digest, route digest, artifact
-digest, and all declared counts. Read `sources.lock.json` and `legacy-routes.json` from that exact
-Website commit to ground both input digests; require the accepted schemas, the exact sorted
-23-repository roster, and exact agreement between locked commits and `sourceCommits`. Bootstrap
-artifacts are not publishable. Artifact file and route inventories use UTF-8 byte-lexical order,
-collapse only the exact `index.html` and `/index.html` route forms, and reject nonportable paths or
-Git control files.
+The selected publication must resolve as either a retained flat v1 rollback or the exact
+`b10x-publication-layout/v2` top-level shape. Its site contains byte-identical canonical
+`PROVENANCE.json` and `.well-known/b10x-docs.json` plus exact `._b10x/deployment.json` metadata.
+Independently recompute the payload inventory, route inventory, and their digests; require nonempty
+rooted routes and agreement for the Website commit, route digest, artifact digest, and all declared
+counts. For v2, revalidate the exact sorted catalog source set and every normalized bundle under
+`inputs/`; the source-set, Atlas control, bundle, collection, content, and compatibility lock
+digests must all agree with provenance. Bootstrap artifacts are not publishable. Artifact file and
+route inventories use UTF-8 byte-lexical order, collapse only the exact `index.html` and
+`/index.html` route forms, and reject nonportable paths or Git control files.
 
 After deployment, verify `https://beyond10x.github.io/.well-known/b10x-docs.json` and the complete
 declared route set through Atlas.
