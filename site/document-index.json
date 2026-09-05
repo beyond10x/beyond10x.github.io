@@ -1851,15 +1851,14 @@
     },
     {
       "route": "/docs/connectors/",
-      "title": "b10x connectors",
-      "qualifiedTitle": "b10x connectors | Connectors",
+      "title": "Connectors",
+      "qualifiedTitle": "Connectors | Connectors",
       "project": "connectors",
       "projectName": "Connectors",
-      "description": "b10x connectors in the source-owned Connectors documentation.",
-      "documentType": "reference",
+      "description": "Understand the system that connects agents to external services while keeping credentials, permissions, and execution under explicit control.",
+      "documentType": "overview",
       "audiences": [
         "evaluator",
-        "adopter",
         "developer",
         "operator"
       ],
@@ -1873,6 +1872,135 @@
         "reference"
       ],
       "sourcePath": "README.md"
+    },
+    {
+      "route": "/docs/connectors/architecture/",
+      "title": "System overview",
+      "qualifiedTitle": "System overview | Connectors",
+      "project": "connectors",
+      "projectName": "Connectors",
+      "description": "The subsystems, ownership boundaries, and data paths of the current Connectors implementation.",
+      "documentType": "architecture",
+      "audiences": [
+        "evaluator",
+        "developer",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "docs/architecture/README.md"
+    },
+    {
+      "route": "/docs/connectors/architecture/authority/",
+      "title": "Connections and authority",
+      "qualifiedTitle": "Connections and authority | Connectors",
+      "project": "connectors",
+      "projectName": "Connectors",
+      "description": "How provider configuration, account authorization, Grants, approvals, and credential custody fit together.",
+      "documentType": "architecture",
+      "audiences": [
+        "developer",
+        "operator",
+        "evaluator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "docs/architecture/authority.md"
+    },
+    {
+      "route": "/docs/connectors/architecture/deployment/",
+      "title": "Deployment and runtime",
+      "qualifiedTitle": "Deployment and runtime | Connectors",
+      "project": "connectors",
+      "projectName": "Connectors",
+      "description": "Compare personal-local and hosted Connectors, storage and identity, and the voice and Git byte-plane boundaries.",
+      "documentType": "architecture",
+      "audiences": [
+        "operator",
+        "developer"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "deploy"
+      ],
+      "sourcePath": "docs/architecture/deployment.md"
+    },
+    {
+      "route": "/docs/connectors/architecture/events/",
+      "title": "Events and durable state",
+      "qualifiedTitle": "Events and durable state | Connectors",
+      "project": "connectors",
+      "projectName": "Connectors",
+      "description": "How provider events are attributed, admitted, persisted, and consumed, and where delivery guarantees stop.",
+      "documentType": "architecture",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "docs/architecture/events.md"
+    },
+    {
+      "route": "/docs/connectors/architecture/interfaces/",
+      "title": "Commands and interfaces",
+      "qualifiedTitle": "Commands and interfaces | Connectors",
+      "project": "connectors",
+      "projectName": "Connectors",
+      "description": "Follow a governed invocation and understand the CLI, HTTP, local, MCP, and byte-plane interfaces.",
+      "documentType": "architecture",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "docs/architecture/interfaces.md"
+    },
+    {
+      "route": "/docs/connectors/architecture/specification/",
+      "title": "Specification and implementation status",
+      "qualifiedTitle": "Specification and implementation status | Connectors",
+      "project": "connectors",
+      "projectName": "Connectors",
+      "description": "What Connectors declares in ESS, what it generates, what its tests check, and what enforces runtime decisions.",
+      "documentType": "reference",
+      "audiences": [
+        "developer",
+        "evaluator",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "specify"
+      ],
+      "sourcePath": "docs/architecture/specification.md"
     },
     {
       "route": "/docs/connectors/design/",
@@ -1897,11 +2025,11 @@
     },
     {
       "route": "/docs/connectors/design/01-domain-model/",
-      "title": "Design 01: the domain model",
-      "qualifiedTitle": "Design 01: the domain model | Connectors",
+      "title": "Domain model (design reference)",
+      "qualifiedTitle": "Domain model (design reference) | Connectors",
       "project": "connectors",
       "projectName": "Connectors",
-      "description": "Design 01: the domain model in the source-owned Connectors documentation.",
+      "description": "Domain model (design reference) in the source-owned Connectors documentation.",
       "documentType": "reference",
       "audiences": [
         "evaluator",
@@ -1920,11 +2048,11 @@
     },
     {
       "route": "/docs/connectors/design/02-architecture/",
-      "title": "Design 02: architecture",
-      "qualifiedTitle": "Design 02: architecture | Connectors",
+      "title": "Architecture (design reference)",
+      "qualifiedTitle": "Architecture (design reference) | Connectors",
       "project": "connectors",
       "projectName": "Connectors",
-      "description": "Design 02: architecture in the source-owned Connectors documentation.",
+      "description": "Architecture (design reference) in the source-owned Connectors documentation.",
       "documentType": "reference",
       "audiences": [
         "evaluator",
@@ -1943,11 +2071,11 @@
     },
     {
       "route": "/docs/connectors/design/18-governed-outbound-mcp-services/",
-      "title": "18 — Governed outbound MCP services",
-      "qualifiedTitle": "18 — Governed outbound MCP services | Connectors",
+      "title": "Outbound MCP (design reference)",
+      "qualifiedTitle": "Outbound MCP (design reference) | Connectors",
       "project": "connectors",
       "projectName": "Connectors",
-      "description": "18 — Governed outbound MCP services in the source-owned Connectors documentation.",
+      "description": "Outbound MCP (design reference) in the source-owned Connectors documentation.",
       "documentType": "reference",
       "audiences": [
         "evaluator",

@@ -2,6 +2,117 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "ess/early-stop-assertion-0.18.0",
+      "id": "ess/early-stop-assertion-0.18.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-04T14:08:16Z",
+      "title": "An authored scenario can claim that a consumer halted an ordered scan",
+      "summary": "`halts_after: <n>` lets an authored scenario require a consumer to stop an ordered scan after n rows. The target reports rows produced and whether the consumer ended the read. Targets without incremental reads report `unsupported`. This adds a claim to `ess-conformance/4`.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.18.0",
+        "version": "0.18.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/scenario-player-0.18.0",
+      "id": "ess/scenario-player-0.18.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-04T14:08:16Z",
+      "title": "A specification's scenarios can be played in a browser",
+      "summary": "`ess verify conform web` emits a browser page that walks authored scenarios, showing actors, state, selected views, and declared consequences. It replays model-determined behavior without executing an implementation, so authors can inspect a specification before filling its obligations.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.18.0",
+        "version": "0.18.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/authored-scenarios-0.15.0",
+      "id": "ess/authored-scenarios-0.15.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-04T13:13:51Z",
+      "title": "A specification carries the scenarios an author wrote, not only the ones it obliges",
+      "summary": "Authors can declare modelled instances, command timelines, and expectations in `ess-scenario/1`. These scenarios compile into `ess-conformance/2` with identities distinct from synthesized suites. Twenty-seven refusals check their names against the model. Included in the published 0.16.0 release.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.16.0",
+        "version": "0.16.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/elapsed-time-claims-0.16.0",
+      "id": "ess/elapsed-time-claims-0.16.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-04T13:13:51Z",
+      "title": "An authored scenario can claim a length of time, and a target has to answer for it",
+      "summary": "Authored scenarios gain `mark:` and `elapsed:` with `not_before`, `within`, and `quiet` bounds. The suite states a duration and its anchor; the target reports an observed or advanced clock. Targets without clock support report `unsupported`. The claims use `ess-conformance/3`.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.16.0",
+        "version": "0.16.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/command-line-surface-0.14.0",
+      "id": "ess/command-line-surface-0.14.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-04T10:01:53Z",
+      "title": "A component can declare a command-line surface, and ESS synthesizes its parser",
+      "summary": "`reached_by: command_line` and a `cli:` block state that a component's callers are people at a terminal and where each command sits in the tree. `ess generate synthesize --target clap` emits the parser, the handler obligations and the completion scripts from that declaration.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.14.0",
+        "version": "0.14.0"
+      },
+      "journeys": [
+        "specify",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
       "key": "aep-service/0.1.7",
       "id": "aep-service/0.1.7",
       "repository": "aep-service",

@@ -2,8 +2,43 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://beyond10x.github.io/releases/ess/atom.xml</id>
   <title>ESS releases</title>
-  <updated>2026-09-03T23:38:32Z</updated>
+  <updated>2026-09-04T14:08:16Z</updated>
   <link rel="self" href="https://beyond10x.github.io/releases/ess/atom.xml"/>
+  <entry>
+    <id>ess/early-stop-assertion-0.18.0</id>
+    <title>An authored scenario can claim that a consumer halted an ordered scan</title>
+    <updated>2026-09-04T14:08:16Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.18.0"/>
+    <summary>`halts_after: &lt;n&gt;` lets an authored scenario require a consumer to stop an ordered scan after n rows. The target reports rows produced and whether the consumer ended the read. Targets without incremental reads report `unsupported`. This adds a claim to `ess-conformance/4`.</summary>
+  </entry>
+  <entry>
+    <id>ess/scenario-player-0.18.0</id>
+    <title>A specification&apos;s scenarios can be played in a browser</title>
+    <updated>2026-09-04T14:08:16Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.18.0"/>
+    <summary>`ess verify conform web` emits a browser page that walks authored scenarios, showing actors, state, selected views, and declared consequences. It replays model-determined behavior without executing an implementation, so authors can inspect a specification before filling its obligations.</summary>
+  </entry>
+  <entry>
+    <id>ess/authored-scenarios-0.15.0</id>
+    <title>A specification carries the scenarios an author wrote, not only the ones it obliges</title>
+    <updated>2026-09-04T13:13:51Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.16.0"/>
+    <summary>Authors can declare modelled instances, command timelines, and expectations in `ess-scenario/1`. These scenarios compile into `ess-conformance/2` with identities distinct from synthesized suites. Twenty-seven refusals check their names against the model. Included in the published 0.16.0 release.</summary>
+  </entry>
+  <entry>
+    <id>ess/elapsed-time-claims-0.16.0</id>
+    <title>An authored scenario can claim a length of time, and a target has to answer for it</title>
+    <updated>2026-09-04T13:13:51Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.16.0"/>
+    <summary>Authored scenarios gain `mark:` and `elapsed:` with `not_before`, `within`, and `quiet` bounds. The suite states a duration and its anchor; the target reports an observed or advanced clock. Targets without clock support report `unsupported`. The claims use `ess-conformance/3`.</summary>
+  </entry>
+  <entry>
+    <id>ess/command-line-surface-0.14.0</id>
+    <title>A component can declare a command-line surface, and ESS synthesizes its parser</title>
+    <updated>2026-09-04T10:01:53Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.14.0"/>
+    <summary>`reached_by: command_line` and a `cli:` block state that a component&apos;s callers are people at a terminal and where each command sits in the tree. `ess generate synthesize --target clap` emits the parser, the handler obligations and the completion scripts from that declaration.</summary>
+  </entry>
   <entry>
     <id>ess/0.11.1</id>
     <title>ESS 0.11.1</title>

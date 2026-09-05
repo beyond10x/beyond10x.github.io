@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased
+
+## 0.5.9 - 2026-09-05
+
+- Align every generated Connector factory and catalog dependency with the exact Connectors 0.6.2
+  service identity so an independently promoted runtime composes without duplicate trait types and
+  can expose the bounded Smart Git broker.
+
+## 0.5.8 - 2026-09-04
+
+- Preserve optional projection-field metadata in realization plans so generated services accept
+  canonical field absence without weakening required-field validation or admitting explicit null.
+- Version the enriched realization plan as `service-realization-plan/3`, retain deliberate read
+  compatibility for valid `/2` plans, and preserve nested optionality in generated Rust types.
+
 ## 0.5.7 - 2026-09-04
 
 - Separate scope-based projection visibility from aggregate ownership so tenant/realm-partitioned
