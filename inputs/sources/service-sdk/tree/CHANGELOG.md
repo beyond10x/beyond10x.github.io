@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+## 0.5.11 - 2026-09-05
+
+- Align Connector factories and conformance with Connectors 0.6.5 so a composed host can keep
+  legacy GitLab connections inactive while remaining available for verified reconnection.
+
+## 0.5.10 - 2026-09-05
+
+- Align generated Connector factories, catalogues, and conformance with the exact Connectors 0.6.4
+  service identity so composed hosts can use the faster Smart Git runtime without duplicate traits.
+
 ## 0.5.9 - 2026-09-05
 
 - Align every generated Connector factory and catalog dependency with the exact Connectors 0.6.2
