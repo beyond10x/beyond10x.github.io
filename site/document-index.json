@@ -3087,7 +3087,7 @@
       "qualifiedTitle": "Track specification change | ESS",
       "project": "ess",
       "projectName": "ESS",
-      "description": "Compare two revisions semantically with ess verify diff, and compute what the change invalidates — scenarios and generated artifacts — with ess verify impact.",
+      "description": "Compare compiled specification revisions and explain which scenarios and generated artifacts need another check.",
       "documentType": "how-to",
       "audiences": [
         "adopter",
@@ -3194,6 +3194,29 @@
       "sourcePath": "website/docs/reference/cli.md"
     },
     {
+      "route": "/docs/ess/reference/formats/",
+      "title": "Formats and digests",
+      "qualifiedTitle": "Formats and digests | ESS",
+      "project": "ess",
+      "projectName": "ESS",
+      "description": "Identify ESS documents, their readers, and the bytes each digest names.",
+      "documentType": "reference",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/reference/formats.md"
+    },
+    {
       "route": "/docs/ess/status/",
       "title": "Status",
       "qualifiedTitle": "Status | ESS",
@@ -3236,6 +3259,29 @@
         "troubleshoot"
       ],
       "sourcePath": "website/docs/status/limitations.md"
+    },
+    {
+      "route": "/docs/ess/status/outlook/",
+      "title": "Outlook — making ESS dependable",
+      "qualifiedTitle": "Outlook — making ESS dependable | ESS",
+      "project": "ess",
+      "projectName": "ESS",
+      "description": "The proposed priorities, vocabulary, and evidence needed for ESS to mature.",
+      "documentType": "status",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/status/outlook.md"
     },
     {
       "route": "/docs/ess/status/roadmap/",
@@ -3303,6 +3349,69 @@
         "reference"
       ],
       "sourcePath": "README.md"
+    },
+    {
+      "route": "/docs/extensions/",
+      "title": "Extensions",
+      "qualifiedTitle": "Extensions",
+      "project": "extensions",
+      "projectName": "Extensions",
+      "description": "Extensions in the source-owned Extensions documentation.",
+      "documentType": "reference",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "README.md"
+    },
+    {
+      "route": "/docs/extensions/model/",
+      "title": "Extension control model",
+      "qualifiedTitle": "Extension control model | Extensions",
+      "project": "extensions",
+      "projectName": "Extensions",
+      "description": "Extension control model in the source-owned Extensions documentation.",
+      "documentType": "reference",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "docs/model.md"
+    },
+    {
+      "route": "/docs/extensions/scenarios/",
+      "title": "Architecture validation scenarios",
+      "qualifiedTitle": "Architecture validation scenarios | Extensions",
+      "project": "extensions",
+      "projectName": "Extensions",
+      "description": "Architecture validation scenarios in the source-owned Extensions documentation.",
+      "documentType": "reference",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "docs/scenarios.md"
     },
     {
       "route": "/docs/harness/",

@@ -2,8 +2,15 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://beyond10x.github.io/releases/ess/atom.xml</id>
   <title>ESS releases</title>
-  <updated>2026-09-04T14:08:16Z</updated>
+  <updated>2026-09-05T21:00:00Z</updated>
   <link rel="self" href="https://beyond10x.github.io/releases/ess/atom.xml"/>
+  <entry>
+    <id>ess/source-driven-realization-0.19.0</id>
+    <title>Checked schema imports and structural data realizations</title>
+    <updated>2026-09-05T21:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.19.0"/>
+    <summary>Import complete JSON Schema roots with source identity; generate structural Go, Rust and TypeScript libraries; and run source-pinned normalization recipes. Rust normalization has a library API; Go/TypeScript support is pending. Rust/Web synthesis returns checked failures, and sliced provenance names its digest profile.</summary>
+  </entry>
   <entry>
     <id>ess/early-stop-assertion-0.18.0</id>
     <title>An authored scenario can claim that a consumer halted an ordered scan</title>

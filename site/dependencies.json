@@ -50,6 +50,10 @@
       "label": "Eventlog"
     },
     {
+      "id": "extensions",
+      "label": "Extensions"
+    },
+    {
       "id": "harness",
       "label": "Harness"
     },
@@ -233,6 +237,11 @@
       "from": "eventlog",
       "to": "workflow",
       "label": "supports"
+    },
+    {
+      "from": "extensions",
+      "to": "ess",
+      "label": "uses"
     },
     {
       "from": "harness",
