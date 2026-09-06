@@ -1,12 +1,12 @@
 {
   "schema": "b10x-website-provenance/v2",
   "websiteCommit": "fc4571534765c098ed861bc326da4d3da0d1df63",
-  "atlasControlCommit": "304a58f851ac95cd1010aced1a2aa0f57ed8c511",
-  "sourceSetSha256": "81e55400013d3e83c0787089080b213399c51635f641751673fbc6c125d063e6",
-  "sourcesLockSha256": "c849ba1b54f1f09001b7725fa9ec70a1ba5e69bc101135d3bb85c132c20562c3",
+  "atlasControlCommit": "f686fe034bc3f1c7c5d276476b814ee05c2bca9f",
+  "sourceSetSha256": "cb90df78811d72fbda87da614ebab66d7841189dfa63be889f56f1964637346d",
+  "sourcesLockSha256": "091228b507e392eb4530bf05f0ae0cd6b4a3cabcf3e52206a5d64bfac5445ae8",
   "legacyRoutesSha256": "ce5ab0381fe28205758cf7ec6cdf4face2f21b4d8ccedc9ed7325fa094c0fec2",
   "routesSha256": "0ea58ffa5fdfff5ecb1a40b78e65d3cbdc6e8f8a95ed29b86c085bdccd95dde3",
-  "artifactSha256": "d94815ee3cad1768078ea69785e2765970cd5a430e684c178fcc94109ed89ce3",
+  "artifactSha256": "ed2d6fbd9da3068d53556a16594c43defb29e242e4b950f158973b660855b35f",
   "sourceCommits": {
     "aep": "00c742e4179593738a2e8aa69e2ecc07d3c89402",
     "aep-service": "b0c047646583eb1537d47ee210a1ca88b515dd5d",
@@ -18,7 +18,7 @@
     "devcenter": "33f132d81772ac70d822e2119ac28dc5a7e75842",
     "docs-system": "49eb1e4a1b77aa6e958dfaa60cbc6394f40f5808",
     "entity-runtime": "513d3bc0c44d7ae0109df90935d984bd3f278afb",
-    "ess": "e113a65a0bac63e77cd17f43fa280a5bf56c93f9",
+    "ess": "9899faed9eb10eb2e4d9e6dc946f6d732e87c6b6",
     "eventlog": "20e00c1eeab5d67bd5f749bbbd871b1fbfe7f796",
     "extensions": "dd96377944e1a2ff49a525b5077757bfda8d2bee",
     "harness": "a5f6ef0b271d8c5f80d161768f0f1a0dd6960cc2",
@@ -145,15 +145,15 @@
       "contentSha256": "4beda285a4379a844f0465d133096cfef7ee445195a2bf418f6be9b4beafc47e"
     },
     "ess": {
-      "bundleSha256": "cb7aee61277d5954884e82e3228c69defdc1182a07eb5f5f66c9e5b32f4b2869",
-      "commit": "e113a65a0bac63e77cd17f43fa280a5bf56c93f9",
-      "producerRunId": 34001828934,
+      "bundleSha256": "76b77a6c2778c6960eda596ee4c2b48fa350992e94a8cc49c1d054df0ff77e07",
+      "commit": "9899faed9eb10eb2e4d9e6dc946f6d732e87c6b6",
+      "producerRunId": 34004527680,
       "producerRunAttempt": 1,
-      "artifactId": 9979714535,
-      "artifactDigest": "sha256:294becf330da54edd82fa0b51a41a9a685f19a56effd72ae43b4db775ace18cd",
+      "artifactId": 9980524514,
+      "artifactDigest": "sha256:2f694c7c24f207f05324f9cdba54d0a0dfe9943f3e51d16e13311a2298074c6e",
       "manifestSha256": "af67e8dbbd482583c9c72afc2cf7800f134dcda7ac6cd129381e21aaace0df49",
-      "collectionSha256": "e39b4bf79c716be00aec09eae03d401497781469ed8e16aca45723355921af2b",
-      "contentSha256": "057667de165ce6d200f5f384632dcc901c5f7a923f48dc59880dc71ffe0e0cfa"
+      "collectionSha256": "8773bde49b6b354e901688336d3b26183663b91ca9fa8d20492178191d08a087",
+      "contentSha256": "24845548779d5d1a631e21ff83d9ab1f670801c54b370c1b7609aaf9dd6399df"
     },
     "eventlog": {
       "bundleSha256": "a1f28879a68cf7532d1d1e61ffb578cb27035b0a68e7a651a3cc86ddd182d1a6",
@@ -660,12 +660,12 @@
   "files": [
     {
       "path": "._b10x/code-fence-inventory.json",
-      "sha256": "1cd873091ca3835e8b5477ca66581e55559a6790148c6aca8d4a8ce108af27b3",
-      "size": 917680
+      "sha256": "850911deee65e8703aeabf6762f189a3b9345e07f66f11f4078307794eddb89f",
+      "size": 919137
     },
     {
       "path": "._b10x/quality.json",
-      "sha256": "2d85bb29f128b420ef7721a965e396aa272f4ee2c4ace79bd3244e8f62c9002b",
+      "sha256": "26aa1df4ecfb032eb0499b6a00be17d25980d183baaa0a9369519a0bb3e6bd74",
       "size": 281
     },
     {
@@ -685,7 +685,7 @@
     },
     {
       "path": "404.html",
-      "sha256": "3af4913c82ffde975d94ef8bf5e6db7d10b002b365e9ac8a66b72be03078df10",
+      "sha256": "19fbfe67d9dc11c1928b5e0cad125dec7ce4505eefe597fb7953d64be76a0521",
       "size": 9601
     },
     {
@@ -695,7 +695,7 @@
     },
     {
       "path": "api/aep-service/http-api/index.html",
-      "sha256": "c2c9b303b0696bf27ab4556f5e6c2934709d6cb885236f9a6ceeabd9c89c603a",
+      "sha256": "cf9fd44a30f5d78565dfa67d5e988d53e74cd6e58b680387b4a841552fb46a48",
       "size": 12852
     },
     {
@@ -705,17 +705,17 @@
     },
     {
       "path": "api/aep-service/index.html",
-      "sha256": "2049bed64df42d3177a0f19dfe33fc81cd6d391f13fadd5f654caf40faaffa89",
+      "sha256": "ac48216a6db0d15e45263481b5d58c2a89fa071eb7c736d9b4b4bb0ab06b77e2",
       "size": 10712
     },
     {
       "path": "api/agentide/index.html",
-      "sha256": "02ff918516b96bb8e98579f25c95e7e302a38aafbb812f302b0308a1eca97673",
+      "sha256": "e9a7e6265c9d32130c8f62d20371587dff7f49f64834d6b5080f8da0bb5bbdc6",
       "size": 10695
     },
     {
       "path": "api/agentide/intent-engine/index.html",
-      "sha256": "5b9e79ab9b6d837f19dfa7021163d2b54b6086d33952b190b3cb38e790945ee1",
+      "sha256": "70c9350cfb1f1b7b1cb4b24e94f00bb7c7f2d949aebf76163455958db5345654",
       "size": 15457
     },
     {
@@ -725,7 +725,7 @@
     },
     {
       "path": "api/devcenter/http-api/index.html",
-      "sha256": "338cbb8bede0d3d811f03baa7b7bb01e93a660bfd759513e42dba5e724e14efe",
+      "sha256": "87c54b5ebbe09c8a287bccabb47a0c0168aae131ddb289176ed6879d01bc1b53",
       "size": 15327
     },
     {
@@ -735,12 +735,12 @@
     },
     {
       "path": "api/devcenter/index.html",
-      "sha256": "36708ae22e396ff04aac7834de9bbe7a9fc49585b0f7a99e9f1a671a63256375",
+      "sha256": "2ecb7802bc25f7427e968a82c9223d4756a431bc0c0dbb6371112abdd90cd603",
       "size": 10694
     },
     {
       "path": "api/docs-system/bundle-v1/index.html",
-      "sha256": "6dc3454e87d44b0cb03693653094da5f09c46c91d49fc376a423933c625394d1",
+      "sha256": "b3fcca8a4a06e59e292b867e31cc662757bd7062e47f89fe9f17345fa52470ea",
       "size": 12074
     },
     {
@@ -750,7 +750,7 @@
     },
     {
       "path": "api/docs-system/change-v2/index.html",
-      "sha256": "8ce96f876067e2ed6e82a3aa21ca969c1c099b2ac2c31fd020bc212b65d28333",
+      "sha256": "a60656b639772ba7f7a16fdcb9fc22ec8cadc0418e99adb0a8387ddb9f6a79e5",
       "size": 12231
     },
     {
@@ -760,12 +760,12 @@
     },
     {
       "path": "api/docs-system/index.html",
-      "sha256": "42667be0c4f45b64380a3ca305410d43db0e1c6f8e6cc5e57d7310c78a7b9ed6",
+      "sha256": "b5a7dc8d7fc1f26e6cce5db121869ef49b841f6aff48bf639cbf0edb684b56f1",
       "size": 11030
     },
     {
       "path": "api/docs-system/manifest-v3/index.html",
-      "sha256": "a13d960459c6df101c8d492513cef740e3ff3bab1c4d186acf41745390412b52",
+      "sha256": "3738338c5a33ba9a1cbeb533e67b4247425e013abe7acbb9392678e585ddb472",
       "size": 11952
     },
     {
@@ -775,7 +775,7 @@
     },
     {
       "path": "api/docs-system/redirects/index.html",
-      "sha256": "0d1779a0f0ae36ad18868412693dc65c28e7ef3ef1dde4fd1d395b1eb521c0e4",
+      "sha256": "db1aac0ca2fae96f6d045a9a9cdab7ad620d8172ad47bf6015a6654513c3e96e",
       "size": 11844
     },
     {
@@ -785,7 +785,7 @@
     },
     {
       "path": "api/docs-system/source-lock/index.html",
-      "sha256": "4a184fac86f7150465e59cf625ae0280bc075964d8bb8aa945997ae8055386fa",
+      "sha256": "4e03be18d4465d5290edbef56e67cf3f6cd8e660273ec8f6569c3b4b8c4515d1",
       "size": 11827
     },
     {
@@ -795,12 +795,12 @@
     },
     {
       "path": "api/index.html",
-      "sha256": "29ea6e7f7ecee21da09a49611417a492b4b8bf48d738041275c4ed1ff35469f4",
+      "sha256": "d83284f17f4af78fa18636b49cfbdc715675cca351068b184313835c9f416ca1",
       "size": 15370
     },
     {
       "path": "api/secrets/http-api/index.html",
-      "sha256": "be64b4a019a8f8d350a7bfc96b143a09c89918b2f330f7c5e8d5f359097b3f5c",
+      "sha256": "ba75ee338fd2f6f863d9bdf0fc853e4d4f4d6cf215023246fab6a4903b2e7233",
       "size": 13090
     },
     {
@@ -810,12 +810,12 @@
     },
     {
       "path": "api/secrets/index.html",
-      "sha256": "8a02ab1ed9359ecc6eca316e3440a723cf89d5983c2a587959cccbb11591e576",
+      "sha256": "3a1fa906226cf2c110234e21c15d28775a965537e486f90ee2636e472ba0b33d",
       "size": 10676
     },
     {
       "path": "architecture/index.html",
-      "sha256": "6c40f861a37d9978827d7248379c2ebfc2413b716ea37ab05dfa69b91c1ca4f5",
+      "sha256": "701998f6069e2cec654f7f2c9ed934018ce3dc1a81507c6d5934de8522e07ec1",
       "size": 20852
     },
     {
@@ -949,8 +949,8 @@
       "size": 13656
     },
     {
-      "path": "assets/js/0b0db364.79d2284f.js",
-      "sha256": "c535d53a8eed23a1f0196dac4f24dd1e1de0a6e497a25b94b99d0cc36b8a8446",
+      "path": "assets/js/0b0db364.7ff256f3.js",
+      "sha256": "1e83c788f7132d8ede16e637c1bfe873f5db5d4e23d217b68cbd8fb9e9290fb2",
       "size": 20958
     },
     {
@@ -1014,8 +1014,8 @@
       "size": 15917
     },
     {
-      "path": "assets/js/14e9d454.647389ca.js",
-      "sha256": "32cfa35fbcc126793ae592bf6705ab9c32e82304ebdf9c24c0f931e88662d078",
+      "path": "assets/js/14e9d454.b81e47a7.js",
+      "sha256": "61a2ab4f70e3f9ba6d6d831e6e1f91f4124f2625a340868d2ff339d4820573d0",
       "size": 6556
     },
     {
@@ -1024,8 +1024,8 @@
       "size": 312
     },
     {
-      "path": "assets/js/16ac573c.6b67efa5.js",
-      "sha256": "ba7d1a2a2018de2c3c3f62c7e053cf34ffba101284ebc75d65279ddd392c82b5",
+      "path": "assets/js/16ac573c.2d4c508b.js",
+      "sha256": "8a4b5b9ca65fc57ef1a86fb613038acda66e7039f9492071899427e179442c74",
       "size": 7023
     },
     {
@@ -1069,8 +1069,8 @@
       "size": 529
     },
     {
-      "path": "assets/js/19d48f95.e33339eb.js",
-      "sha256": "9d2d25c4c024bf81cc7f866014a1fe4cdd1b2ab504703c7e4a2fe6a0c844ea85",
+      "path": "assets/js/19d48f95.ce1c7899.js",
+      "sha256": "9639111efc08ed594905e9db979c19daf8154958c7ee971df4ad334425b27ded",
       "size": 6957
     },
     {
@@ -1079,13 +1079,13 @@
       "size": 18854
     },
     {
-      "path": "assets/js/1bf59705.d3f4eb42.js",
-      "sha256": "6a6893450383eacfb4fc6be6ce6314889604f394ffe0423cdea4011158624e52",
+      "path": "assets/js/1bf59705.1941114b.js",
+      "sha256": "f71fd9cc85bb02a1675e2536b19864f1a2474a2f19b7121deff74f598454ecdc",
       "size": 4605
     },
     {
-      "path": "assets/js/1d683b29.61187482.js",
-      "sha256": "c4a6d27a2818a0b5eb7334d5f6305cc03fafba2f9726ad17e37c560a200173fc",
+      "path": "assets/js/1d683b29.a939247f.js",
+      "sha256": "04266efb6ad47312c86c87311859f596448563f569b13e42b289a10198a0558b",
       "size": 7784
     },
     {
@@ -1204,8 +1204,8 @@
       "size": 11024
     },
     {
-      "path": "assets/js/26f7ac9c.d2e5462e.js",
-      "sha256": "21d55063125548f365882d108d45694e905d06ae0570145899182740422b9c8a",
+      "path": "assets/js/26f7ac9c.1d072344.js",
+      "sha256": "e8c85d6cd6aa0439e497db3acc29e435e334939168826fb653fc9646159d5124",
       "size": 24450
     },
     {
@@ -1354,8 +1354,8 @@
       "size": 10345
     },
     {
-      "path": "assets/js/31f7e82b.cd12c26a.js",
-      "sha256": "2156c64294c5bc3835556d0817f5386a5fd4efdbebe62cb0b4b341fed6a5cc30",
+      "path": "assets/js/31f7e82b.8e11a9b5.js",
+      "sha256": "f0a91d9c99a7d79dbc9c2ad685753d7829b6e255e9d4d1ad269136615850257b",
       "size": 4652
     },
     {
@@ -1369,8 +1369,8 @@
       "size": 12902
     },
     {
-      "path": "assets/js/32ee1cfe.b8d0d4da.js",
-      "sha256": "7f8ef44a07b7e3d8d1e75089259e482def3c098a0964be3b028ba0346c9a0753",
+      "path": "assets/js/32ee1cfe.1b488c54.js",
+      "sha256": "0671de767ce2fd03926270a5285ad79bae847d7b7853f8eb570b89c7019d62a5",
       "size": 5765
     },
     {
@@ -1739,8 +1739,8 @@
       "size": 7781
     },
     {
-      "path": "assets/js/56a1b487.3a2c11e8.js",
-      "sha256": "aec562ce12a0cac42f15cd6e8982c83368ce2745f6d9e39153aa5d8b834158f5",
+      "path": "assets/js/56a1b487.106e398b.js",
+      "sha256": "7309b710930858629a7ccff082f1fcb11376a4191a324a2d71f3b4f3be4f9a11",
       "size": 10994
     },
     {
@@ -1769,8 +1769,8 @@
       "size": 10728
     },
     {
-      "path": "assets/js/58a25c1e.e5f9d28f.js",
-      "sha256": "154f0478c583c967d537e5b628e783dcbd8920b9e09dc18442443a1fff7289a2",
+      "path": "assets/js/58a25c1e.86daaf6f.js",
+      "sha256": "2997d74a21b0217fd861d5c35f14505eb710f7e1a5eb329c6cdfb8cab26c9d18",
       "size": 23151
     },
     {
@@ -1839,8 +1839,8 @@
       "size": 376
     },
     {
-      "path": "assets/js/5efc1104.5a9292f3.js",
-      "sha256": "2042ed38c7563d54b128325fc949ae17764ce49151be29dea32067cc3f9a3c7b",
+      "path": "assets/js/5efc1104.11129b0d.js",
+      "sha256": "a741f28381c959ba6b823f6f61d0ec6cc961a5f8e7d0ecf7a3731a3283bf6c29",
       "size": 6195
     },
     {
@@ -1889,9 +1889,9 @@
       "size": 4392
     },
     {
-      "path": "assets/js/6465bb61.3a0f4a26.js",
-      "sha256": "bcdd996feb477f8d4951c0783d634947b39dbf8a9d1cdd41ac27c882d998a64d",
-      "size": 24509
+      "path": "assets/js/6465bb61.1fe92063.js",
+      "sha256": "3bc552b1ad84b4f66258984dfa2c6255337d7e4bfc5e3a2d6a1f5cafecd91e24",
+      "size": 24751
     },
     {
       "path": "assets/js/6520.b5fbd95b.js",
@@ -1919,8 +1919,8 @@
       "size": 3888
     },
     {
-      "path": "assets/js/67191b30.27e79023.js",
-      "sha256": "44a840c6b398f5e518c9f7c72fdaf86e6ceebcdb9c6ac7e85ea54df235fe696b",
+      "path": "assets/js/67191b30.36ab19d0.js",
+      "sha256": "9880edef0834452b4c221c461b32d1e86917ee4b643f1a7cee2c3b93a35839d0",
       "size": 8126
     },
     {
@@ -2119,8 +2119,8 @@
       "size": 99841
     },
     {
-      "path": "assets/js/7672929a.7709d7b8.js",
-      "sha256": "55afef677312d29c423d2e6ae811f939cfe3bdb002f6488b387beaedf6f30600",
+      "path": "assets/js/7672929a.05aed17a.js",
+      "sha256": "348123276aadfa85aea8b64c8d3769a672ce71f81ea44693fd2640f33288ed0e",
       "size": 5241
     },
     {
@@ -2129,8 +2129,8 @@
       "size": 23728
     },
     {
-      "path": "assets/js/76bea08f.1f9192c5.js",
-      "sha256": "565b0f8b1400a6ea592c5fe45a1d0147dc5dd008b4c3f6f469c5a17e4b6be355",
+      "path": "assets/js/76bea08f.bf18ce7a.js",
+      "sha256": "f454733042e9fe9d935edc27853e40ab321756ba1d6df16acb8206224a3baef3",
       "size": 8080
     },
     {
@@ -2194,8 +2194,8 @@
       "size": 16838
     },
     {
-      "path": "assets/js/80212665.c46a98b3.js",
-      "sha256": "cdd88c22ba317a45cd6ea869e715e32063cb3ea3cdb1d8b337e0715d4b4513aa",
+      "path": "assets/js/80212665.4dc45607.js",
+      "sha256": "3176bee51207484a211aefad3e09451fa45fad2b2cedf6e0289456c91a2deee6",
       "size": 12514
     },
     {
@@ -2274,8 +2274,8 @@
       "size": 8594
     },
     {
-      "path": "assets/js/85ad30fe.51f96201.js",
-      "sha256": "0e270b0fe3515d1f61b306ec63ee1a4b915a6dcbd0ddcf1057611256c36c7494",
+      "path": "assets/js/85ad30fe.9647448a.js",
+      "sha256": "9fe27cdf7884f46ff7ad72879e58bdf5b3cf712f01a67ed4ac5e4e90ac200aaa",
       "size": 7168
     },
     {
@@ -2484,8 +2484,8 @@
       "size": 2484
     },
     {
-      "path": "assets/js/9c5099cc.01eb8403.js",
-      "sha256": "bed58c51abbb30fb9658109ec0a03a05061f1d0b0463937d6cb35f8fdfe5a835",
+      "path": "assets/js/9c5099cc.ebe5c8d1.js",
+      "sha256": "f42112fa7abdfb69a70b2078f63464f59d5e6dbd3648797168ec19e717396186",
       "size": 4711
     },
     {
@@ -2589,13 +2589,13 @@
       "size": 2747
     },
     {
-      "path": "assets/js/a6c08646.55c39b2b.js",
-      "sha256": "dc914d222866452c7ed1b02ccea2e4b33a6a35156d288d34e7397d54bb5f2a01",
+      "path": "assets/js/a6c08646.2bc713b8.js",
+      "sha256": "a237946f24c1270ace10628d33f96eab9da967ed3942c8f4cbebc0a02f4a0882",
       "size": 27966
     },
     {
-      "path": "assets/js/a6e25071.35890953.js",
-      "sha256": "efbce84bb3a2302ad029cacaa9d8f970592f799edc197569ecb1c60ea556f5ec",
+      "path": "assets/js/a6e25071.2d0ca50a.js",
+      "sha256": "61afd91604c32e080a039de50bd077a34be464ab0e9b2059c459c70a87304ba2",
       "size": 5998
     },
     {
@@ -2644,9 +2644,9 @@
       "size": 2614
     },
     {
-      "path": "assets/js/aa41145c.29b43228.js",
-      "sha256": "08c32b7d42c3bf695361f134c8718f6a362177c3b5a09acdc607cff8bc15a9cc",
-      "size": 39646
+      "path": "assets/js/aa41145c.48f1a441.js",
+      "sha256": "b613685a08102fde2c6022bb3b52f593f39efc8dbbbb0e8d2c62bbe6266ccfe1",
+      "size": 41692
     },
     {
       "path": "assets/js/aa6be8c2.309028fe.js",
@@ -2799,13 +2799,13 @@
       "size": 16963
     },
     {
-      "path": "assets/js/be2a3a15.1d51de37.js",
-      "sha256": "5977c6c344a761ba198ad45c1a188c779bff1e4c06ae35307f36f526e8433cc3",
-      "size": 52437
+      "path": "assets/js/be2a3a15.ee910052.js",
+      "sha256": "3845fcbfcadd1d00a7c57d430bd9175fb1257047aef332584136d3c023de7f46",
+      "size": 53239
     },
     {
-      "path": "assets/js/be79898d.6cb8af77.js",
-      "sha256": "95dc1b21a8268f4bdee3893bdcf2d6a58f7357e45d6b5299a897767b645bb981",
+      "path": "assets/js/be79898d.51757f2e.js",
+      "sha256": "c82742ec5675d26c9c7ec1e5b259dc3188932b9d8f33dbe897e1fd05e0c2f6dc",
       "size": 8559
     },
     {
@@ -2829,8 +2829,8 @@
       "size": 2776
     },
     {
-      "path": "assets/js/c06fb310.06c93862.js",
-      "sha256": "91ce6733737a2f0d71a4fc9591bcacf30f36d44cac66e63341a2f44d9aeab349",
+      "path": "assets/js/c06fb310.26c48339.js",
+      "sha256": "86bb699cf9055fab68fa6f3f131ae6bb13528c828e622cf10d08899c6b1e19fd",
       "size": 17430
     },
     {
@@ -2854,8 +2854,8 @@
       "size": 4565
     },
     {
-      "path": "assets/js/c66309e4.57eb2ba6.js",
-      "sha256": "b22e87994dc3c3e1f30755132c150cf3ff87256a8d88ede53284ca104708aad0",
+      "path": "assets/js/c66309e4.ce3be20e.js",
+      "sha256": "ae68accfd9876066c4baa9a3750e7d774a8a240baced713c9fca89e8b1b91efc",
       "size": 230871
     },
     {
@@ -2874,8 +2874,8 @@
       "size": 16049
     },
     {
-      "path": "assets/js/c7d08d3e.9c7320f5.js",
-      "sha256": "8bf32f75d9852261a795664ba87a06e82ff76a6f04cc6c133a7ca6b11e4172fc",
+      "path": "assets/js/c7d08d3e.7820433c.js",
+      "sha256": "4303d2deb939a67380860e6fb9d45a51702b598e92512ec00274b18a4fe78250",
       "size": 27583
     },
     {
@@ -2954,8 +2954,8 @@
       "size": 526
     },
     {
-      "path": "assets/js/d0b48460.e5cacde5.js",
-      "sha256": "54c8d53a70bce81c02fe9bcd8090e192f7829b43701c6ef31f841826eb5c9edf",
+      "path": "assets/js/d0b48460.b44e980b.js",
+      "sha256": "36e7b79ceb093f3391f1c955fe41ed67cf27e36c39b95ecc06daaabb66fbc598",
       "size": 7675
     },
     {
@@ -2964,8 +2964,8 @@
       "size": 26878
     },
     {
-      "path": "assets/js/d32b1d93.c989a056.js",
-      "sha256": "4f89636b31f01b3fbe595123cdfea53b8388dae7bd2b090b4ade70f5cfb66761",
+      "path": "assets/js/d32b1d93.68bded7c.js",
+      "sha256": "cad5a1dda86637392cf68798dcdfc944c50d29634ededd6eb0640363ca904241",
       "size": 4580
     },
     {
@@ -2974,8 +2974,8 @@
       "size": 9160
     },
     {
-      "path": "assets/js/d371f476.e7375ba6.js",
-      "sha256": "2da9e0ffdaaea3bbbd0b9c4fcb984659c612bf9ad83cd86577822103afe2da5d",
+      "path": "assets/js/d371f476.2e6cb69e.js",
+      "sha256": "227e0cf3930769fa8add93f135d8732f5330d1e9f76da3951d8fc8a2e61b2f82",
       "size": 4818
     },
     {
@@ -3039,8 +3039,8 @@
       "size": 9650
     },
     {
-      "path": "assets/js/dc61eeb6.f6bab99b.js",
-      "sha256": "353a22f071cbf3bfc456f5d94e649c5a7a30613c0bbf7afaacc3b2ce1ea1d24d",
+      "path": "assets/js/dc61eeb6.f2bb945c.js",
+      "sha256": "5ed76c2bb114a384e661af0aa66277fbdbd689c625ffbbf0427674dedfadcd16",
       "size": 4429
     },
     {
@@ -3074,13 +3074,13 @@
       "size": 4538
     },
     {
-      "path": "assets/js/e4a48e35.2feb7e93.js",
-      "sha256": "55c875435f96344494ecfd746048b41bf3c658f729dfca9324d68b717bebe846",
+      "path": "assets/js/e4a48e35.f2d28fdf.js",
+      "sha256": "2092fc7f72238e3f20ae393c946d14ae865984e8abde37027dda5f32591ec115",
       "size": 5038
     },
     {
-      "path": "assets/js/e4b16884.226da07b.js",
-      "sha256": "81501ed80f52552ddb7af6a61d4d1d4a56ec211fe870b626fed2dd6c21c3b0b0",
+      "path": "assets/js/e4b16884.ab024196.js",
+      "sha256": "aff9c83f917cb36cade87993913c6ecf9d8b2212db16e6ada15d9f46ceb42e42",
       "size": 15952
     },
     {
@@ -3129,8 +3129,8 @@
       "size": 7253
     },
     {
-      "path": "assets/js/e96dd89f.8dc9eba2.js",
-      "sha256": "359722fcdc8693261bbefe2dae5bce520c03230f79f3cb342cb21c83cc245dd7",
+      "path": "assets/js/e96dd89f.c6ce50a6.js",
+      "sha256": "0a02822b53e758a91c67b837d809508467f0fcf0f4aa1493ece6a89a8150788e",
       "size": 4587
     },
     {
@@ -3149,8 +3149,8 @@
       "size": 10439
     },
     {
-      "path": "assets/js/eb25b01c.79546baa.js",
-      "sha256": "59414432ce41ed5c04923f5800f16ddc5d6fee35ef0c396803bf9fa863643198",
+      "path": "assets/js/eb25b01c.2b44ad56.js",
+      "sha256": "05d0769365b44187bb4b0f77082304275f4abc055e6350a96089c4b1ae0f9f69",
       "size": 6201
     },
     {
@@ -3159,8 +3159,8 @@
       "size": 4671
     },
     {
-      "path": "assets/js/edb78ab5.77a0cf0b.js",
-      "sha256": "9c7807ff8289cd0e8ca5eb43b3c2a40f3e6dbca13d3c1e71363da80cdb5fa607",
+      "path": "assets/js/edb78ab5.8c8e7258.js",
+      "sha256": "6e93e591c581621850d41ce1438b5622be6730e3b4b9d6a9fb75b15b192f40d8",
       "size": 99393
     },
     {
@@ -3169,8 +3169,8 @@
       "size": 3442
     },
     {
-      "path": "assets/js/ee592a6f.773dd0ba.js",
-      "sha256": "1f494505bb9c23a46953126796e3ce5f432449081788b256153042166f75da12",
+      "path": "assets/js/ee592a6f.d1262698.js",
+      "sha256": "f43a4d1d4b25ee45bbd42e0ef90d8db2f7ab8eaa13a0201a6cd0a82c8fb09125",
       "size": 4527
     },
     {
@@ -3194,8 +3194,8 @@
       "size": 527
     },
     {
-      "path": "assets/js/f18a76f2.1524e9a7.js",
-      "sha256": "012a6a47a7cb3ee33ea5b0e767e53ed8daa90a0e97765e6ace7ae523a4c57114",
+      "path": "assets/js/f18a76f2.f2483f39.js",
+      "sha256": "8c9d7bb480d4359e4d10a351c5d82ee933bc04a786ed67a7d36b6c9ad1fa7f1b",
       "size": 4544
     },
     {
@@ -3214,8 +3214,8 @@
       "size": 11915
     },
     {
-      "path": "assets/js/f46cc2db.94f2b79d.js",
-      "sha256": "40711f726bf1d9749361c37b64e1f9f684d1993495b59405f1c64b2e97137669",
+      "path": "assets/js/f46cc2db.aca398e4.js",
+      "sha256": "c2ba030d8a8f698674dd64d1c7055457133d4acdb4e4c046fa28c86ea5a67152",
       "size": 6551
     },
     {
@@ -3269,8 +3269,8 @@
       "size": 4372
     },
     {
-      "path": "assets/js/fb55fb20.ae1e5145.js",
-      "sha256": "c482594d0e2f750d2af5a95235bc25f2163f00dde2a4306a9b8842da59a1161b",
+      "path": "assets/js/fb55fb20.e7e910af.js",
+      "sha256": "5abf8cd9daf08ed277d16a69ebeee1e0e3933172a65b506485db2596d0cda5f2",
       "size": 8110
     },
     {
@@ -3294,18 +3294,18 @@
       "size": 654702
     },
     {
-      "path": "assets/js/runtime~main.2a605b02.js",
-      "sha256": "19ea0a68a2dc0f3128501f4e7bd30a556882e9ec82978c74d5cced76a2f41afa",
+      "path": "assets/js/runtime~main.b815b198.js",
+      "sha256": "2fd1b5ea6a6478858ac28781588df3ad0ea9a431fdb0c30fa19fd39e00bfd014",
       "size": 24411
     },
     {
       "path": "build/agent-systems/index.html",
-      "sha256": "5f0e834608306ed7c45e9f6af4bb95a8fcb14fca46e354adf49572e1ed1075b7",
+      "sha256": "01966af7a8ef8910672c9d523e9d3fe76aca597ee6c6178cb9858a95bf4595c2",
       "size": 19682
     },
     {
       "path": "build/index.html",
-      "sha256": "ede89a72048002949173adffea124a23f8f05f32acec1fa63d6a0a6a8c4327ec",
+      "sha256": "53d679671c0850077c6bb90fb17b2c3b43653c201973e9f307441d8b5c323c6c",
       "size": 13266
     },
     {
@@ -3330,7 +3330,7 @@
     },
     {
       "path": "changes/index.html",
-      "sha256": "bf70280e9d1e02d40d4a915525663d5a8f523dfc53488693c30a6d62e74e6e87",
+      "sha256": "fc5dd6e76448a00e83e3926badd6be6e828f0354560ca3367a6719baeea28c8f",
       "size": 34884
     },
     {
@@ -3340,17 +3340,17 @@
     },
     {
       "path": "components/agentic-principles/principles/index.html",
-      "sha256": "03eeee19a46e3ffdd5462c9641dcc52481182f0d5809c6b005172d144d8fc925",
+      "sha256": "b327fe35dcdd0e67cff6aa6376616c009aaa41e9fac89f7d7cf31c0d86786335",
       "size": 11896
     },
     {
       "path": "components/index.html",
-      "sha256": "cfe8d23b4b231b8875886cf174a4c42592d30e7ff172a7318278f20798b9b726",
+      "sha256": "31120b20ad566ff6f3bb61bf8f29c6f4a212b20a8ad8a150b63a75c6cc01aebb",
       "size": 10587
     },
     {
       "path": "contribute/index.html",
-      "sha256": "6b711ddc688488196700ebf86699bc065e58ca758009fa38c141d1e4ab56ebdb",
+      "sha256": "81ce9fbfa5f6be0d460330a2785a20764fe31c435d84bbe8d9e3548d4980f002",
       "size": 16791
     },
     {
@@ -3365,1122 +3365,1122 @@
     },
     {
       "path": "docs/aep-service/architecture/index.html",
-      "sha256": "039582817f01b85148767bd09680f152c2a43ec027a90242968057a782ea40b9",
+      "sha256": "c948a1a5fc1f49ce4a4636e0c15db61e0b113b25002d7bccda2ddd01b7e9e01f",
       "size": 25809
     },
     {
       "path": "docs/aep-service/commands-and-queries/index.html",
-      "sha256": "6d5281bf769ac93f471c9f6f98c5329e1c8d76d87929dc67b3024437bd8e7aea",
+      "sha256": "d76a8398344a14cb7689f501d9b81b2ad25d3cf3330ce381890132937a163a73",
       "size": 22169
     },
     {
       "path": "docs/aep-service/concepts/index.html",
-      "sha256": "240233b80563aaed2cb73488bf8e88cfcf31e718515e07eac22a8a42b1f6a61b",
+      "sha256": "6aced5d0baca90039748bf2434755fc3d73d02817cbe5bb81d34d9c39a1a7ff9",
       "size": 24644
     },
     {
       "path": "docs/aep-service/configuration/index.html",
-      "sha256": "bfa1d8c6e277d6f7dfce051275eaa23785d44160cb604a69bec89998dfb7a493",
+      "sha256": "bec5749ba5271bbbd4e96e95560a85d27ce7c65c4a0ed717b8234af5e7d241a0",
       "size": 24821
     },
     {
       "path": "docs/aep-service/http-contract/index.html",
-      "sha256": "eca8e70dce1db006c33ff38c8caf596107529b8cc35e709f8b28e192ac66d3a6",
+      "sha256": "801fe7ecc2689127dbe0a90fbbbd4bb091b4de5d3ac4fa46f662c4eb8f24c988",
       "size": 23409
     },
     {
       "path": "docs/aep-service/index.html",
-      "sha256": "5c0973d6004d6450408fce72a52aacf59b3fd7ba916f2d8e8603b3b87861ebb5",
+      "sha256": "ceaf4ea2916948b315de4a95ab0a865d168df2a7422c6f49d29589a7cbd561eb",
       "size": 22765
     },
     {
       "path": "docs/aep-service/operations/index.html",
-      "sha256": "9199ce00547f89f503a2feba65f9185b9b93be9182e199f13fca6bbda10f9a76",
+      "sha256": "b53d4b6bbe30d1c64314857f97e0a82df32e4dd272b1d9fea279f6746d9647f0",
       "size": 22970
     },
     {
       "path": "docs/aep-service/quickstart/index.html",
-      "sha256": "39dcb795e576a585adfeb6320b8e7ad30c98079e7cb27874e71d4b108d08e59d",
+      "sha256": "227b2454914b8d6735fbd2da5741e38176d7354f62b9efb2ff1efc0bd370f191",
       "size": 46764
     },
     {
       "path": "docs/aep-service/release-status/index.html",
-      "sha256": "9a04c14492c6c7f641ef573d5e1995260e24ee825b55c4057ef1a91f26e8170e",
+      "sha256": "9e5107b6ea368d823f99df2eacd9cc150c8b4119ae889eedb828c02709326c5d",
       "size": 21132
     },
     {
       "path": "docs/aep-service/reliability/index.html",
-      "sha256": "5c3f096728342b7d9a24f32870d7af91b8f69f15002c0a5ea527e73d9a94b292",
+      "sha256": "1ed8eeaf60ca43fd1d6f1b1e08f2b3d93a17808201f683d106b1c1e227bdf932",
       "size": 25695
     },
     {
       "path": "docs/aep-service/security/index.html",
-      "sha256": "f807e4f3483070e5285236d03785cf9969863e846fba47dabd6a2305d2d35f0f",
+      "sha256": "42e71d46212c04b5ee6a7ea1c9d3bb8e2f99b043b7418a6313cc1d457c15493d",
       "size": 21697
     },
     {
       "path": "docs/aep/concepts/aep/index.html",
-      "sha256": "7ccd59990b2fd0080340fc8c853377bc5c6d430ad317567f6337faed7e3efb10",
+      "sha256": "6ef05fa8b56977ab0e1477b2b0f883ee4c6440ac8726c22ae86a02c5ca5f4439",
       "size": 33867
     },
     {
       "path": "docs/aep/concepts/design-principles/index.html",
-      "sha256": "cf3557f568a558dcdc5ed7a49d172d23e0f358b2636103c93c325764558a8686",
+      "sha256": "d2f99dd06a1a8f209daa6af02986eeb4bbd3994148610ffe8034c1239af111f3",
       "size": 93896
     },
     {
       "path": "docs/aep/concepts/evidence/index.html",
-      "sha256": "2f12ba3275f533d47ae6ff9683a1f4d47b33bf0bfa4c0a936e2d5fce251b9c30",
+      "sha256": "2f3a9f2b7daf16e0faddb801af5316d24edca3bdaa58480d72db4404375ca089",
       "size": 48119
     },
     {
       "path": "docs/aep/concepts/index.html",
-      "sha256": "bb0731dc8cdc6b100574ffb112472753aed0d043ed59a63b426aba26a39b6d05",
+      "sha256": "347e4e556b2980d0701c98345fb621066cb52a9d7a6732d3071f66c2c43125a1",
       "size": 18122
     },
     {
       "path": "docs/aep/concepts/lifecycles/index.html",
-      "sha256": "68dee570edf93dbc0101845fac61c552b77b8e4e47befa77520fc80c3dff1905",
+      "sha256": "d8a25b444576ca3dda3d6bbde05d6bea75afb7c8e071071a0defb451bf3f09cb",
       "size": 50291
     },
     {
       "path": "docs/aep/concepts/overview/index.html",
-      "sha256": "304711ccd6aaf4a71e4406d54fd2f71382672080566fa90f61a47a1cb69d3e5c",
+      "sha256": "cf262c16f73ec86c89ef3f2bb3dba7f9967f582b525fc0f3ddc093dee3861f21",
       "size": 26263
     },
     {
       "path": "docs/aep/examples/governed-task/index.html",
-      "sha256": "c62c7d395406d913246e2853b17f3b459be09065810b511801ef13c1816adddf",
+      "sha256": "aed5df40e815aeb1d38f42b1ccb9c771a2070640854b916d8c214ee1aaa865b3",
       "size": 43103
     },
     {
       "path": "docs/aep/examples/index.html",
-      "sha256": "0d347a43cecc9581f91ded96bf003ec335d39f6ee2df84451de262e0ce671fdf",
+      "sha256": "b87c2d6137daa687d5fe7fd39593e035309642d5a45f01de6529a78ff4ccf6d7",
       "size": 16785
     },
     {
       "path": "docs/aep/getting-started/index.html",
-      "sha256": "c0106e1965ebf3d56e2c7a769fefc00125b0a19c179c04af568fe978428231b5",
+      "sha256": "663d1c2c12c6e93b16b31f3dfd872d5856d390eef4e426c957abf47fb6f42f64",
       "size": 44413
     },
     {
       "path": "docs/aep/guides/check-a-transcript/index.html",
-      "sha256": "eb7b48cba7c3dba8c83bf2ba63b7f5ed69afe3a71b446e4b34568aa22dd41001",
+      "sha256": "c850c08eb2fd52018850e998ddb18c7dae5bda0d42a2bad83063bf48ae2964d9",
       "size": 79667
     },
     {
       "path": "docs/aep/guides/govern-a-task/index.html",
-      "sha256": "5e62e59d2428b0bfad9c059ec4c635b982653d8f5129383a9ce494ef116fbbd6",
+      "sha256": "a82f64a70a0dd6b87d766cd307447431d9b5b5fe0a6c298e1ca004f3aaaa5d94",
       "size": 74474
     },
     {
       "path": "docs/aep/guides/index.html",
-      "sha256": "1b3f9b0e5dec79ecd7e4751c6eb96b84d026943e1dbacc759323460096b5edb5",
+      "sha256": "0cc89490980c19c4469bc05de04d900dbd658ebb49136e6fdce87f3d308feae4",
       "size": 17847
     },
     {
       "path": "docs/aep/guides/integrate-a-harness/index.html",
-      "sha256": "a41a86ab7faa4d61be4383ee403b27a99b2dd7833bce27fd33133140593a0f31",
+      "sha256": "ad70f262d7b974ec8e7e4d89c5ce8b2344f15a949adac976386b52d662c1b495",
       "size": 120493
     },
     {
       "path": "docs/aep/guides/write-a-principle/index.html",
-      "sha256": "c4ca95b9b1d9219c34d960ef35997681ee17e96680cdc09ba6317428e411e6fa",
+      "sha256": "e3500320c929825fe9cbd4de8aecb7f353b2c39781c1d891c381963fdf0f5d11",
       "size": 49766
     },
     {
       "path": "docs/aep/index.html",
-      "sha256": "00ad37bec5b60af9fdabdb2f3a096d2d784c420910d0ba8923c946fb907ff93c",
+      "sha256": "e9eeb6790ae307b302e8d04777b55aea5a8e69f038039ffd89b810b2c48b6dc4",
       "size": 23725
     },
     {
       "path": "docs/aep/reference/cli/index.html",
-      "sha256": "cee688c47273fdc55bb6960bed974f1d633de0a325c976caf22620a1b6752839",
+      "sha256": "3c99e474ba0c890bf0d1240eab605e80152587fda61e7e8ab38956ce52880308",
       "size": 116546
     },
     {
       "path": "docs/aep/reference/documents/index.html",
-      "sha256": "f8e2c65443d65b015c4192867f89c1de35f537ce3c28d234396b878c37a096f1",
+      "sha256": "359ef9c3b4cb501b159bbbe8e1f66242d4920ec7418a6829275e0c4037011a28",
       "size": 103224
     },
     {
       "path": "docs/aep/reference/glossary/index.html",
-      "sha256": "b0631bcc70cbf78b178eb7381ed22fbd4b54bab7143aa712afefa2317537437c",
+      "sha256": "78a817ebed81f70ca8146376b1b8416140ead8def621102e970e9b2eb8f76f62",
       "size": 22602
     },
     {
       "path": "docs/aep/reference/harnesses/index.html",
-      "sha256": "4ce8f492cff941513d8c363be33d451b66e3828aa9795a8064962a8cdfec7d55",
+      "sha256": "c5b2873f884938785384b39987c9e624e7b0381ec47831480ae89d5dc0bc02a7",
       "size": 33077
     },
     {
       "path": "docs/aep/reference/index.html",
-      "sha256": "51d0a11c873f4a535f08c6f381593a26edc38590101256bc3616dd8783b0c33a",
+      "sha256": "6c4d341398b840691599f9722e4f35f01128b29446b615831b8ed6acd2b3e440",
       "size": 18097
     },
     {
       "path": "docs/aep/reference/vocabulary/index.html",
-      "sha256": "34644137d3f675cae8366944d0e23280aca4c2832597b8578d6dc43468ba9a4b",
+      "sha256": "458845f511e5a8367d0553b64465cd60c7cc9e4905e901325b84a2cb9032dbe2",
       "size": 47460
     },
     {
       "path": "docs/aep/status/index.html",
-      "sha256": "3a1366be2d3507033163c23b1b330433a6acaca47b9b91658ddd53a56c4c9112",
+      "sha256": "09af4819d3eef9d4ec7afb02cfc1ffd6376ef3232b60ca90509febda3c00daeb",
       "size": 17420
     },
     {
       "path": "docs/aep/status/limitations/index.html",
-      "sha256": "4abe5906537e77ffc81f43a49f0aef569c9738e2c8830a82500170fed90b786f",
+      "sha256": "5752199fe38f369bf1136b4d598f775eb6bafa1ff1d8440d3dd05ea411355b33",
       "size": 19752
     },
     {
       "path": "docs/aep/status/roadmap/index.html",
-      "sha256": "98ffd03917debf1bb637ef3680a868f46149165e48e517ba12d0170d0d7c9b9a",
+      "sha256": "3216ff4a04d07b798a147bd31de986c568688fb40908016369ca6e664a17ce36",
       "size": 20136
     },
     {
       "path": "docs/aep/status/where-this-stands/index.html",
-      "sha256": "ec2678e606c51721b47c913d24404390c9eb7e822a835a29a1312b0164e06c80",
+      "sha256": "c66fc92e011625742cbbe6e614312835f4748bafc4934eb83be4ba8a492e1308",
       "size": 20622
     },
     {
       "path": "docs/agent-platform/index.html",
-      "sha256": "dfb0a538aa5f784332eb63e8b72ab95f8f12c748f6db520bb56b38ae9bf0d06f",
+      "sha256": "0dbb04b75ba4034fbb4727ced8f7fd80d99a26991a5ddf8ca833fb763c021473",
       "size": 26621
     },
     {
       "path": "docs/agentic-principles/CHANGELOG/index.html",
-      "sha256": "0c65985113d7a596ffbaf244d60767cccb60301aedc3c3335b5d1e7b6a92052a",
+      "sha256": "fbdedcbc8d5f01218d7f3427141656bdda26a0ce5f5621bba789efa845006c99",
       "size": 21823
     },
     {
       "path": "docs/agentic-principles/VISION/index.html",
-      "sha256": "88d3464d3c92a6d5fbd00282413dc72a7e9bc1f3440978541fcb1018c8bd3334",
+      "sha256": "36c5859ec809d22b30c2054d821317dcb2c9b8be495a1928d1df57d985a02331",
       "size": 28401
     },
     {
       "path": "docs/agentic-principles/index.html",
-      "sha256": "e0e8a6d9b42bf125f05beb407baaa75e182f534211089dc0f41aab68cb2ab580",
+      "sha256": "96247c6af22a44e5e5192328f85853236b0874005daaf47315f28d79eba8aa30",
       "size": 24560
     },
     {
       "path": "docs/agentic-principles/research/2026-08-25T001928+0200_seed/index.html",
-      "sha256": "82d8614dba09bc9ff153d7366ce533b1d79cd29074976be2f430d41db9fd7382",
+      "sha256": "5cee62064f1cef111d51b42c9c64720716ed607dda4220f712318313385fb1c9",
       "size": 36530
     },
     {
       "path": "docs/agentic-principles/research/2026-08-25T004318+0200_engineering-protocols-workflow-fit/index.html",
-      "sha256": "c8cf08022fe0d4af0b512c68b9bf083dbbbf065a13526714a8be0a861fefb635",
+      "sha256": "24c7f620d918989167d945dc318e39b991231068568906900e6601e8fe70f338",
       "size": 37602
     },
     {
       "path": "docs/agentic-principles/research/2026-08-25T005715+0200_fix-the-source-not-the-adopter/index.html",
-      "sha256": "68a9f08c3b8205d24e996ddba26282de7dc2b0906e6aec85c50954649bd16df6",
+      "sha256": "05d5ce1257ee3790feb0b104ddab1f03147c514c612000ab7d2160672b71b0cb",
       "size": 27924
     },
     {
       "path": "docs/agentic-principles/research/2026-08-25T023000+0200_scoped-progress-under-partial-failure/index.html",
-      "sha256": "9896873465d51567137f7f7cd322fb7c5e917cbe440778f9ea863081a2757456",
+      "sha256": "fa66930297b1ff3f6bc891a88e8cdd8bfea4c9f4f5ef66426792290de559751f",
       "size": 49868
     },
     {
       "path": "docs/agentic-principles/research/evidence/index.html",
-      "sha256": "c942e9675cdd591facc20d9a7f5ad770f526e81cadef2af233c5702280e8bb7b",
+      "sha256": "42e6657f73e808d6233583490babf8d1f210225059dffbd738d72315b113dbc6",
       "size": 17865
     },
     {
       "path": "docs/agentic-principles/research/evidence/scoped-progress-partial-failure/analysis/index.html",
-      "sha256": "334b3efb3bc5b7fd969ea53c7b4f9c90caab7e62f3ed0c223358145892a5310f",
+      "sha256": "99d467707cb85746e8b3d42dafcd36a89ac1af542f417a6a21e3d9b1cc2cf4e1",
       "size": 28360
     },
     {
       "path": "docs/agentic-principles/research/evidence/scoped-progress-partial-failure/index.html",
-      "sha256": "bd1db74620018afa87a7c8b26b4f1ec50424498a16ba7c7d1824f790b4ba61a7",
+      "sha256": "05549d7ba7d333e44e3629d17ae0f9356957c2ac3cd7bbda3d1411c2bf88cb65",
       "size": 24022
     },
     {
       "path": "docs/agentic-principles/research/evidence/scoped-progress-partial-failure/sources/index.html",
-      "sha256": "02a01dd3e169a4ddc63804f0d55de4894cd3c9dff83edd85dfdf29ce9378679a",
+      "sha256": "03b4c51a0d2fd406bc45a3f4acb2f07b498bb47aa052c7e3fb204a69c07a72e7",
       "size": 32063
     },
     {
       "path": "docs/agentic-principles/research/index.html",
-      "sha256": "83cc3381927ff8fe8d6c81628024c7f75840b6031afab8ae4a285c3efc5787ac",
+      "sha256": "08eba3ef7c626fc5628c4bd0876971ee1cc4b025f4b262662eb4c20ce88dac54",
       "size": 17659
     },
     {
       "path": "docs/agentide/CHANGELOG/index.html",
-      "sha256": "85e6aa3e96386a078432df14f84bfbef1ab4dd4e6b9836e7543d68cab166765a",
+      "sha256": "c200a27b8de8e1fa4a2d37bb0607ee46d96ec83cde189e5c79dae8eb360bc5cc",
       "size": 31908
     },
     {
       "path": "docs/agentide/architecture/index.html",
-      "sha256": "86e4c1532278e488d59982975f3a6d9b75ed51ffd73d8d8ec47983d449b228c2",
+      "sha256": "7590b0316a92640b35b4f6aed3b858330eb2a7527c52e3c42cf85adf76669d93",
       "size": 31612
     },
     {
       "path": "docs/agentide/generated/ess/docs/crossings/index.html",
-      "sha256": "3df1b468858e45384b51b80866cf7c254a3d8f46ee36b5ef044f5c22df4a57b7",
+      "sha256": "51f8f09aeac22418d0d630d70d3fb9e102a8e5a8bd1985ec5e2de48d43895421",
       "size": 20861
     },
     {
       "path": "docs/agentide/generated/ess/docs/domains/agentide-coding/index.html",
-      "sha256": "703ce1994c81e0050b87a3eb1e5d0875124bd24aee56939fa36d84dc5920c616",
+      "sha256": "d0a683cf89242a1061c20b328f86251f9234cb23e7ce26ab66b14d642f0caf2c",
       "size": 88804
     },
     {
       "path": "docs/agentide/generated/ess/docs/domains/agentide-coordination/index.html",
-      "sha256": "c7a49b0623d0d0ea163344f2c5f6185f53f6c8e73309a2dfcab4bda1b0a196d2",
+      "sha256": "6082573e1d11765d53a5fc509a6ac2ef1f487b2493b4de19ccf6a1f0e4cadb1a",
       "size": 77326
     },
     {
       "path": "docs/agentide/generated/ess/docs/domains/agentide-session/index.html",
-      "sha256": "a55dceeb643b788506dd6fdd102869e38c09917c9124ece65b2057af4baa949f",
+      "sha256": "0f4b0014e1426b75468e294d5fa4c7ff0b2434465dbdbdeccd0084fa97f7b452",
       "size": 53328
     },
     {
       "path": "docs/agentide/generated/ess/docs/domains/agentide-surface/index.html",
-      "sha256": "43a2b57ed8fc825645e406a32196d9bb332c75462e4521ae41e13153c01dd5e5",
+      "sha256": "7c4401a9f13d6df7d702d49d2b72a650d636ab0c8949fc3703ddb1e4066cac9f",
       "size": 60504
     },
     {
       "path": "docs/agentide/generated/ess/docs/domains/index.html",
-      "sha256": "dbd15048d5f2d08c6a9f2ab3d7429f1901c412da59727c2dfab0d759dd798257",
+      "sha256": "4d7484b67f44c6b0c96fb39d1be862960b363193fb6345cbdf82fc573205bfd0",
       "size": 20115
     },
     {
       "path": "docs/agentide/generated/ess/docs/index.html",
-      "sha256": "9c0cd29f6821c748e6506ddb311cecd26fb6e902a4d956a06668f08ef4b42df7",
+      "sha256": "fa2e1ba182fc5da7ea2af36065c0bb1f4b6d66ad1c11021239050f112a2027a8",
       "size": 36804
     },
     {
       "path": "docs/agentide/generated/ess/docs/interactions/index.html",
-      "sha256": "eff30e94f74694a3f16c26d549a7126b027be6d8ce543be7c2d55579e34f4956",
+      "sha256": "d07c1056aacb80a0553ed31abcc1e8dc067363487263a9ce37ad17e854e98963",
       "size": 22807
     },
     {
       "path": "docs/agentide/generated/ess/docs/topology/index.html",
-      "sha256": "d72c36ad5417943ed0e5e67d7d787854baa0dd3d88413e8d446bd0db9c1274b5",
+      "sha256": "af625b5cfc77738b272db7ab7cb5c881cf38207d103f7b4267494af69dcdfd5f",
       "size": 21409
     },
     {
       "path": "docs/agentide/generated/ess/index.html",
-      "sha256": "10e5b79cf613cc5536f4d2f935057ddfae179f67fb5051918d8a45480c7335ca",
+      "sha256": "afe47477c08848d6078937d98955f9bd66e479be96f039786a3b2728f65cfae0",
       "size": 17008
     },
     {
       "path": "docs/agentide/generated/index.html",
-      "sha256": "1f0240dd942a1d707414ec8b7c8a1733bf77fe67b73ac04eaca1a252a3b1f21f",
+      "sha256": "cfe586a7df210506fc0cc41ac6e135dbbfb85ac7b61da328c7f941c8538ebf9e",
       "size": 16309
     },
     {
       "path": "docs/agentide/harness-tui/index.html",
-      "sha256": "58bab03a274400908b50efccbf960150aff4b1519fc767fced10cf0e59e17ebd",
+      "sha256": "c80adaf05d315cf1644c6297fdfd202c392bea400f339c42ff8448c02e840bb7",
       "size": 26122
     },
     {
       "path": "docs/agentide/index.html",
-      "sha256": "b27f4d6d91e43a1159cb277bdf651284430c465414a64c6b89cc68ee094efb6f",
+      "sha256": "9bfe34cfd3636c6f142cd6f1c504c16339649e54e5e1b4ada06de3d598633b1e",
       "size": 34148
     },
     {
       "path": "docs/agentide/keyboard-interface/index.html",
-      "sha256": "b76048803861b1d7c53eabeaf856d2b5b9496ae73161e7a5ef4286f8444c4181",
+      "sha256": "2930c1df542ad798fa08cf60da2855f43c6cb2d763d2d0883bcae423c06ab459",
       "size": 19099
     },
     {
       "path": "docs/agentide/running-modes/index.html",
-      "sha256": "43764d6fd2653e395282877f59487d297e72e423ef3c9746829a509b7f75378d",
+      "sha256": "5c9b7d577674ff8a485cd36a43587fb1a91f020ade017e4fc006a9dc3638b580",
       "size": 25793
     },
     {
       "path": "docs/agentplugins/choose-a-plugin/index.html",
-      "sha256": "d9d94d153c9065a94d416194084031a7baf9c92ad520101c9f1aec4aa0522321",
+      "sha256": "636a2fcd7a81a5b34c6e83a5b96b5ae006c90a7592dc57138481a8a785cbbdbe",
       "size": 22178
     },
     {
       "path": "docs/agentplugins/golden-path/index.html",
-      "sha256": "1818380e49b179aacb784d0dbc23414c4f93703e635f52840ef986625383b6b4",
+      "sha256": "f4b0a0185814b7e1be3df126c8137568f1a2c07067d8135d60e11bcb07b67773",
       "size": 84690
     },
     {
       "path": "docs/agentplugins/index.html",
-      "sha256": "4351f992bbb7895e604ab38954b1010ba7bf8dd5b8c7ec41a4bbbde7dbaef9c1",
+      "sha256": "79785e1185bfb60e566e65bc9ddbe6fdb11017afe54fa386a1edb78bfd6857e5",
       "size": 18315
     },
     {
       "path": "docs/agentplugins/install/index.html",
-      "sha256": "149aba43ca135c7e9e07cde217dff1962bd3142d63728ee01c64bd95fd503aaa",
+      "sha256": "c27a2e013e68099395250f7fea1cc75701f73730d75bb9f2a2045d8f39c37978",
       "size": 48894
     },
     {
       "path": "docs/agentplugins/plugins/aep-drive/index.html",
-      "sha256": "c853d4557585e97a2e91c9b8f7ce0ae64e20106876d4dee0b9ee24c547697619",
+      "sha256": "95f39d1089aade568118019d6a1d28dfee0972bf186cc761f1694eb0310f249d",
       "size": 20566
     },
     {
       "path": "docs/agentplugins/plugins/aep-plan/index.html",
-      "sha256": "c39fc4f68da86917153d8e15c1eef65078183b79ccc8332f90963beebdda69b7",
+      "sha256": "5caa73df6b2d682046b406551d7e3c053cc41f9834451e354e2c2fa44aefc157",
       "size": 20359
     },
     {
       "path": "docs/agentplugins/plugins/beyond10x/index.html",
-      "sha256": "265ba2182e791bbc2ccc762312225cce53a45584b8c4d80b14f0c301087afffa",
+      "sha256": "7ae76b90b532adbcd3d41e0d36e4c572a889f953d37cbc64392b004a26533998",
       "size": 21798
     },
     {
       "path": "docs/agentplugins/plugins/connectors/index.html",
-      "sha256": "1100384795d9b9f414079d97b83ae184e3637a22d40fc02526dfbc97ac4353ff",
+      "sha256": "d557270e3d3b003b58016e3cf917b24c5931e6f7a1bfa8a57b667685cc649922",
       "size": 23898
     },
     {
       "path": "docs/agentplugins/plugins/ess-specify/index.html",
-      "sha256": "4e618eccbf474c520efde5db76c56abd6bb06cfe7db3f3ab79e83793bde05eba",
+      "sha256": "472b808e1f20c58f2013da8f54d7335237503e66106f6fcece679ef499b9f288",
       "size": 19096
     },
     {
       "path": "docs/agentplugins/plugins/index.html",
-      "sha256": "883eacc5574c5a2d416459c503fa9f21d93c22b73af04b1db729f1fe80c5f589",
+      "sha256": "c68109cdfb1eb277906c1eb7158de4e3698be558da7cbd67a28d840faf08c3d6",
       "size": 17420
     },
     {
       "path": "docs/agentplugins/plugins/workspace-hygiene/index.html",
-      "sha256": "506fc11d2724210bb05414808b4f980d37522672b26263804820fa57f0cef7b6",
+      "sha256": "515c2a8812a867c323e3e1da8954de1afa7e021bb47c049d4a69604c8f3f717d",
       "size": 22131
     },
     {
       "path": "docs/agentplugins/trust-and-scope/index.html",
-      "sha256": "b29aaf59f744a65c44a387d9d78a6eca285e687932ee37031ff7d6ca28fc124a",
+      "sha256": "e8d29b1b89909c56dfe7482955dc4f544aac4f47ead31bcf5a9756a9fcb19452",
       "size": 17918
     },
     {
       "path": "docs/build/index.html",
-      "sha256": "4ff72d9389fcd0335b70ac48bcdd38f33c090a9b9f5c2b872326899903f23579",
+      "sha256": "a48fd7a9f82645eca773c83cb7002f56ae634dc133ba8abc595de5c2539b05b6",
       "size": 23784
     },
     {
       "path": "docs/connectors/architecture/authority/index.html",
-      "sha256": "7ad33f699c25d4ce4a0b98a37ec55166addaab7cf3d0a48bddd13e199fa5d9c6",
+      "sha256": "f3bc27de921ea5eb468c6643033e70f2c33d3d8646112cb8c6ed4327444f54e5",
       "size": 29817
     },
     {
       "path": "docs/connectors/architecture/deployment/index.html",
-      "sha256": "62207c1561d8f11fb7d12316e81c27c6be9241057f577b52e55fbe38b47fa8ec",
+      "sha256": "54afbbbcfd823efccaa72d60a195ea03e50896f4ae4508292f2ca7b3b50e7b98",
       "size": 33342
     },
     {
       "path": "docs/connectors/architecture/events/index.html",
-      "sha256": "63c912f541077f0f4d4a67bbcaa9892e98c24384635415027859e03940fb67ae",
+      "sha256": "3444f36fc5356f95609b2a97656da6a8e7b76124e25a44b58742e10e5f810b06",
       "size": 29535
     },
     {
       "path": "docs/connectors/architecture/index.html",
-      "sha256": "6f5835547b76c39340357ee0239677e12fe89d427d3d4bbaa963b103e4026cc9",
+      "sha256": "073417022da946b67e47174c9ddb5e75e242c148d69d43a965ca77ca85f5e3e5",
       "size": 30448
     },
     {
       "path": "docs/connectors/architecture/interfaces/index.html",
-      "sha256": "65ff90aa809519cd65a39fbceae0915bda3580c665db4516c9707338ed75f892",
+      "sha256": "17c9c4de56c8db15b6c35035d35fc0b2877d7f0a2e020ae7c3bb4cd5cf01e662",
       "size": 33112
     },
     {
       "path": "docs/connectors/architecture/specification/index.html",
-      "sha256": "99c43158f7dec6dd5a438f3499f364fbe688b580cefe0acf939de2bac0dd5e2d",
+      "sha256": "4092f4774c3d8ed32b28e7b1afdf59d683ed55c56794d0cfd34c949530c6d08f",
       "size": 31019
     },
     {
       "path": "docs/connectors/design/01-domain-model/index.html",
-      "sha256": "75fcadc7beeda93eba07dc2e6628933dcf84bc7f51dd04fce15098e39a6c347e",
+      "sha256": "03b65442f1920805624135387342d7318204843133435ee7a4ba15bb9668b2c1",
       "size": 59134
     },
     {
       "path": "docs/connectors/design/02-architecture/index.html",
-      "sha256": "88e88b40f3f9abd042b6d9f11864eedbd796f1f2f2f2c8959086b10eb717a390",
+      "sha256": "600a8105ad8e5bf25686cd8e0f797fa01a276c57aa5f4a39bde4e6a6d621a239",
       "size": 65124
     },
     {
       "path": "docs/connectors/design/18-governed-outbound-mcp-services/index.html",
-      "sha256": "41f77f58bdd5d9da9440a1bc84127d4077b3a5bc9f0b841eef4f5bf457dde954",
+      "sha256": "3585e2d2d34d7b415791e185d6bf51fa13335a11e922ee03f82ade91271558e4",
       "size": 25594
     },
     {
       "path": "docs/connectors/design/index.html",
-      "sha256": "537314e34a8dcfc153f76fbe2d69aaecfc251d47d24d47d5c801de778f068c9a",
+      "sha256": "eafd377435682515c34077566039872af932d8e301b2c70d455e7754116dac5d",
       "size": 16588
     },
     {
       "path": "docs/connectors/guides/administer-hosted-integrations/index.html",
-      "sha256": "30eda10a89f62de12e87154bbcba9a94a562f4976e2ff491b461bae4a3648f4e",
+      "sha256": "472f7ebaf479ca51b0bc1883075db370302e193ab473693c5588ae13b4785f7d",
       "size": 22247
     },
     {
       "path": "docs/connectors/guides/connect-confluence/index.html",
-      "sha256": "e41fc85e235c585ed3cf0bde17313295ed0e808f6976f7a7a9f31c7c40ca4616",
+      "sha256": "d708d37ab2446ee534f6ec93468dede3d009f3d2d097f60ce421edd669129100",
       "size": 32044
     },
     {
       "path": "docs/connectors/guides/connect-gitlab/index.html",
-      "sha256": "dafa66cc64cd89ea5a3f48240158dcd1a30d061b13dc73f2fac8a17bc64b14b0",
+      "sha256": "49319cc4ecc8bcf553634bc29f28d960196571a0152a56a7433705e197a34fce",
       "size": 24854
     },
     {
       "path": "docs/connectors/guides/connect-grafana/index.html",
-      "sha256": "f5ec083bb5adec7bd50e8f1a51dd6de2c1b13200c1dd6877769444dc645be3c7",
+      "sha256": "dda94bfadcc34a272dbb55581b6f39480de70e3a92e231d3fd9dabf8acab9d49",
       "size": 37055
     },
     {
       "path": "docs/connectors/guides/connect-jira/index.html",
-      "sha256": "ecbba67c6bf76eeef5e255127947a6349ba35cb3fad4fea9e24e96aa0e874478",
+      "sha256": "6ee0d7e86c2f37914d0f5168ab5c6fa9d98d07898b68a9ad147515b9e46f0858",
       "size": 40449
     },
     {
       "path": "docs/connectors/guides/connect-kubernetes/index.html",
-      "sha256": "69bec21dc9f05b6a77328ffc4a6e0970c3b66e882c7eb306b18b54c4c64d9a29",
+      "sha256": "6d60e926e082017447efc68696ad597bfacc5456dcec8e480cf5bf5d4d0e438f",
       "size": 22976
     },
     {
       "path": "docs/connectors/guides/connect-slack/index.html",
-      "sha256": "1fb329bcdf25acf10aadfad88ffb053de71bac8c8586753c8f1f2e48ce46e10d",
+      "sha256": "a2be3766aae8eba0b43aaf0e316500fab9f71710bb8d0e8a143ab8dc02f36a98",
       "size": 26545
     },
     {
       "path": "docs/connectors/guides/index.html",
-      "sha256": "5685cf9e8d946ff7f0386956a0cb41ba0189bf7e4f9b25c69a263f180dc963a4",
+      "sha256": "b411aee63ecda5cb70e4eb2de5e5ab551d06745725acfde6837f620a354ae46f",
       "size": 17909
     },
     {
       "path": "docs/connectors/index.html",
-      "sha256": "cc8b2c1f1c70d597130ba8a2c9f0d9af6bb9505721fc5919c8a95fb45a79b068",
+      "sha256": "6931a0e0c0697f5f3f31d3b81b3d944676143f2581a967c7494723fcbddf28d7",
       "size": 24193
     },
     {
       "path": "docs/devcenter/ess-deployment-model/index.html",
-      "sha256": "d1c4c5a4ac9822ecb97cb1ab5ed9934b90516861279d0d42cad87845efec2b4f",
+      "sha256": "7e13fda52b8dcee94cefe460806223d5d91c3f5eb0c72c9ce964f5b354be49b4",
       "size": 32572
     },
     {
       "path": "docs/devcenter/frontend-review/index.html",
-      "sha256": "1cc31fc96d30f6e16f3dde5cf886c62fc002b7fb10c244d05784d53cb7a0a960",
+      "sha256": "11b0526c984a1092f45c6fef9f306b3b3e28e8f57469e7d63871866a0e65dc3b",
       "size": 17230
     },
     {
       "path": "docs/devcenter/index.html",
-      "sha256": "86b93ef8bad6fec5967a66faf9bb3f9f10243b8bc2cd27f3a3a3b6c4be071d5c",
+      "sha256": "b085ef55cace5469ef8c88d5a30c4f44917466e416b0d6cb2f909282fb09ba11",
       "size": 46220
     },
     {
       "path": "docs/devcenter/production-deployment/index.html",
-      "sha256": "3e66857b043d8af7c047bcc34bf8fed65811c60d3523877c07be7566b6313b7d",
+      "sha256": "c71b88b65926b03c9ae603afb58ed0e1df82a2f2b27811de6cbbefb89bb378d2",
       "size": 16724
     },
     {
       "path": "docs/devcenter/source-build/index.html",
-      "sha256": "4994ae082a82d03af423a7d16ab0d6c4bb29782fe2387f1c599b458f34827635",
+      "sha256": "47a5b31a4acbae8ec065319b749546bd7f1ebfcf7ee1473caea5dd3f6fbd66f3",
       "size": 16748
     },
     {
       "path": "docs/docs-system/CHANGELOG/index.html",
-      "sha256": "ab19bf57b8a30ee7fa28681e92770a681d74839b8ad68194e870d15ade068474",
+      "sha256": "29bd865a1fd3414917a132ebe8a7647bb2112e40a9fb1de3435cd861b7671bd2",
       "size": 26112
     },
     {
       "path": "docs/docs-system/index.html",
-      "sha256": "b0de452c91fbf7174d50cefc072eca6633c17195773b5d281c3290747ab88a9d",
+      "sha256": "c3fe64c5eef8f3ca50c156f50ed8ae9e24d7a73d614de10cb30ceea3b3811cf1",
       "size": 68261
     },
     {
       "path": "docs/entity-runtime/agentic-systems/index.html",
-      "sha256": "9baaf1d19609bf78aff5a6f80b55aa10cd16a8608ba77fa60493b25decf4682b",
+      "sha256": "2f8e6fa22c48c829a0ce58cebaf8da27a48c17f29afbf6aa5be6b650655eb79b",
       "size": 25375
     },
     {
       "path": "docs/entity-runtime/guarantees/index.html",
-      "sha256": "228fd266c9e85ff45a053a83503fee641ebf90004050a1619fd8b5a6400aac53",
+      "sha256": "0742df0dc9651899ecff2a9e8040be56155ef5640bbaad572f3b3c5f8e90e6e0",
       "size": 24899
     },
     {
       "path": "docs/entity-runtime/guide/agent-integration/index.html",
-      "sha256": "e44d4abfe2a030a6e604000f182f3e1b41cbad1445eff76193de5b4029b740dc",
+      "sha256": "9f31052c5b43911e87f5f0299b67e7f81c2b903f293751501b3b3fbbe5d1df82",
       "size": 31489
     },
     {
       "path": "docs/entity-runtime/guide/cli/index.html",
-      "sha256": "593c96a707ca5a334f1e2d4418ecd5405496a5f44198a7bc7ade6d0dab96193f",
+      "sha256": "3be8db5762e6f360e6ab8281e3400c786c099823ee1578d878524fcf4031c372",
       "size": 37032
     },
     {
       "path": "docs/entity-runtime/guide/definitions/index.html",
-      "sha256": "8ec6d91fcf972c4102f48ebb1dcad147c513eeb219f05d38373c06e06e897e46",
+      "sha256": "697c2145116f7fb0aef5d0410bb188aa260c5baebfdb1241745927f93d9fab21",
       "size": 61148
     },
     {
       "path": "docs/entity-runtime/guide/file-store-migration/index.html",
-      "sha256": "7cfe5799af5ea32088b12f4b7fbd8ca2058d5fbe64602d9f6df5ffed33512986",
+      "sha256": "c0b9e7ba826f1855bf43f04f58d5464c4d57edcd0ef6c5530ada1a9a1107f453",
       "size": 26851
     },
     {
       "path": "docs/entity-runtime/guide/generated-cli/index.html",
-      "sha256": "42317d4ea28e23a6de010ef3013498ba4270abaa864995b829e753da01a60c69",
+      "sha256": "2d5cee0756542fdc1ee614b7e0cdba0b95fba0ede670545de5763769020f9165",
       "size": 38877
     },
     {
       "path": "docs/entity-runtime/guide/generated-docs/index.html",
-      "sha256": "08ed507d4218ddc85f336a4c4d03a9b7f730e030da88dd749ed4c3d68d5079fb",
+      "sha256": "c41d4228485269b14de38c23f31128ef8d56e6276e6cb80b875a0f839ba8a948",
       "size": 25670
     },
     {
       "path": "docs/entity-runtime/guide/getting-started/index.html",
-      "sha256": "2ab62dcf9fb712d05c5808b95d2737f7e5cb9b352f8c44af521a37080b8af31f",
+      "sha256": "d9775ee2b5a5c02de27d28827714c2d229497bfe050eaff2e18585c8c3c20532",
       "size": 52840
     },
     {
       "path": "docs/entity-runtime/guide/graphs/index.html",
-      "sha256": "073e0830c2b88916dbc65d503dd5e7f9355425ebec6c4425e1b5ea32e7e352a4",
+      "sha256": "d7968aabc9c9ea3c04ae67c0857f24ba41abfebb3e6bc06fb7d563c3cae45f0c",
       "size": 26871
     },
     {
       "path": "docs/entity-runtime/guide/index.html",
-      "sha256": "3ce32582f244ae19263a315db2c1a1819ae8288f4651c4447617e4c8c4d976c6",
+      "sha256": "c9ccac016fa15a7b4a46b73f5305bf19b37cee37e99e09d76a7ed590d1d317c7",
       "size": 19508
     },
     {
       "path": "docs/entity-runtime/guide/library/index.html",
-      "sha256": "a352068bcd15a704cbe6ec588d14f1bef352954b1be2e34d33b06f9e551d7f57",
+      "sha256": "37b8faf975e9112fff957297a9df237658ec0c586fa188f704dccbe93f2f0ea9",
       "size": 44174
     },
     {
       "path": "docs/entity-runtime/guide/mcp/index.html",
-      "sha256": "848ff614f15f5a84bccdfa099a7fd23a68bfa925dca13697c3eb0462c5e38be8",
+      "sha256": "5b4c96adc6dc894358acb8e23b2a3e4bee83dc840f5ebe8501d4b2551643631f",
       "size": 32067
     },
     {
       "path": "docs/entity-runtime/guide/modeling/index.html",
-      "sha256": "f5deb9975b8b958c2aa9551febab8b5ba0552990982def45c7bce9213ce5d616",
+      "sha256": "e2de143a5f580559fea1511028fa8ee6267ed675b8efc4bba1cf9c2bf92095e7",
       "size": 28900
     },
     {
       "path": "docs/entity-runtime/guide/refusals/index.html",
-      "sha256": "9f9401fa8499c78e6468a88a9148376a0335dbbdcdec99580afc8f6d7b515927",
+      "sha256": "ee126eb66813e37169d1dec6c8c84007ddb10c922b739f5d30e8b4eeab92368e",
       "size": 29142
     },
     {
       "path": "docs/entity-runtime/guide/storage/index.html",
-      "sha256": "379b0cae046675919acbbf25ec422ba25c30f0c264b4acd784f3354d586716f3",
+      "sha256": "b3e2a20cb48a249144f0e71772ef0939c76cb6694163b8fba62cf774c958c798",
       "size": 29425
     },
     {
       "path": "docs/entity-runtime/index.html",
-      "sha256": "a84d1592a5734be8d0eb1d3c9b0e9534100156732ed00f53ba6053c3eed16f38",
+      "sha256": "e876fb420fa6d0a5daad1829a98148a7718fb07b035dcf54d91c0473cec785d0",
       "size": 24069
     },
     {
       "path": "docs/entity-runtime/system-model/index.html",
-      "sha256": "f8a98c145cd7a107b7f199756ec233278c539691b2bafece5a6f8e6a648e577d",
+      "sha256": "c65e5bd379adef70f0b26eca0008bacee16ebb50552e647b456cb1774a235550",
       "size": 33096
     },
     {
       "path": "docs/ess/concepts/component-delivery/index.html",
-      "sha256": "dd15119cb1bd25e917075a8c538974422d375be0e36a254b489d9e0a1ea37e73",
+      "sha256": "93354c9565b91db7d3b04e59b9a52dfe0df689bc0254377d25628c83b6fdf4e7",
       "size": 21877
     },
     {
       "path": "docs/ess/concepts/ess/index.html",
-      "sha256": "2464e5b27b01b5406e85d41679decd5afdd58a563f61c71b25e0e5579b704d3f",
+      "sha256": "4ae429770b239753ac0e0161729ae8a626b0b1e3b2d12f3323e3b02679219d75",
       "size": 31908
     },
     {
       "path": "docs/ess/concepts/index.html",
-      "sha256": "1e94ba0addffadff34eca4d37df6b2c932e6d1d88c8784df07e59ae70aca8eda",
+      "sha256": "9a67307f7745bc00e0f2b0de559bd7982925d03cefae3a5dea735dd78372d21d",
       "size": 17030
     },
     {
       "path": "docs/ess/concepts/overview/index.html",
-      "sha256": "efb664a4dd7f866c92bedf6c196ed7a210a1e7508874a84d0d5f12dffe3595e6",
+      "sha256": "2fc22b2ac78dfa662d188c822e199f94b427ebfbf552e9fbb98b0a5925c2510b",
       "size": 23070
     },
     {
       "path": "docs/ess/getting-started/index.html",
-      "sha256": "9d9b2ba0747dc14a569fe5f89cd02fad659290be08af44051dc30636ef09d889",
+      "sha256": "4e8e90f63ff82993e94d35b27c2f11b23805c1b12a7c6709efa201283e96480d",
       "size": 51247
     },
     {
       "path": "docs/ess/guides/check-infrastructure/index.html",
-      "sha256": "3a78677fc8db775926cdb4dbef4fa863e3b8926984e879d7b89d7137e8e8e204",
+      "sha256": "908166e8bbe8e4e016da46154c950ad25e3c90f5e6cf679005cd2dba8be7467c",
       "size": 31740
     },
     {
       "path": "docs/ess/guides/generate-artifacts/index.html",
-      "sha256": "1297cf782611441a1e6980964e642d4e7c6e0dde052ef0f7f06c29a05e3f49ef",
-      "size": 74592
+      "sha256": "a1f9113f072fb8913fb5b6e4a9337a323195553881091fdbf11b90ce26ab35e1",
+      "size": 78090
     },
     {
       "path": "docs/ess/guides/index.html",
-      "sha256": "98e484147437e3926d1f42bcef0e96f4c48b4374c7ef15420588db8f9d038bfe",
+      "sha256": "754c00773314f6357a987ef4b22d934e65e11082f3495f59658d0f58a83144d3",
       "size": 18354
     },
     {
       "path": "docs/ess/guides/record-realization/index.html",
-      "sha256": "5de7e31349cfd8a52c37a744e6b88a8f0261e40c8d84127c914f059c0b95bfcf",
+      "sha256": "2e47a977dbf5860761422f8cb01e6ccf6dc5a2525c9f29241eea71320338f3f2",
       "size": 26999
     },
     {
       "path": "docs/ess/guides/synthesize/index.html",
-      "sha256": "ccfe4a53c62fc161f8673e8283ca04a69d73a9e4dc71f83ad037683ad669dd69",
+      "sha256": "ce30fd756ba0b0cbdcedd23b0353da44b4a804e2c74ee4ffcb3ca5d583ccff59",
       "size": 33281
     },
     {
       "path": "docs/ess/guides/track-change/index.html",
-      "sha256": "b6717719c15d7f2c9db469766b0c1772dd5e70ad49c5a81f18abc5b99343f4f8",
+      "sha256": "6c4ff670012f3a684245202e8b4b922dc87f9aa5bf2d99742673bf4d87c49a45",
       "size": 29399
     },
     {
       "path": "docs/ess/guides/verify-conformance/index.html",
-      "sha256": "906538e3548030251ffae462fcfa65ab636f8772376a9d33b5f4cc23644b7793",
+      "sha256": "1192870fc14b83e0ddddf13f2c51700a980a32051ccc2b4c486b942d21caef47",
       "size": 27193
     },
     {
       "path": "docs/ess/guides/write-a-specification/index.html",
-      "sha256": "c406f0e1b1aca37a2a4b33385eac9c80bebe70d60679d4de37195372b7db2c30",
+      "sha256": "b8d2278254306890762b59ff8faf14537f25a092f06aef502d03adf897443a3f",
       "size": 74469
     },
     {
       "path": "docs/ess/index.html",
-      "sha256": "30794593de714b0d224b9026d0700e0848659073e3dd8f3b9ce8b797dd2837af",
+      "sha256": "d5fc8321f6466b21267d826fe77d77016ac9c5608d63b5fc179d1a3c8de572e6",
       "size": 22791
     },
     {
       "path": "docs/ess/reference/cli/index.html",
-      "sha256": "66680b659335f1fd9d82a5f00a9ee8599eaa7776e030bf20987e922c081a7fc0",
-      "size": 35034
+      "sha256": "ca81bce71bcd452c9a34447335d335b1aa6afacdbc9f332547c42a9e2ef9aa0c",
+      "size": 35267
     },
     {
       "path": "docs/ess/reference/formats/index.html",
-      "sha256": "e03b1dad38f2361f451a3d2737869352bcb915f60a93570697ffdacf35f57ca8",
-      "size": 60001
+      "sha256": "a097202b517aa5d52748f2c7790a9193844286c31d5bf95dd21b015bbf517a6c",
+      "size": 60659
     },
     {
       "path": "docs/ess/reference/index.html",
-      "sha256": "e4d83d4a70f182b7b84d4f31bf6b0b47a6a78ab22d75de0f2b563ebfd48f42e9",
+      "sha256": "beb4909577a4a7283cdd977467898635731473418cbacfafc981d7c8c3808e5a",
       "size": 16530
     },
     {
       "path": "docs/ess/status/index.html",
-      "sha256": "25526dcfec5392cfb3d412bf567e35e426e970d554a5f55c2bc1f7bfd16c1bc9",
+      "sha256": "073ca353ca86c9846ee012cbe6d560f3359533eb8ccd4d0ea91d36dc748f14f2",
       "size": 17192
     },
     {
       "path": "docs/ess/status/limitations/index.html",
-      "sha256": "bc2ce2cc7146d257cdd1988732b4395100763e053454731c0a71b39876fe8a81",
+      "sha256": "519f2cdfb0a838469cf4017f85ce34ef5de0692d74bf5dac5a601b3de084c077",
       "size": 19529
     },
     {
       "path": "docs/ess/status/outlook/index.html",
-      "sha256": "bec0d214da41ce351b2e8ba6c689240e89c783128e7c1e5d2f258eefd1d849dc",
+      "sha256": "1fe02d7b254a8b09f59e8c803be4dd5dcd46fcb219fe87dc4d74eb3d526917b2",
       "size": 36197
     },
     {
       "path": "docs/ess/status/roadmap/index.html",
-      "sha256": "34ca6f14770757e9b908ec62e9e95d4b536d14786f6f4c49368a0ddb1e504724",
+      "sha256": "5de97dabb6693b0c98d1e13d3ff1f09a369c3071620f66195896a2fbd8d9e94b",
       "size": 19435
     },
     {
       "path": "docs/ess/status/where-this-stands/index.html",
-      "sha256": "c3a04bc8a4b2769462c27b1b60703a95936faa611ec2722da9264fde87c133c2",
+      "sha256": "27a5059ac63d0d78179f850bfe111ba2c115a0dfab6ba0b29278e2e05b6464c3",
       "size": 22344
     },
     {
       "path": "docs/eventlog/index.html",
-      "sha256": "b1e800d6f9f99339c044c8f11a2a743f5c5c30161861f1dc8d5d98d3ca93a689",
+      "sha256": "ba36257e17576218e89b1c8a672ca8b368c757bef7a1d1cc1c0a635c0c3b07c4",
       "size": 25054
     },
     {
       "path": "docs/extensions/index.html",
-      "sha256": "babcb13eac83845b8ecff6a15a95a7a582b33fd818c3d7b6bc436b5eb9bba8eb",
+      "sha256": "de3d280bd0bc90e6073a4655785256fb0ec616a9a0bccf63c2423355f031d48a",
       "size": 22755
     },
     {
       "path": "docs/extensions/model/index.html",
-      "sha256": "1cb28c24d68dea9c3a276e6bbc7de263e6ac4a48472d4ec8f69c30ca3928196d",
+      "sha256": "70dca5d2a4de71c4e49d1980fd283c47c20a9c63f0f07d7272ce2cd546cea93c",
       "size": 38976
     },
     {
       "path": "docs/extensions/scenarios/index.html",
-      "sha256": "a8443d3911aecae6c88292d055c27212a309c654119e45209f92b5a178b0a446",
+      "sha256": "e2735440fd98079faaab8474e473f8db69931b949b7b6e6a26ab8e1213bc2508",
       "size": 22931
     },
     {
       "path": "docs/foundations/index.html",
-      "sha256": "b6e577c0faaaf44e67ec5dc49f98d6459d5e2e23dc67b556519d07d7b4a86623",
+      "sha256": "06e135daf1031c538f896c0ee4b7b5411f3b66ba2e9328915b3377514aac5aa0",
       "size": 20375
     },
     {
       "path": "docs/harness/concepts/agent-loop/index.html",
-      "sha256": "a594402c1416f19cee906ffc986bbd0a80cc75da340b37190dbfac260cec0c0b",
+      "sha256": "c0f3384b884a4c32770d4e89f45b4c639907f629cf36692379bc355e29332af6",
       "size": 26931
     },
     {
       "path": "docs/harness/concepts/index.html",
-      "sha256": "7e414dcda5073d43994f22165a1d80e88d34291d0aec401a5b7e4e92aa410e8f",
+      "sha256": "b16297792e4c89e8b200d4cde682fa052fbc4029c502d1cf3bd9a5f82767ade6",
       "size": 17431
     },
     {
       "path": "docs/harness/concepts/security-boundary/index.html",
-      "sha256": "e46b3d19a9e546b87df9f109ddbf2fce7d622c862e4e2b86723ad88daf2c91d8",
+      "sha256": "cb1a0ef2f0f9ec0ef623176478277933c91a4d77c64116e9de2d3ae274616a31",
       "size": 28273
     },
     {
       "path": "docs/harness/concepts/tools-and-approvals/index.html",
-      "sha256": "715e417fddc4053d0dad508e70c914f55084c8574cc2e3aaf549944ab645b6d4",
+      "sha256": "8af5644ae90bd0c9b578e6c4b267e1082f38386c5229680d3dc7c1a77d96abdf",
       "size": 30050
     },
     {
       "path": "docs/harness/getting-started/index.html",
-      "sha256": "5687b80c42b69f0adeed0bf3b57acaf82ab541cfa16374af291ce3a9b36706d2",
+      "sha256": "280e4142f862a236a6b192cd0c415c297a0bab68028bf2b3563194cc48379062",
       "size": 31387
     },
     {
       "path": "docs/harness/guides/confinement/index.html",
-      "sha256": "87b43d62e21f6118dc2a218dc8c11b5f87f5ec18204129771e26c99b63c3413b",
+      "sha256": "6469cecd1f30f97ac89c784b555ab4395bfaa68099f06af99dc5be7862014ce4",
       "size": 30688
     },
     {
       "path": "docs/harness/guides/index.html",
-      "sha256": "319ab69f3c71ebda065d247a95998c3aaeaafda3e71f89c0681e7880c8271a5e",
+      "sha256": "46ea8d6e89a5950970505cd54af7fad9c05b11457c711afcc87654ed55ce9a5a",
       "size": 17948
     },
     {
       "path": "docs/harness/guides/profiles/index.html",
-      "sha256": "6955cc6d543e3aab7a6c959195bf9c7ccb1cb10651c5ed3f4765e30bbb9f2256",
+      "sha256": "b6ee013c3595a89c6934df7ae7f91998401b0773bb5a8bbce95d690e09e97d1e",
       "size": 29961
     },
     {
       "path": "docs/harness/guides/sessions-and-events/index.html",
-      "sha256": "f9481d6daf9e17bffa78f33e1a9c012de02ffacf610b80810d373e5108902d3b",
+      "sha256": "c83d5aeabc537581dd884139906dd8a6fdb3a9fdb3dc0b24be4089eca51428f1",
       "size": 38411
     },
     {
       "path": "docs/harness/guides/structured-runs/index.html",
-      "sha256": "9983a6cce608df24e81a9070bbe4a87e028db81c45172c9071a32e8328e5fe2a",
+      "sha256": "aae3511b50ace5776ed6b63b69501ae5240c1d9ce847fcf03f7fc5b69e221055",
       "size": 45815
     },
     {
       "path": "docs/harness/guides/workflows/index.html",
-      "sha256": "6534a1316b134ba898b86008afc0fa91ddac369293b3850a6e3fa7d9b17de78b",
+      "sha256": "70df74213964fb9489b2550e65d96243f600d90a8917f5cc6699ee5066c15f59",
       "size": 30423
     },
     {
       "path": "docs/harness/index.html",
-      "sha256": "eeb88b23afcdad044a81de8dc2c0b8324849d36120be607880b06bc8a3a8ae62",
+      "sha256": "5a67c5ded85c9fd086753004cd754e7f9d9e188c9ce7720d495cba44f8dc72f6",
       "size": 24168
     },
     {
       "path": "docs/harness/reference/cli/index.html",
-      "sha256": "a8a304a6e11221a95f9ff7d451341130dbd730a693f131dd6f705c7f692a95cb",
+      "sha256": "de995eef8d3759437b0fec4f212ef902d0fc27a2196059fd8193fd82bf9bccf7",
       "size": 44412
     },
     {
       "path": "docs/harness/reference/configuration/index.html",
-      "sha256": "5bb4873fee41026766f0798caaa3b1c46aec63f287f2f4e1a8f02adab577d060",
+      "sha256": "c1f8b766a482d6ef6f5c1391a69ad9cdc06eea6eb4ca684fc876f4f519582565",
       "size": 52969
     },
     {
       "path": "docs/harness/reference/index.html",
-      "sha256": "8a4e857dbcce7422b4dbc0a9d21ffb4321256555859eb7fb04e91313b43af5b9",
+      "sha256": "48054dadda621f27040941299ecbd26bc28892c06ad0d7880072147e536f82c7",
       "size": 17891
     },
     {
       "path": "docs/harness/reference/toolchains/index.html",
-      "sha256": "6d2d626b3b248befe1318fa96f49234adfe747acf489d1f8a1230c440f665ca0",
+      "sha256": "c01b572860fad7f884fff210bd35f3e6ad08b2570b93625435cecbdf59e792b3",
       "size": 36509
     },
     {
       "path": "docs/harness/reference/wires/index.html",
-      "sha256": "b89573c80c0f178d21828ad852e61eb1245b034bf22d55e1063cf5c1838f8ecb",
+      "sha256": "559c5ec46ab8cea452fb1196c5d18658819e45a85bcb865935b99991a9cf8c6c",
       "size": 25181
     },
     {
       "path": "docs/harness/reference/workflows/index.html",
-      "sha256": "50a64310ff928684410b6ad433b1ba3f408b2fa4b7585fc21b0e013ea9346696",
+      "sha256": "75bedb2e4fbeb760512e56f023752c1188fc7a4304204048a4f1192af037081a",
       "size": 73332
     },
     {
       "path": "docs/harness/status/index.html",
-      "sha256": "3cd925ca3917c2c7a080e7661eda41969bff2e8cc17d75f0cee8aafb707d30cb",
+      "sha256": "b0324545eb21359845fc5211212dde2128fc1e836b625e328815ea85bb03e035",
       "size": 25558
     },
     {
       "path": "docs/harness/tutorials/confined-change/index.html",
-      "sha256": "329500aa9da6b53fb0831d8e3b55a33590fb27c5f479d75d1f4b11d5e73c7d8a",
+      "sha256": "2f4a847c6af7c1326c83d56c4d49bca95a13c79ffc7b647fb7234cdac66c635f",
       "size": 28801
     },
     {
       "path": "docs/harness/tutorials/index.html",
-      "sha256": "dcd62c176a089a517380f14ae7559c54846118a8c3a6eb475323765e9a08201c",
+      "sha256": "e0573f89476aeaa6ed40764aabce54261de2259bffcef47938d904119ccf5ff3",
       "size": 16584
     },
     {
       "path": "docs/identity/index.html",
-      "sha256": "c76135f53a0468eef98df586f98b78dfb5a5ac8909d87937bf49462edfe8f8cf",
+      "sha256": "93c2db151cb0f10cadbeda9b033cf57f1c2cc2253d92dace89f8cdf608b0d90a",
       "size": 49150
     },
     {
       "path": "docs/index.html",
-      "sha256": "f142c9aaadd54ff401deb370fdb601cdb3c14987fbffc11b9930d6c95e16279a",
+      "sha256": "754dbb43585e4f1cc3b64c953637b711baf232dd91cdadb70671f15259ca7970",
       "size": 19635
     },
     {
       "path": "docs/mcp/design/0001-consumer-authority/index.html",
-      "sha256": "019af20300b4d3b5aa2dc37aee746ee6df9922c41767525e15a331f253312d29",
+      "sha256": "04dc79843ac802ce3d39a8ac913c76e4b6cdb4fee9466a62196523d82fbbed87",
       "size": 19551
     },
     {
       "path": "docs/mcp/design/index.html",
-      "sha256": "7c1fd79fe53f8fecbdcac211553a3ac91c0733b6a7b1166ee241b37915b97c7e",
+      "sha256": "109383d078ab41f616bdfa6415520e1cc15503a1a4af0a127dfd91deb1d254b2",
       "size": 14698
     },
     {
       "path": "docs/mcp/index.html",
-      "sha256": "c970f72558a6d5ee00026a24752a9a16380ac9e8e5adddb3296c481c5cd8aaac",
+      "sha256": "98805da5a26397f5d14c17d36d2dde18dd84dba73851a05d1c4ac1692b794f66",
       "size": 24932
     },
     {
       "path": "docs/metaharness/control-seam/index.html",
-      "sha256": "df89701be3c75343132b5e94205af164020936b790ee26a11ec7b6280ac04f18",
+      "sha256": "0770e7462cfcb557320c283c6d85703747ddd84af4735825e1e984216129edb9",
       "size": 29291
     },
     {
       "path": "docs/metaharness/frames/index.html",
-      "sha256": "da7b04931686720407e38322543fc3eca06e52bfd9d2d2bbebad9276fa168aae",
+      "sha256": "63bf77b57bfe4d819885f7fdb91b18d391e5b7ebe8ca1b48879be8af5d7c6ec5",
       "size": 28875
     },
     {
       "path": "docs/metaharness/harnesses/b10x/index.html",
-      "sha256": "13c04e4f4a73588ef213c9c6029203a097fde1d8e9f73629a35e5a61f00488de",
+      "sha256": "0932889703d5ef87a488eef34cdc258fa1f7f3fdc8a5e243c855a33ccce1a481",
       "size": 33437
     },
     {
       "path": "docs/metaharness/harnesses/claude/index.html",
-      "sha256": "7a05cd72f1256af16db3fac97dc32e1bb2287885850d3abc00978160115451fe",
+      "sha256": "c2c24785619cccfe927809575ba6b6b8feb2ed34bdde9748db737dc53540a56b",
       "size": 27732
     },
     {
       "path": "docs/metaharness/harnesses/codex/index.html",
-      "sha256": "e2329a5ce5925130b83eb9319e92f884ce0e6a1c841d5314b051f635469963db",
+      "sha256": "aceb07c461ce447176bc176f55a6ea37bc86419438df634c6c51a6871216512b",
       "size": 39715
     },
     {
       "path": "docs/metaharness/harnesses/index.html",
-      "sha256": "d9ead365a53208d2bbb5f350bf8f9f32e597602731e202af76adbac39d99b38e",
+      "sha256": "ca6b56a8454b880a80dc2e5cb0af31ddd5e4eac85287a7f6b6976700afeb69b1",
       "size": 17431
     },
     {
       "path": "docs/metaharness/hermetic/index.html",
-      "sha256": "0232ffa954f595d39f3725533780d66ed3bdd4d8f4012ae333aeeb1353afd1eb",
+      "sha256": "c33b97a8e00213a304f90fcb37ec026e5cc06482e571c565fba40d87d94398cd",
       "size": 27098
     },
     {
       "path": "docs/metaharness/index.html",
-      "sha256": "53ac8c1b29d8da59a20ebc0482871bd1a0abf30d260293898c343855b05cf0e5",
+      "sha256": "938f4dc8df3389a576f9b90dd185a6f558ce6a8251883f73747153646b5710ff",
       "size": 27317
     },
     {
       "path": "docs/metaharness/protocol/commands/index.html",
-      "sha256": "822e6fc1c0d8d2d93dbc341d283b695ac23117731f0be2fb653eb83d0959d6b3",
+      "sha256": "3e4a4af5e4bd5fe0166cf00200a3a78dcb751826d938ee2db72be4400eb617b1",
       "size": 29570
     },
     {
       "path": "docs/metaharness/protocol/events/index.html",
-      "sha256": "7aeee1b2200d4ac6b8693a39549d5b55e2a0c0d7afc029f03c4193ccde01c9e0",
+      "sha256": "63f27e32a616882b2d6f6686c1157f3e1ad4517c8842e5dcda3e6b7c3ec5dd64",
       "size": 32060
     },
     {
       "path": "docs/metaharness/protocol/index.html",
-      "sha256": "547ca3cd579765f9b7a6ca13da4ccbbf7c6566eb00ec38a3bd4f1d3145332042",
+      "sha256": "fb2838837bab76c5d615b21823666c66918f702e62931295e85cd6b158eb11df",
       "size": 17113
     },
     {
       "path": "docs/metaharness/quickstart/index.html",
-      "sha256": "0dd2e6634212069328383e6ae7e6bcef0e56e204c9f4e4fa1136faa43bb47df0",
+      "sha256": "a5b7e2c70dc53c01235ed4bfce5d3fae2cc17c900ef923918ba272c175a9b845",
       "size": 32155
     },
     {
       "path": "docs/metaharness/reference/cli/index.html",
-      "sha256": "294e51ae983d0288e15a339da10eed53ad52b1df9edc46da0e133d55fc80415a",
+      "sha256": "fdacd884b8c00661eff4b6c37e47a625ba2ff7d526131bdc4e4c9d2091fd887a",
       "size": 36979
     },
     {
       "path": "docs/metaharness/reference/index.html",
-      "sha256": "ab8edf5e6b3c44aa2d0cb235bff937e451913a2f4d3668756cda3d23d04c2d72",
+      "sha256": "4a6d6c695f49a7f9245ee1658b0a93b3463b4f11291fcd2e4c370f6fc79f2873",
       "size": 17122
     },
     {
       "path": "docs/metaharness/reference/library/index.html",
-      "sha256": "215d4c33bc0d3309f73425cbd0a3b986370504c3f1df5cb0b89cab7bb4938c0b",
+      "sha256": "c0f449e07f0a4e40e5fe17058fb9c168e60c5377bd6074165977377cee897991",
       "size": 37207
     },
     {
       "path": "docs/metaharness/status/index.html",
-      "sha256": "a374c992e77f94e37cb5548007db3842305cffb962bff5a26e9e68d696314337",
+      "sha256": "c035b7cdfb26e10097bf9d623e9e99df3c8c6311ed4d644b5b931a31cd3b7790",
       "size": 36310
     },
     {
       "path": "docs/products/index.html",
-      "sha256": "49d9fc547c3be85d689aa5d835144f566c2b45617dae051ad621baed6af5052b",
+      "sha256": "47b958624d850522ffee38aca879456061ec41853a55c060dcbfe72522fefbd6",
       "size": 18229
     },
     {
       "path": "docs/research/index.html",
-      "sha256": "243b725cc6718d6bb862d22bfb341bb3f082c91c63339bb100582aa56a92fc8e",
+      "sha256": "a0a963c276a9f883ab955c36e6acc1ebd28cfd0eb74d77aa4d0a204b7220f95c",
       "size": 21163
     },
     {
       "path": "docs/secrets/architecture/index.html",
-      "sha256": "c3827e4223dadd48c93edd9601f2a26c1718e0c5fcf7548116e0082c583a87ac",
+      "sha256": "109fad9df664ec34df7330d5f0a95c73528abfa3340e158b756ca30255526322",
       "size": 19882
     },
     {
       "path": "docs/secrets/index.html",
-      "sha256": "972fb07189b944a0f3ac17ea073a07a48018ee5983dc9a3b5a33bf86ae2034f2",
+      "sha256": "69e81560a633c815b4745cc30b6f66bc779d63012391a8018c20b1388abdea55",
       "size": 21787
     },
     {
       "path": "docs/service-sdk/CHANGELOG/index.html",
-      "sha256": "b076bb8476733f1d889f6dec005c4ef55f39533e035ed04b47257fca77d3349d",
+      "sha256": "58ef5b36028e26a8f1921a54d7466766c5a60e7fba0bb4b4d124cb21f61137d6",
       "size": 35878
     },
     {
       "path": "docs/service-sdk/CONTRIBUTING/index.html",
-      "sha256": "6f91d83e94dc021a04ad380d3d1ed5146bb50a7749f2dc91d8d4497f13d77081",
+      "sha256": "4963ba50a5517fffab6e66e710dfa0f9b2e8e3bdf9ccd12e550307baa62c51e3",
       "size": 18578
     },
     {
       "path": "docs/service-sdk/SECURITY/index.html",
-      "sha256": "8ed90ff1f1b16dd4c69d5eb1532f142905f4402ecea88e1a8495d32c8925d8f0",
+      "sha256": "dfc620015cda4090404770071a057091ba3eb946465b571b171ae9026d529b52",
       "size": 18281
     },
     {
       "path": "docs/service-sdk/index.html",
-      "sha256": "d80c22bb685e7db158f2dc940d26541ca26e39c41582c75ab006ebfaf4b501d3",
+      "sha256": "88a783ab736819c42eadba73e4880c07e84244bb9b91d9599a8da25523e366a9",
       "size": 33079
     },
     {
       "path": "docs/services/index.html",
-      "sha256": "947bb766beaab7dd69201757af0cbba6e3c22f979802260ddbb9b585b31c2394",
+      "sha256": "a3c51b8984baf27de54547c08ff85491267e93f472a374f176928654c0a75ea7",
       "size": 24754
     },
     {
       "path": "docs/substrate/concepts/boundary/index.html",
-      "sha256": "61c924fd2f6ca3a23dcda95b1affc65dc7e6d0d6c7c39ed80c871184e1e9e8df",
+      "sha256": "185b8b3be4096bf68dbe99c4dd7f58712331db87d27c967005d671988acfaa7b",
       "size": 22898
     },
     {
       "path": "docs/substrate/concepts/confinement/index.html",
-      "sha256": "0b8a639000399c4d39e83458d8a8c1c98db334bc26bb65f9da61457bca1ccf59",
+      "sha256": "20e807e8790df0b2aa792047d3d48f29ac8c97e0203ec876b27370431007959d",
       "size": 24562
     },
     {
       "path": "docs/substrate/concepts/index.html",
-      "sha256": "c0b829413c44a98b00dfe2073ef429b95d8e2cde04cfe0cc5ab852f15f3fd96a",
+      "sha256": "896b54639c403b1ebf55d69c62217f3a1a4324ba55ef94d6f31ee2f07dc9732b",
       "size": 17689
     },
     {
       "path": "docs/substrate/concepts/model/index.html",
-      "sha256": "32715c209aa38f88e0175dcec08f1f98633f7f247690f68f2578d41cac0fbb35",
+      "sha256": "55bf227a92eeba39ea3beadd963aa7e3274e293d4cf31cface8a342549bca35b",
       "size": 29678
     },
     {
       "path": "docs/substrate/concepts/operations/index.html",
-      "sha256": "f33b0364e79c475da3a08579a2e582cb55400d49787a3d3a02e6c4ad1eac51c9",
+      "sha256": "3974a2a41281eafceb659f015610d1f37c6b4d790cc3e1f122373d7e364118f3",
       "size": 27947
     },
     {
       "path": "docs/substrate/getting-started/index.html",
-      "sha256": "1b09760e95d23bff4d63768b1ad3144e3df18db7a91fec656996a6444299933b",
+      "sha256": "cf0409f19545eab3cdc559d2b6a71b626a800125b7c4ef0ace37770a14646c96",
       "size": 48030
     },
     {
       "path": "docs/substrate/guides/deployment/index.html",
-      "sha256": "1664845f7bf6d9c059b2cec40d0ea3fb818330e76a46a00bda6c7615e84164d7",
+      "sha256": "e63faec9f74c701fcc8fb92f04e02a222963c1054854a62446cd1840c3b5abb5",
       "size": 35109
     },
     {
       "path": "docs/substrate/guides/index.html",
-      "sha256": "dfb3224d67a30ac2b1feef958619fb041b35523fb833fd25e42fa2594ee0fbb7",
+      "sha256": "592d84727c7819a651329d5204de8a9fb4605b6596dc8a90285e50404ab8d312",
       "size": 17875
     },
     {
       "path": "docs/substrate/guides/mcp-adapter/index.html",
-      "sha256": "e54c5d2d6053b7df983890dc7b1270b0baf668016674a5c40002efe7aad649f2",
+      "sha256": "99cceade479ae93138c71b7719335bef4a877a551921f15809f928d5d041b1eb",
       "size": 32492
     },
     {
       "path": "docs/substrate/guides/run-a-command/index.html",
-      "sha256": "c4e2ba0e546ce6c8acbd66fdd7a007fd86320f908b70c8cbfa70d4be1e52a150",
+      "sha256": "9aa3c19dca07dc2e3b19db9715a0c8d2dd038c22949570a9df123a553f315aef",
       "size": 74587
     },
     {
       "path": "docs/substrate/guides/rust-sdk/index.html",
-      "sha256": "8ca973b55f9c2fec03e0fd324ee22680081a58e703825510368f7e65723d2998",
+      "sha256": "45ba2d93c0c34ea574845e34811d92eedbbb4dc5f82bb58d7e2308812f210912",
       "size": 101016
     },
     {
       "path": "docs/substrate/guides/storage-and-metrics/index.html",
-      "sha256": "1ed7d6bb4ce292e8657435d7534e05d3004a0335acfe4cf0ec800ee0a54fa0e0",
+      "sha256": "33d7a7d63dac6a6c1299d30962e34d3b91e72eb8c64a00c38c95fc50abe4869c",
       "size": 46542
     },
     {
       "path": "docs/substrate/index.html",
-      "sha256": "caeeb71523763845b74143581be4b074bbef89c274e99b5a5e770a2aed25086a",
+      "sha256": "4f860f579c87fca501b7e2abd8d25273a105e871da2f33669a97318a8d50df93",
       "size": 23003
     },
     {
       "path": "docs/substrate/reference/contract/index.html",
-      "sha256": "e94f5bdfb94b8fa48b8c337ca3044832394bf2982be82ce4fa17973f9bb78db1",
+      "sha256": "9d5bfea185cd1f13e8b9b773c09c0cfecf38667ddb10a63fee0011fc85c0bd09",
       "size": 30131
     },
     {
       "path": "docs/substrate/reference/index.html",
-      "sha256": "d22d89f09edca7c65ac0d62b249457c37652bb4fe7351751155eabb3ef4823aa",
+      "sha256": "01e2ba3851da1e78993b4803b6747527b2f59f7cb199b51e8abf4b3213de9caa",
       "size": 16563
     },
     {
       "path": "docs/substrate/security/index.html",
-      "sha256": "4bfbe904491f477c959c367b7292bb7e493c6c744bfe3ebe62d4042f9dfacc68",
+      "sha256": "f9782bea7b9fc0b11277ac9f2467ca1b3576a9ec49be2317d512484d84f12e57",
       "size": 17948
     },
     {
       "path": "docs/substrate/status/index.html",
-      "sha256": "f297359e5a522d2c4d89198452caee9bef78e05712d61e035a2026bf3ac7ffe0",
+      "sha256": "4298c51294b46a73d0870e8178e44344f59f62d92a770a44a34156f8e013f8ee",
       "size": 24062
     },
     {
       "path": "docs/substrate/use-cases/index.html",
-      "sha256": "fb8416786a1de36fc9ec323a2b4827dcf779f8bf18ec6f2923f756b7fcd281b8",
+      "sha256": "b36467c584b38aeb91fe01c3aa0b87115397491a612cff4cae849bdd66f0a7ac",
       "size": 23684
     },
     {
       "path": "docs/website/index.html",
-      "sha256": "8463d6cd7353a81f78cd96d80053bf322dd55880ef3ea7681e4c4ff741c1dd60",
+      "sha256": "efc93d049dfc547f08480170dda8e4290594f3fd19d908c5977780e0b7234af5",
       "size": 18328
     },
     {
       "path": "docs/workflow/index.html",
-      "sha256": "9a27513b5103a88c887d7a1efc69576cddd14fba4426e3256c5063547042f988",
+      "sha256": "dcba96934cabed91b9902feadea65ed5a4f83b32efa2de905f04e29a481c7e8b",
       "size": 17531
     },
     {
       "path": "docs/workspace/index.html",
-      "sha256": "aded0dbb2d8d84a5ba669867f256c13f57dec8b6c3876148249e05fec0bfb7a0",
+      "sha256": "98b0642a85c48df1a29e4bf53a649f727a0872bcdfb9b57aba2e8468e3e748d7",
       "size": 30890
     },
     {
       "path": "docs/worktree/architecture/index.html",
-      "sha256": "2a701c8db8b76f4cbfcbaf70961711a52aed4cdc1d47b97b0974c58e57a42bfa",
+      "sha256": "111db5bf85fd0dcf8db700b0206aaddfc6f9b651c58c4a7c82319ad4f3dfed87",
       "size": 26443
     },
     {
       "path": "docs/worktree/index.html",
-      "sha256": "f4f049a9f6559c36caffa23b78d1297907d660a343b1419ea3d7144fa09e1186",
+      "sha256": "7c1e9ac103006918ea53a98cbba8256b7b8170483bdf8ef61690471abf061d1a",
       "size": 26438
     },
     {
@@ -4495,132 +4495,132 @@
     },
     {
       "path": "ecosystem/aep-service/index.html",
-      "sha256": "f5b10100dbb39bb8204c0f0a30520e41b05bdbbd1141d9fa1419d0ad5699a483",
+      "sha256": "033af421f925daa5e89670229161ce535978d54927ebc9b1b3ff719ad447df4d",
       "size": 14677
     },
     {
       "path": "ecosystem/aep/index.html",
-      "sha256": "85a69c41d5f2fcccca665490830e00ab7c423f123be656d4c93b528225d25b92",
+      "sha256": "66bf4b1bea6e04a0bb4d5d09a9fa85956052b497f8315461bbf637f30ea644f8",
       "size": 15237
     },
     {
       "path": "ecosystem/agent-platform/index.html",
-      "sha256": "9558f0bd1b97b1646f973a9e4025eb08663ece466bb3eccbbf1c92fe0cc6b564",
+      "sha256": "588727a88c0fa1f71b857e369ea86bda53ae1cc7ff38ad2bbedfc55c1df294db",
       "size": 15510
     },
     {
       "path": "ecosystem/agentic-principles/index.html",
-      "sha256": "328adaefccda7712887412ea44c4383f0d188632fa02acf2c168f5be3e9c3ef6",
+      "sha256": "a88cf686b4254537cc9732655cc8fb594af86e658f3cc282b615853ebf9bb191",
       "size": 14752
     },
     {
       "path": "ecosystem/agentide/index.html",
-      "sha256": "1daf82bd271a15765723bec4a510eaab56dbf856147b617bcce0d6cfbae10242",
+      "sha256": "4ed794c6f488d5abee50c323f0117b0e0f2dd911bd20c7779b962b78d1964f93",
       "size": 15178
     },
     {
       "path": "ecosystem/agentplugins/index.html",
-      "sha256": "12033bfaffc56642803c92ab4bef5c0cc174bd413ed32b172a97926a0df07db1",
+      "sha256": "cada507f7d60f87f19956fb5989ae9d97272b7349b8feb265f4f98753d2dd266",
       "size": 15122
     },
     {
       "path": "ecosystem/connectors/index.html",
-      "sha256": "33232fbfcce1ae0f2f409f24ffde37cff10aa4f30835a41014ef47dbccdf077a",
+      "sha256": "45e2ea1f999551ce8d16a919e72484853ef820105df63eb2b45b4d68242e9bdf",
       "size": 16761
     },
     {
       "path": "ecosystem/devcenter/index.html",
-      "sha256": "ba18d1c4b0cee8dce454ddba4bad5def21fd3d9cfe38de9e85152b2ff0f1a110",
+      "sha256": "f05ca2aa7ba18b6632a0349ed03a5051adb63d5bf4aecacc69dbe77102760e64",
       "size": 15276
     },
     {
       "path": "ecosystem/docs-system/index.html",
-      "sha256": "4a86513c51646d1c9d02b4de24e5865da7f074f3d0278f91e854270992056b64",
+      "sha256": "498a7c41931bb0af7d889a317aca213ecf78e10f4e1272299d573726f0adc9fb",
       "size": 15067
     },
     {
       "path": "ecosystem/entity-runtime/index.html",
-      "sha256": "1fada94c92dcc05dead2ed9f16ded916751bfaa8a9b2b2271ffe966838100619",
+      "sha256": "447b87d63513da4377db979192e70ee5278a81f6b782a6ab8612d8e9579ff80e",
       "size": 14804
     },
     {
       "path": "ecosystem/ess/index.html",
-      "sha256": "3f14ff757c7fabe1c69111b86772f0bfcbfecc6d591b3fe8fb6e094222ca6034",
+      "sha256": "56786618abb2a74aecf9155a59847a34e8a1e0ba5abb95ca70fab83a8b724200",
       "size": 15050
     },
     {
       "path": "ecosystem/eventlog/index.html",
-      "sha256": "bf266cfc88ebd6095bf079a101ee0486c25eafdf86ace715bfd68fb7bf73c774",
+      "sha256": "646b218fad3c1910c3bb2c097d50d24257cc3bdd3ba9caf71056dcaa3ef45f2b",
       "size": 15441
     },
     {
       "path": "ecosystem/extensions/index.html",
-      "sha256": "6de13b55520bccef8c02c6380d84564e452868f99f6bade7ae9466e5a5b08a2d",
+      "sha256": "81fac998fc87439e08145842ae22e6a55fc28a15715e240082d1b8746081b517",
       "size": 14223
     },
     {
       "path": "ecosystem/harness/index.html",
-      "sha256": "14f03fec867a704d064c4e8110a73a59ca76a4d766c087cabdd5efccb40a99a2",
+      "sha256": "2db8abfddf3369ad9aa2024f919795a4ec7f91a0ec30342463d3cd54cc2068d8",
       "size": 15142
     },
     {
       "path": "ecosystem/identity/index.html",
-      "sha256": "41470f5d8d66dab42ffec166b75b7be4ba93202584e9d26a57217e719da543eb",
+      "sha256": "5f138c6acbfdac186e34616791be2f2f46e89a876420af926939ccf84fdec999",
       "size": 15835
     },
     {
       "path": "ecosystem/index.html",
-      "sha256": "05da8b98d85c2f4198851a5ccf777edeca4cd7fbe897116bbe9b9d9cbffb838a",
+      "sha256": "7a84e28005b4d59363158eb128ba6d26c44c092ca3e1406e6329b79f4d1a367b",
       "size": 25836
     },
     {
       "path": "ecosystem/mcp/index.html",
-      "sha256": "06f1edd543dfb5164782b307d77fe3f0c77f241de2cc877b24fdfb1aef84fafc",
+      "sha256": "29a41371f43c65bbde98bd748fd05e001daffa96387feec89759a33d5d5723f7",
       "size": 14382
     },
     {
       "path": "ecosystem/metaharness/index.html",
-      "sha256": "77783e29970ad36cfa6e86d11e58d7bd7f05831ff981c6b6bf330655a8fbb4b7",
+      "sha256": "f67374b187935261ae42ab4997082ae81adb79bb9b682d5c871c13d24fe237b8",
       "size": 14591
     },
     {
       "path": "ecosystem/research/index.html",
-      "sha256": "1eeeb20ab08c29d23cfe6129d7ee09c934b29bc3fa47e90824a2d1a690e3a538",
+      "sha256": "820a4996955759293fa8f59c4cb506dad54cebcdf9103b11732c547549f077ce",
       "size": 14849
     },
     {
       "path": "ecosystem/secrets/index.html",
-      "sha256": "fa267788d739c2c1ce0ffb6c3709a07f0780395a2d75aefb37c7f6769c54bacd",
+      "sha256": "adfdc0895f696d659a671008194803ebe771380c808416a394b3d42bb5e67d58",
       "size": 14649
     },
     {
       "path": "ecosystem/service-sdk/index.html",
-      "sha256": "1e239e1c43794587a76e8f13223eae14154ec8ab0fe68697dbd0ae136828640b",
+      "sha256": "7053eef67c4594f6b010cb81a3b2917811343b37dc12aec1fc30b312da655945",
       "size": 14743
     },
     {
       "path": "ecosystem/substrate/index.html",
-      "sha256": "297747d0863a85247c3ea40e0db0b409c5eaf641e2ea88a21320e1db19ead7f4",
+      "sha256": "8b2209dad203e153a7e93e85b4e35e38513afd3e446a5946d05b8821755d7328",
       "size": 14577
     },
     {
       "path": "ecosystem/website/index.html",
-      "sha256": "5953a7a0439131f34fa8c43e754c5368b0a391e108cbbbab958f6173a06cb1d5",
+      "sha256": "f29829c1c72fa79d33fc623add1fe0ae4aa8fa07b691eeb31ad92228b2d6d5af",
       "size": 15960
     },
     {
       "path": "ecosystem/workflow/index.html",
-      "sha256": "ddcc67abe09d873a380be2bfc53f90616dbfd00024cde232c2cd13e81a285ac3",
+      "sha256": "976700b85ef9c611039d3e4de13874f188be49d46c220179bf24e0457205c180",
       "size": 15206
     },
     {
       "path": "ecosystem/workspace/index.html",
-      "sha256": "0aa49f6de0e364d48defb20db935eb6ac22c3460edbc7537a69f95b9d8847371",
+      "sha256": "d8112b0b182d2b4833819f1c0dc8bcbadb70b03e384520767ebfbae89f1270eb",
       "size": 14257
     },
     {
       "path": "ecosystem/worktree/index.html",
-      "sha256": "dd5cbc6d25452c21c6c0cb73299d53a49abf2ed28635a93cd737cc191f61e0ce",
+      "sha256": "d25c879863869a38e90f4eb0aaa7faa06109a821ed9049e9464eaf11f4030d9e",
       "size": 14445
     },
     {
@@ -4650,7 +4650,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "71e0db4ba537f84b9822435cbbb5ba06399cc7b1d3e753d4f3c868a55306f6a6",
+      "sha256": "1295e684f034aa53bd39e3207b4375f23fd8b7aca70bff46b449ac753635076e",
       "size": 16664
     },
     {
@@ -4685,48 +4685,48 @@
     },
     {
       "path": "learn/from-principle-to-action/index.html",
-      "sha256": "b676b079cb6f58c723afbfc4b0d49277703bb392e94a330e4afd7f560ebd7593",
+      "sha256": "9ba09c761858bf919e5ff2e7a48b0446e652797e944886ec33768100d0e97169",
       "size": 41651
     },
     {
       "path": "learn/index.html",
-      "sha256": "730e5b2a252169160561c9794f39099de48af14fecf2786fab33c01db787a662",
+      "sha256": "2f7799a14f08be86a0f5d7e05ec385661921f85da25a22584f940ba2ad65359b",
       "size": 12962
     },
     {
       "path": "learn/safe-agentic-coding/index.html",
-      "sha256": "91cbc12679944a3ae172c4b6a60986199698f5a8bd2c033873a65a6b8809280f",
+      "sha256": "03e73d08d43a4ae074990c87962641ceb7a1059b7e9f519346651fe8138825d4",
       "size": 19174
     },
     {
       "path": "operate/index.html",
-      "sha256": "51cb45183d9705632b787348b0d211642fa5758179f9bbfc2dcb492195f09161",
+      "sha256": "138dc077401c9b80e877dfec8a0476eb5577d6938fca0c7966b3a640a21821d6",
       "size": 18957
     },
     {
-      "path": "pagefind/filter/en_331b0c8.pf_filter",
-      "sha256": "73e0de12f01d7ada5aaf8421682ec99386c97b95dc0f075ceb4e88587b941b73",
-      "size": 711
+      "path": "pagefind/filter/en_4fb4732.pf_filter",
+      "sha256": "492457f545e26c4fcd0312a713c87713b2b380a256846a744de8ae376d617c94",
+      "size": 694
     },
     {
-      "path": "pagefind/filter/en_45d6c35.pf_filter",
-      "sha256": "c627afb75caecf3de84c2e3ba5df081bf6175da540f89881033dd0a2916247f1",
-      "size": 692
-    },
-    {
-      "path": "pagefind/filter/en_75723dd.pf_filter",
-      "sha256": "9ec0f21b61814c8bc0b8ebf862dcaf48c1d9837e4798b1954c742ca6c2363a2d",
-      "size": 566
-    },
-    {
-      "path": "pagefind/filter/en_a989915.pf_filter",
-      "sha256": "4fe0ab39c50e19375d217ac950964896c95b4863b8ddad52f52ea18f39317ff4",
-      "size": 715
-    },
-    {
-      "path": "pagefind/filter/en_eacc21e.pf_filter",
-      "sha256": "a34110f6b214c122b270ea455f95226415de732a491df9fa08f20059af8d61ef",
+      "path": "pagefind/filter/en_8a54a69.pf_filter",
+      "sha256": "188f522aa43cbe0244483225899255b078d862f6e9eaeb48cd5530bdea357228",
       "size": 810
+    },
+    {
+      "path": "pagefind/filter/en_9889d27.pf_filter",
+      "sha256": "08a3aaf05a98ffcd4f0fe4e7f7cd9635fd7d3dcfa66840a3738127cc824202bb",
+      "size": 701
+    },
+    {
+      "path": "pagefind/filter/en_a6ff4ab.pf_filter",
+      "sha256": "1f8a38f0954707749a24e43983b147bb2356542c61a57e92294cd5f5839fd69e",
+      "size": 719
+    },
+    {
+      "path": "pagefind/filter/en_bdc51c1.pf_filter",
+      "sha256": "01b47fd28aca51ee86832279ed1b0120493a2cea2fdfcf3ce0196a0cb071cd16",
+      "size": 565
     },
     {
       "path": "pagefind/fragment/en_107468c.pf_fragment",
@@ -4922,11 +4922,6 @@
       "path": "pagefind/fragment/en_2c3b86d.pf_fragment",
       "sha256": "83a8172c349f18a3eb95bf9cc427ad7903f5a585e4630b97251c0e0d1bddd833",
       "size": 3049
-    },
-    {
-      "path": "pagefind/fragment/en_2c429b9.pf_fragment",
-      "sha256": "2d4ac1943848d71a731b42f19866554576e45b75ea5e79511adf6593d950cb11",
-      "size": 7454
     },
     {
       "path": "pagefind/fragment/en_2dc593e.pf_fragment",
@@ -5219,6 +5214,11 @@
       "size": 2256
     },
     {
+      "path": "pagefind/fragment/en_50247af.pf_fragment",
+      "sha256": "88e6a4680732a31adf08709a124924b6f09612fac8ca21fcfb9302a331c98a68",
+      "size": 7597
+    },
+    {
       "path": "pagefind/fragment/en_50ae632.pf_fragment",
       "sha256": "2ed079e97b555cb0c1557187a87da07071447cf0194ff3a1639705c80444bb08",
       "size": 470
@@ -5289,6 +5289,11 @@
       "size": 2986
     },
     {
+      "path": "pagefind/fragment/en_5c12a5a.pf_fragment",
+      "sha256": "307c68ea7936ee50e53a457e265cb4be6ababa85a1af7e4caac8c86755a37077",
+      "size": 807
+    },
+    {
       "path": "pagefind/fragment/en_5c455d2.pf_fragment",
       "sha256": "03246a55636ebeba5361352153ebcb96a6df168ff5050a9d690a6ed7c97bf816",
       "size": 1557
@@ -5354,6 +5359,11 @@
       "size": 1826
     },
     {
+      "path": "pagefind/fragment/en_652470a.pf_fragment",
+      "sha256": "11a709597ef5c5cf85507aea9ffa66f1e856718d7e63bc370994b4586f9f1bbb",
+      "size": 9596
+    },
+    {
       "path": "pagefind/fragment/en_65297c9.pf_fragment",
       "sha256": "69c154aedfa27f791d04b8f2c632bc83fb30ef747f6d1c35ff5c0360353b9a7c",
       "size": 177
@@ -5369,6 +5379,11 @@
       "size": 1497
     },
     {
+      "path": "pagefind/fragment/en_6685b48.pf_fragment",
+      "sha256": "9ae639181110facc37e85a246df5ac17a21f27e51c61375cddf86ce3e60cd50f",
+      "size": 4013
+    },
+    {
       "path": "pagefind/fragment/en_676d7db.pf_fragment",
       "sha256": "67711a3942352925f2fc7ad0185ec22220d607f91d1e7f695591e723f08a174f",
       "size": 2269
@@ -5382,11 +5397,6 @@
       "path": "pagefind/fragment/en_69dcf95.pf_fragment",
       "sha256": "d0d03f30e9ed6e3390b59a98e039ff0505839de4c10d386f0b5712a919a5d70a",
       "size": 2884
-    },
-    {
-      "path": "pagefind/fragment/en_6a1cec2.pf_fragment",
-      "sha256": "21a6f4fd149091a8f1aecd5da6fe78e131c7b07907068e43f80c55b185dacb93",
-      "size": 3950
     },
     {
       "path": "pagefind/fragment/en_6a2a165.pf_fragment",
@@ -5849,11 +5859,6 @@
       "size": 849
     },
     {
-      "path": "pagefind/fragment/en_a1d0434.pf_fragment",
-      "sha256": "7fce2b15054301c6689993479fe618e1e9b9a4b5786f838226ab6f72943a3dda",
-      "size": 9104
-    },
-    {
       "path": "pagefind/fragment/en_a1e4de4.pf_fragment",
       "sha256": "466cd6f1676476a88e7c9a2a0d607d9251834493fe1aea38eebb218ca0fe4b20",
       "size": 4876
@@ -6072,11 +6077,6 @@
       "path": "pagefind/fragment/en_bdfc5b3.pf_fragment",
       "sha256": "a3d7f39b22290de8bec7b429a5ece269732af9fdfbe40e54f92b0f873ae4d6ab",
       "size": 2611
-    },
-    {
-      "path": "pagefind/fragment/en_be9512d.pf_fragment",
-      "sha256": "ef8d754bdac4f5f3593b0025db5639e75ea6388e793139cb1c62b6012cef8b59",
-      "size": 806
     },
     {
       "path": "pagefind/fragment/en_c0aeff5.pf_fragment",
@@ -6514,119 +6514,119 @@
       "size": 744
     },
     {
-      "path": "pagefind/index/en_13a6324.pf_index",
-      "sha256": "dbf18981b473ebf2055fb3daab5e7a695d32b6e13844139a19e27754ab39688e",
-      "size": 33977
+      "path": "pagefind/index/en_12de301.pf_index",
+      "sha256": "f5fa6fcc5a0a35397a71a7bd2ea97c08ada159a03e528c215e14a40c1f562c79",
+      "size": 32743
     },
     {
-      "path": "pagefind/index/en_163f7cc.pf_index",
-      "sha256": "936d36db68fd809562ee3c825753995eba20c0cbf11da51214d44761dedf6815",
-      "size": 20376
+      "path": "pagefind/index/en_1f67958.pf_index",
+      "sha256": "36f98583e83a5b0cd345ed36d1fb1037100226560b4a1716e60b36658f507597",
+      "size": 30229
     },
     {
-      "path": "pagefind/index/en_16c4e72.pf_index",
-      "sha256": "db0dbebb27bebaaa2977b3fcbb03b8f7ab657b897776e50e84394558bc9b5609",
-      "size": 30714
+      "path": "pagefind/index/en_20e0f3d.pf_index",
+      "sha256": "58014233e3c53bded9ce150ed877501d78f22e25f179ae320d44aa038bd6252b",
+      "size": 34032
     },
     {
-      "path": "pagefind/index/en_17775ca.pf_index",
-      "sha256": "1b76bd27606c4ece0f854ebda6afd7b0d12c4be2c3a9c0783a6e7c329221458e",
-      "size": 32318
+      "path": "pagefind/index/en_2812ab7.pf_index",
+      "sha256": "d65e32025983b67288c4a310a4fabd3b638783cb26b5e4fea4f3ee70b3c25173",
+      "size": 20409
     },
     {
-      "path": "pagefind/index/en_2c942ab.pf_index",
-      "sha256": "80944d55d5d21c9d638cb1c24a1c61e8e7c4162e359308409cdd96623c1ff9c0",
-      "size": 32775
+      "path": "pagefind/index/en_34ce10a.pf_index",
+      "sha256": "a5873845200b3089af980101c63b4a4f5253bb06897123b1fb0e1a8402e90b76",
+      "size": 32964
     },
     {
-      "path": "pagefind/index/en_3766e27.pf_index",
-      "sha256": "056ac16175e75bed19bd4bdc43e2c6bdb3d3f133854a6cebe3b77ee760ab0319",
-      "size": 32952
+      "path": "pagefind/index/en_46e416f.pf_index",
+      "sha256": "ef2119b76e3ebb749dc181190b06b91e5dd69e719336cbcfb03b04a2f351f36f",
+      "size": 38044
     },
     {
-      "path": "pagefind/index/en_38bbe8f.pf_index",
-      "sha256": "0f516906f6aa433f1d01abd97283b8afd549e9c79cabc4bcfbe826586c1b7cd2",
-      "size": 29699
+      "path": "pagefind/index/en_47a225e.pf_index",
+      "sha256": "e44eb100ba4e346b1e0ccebe222d655e3b52a7e48e91401dc85b2d141c536343",
+      "size": 32979
     },
     {
-      "path": "pagefind/index/en_3e16722.pf_index",
-      "sha256": "64a703507a0d1e0d167c297e6c033487f01ff2a9650714892e6246627e7206e8",
-      "size": 32579
+      "path": "pagefind/index/en_55afe46.pf_index",
+      "sha256": "9662833631112e23d09beb3f61d7a4e61187400533bce78b214d3123b39cb3e0",
+      "size": 32527
     },
     {
-      "path": "pagefind/index/en_46d042b.pf_index",
-      "sha256": "57f9357853e4f7dae740394d2dafd3db36740fd494e6aa5c9259f2ea0e508330",
-      "size": 32651
+      "path": "pagefind/index/en_58e118a.pf_index",
+      "sha256": "8a4556e7f4e91621ac20e40a73d90e9ca887ff3952e12db31c5c505bd874d678",
+      "size": 32507
     },
     {
-      "path": "pagefind/index/en_4ea6593.pf_index",
-      "sha256": "6a6c314a5a57bf38df400200f459a3638fff15cb065cdcecc8bc196896430c6b",
-      "size": 32471
+      "path": "pagefind/index/en_61a3fbf.pf_index",
+      "sha256": "1331583ea631591581d666594b9fb532d2d3d4a89b01081543a35db5a90b4d85",
+      "size": 32609
     },
     {
-      "path": "pagefind/index/en_56bdadb.pf_index",
-      "sha256": "551d2e8e611c30fad126b724cf8d14078d33343e0a8b77597ba4020acfad68c6",
+      "path": "pagefind/index/en_6e3258f.pf_index",
+      "sha256": "1ed66fc8557ced666abfab21a97d4f0eae021b2f869f4cd91f42aa3e4b3b0139",
+      "size": 32382
+    },
+    {
+      "path": "pagefind/index/en_7f162cf.pf_index",
+      "sha256": "60e006922c80939ab971f71f2e827b3ad219990f64b9e04480b9bd5c65e0e733",
+      "size": 32685
+    },
+    {
+      "path": "pagefind/index/en_7f66ce8.pf_index",
+      "sha256": "0011f356e6e70efe95abd08e5c6876fb4342e6f79313dc18cbb6bc4b6119b27c",
+      "size": 32504
+    },
+    {
+      "path": "pagefind/index/en_866df14.pf_index",
+      "sha256": "f15d494852801b1f5175608de4d4abad94c55b9b6451391f0d89f852707d67f6",
+      "size": 31817
+    },
+    {
+      "path": "pagefind/index/en_9194d76.pf_index",
+      "sha256": "9ed5aef17823d55bc327bd9167392069561b3150d21b1c51482f6eea19da9a29",
+      "size": 31915
+    },
+    {
+      "path": "pagefind/index/en_b442fa7.pf_index",
+      "sha256": "544f1f04d0bf1b4ba0bfbcac563c17961688a8a95923510554fbaa94abe92dd7",
+      "size": 30917
+    },
+    {
+      "path": "pagefind/index/en_c53ce6f.pf_index",
+      "sha256": "29e6651398a4b6984fe8c193925afc8bc08cf4f2077ded546eb17a229488f0d4",
       "size": 32500
     },
     {
-      "path": "pagefind/index/en_604f827.pf_index",
-      "sha256": "3f4998b88d5ceab297f2e4c28a83e11c0e0d2c8e0ad999eec3b89754eec968aa",
-      "size": 30212
+      "path": "pagefind/index/en_d182a16.pf_index",
+      "sha256": "612397bb3a7697bebd3fae8b42be1e63acbf38fc8ba5e7437f9d7b4572231f3b",
+      "size": 32420
     },
     {
-      "path": "pagefind/index/en_6216763.pf_index",
-      "sha256": "bc73724401b527366b2b5a65ba17bea0596b627f74c1c2c9262e2c8e379a39f5",
-      "size": 32717
+      "path": "pagefind/index/en_d27fccf.pf_index",
+      "sha256": "c0cea2daaee11adba97ca24a4d1ea9d28daa466786914697a54c54385e29bb24",
+      "size": 29736
     },
     {
-      "path": "pagefind/index/en_652eabc.pf_index",
-      "sha256": "ea28f69775120179b9c28a3c819a36788334b32b93b28fee7763a51a98d06c04",
-      "size": 32439
+      "path": "pagefind/index/en_dabf7bf.pf_index",
+      "sha256": "4f581de3f8aac28c52006c83614c22babf4c7507151d6435188ba28262c07d99",
+      "size": 34757
     },
     {
-      "path": "pagefind/index/en_7113a0a.pf_index",
-      "sha256": "2ffd8788775025feabdf308f1daf1b5508eaad1a291c95cc2af7d966a75173a8",
-      "size": 38013
+      "path": "pagefind/index/en_e4db82d.pf_index",
+      "sha256": "35fb40eacfbb48c2350cf4d429a6f73aa3456db9b697e48ceb90c7e5285fa413",
+      "size": 30737
     },
     {
-      "path": "pagefind/index/en_7a3e409.pf_index",
-      "sha256": "2455cf6debc45c2171d231ca29bfee62b2504d9ccb2678de3199d2fe5094e11f",
-      "size": 27441
+      "path": "pagefind/index/en_eebc3cd.pf_index",
+      "sha256": "9a841c00b5c4a6e212c1404d05df04795004003d3b4375b5b0fac5df9cfae428",
+      "size": 32814
     },
     {
-      "path": "pagefind/index/en_86c0818.pf_index",
-      "sha256": "bf529d3be9545054550c558c6fa8387329e46c32241c9f2b59dd1f871b510bf8",
-      "size": 31880
-    },
-    {
-      "path": "pagefind/index/en_9897e9f.pf_index",
-      "sha256": "598325a18872e738e404141072a222fa6098bf5338e688d6aea878cf795527e2",
-      "size": 31802
-    },
-    {
-      "path": "pagefind/index/en_a7a7c4f.pf_index",
-      "sha256": "eab81812f990a9f9cb8409bf1b4f0d24db63acb62da17ca0ca54eb7ef37f41dd",
-      "size": 32458
-    },
-    {
-      "path": "pagefind/index/en_c2f3ab8.pf_index",
-      "sha256": "04caece7b262c52a898a9ae37b758eb04a75779410f278ab21f342d866b87b6b",
-      "size": 34695
-    },
-    {
-      "path": "pagefind/index/en_c779b62.pf_index",
-      "sha256": "2af9284abd479e1211ace059286ae99bf0fe122d88f896a6e9537c8f10ef1423",
-      "size": 30889
-    },
-    {
-      "path": "pagefind/index/en_c863a9e.pf_index",
-      "sha256": "f06e057c2b36ce34297967c2ddef77fd509b58bc2a79fc562180240ec5e46594",
-      "size": 32337
-    },
-    {
-      "path": "pagefind/index/en_ebd3991.pf_index",
-      "sha256": "fef5e4ed508fe14dcb5ad0791906847f09e8511656f55ea04406828b794f552b",
-      "size": 32932
+      "path": "pagefind/index/en_f6ccd7d.pf_index",
+      "sha256": "08bf884db3c1956b29be897e45205cdc58855e6771d473092107bc85a4e7754c",
+      "size": 27460
     },
     {
       "path": "pagefind/pagefind-component-ui.css",
@@ -6640,7 +6640,7 @@
     },
     {
       "path": "pagefind/pagefind-entry.json",
-      "sha256": "4a97742a3cd9a10005d55bada62ad82dd9b465f2e6b67f30a2ce4559ac62c958",
+      "sha256": "de0e12b2cc0ee106389735859ef3dddd695f8c6a76147d14cc50894cbec5a6b8",
       "size": 173
     },
     {
@@ -6674,9 +6674,9 @@
       "size": 41255
     },
     {
-      "path": "pagefind/pagefind.en_d774518b1d.pf_meta",
-      "sha256": "c77abd09c03bb16600676966c3e075bbbea2e5e77408cb761248ed8b779bdaaf",
-      "size": 3262
+      "path": "pagefind/pagefind.en_2124d14acf.pf_meta",
+      "sha256": "a058343a56d5677c512070fe6c1b8e03ba863e5122966955498313114e4dcdff",
+      "size": 3258
     },
     {
       "path": "pagefind/pagefind.js",
@@ -6695,12 +6695,12 @@
     },
     {
       "path": "products/evaluate/index.html",
-      "sha256": "019fb245ef917fccc373309115770b72d0618160b4ef3a0ebef3eaec026f220c",
+      "sha256": "8851ace4700a9f295c40b76c9a6798007f9601afc9d0fd0a3eaf7e141e99c3f1",
       "size": 22272
     },
     {
       "path": "products/index.html",
-      "sha256": "3046c47d9419d0022e6c337c6a2dc25151ee17981feb2ba6df42208526c851b4",
+      "sha256": "8c518cb4288960fc39570ee473d3cd581f89d6b3236aff5f091bfbd4d6314d37",
       "size": 12791
     },
     {
@@ -6735,7 +6735,7 @@
     },
     {
       "path": "releases/index.html",
-      "sha256": "2f569535a677b6661d5410f269d148bb674f7b1b1b1d20e3261c683ac74cea58",
+      "sha256": "4bc135ef63c3371273f3bbbb29f7c6a483cc561be5ae42ee68cf080b471f357b",
       "size": 118701
     },
     {
@@ -6745,7 +6745,7 @@
     },
     {
       "path": "search/index.html",
-      "sha256": "988e708596b27812905ebcb22a3e59f69e443644d933cd7cad149bfd725971e6",
+      "sha256": "b455421ff99dca16d8e174825d9f6a4a333e05d112718c56f6674020b455f936",
       "size": 23955
     },
     {
@@ -6940,142 +6940,142 @@
     },
     {
       "path": "start/index.html",
-      "sha256": "9c629c8f1d333527fbfe6a4aef53bfebe8e0b57cadec5c8d866e64ecff1330c0",
+      "sha256": "17c4c66e48f78ffae96206bb96a97c18d9798175780b24b9fdb8328e514ab5f1",
       "size": 13802
     },
     {
       "path": "start/spec-driven-development/index.html",
-      "sha256": "ca6c4b096dabcc57dc39ad25601e1da2c30f84be7dd737265abd148a6ef43bf4",
+      "sha256": "1a8fcd38b2da4f923ffebba0992913b02ed2c4f945e5636419dd808fab0108fe",
       "size": 20707
     },
     {
       "path": "updates/field-notes/aep/a-claim-that-left-the-boundary/index.html",
-      "sha256": "ee2f71ae53d1023e676013275fb86bd743066a81987bb686a914bf4eab1be2f3",
+      "sha256": "a1fbbf57b41f65d04c6b9c6ed677076fe5b64fac7073a65fa9f991ba806cb34a",
       "size": 22804
     },
     {
       "path": "updates/field-notes/aep/a-repository-that-already-exists/index.html",
-      "sha256": "c54336541ffa9cfb277acc6377d41e7a9402ca63eb9ab4260a22d0057c79b270",
+      "sha256": "bc18ad6261c5272c5c882a209410336a1ca603c2202a3e2732bc4690ae20b340",
       "size": 28016
     },
     {
       "path": "updates/field-notes/aep/a-rung-may-cost-evidence/index.html",
-      "sha256": "f13ffa80e325645fdbcf5f4d491af12ba33ee945c09f877007c47225fa1d5f4a",
+      "sha256": "c384d0b6a1f3826a59ec99fe2bd94b7333a05186fbe26d1351d6d20a37f5b0d8",
       "size": 22411
     },
     {
       "path": "updates/field-notes/aep/a-rung-may-open-on-a-date/index.html",
-      "sha256": "e0e3d24f4b55037748203d5143aa45764f753d4f9bb3ab041874d4c3b42e6596",
+      "sha256": "92033cec39f06a967e55bfde8dc6f1cd1c527d57eeeb85f39fc026c85d8de459",
       "size": 18741
     },
     {
       "path": "updates/field-notes/aep/a-second-transcript-shape/index.html",
-      "sha256": "ca65cbf4408751495cc26a5563eb7499cc8d9de472e0b7152f6fa9dd666fcaf2",
+      "sha256": "eb3cf8ad5b4619b72c088f57cb00a4880a25c8ff5d2ac9ae4e755ef9f9e7e2ae",
       "size": 18897
     },
     {
       "path": "updates/field-notes/aep/conformance-and-the-domain-profiles/index.html",
-      "sha256": "7fcd240a51baa4cd2d3cdc0fc5eec7912dd95350fc1dbf615ea339e29e1c7d44",
+      "sha256": "d5b69dba0284ca7d5139afee85406ee2b381fc134827e42947d3ad075a61dd70",
       "size": 17957
     },
     {
       "path": "updates/field-notes/aep/domain-model-and-document-layer/index.html",
-      "sha256": "c989e9ea607dfa36d3d8b1bccbd396dd3442722e036cf7d2bcfa29643bf1d7e9",
+      "sha256": "7865fe9e465056a61cc4b265e73015e8efaa49af5e7ba2e7c89f6eebb0611085",
       "size": 18724
     },
     {
       "path": "updates/field-notes/aep/evidence-names-what-it-is-about/index.html",
-      "sha256": "4f2aff95ef0b18779fe303c00bbd4e8e242d3be8e274a7474ac452284b6b5666",
+      "sha256": "a932b640281bb463b85760b76e7b3176fb0fa107ac1eb2819674f0a55bdb7221",
       "size": 20715
     },
     {
       "path": "updates/field-notes/aep/ground-truth-and-docs/index.html",
-      "sha256": "920b9570ec2ec4b3ecc784659e59b8b17da2d5049a3036115f5165d18da02072",
+      "sha256": "8935db61ac030bc6c3b187e1fc239ad201b586c0f1e5ca394bbee07c34e0fd8f",
       "size": 18930
     },
     {
       "path": "updates/field-notes/aep/horizons-and-the-first-governed-run/index.html",
-      "sha256": "95f80542619fb1c3c73450fee43e71b3cc7cecf115e54d9e6953b40f03ccbc89",
+      "sha256": "5b70885172cc27489f9cd0af59dbe1669fa39ee0bc3f251a06fc6f4527b52db4",
       "size": 19452
     },
     {
       "path": "updates/field-notes/aep/identity-and-the-interaction-contract/index.html",
-      "sha256": "9e388168e38561e7921c103b24ed4a7bb30669317a4b383208396a56800baed2",
+      "sha256": "97fad335ee5e90afb3a57b65a3e717b6528082a4fe6d0790f4b49d4a91d2499e",
       "size": 17422
     },
     {
       "path": "updates/field-notes/aep/obligation/index.html",
-      "sha256": "dbba38d4d5b406f0ada0dedd1ee7df17135941a5cd855421ddae6c99fbcea072",
+      "sha256": "5186d7170a1a21ef95d03dee193a5fbeed53edd9a3e684090e9ced56d1872a44",
       "size": 19062
     },
     {
       "path": "updates/field-notes/aep/project-discovery/index.html",
-      "sha256": "e5f9c74602fbef655a2928fd0a47cf5ef7cd69edf863379ad1bb561b0376ab07",
+      "sha256": "018783e790a61745d95aee1fcbf9e4c0ebda3a4b127ef8424ba543a1a8896fc1",
       "size": 17071
     },
     {
       "path": "updates/field-notes/aep/the-docs-catch-up/index.html",
-      "sha256": "68fbf89097bc8bd447f94ee8d786c8772fda34c2d051e8f58fc7c0202d4811f8",
+      "sha256": "3be3158ede8962a27c7a134a15de49907c4c498144ede3653312a6d488aec979",
       "size": 21773
     },
     {
       "path": "updates/field-notes/aep/the-engines-mechanisms/index.html",
-      "sha256": "445b9298d085dfee561decda7f2e8a54faff284a6f94a6df02585af64b47508a",
+      "sha256": "c3ce8fa5167dc3e768ba6fe47dd9926f75cb92651a56ba3cf149557e0cdea95c",
       "size": 20292
     },
     {
       "path": "updates/field-notes/aep/the-execution-core/index.html",
-      "sha256": "6a3aa05b124226a987741eeb07e2c363063010cf05f72001c788c13d4835a874",
+      "sha256": "636bc3711b5389970a4b72711253b59843f9f5d9be7a6a41b10c11132427faf4",
       "size": 17717
     },
     {
       "path": "updates/field-notes/aep/the-first-verified-tag/index.html",
-      "sha256": "708fc8d7f589d8cce786cde4d6a2a6f6d14a45419420a983aefe07b9cf0ae5f0",
+      "sha256": "d3360db2183cbce3252a9ff525a2268cf167c1325e3b9aa9382c2609b0b6db2d",
       "size": 18918
     },
     {
       "path": "updates/field-notes/aep/the-ladder-is-data/index.html",
-      "sha256": "b37d4cf24440b711effeded30750a68e719c2b15a172e0951b3aa6dd23143851",
+      "sha256": "121d6bc84fd3f5a19a17cbde14702ff95c5aa00fd68e7e28ccfe568ae4f20e9a",
       "size": 26397
     },
     {
       "path": "updates/field-notes/aep/the-pin-says-what-it-links/index.html",
-      "sha256": "6dca6cc1fd1a2179501a77894be1ad1f22b537ce82ce238a4ab3e2dcaa280f1d",
+      "sha256": "3e7d0461ae84ee04a2c93113f43bbc353452f5b896cd04895604d89550e5c49e",
       "size": 17678
     },
     {
       "path": "updates/field-notes/aep/the-plan-and-the-transcript/index.html",
-      "sha256": "398bc86b30978aacc4b844c8f2e2b113fef61e6380f95d385a5448108a87f87b",
+      "sha256": "c75e60641e08214058d4d2239a712b2cac7226f357665ed19adfb51ccca88cb0",
       "size": 19733
     },
     {
       "path": "updates/field-notes/aep/the-plan-has-a-history/index.html",
-      "sha256": "a2832e89bf95a384b138e202abb2f317e41f10e77ceb97349b3358056cf43f2f",
+      "sha256": "4f50e5cff1b434a4a239f3712a6763db22a814c52b098b355409ce274b3252d6",
       "size": 18693
     },
     {
       "path": "updates/field-notes/aep/the-reference-driver/index.html",
-      "sha256": "cf19db8c322260c19c7b12f20fbb6fc3c5d1362f9fefe75e31a77c52ccbd0534",
+      "sha256": "ab873dced2fbef9803946e2a7359d1269bdc7e830ddd8a73a29f7cc3ef76db5f",
       "size": 19565
     },
     {
       "path": "updates/field-notes/aep/the-typed-blocker/index.html",
-      "sha256": "ad247a6fff599859ae903f3ffe23150d20986276a87a4458ea4e4c5f3892bf65",
+      "sha256": "62daf3fecd546b43a05bcda70391a1e2b4a9da2df8599490c237d9dade70bb64",
       "size": 18817
     },
     {
       "path": "updates/field-notes/aep/where-a-run-may-write/index.html",
-      "sha256": "ff46afe15bb90e5148d73db8ade27f44f8721d0f80e6bbf463baf1cab0856d11",
+      "sha256": "acec94514b2b558b233134e93ae1f220374bfb8011214d575adb28774effd7b3",
       "size": 20671
     },
     {
       "path": "updates/field-notes/agentic-principles/what-the-operator-actually-contributes/index.html",
-      "sha256": "4281b47850242df3947c7d412296c4bf131457628f50632c594363aa003caffb",
+      "sha256": "f0d3f97daa16490c54800bd73d9fb3b4a3c10588f80c17ae6f34cfba38634125",
       "size": 31791
     },
     {
       "path": "updates/field-notes/archive/index.html",
-      "sha256": "440d2911cd8dff02c046b9b1c23adeecaa00717b2c032bf3331235429b8ee167",
+      "sha256": "b51b1e258904a3e77330da4ee7db80dca406759e66b374ca2fe941397d00370a",
       "size": 15342
     },
     {
@@ -7085,52 +7085,52 @@
     },
     {
       "path": "updates/field-notes/ess/a-cluster-described-and-answered/index.html",
-      "sha256": "d5c7da0ed02a939da84cbdd4121cb491006dd868625936459cb02a07c7a84963",
+      "sha256": "828c8e5d4170db575fcbfbcbb5c2062b7c32688c2cfb6c0cd9103d61b395577e",
       "size": 19748
     },
     {
       "path": "updates/field-notes/ess/ess-the-compiler/index.html",
-      "sha256": "6bb857218d1f003656dac992c4b5d60eeaffe206a3a427840faefae8f7cbd17a",
+      "sha256": "919b5bb72a6c5ea400d5f165e507e55411bac19f5549acf3118bf3d6ea274735",
       "size": 18362
     },
     {
       "path": "updates/field-notes/ess/ess-the-join-and-the-model/index.html",
-      "sha256": "6e856fbf6ce7708959f04d10a63948ce219bd140238ac990215eb9b3633ffb1a",
+      "sha256": "c868998a0f78d2768e38c688187c600bb3bb1fa1f5df49d6c03dc002be142dbd",
       "size": 18153
     },
     {
       "path": "updates/field-notes/ess/ess-the-projections/index.html",
-      "sha256": "bff50bcd30a7a0897b93a69faf055746d0568b3d7a009f6d252e9ddf72ec9362",
+      "sha256": "14d80590bf33af99324feb3effe1eacfd01256a7517d51e16d9ce76e0a652a09",
       "size": 19244
     },
     {
       "path": "updates/field-notes/ess/hardening-the-register-emptied/index.html",
-      "sha256": "f994a3547f1fe3bc82e0468671accde8b02ccf7d505fd45511fab700bdb15e7f",
+      "sha256": "3f3898cfa6eea5a5c2bfac30840db1c3d541a78c11f36a6abb3131c74cdbbfa5",
       "size": 20034
     },
     {
       "path": "updates/field-notes/ess/one-spec-two-apps/index.html",
-      "sha256": "efbbc904eec60d15f86128a6ad7f9b9145c7b85ffc3dc0d3fb512df45df87001",
+      "sha256": "3133c387d0b9b29ef5b3fe05e2605b222f7cd6ee4aacd881efbb501493024c1c",
       "size": 55984
     },
     {
       "path": "updates/field-notes/ess/reconciliation/index.html",
-      "sha256": "00f5962ad7a0ff7b56fa976aca0dd511fbf4014dcdcb5a6e41e4855ee8ba21e2",
+      "sha256": "238bd36496a39786f479a91f9394cc16a6a08dfd75563ee8e1bab4b27b2169cb",
       "size": 19497
     },
     {
       "path": "updates/field-notes/ess/semantic-diff/index.html",
-      "sha256": "a012488a5e5bf50ebcc10fc15a8fec9b46f0d7c0b16aa255f0181caa8b8c196c",
+      "sha256": "73601e346d44e1d712491cff306aed832ec9e20bf13d943fab39be70c4a562fe",
       "size": 38610
     },
     {
       "path": "updates/field-notes/ess/structural-synthesis/index.html",
-      "sha256": "a2d6aacf4426c6bd1a99df167313e510d8af34878813ab0c3509e27af4bc09ac",
+      "sha256": "f3a011197f0d867acf2b913447b87df1c12e8eafdc3225a588c7a9eb178e9e96",
       "size": 43879
     },
     {
       "path": "updates/field-notes/ess/the-specification-as-oracle/index.html",
-      "sha256": "d5309064b4d1b3972517e144ba2dad8dcd9be45af8dbfb0c2bbaf29ea2fdc387",
+      "sha256": "33d0b273108a292652c38877d1cb9db60ec322a84394711c64089b12af4c3142",
       "size": 19692
     },
     {
@@ -7140,22 +7140,22 @@
     },
     {
       "path": "updates/field-notes/index.html",
-      "sha256": "656e996cc231ada7c05890df2503e240355f48138ddb02d3455939d743bad901",
+      "sha256": "859f145ed8eaca661e271b92628d95aa1d2bbb6d85b002812f2a31bc097a4b35",
       "size": 52235
     },
     {
       "path": "updates/field-notes/page/2/index.html",
-      "sha256": "0f895b35974e0e67da4e2bba34c5d64714b8bf577fe91211c3e2751cb69fe80d",
+      "sha256": "7e1872b2196474645c6b5b49509dae43d09f25ba6481e18d74ca7a32f045641b",
       "size": 48072
     },
     {
       "path": "updates/field-notes/page/3/index.html",
-      "sha256": "aa7bad285426079ec341e8d10aed3635d97545fd6982c7c82eabd80db0b51ea5",
+      "sha256": "6cc293f4902b6e5e7c6e6e866a6a4e23a4ef506ac9124f98462e90c82d681e34",
       "size": 47186
     },
     {
       "path": "updates/field-notes/page/4/index.html",
-      "sha256": "9daa0d67c483e39c03d5730c9d992740947a4b6a314015cb0c84fd8d70eb9aba",
+      "sha256": "e0d41ded45b18baccc008260726d2edbd71500f51132938be82bdb5f64cc0f9a",
       "size": 28285
     },
     {
@@ -7165,127 +7165,127 @@
     },
     {
       "path": "updates/field-notes/tags/adoption/index.html",
-      "sha256": "9db0add5bf16198d58cd7af5e27ba271054c4bc1b6093830654febea1c7d833d",
+      "sha256": "1613663ed1ba815de10c5559d2f4b9d03aa96f40532e1bff5cf775b55719975a",
       "size": 16737
     },
     {
       "path": "updates/field-notes/tags/aep/index.html",
-      "sha256": "09b36b2e4a51d90badf5af3dd852039a30ae6de65cfd5adc0a63c0d9592dfe4e",
+      "sha256": "137abf441097066576e1bfb8f6a80600f95aaac46fbf4c80a7b5bd13add7ffe4",
       "size": 45143
     },
     {
       "path": "updates/field-notes/tags/aep/page/2/index.html",
-      "sha256": "2066f746b1437d3f7be2d3f5924f9dc9266fc1b93c0a841e7b57ecb7fbaa8135",
+      "sha256": "8b9618e95111a1337151d15c3ef39364ad86c778ad4710b428531ca6cbab9a3f",
       "size": 38245
     },
     {
       "path": "updates/field-notes/tags/aep/page/3/index.html",
-      "sha256": "53f884f51ddb6ec628313f44558c7f0928f5ef3515f7753a5b8ef8a91fc9085b",
+      "sha256": "ac415e3fa2a3177f18d5cd93bdbc2608e140f12b5c885ba5157bd698c50c698b",
       "size": 13762
     },
     {
       "path": "updates/field-notes/tags/automation/index.html",
-      "sha256": "74d25031970aca94dd10a177a12ca4e08e9bb88528dcb37285025916b185a33e",
+      "sha256": "6a232a545c08d3327aa28a5af885b369fdf3708a1ea88b80a9df809a7a4c925c",
       "size": 14088
     },
     {
       "path": "updates/field-notes/tags/ci/index.html",
-      "sha256": "78d2133e8c40beb83548b38808af007dddfe7ab303ddc54ba14e0077513f96c4",
+      "sha256": "57045e146c0b80106d2f4da71b461fbdce543fadf519ae7b6bc4c4fa1032c5eb",
       "size": 16356
     },
     {
       "path": "updates/field-notes/tags/conformance/index.html",
-      "sha256": "ab296d96975c6dc72ba1cef1040f416a7afb18ccfdff6308e8b27f38516778a5",
+      "sha256": "452595548109994aed13a87bbc004a3d991666536f44f396cd0040f89591e777",
       "size": 22230
     },
     {
       "path": "updates/field-notes/tags/docs/index.html",
-      "sha256": "06233fc18b5d68694eb5214e3ef9d9962c74d9059d04116204620b9cd1fd0e25",
+      "sha256": "7aace4db212b97f68ca9e289c931ce78cfa311dfe67c595fef7e500d31710493",
       "size": 13823
     },
     {
       "path": "updates/field-notes/tags/driver/index.html",
-      "sha256": "0cf23a7f3eba87436d3cab3397b5dc7bb0cd1d75fa4661ea00340d3bbb6cdb72",
+      "sha256": "674737e4e310da8a8f385a16d7692fcfdc8816e1aef99237ae7f71d32e21aea1",
       "size": 21742
     },
     {
       "path": "updates/field-notes/tags/ess/index.html",
-      "sha256": "189cbd5603dba4019f17b234dad0a35006848f64ca734f1c4f92282953bcdd6d",
+      "sha256": "5fb2f9c07ce5372a19d0f77fdc8a2926349c549b171a1f9e8458bdec5267cea0",
       "size": 36338
     },
     {
       "path": "updates/field-notes/tags/evidence/index.html",
-      "sha256": "a667d706496094db47b8809bdbd1f3009e13600b4da56a8fb130106304ed23f4",
+      "sha256": "4dffb563f68585b54d3b8e53eb9720d1cd7d727c5b7089a02368631385132739",
       "size": 27401
     },
     {
       "path": "updates/field-notes/tags/human-in-the-loop/index.html",
-      "sha256": "f11837bf7b29ae0060009205bebf6cf9f17cc4c519122cf01e238ded06cd3a35",
+      "sha256": "4b9174e6b39baae2da970ff5155795be5dace89184576920cbfbda65461bfa13",
       "size": 14137
     },
     {
       "path": "updates/field-notes/tags/index.html",
-      "sha256": "ba99e332847d3e5a4d3cef3c52a3786d8ec34257bf995f9459f71451eb26ae54",
+      "sha256": "c57b1efadada1bac4f652ffae61a37df0bdb48a8cc5d54c7dd648862c9a5081c",
       "size": 15153
     },
     {
       "path": "updates/field-notes/tags/infrastructure/index.html",
-      "sha256": "c5b8e0fe2d7ae9c49b2e3c598bba539808a5c5f9bb24aad174bac73f6225eecd",
+      "sha256": "8e02098869f03b3078d0e9e05e334b1641bca2a447340b91ea28c6cb13028830",
       "size": 13678
     },
     {
       "path": "updates/field-notes/tags/measurement/index.html",
-      "sha256": "bd309021716acbd8e1d99a127a065044364a294eee9ec890994b95197a2f46fc",
+      "sha256": "addde72986df55f3965bebd6087c954e179e49b6c3be75875d9434d24c8f8f32",
       "size": 14095
     },
     {
       "path": "updates/field-notes/tags/planning/index.html",
-      "sha256": "8edefc8933aaef1b92f6165165fb22b859b7f9c56a785b5341fb5d735e789f4d",
+      "sha256": "3c32a0d437ea0c8922b18c6e81fbf3fa30b7f6d33798a70dbfb36dc32a1e4759",
       "size": 45036
     },
     {
       "path": "updates/field-notes/tags/portability/index.html",
-      "sha256": "9f16ee28eecfc793c12c1aeffd98e18cf25b84e9f4130a6293f9241e1b9cd916",
+      "sha256": "917eaf7f437bcca26de8931752d48626e528cc189370f80824b4e6e429557f22",
       "size": 13872
     },
     {
       "path": "updates/field-notes/tags/release/index.html",
-      "sha256": "6e11eb434fbf1db964e46d3967a759e6fe1c6462ffe1bbde3e6cee61bf8a8e0e",
+      "sha256": "01fdcd1865ff6d70d21a2ad6fd373daf73772c3bdf6931bea9070e1fd737cea0",
       "size": 44477
     },
     {
       "path": "updates/field-notes/tags/release/page/2/index.html",
-      "sha256": "23333204d2b23cc44ddc9f4f1cfb6e9ad5218c1cf6947d2744703b36fbdee167",
+      "sha256": "988fa5ba849a2f2ae6fb6dc5366a9437b81d44633a17865ad862215b45f42b53",
       "size": 39428
     },
     {
       "path": "updates/field-notes/tags/release/page/3/index.html",
-      "sha256": "dc97cee0e3a78979261eff08f5a5d559acbe68b9012b62f171e4a7c068fdd626",
+      "sha256": "cdadc2d00b19a6fda0e58196d2300b6806d9748f95f03935334acc88b471f36a",
       "size": 39339
     },
     {
       "path": "updates/field-notes/tags/release/page/4/index.html",
-      "sha256": "7f82ed4785671ab5c9ac7f2555ac6060e38807e9faff88a649cbf7fa33e7eb2c",
+      "sha256": "d09ba626b01d520abe8efe842d375b3bc72954db36694b2fd0d6dacb30326237",
       "size": 21624
     },
     {
       "path": "updates/field-notes/tags/trace/index.html",
-      "sha256": "36d27f398f67d5a010421bd4847c4a91fb8a75bf5bbafdecaa5dcc8e13c07a45",
+      "sha256": "555421353b0306308ed988de4f958943eba4c1dc6c4faf6300e07594f4581f0b",
       "size": 16689
     },
     {
       "path": "updates/field-notes/tags/transcripts/index.html",
-      "sha256": "f9d9f90edad536993a298771ecad8d38a79a5826098d8b5e6931887b795f4284",
+      "sha256": "e288e426ca2343ef5d3dfaea5825a96a653d62d50d48c42478f11ea117281376",
       "size": 14095
     },
     {
       "path": "updates/index.html",
-      "sha256": "20feeafea6453daa561fde5eb265a95eef668662ca39b21dec65820cc3958601",
+      "sha256": "ddc8ee9d6e09a5e0f5d4bc6ff0d3615223d9604a68632576a62adbd6baaa5b16",
       "size": 12124
     },
     {
       "path": "vision/index.html",
-      "sha256": "15ae32de7951ccda7c4a8c000bea2f0261cdc3edcbfa39c2c019a9c4deb3cc6d",
+      "sha256": "78003f8c7587fa0f554961b617062a0df5a98fa23ddddcc323798d018642b6cb",
       "size": 11737
     },
     {
