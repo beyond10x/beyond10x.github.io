@@ -67,9 +67,9 @@ the output location, in this case `operations/runbook.html`.
 
 Authored `mermaid` fences and model-generated diagrams use the same local renderer.
 Their escaped source remains readable when JavaScript is disabled; non-Mermaid fences
-remain code listings. This authored-fence support is an unreleased change.
+remain code listings. This authored-fence support is available in ESS 0.20.0.
 
-The unreleased publisher resolves relative links using the included documents' source
+The publisher resolves relative links using the included documents' source
 locations, even when their output paths differ. `--front-page docs/README.md` overrides
 the default front page without moving it. Declare UTF-8 downloads explicitly, for example
 `--asset contracts/api.json=contracts/api.json`; they are copied verbatim, and their
@@ -90,7 +90,7 @@ Use the `docs` projection instead when another documentation system owns present
 
 ## Schema-only Bundles
 
-The unreleased `schema import-bundle` adapter selects named structural contracts from
+The `schema import-bundle` adapter selects named structural contracts from
 `components/schemas` without asserting that the envelope is a valid HTTP service.
 Its structural dialect must be supplied explicitly:
 
@@ -117,7 +117,7 @@ qualification. Unknown keywords, nested resource/anchor declarations and unresol
 references outside the selected source collection are refused without a partial successful artifact.
 
 When the source is a complete JSON Schema document, keep its root as well as its
-definitions. The unreleased document adapter assigns an explicit root identity:
+definitions. The document adapter assigns an explicit root identity:
 
 ```sh
 ess generate schema import-document --path record.schema.json --root Record \
@@ -143,7 +143,7 @@ service importer, which keeps its own strict dialect and interface subset.
 
 ## Accounted Data Types
 
-The unreleased bundle realization path selects roots and their complete closure
+The bundle realization path selects roots and their complete closure
 before emitting declarations:
 
 ```sh
@@ -213,7 +213,7 @@ bindings to imported schemas and application-specific decoder semantics remain p
 #### Finite model codecs
 
 Standalone Rust and Go model targets support compiler-owned `Binary64` fields
-from unreleased `ess/2`. Rust emits `EssBinary64::new(f64)` with checked finite
+from `ess/2`. Rust emits `EssBinary64::new(f64)` with checked finite
 construction and `.get()` access; Go emits `NewEssBinary64(float64)` and `.Float64()`.
 Their JSON codecs retain the original numeric token through supported aliases,
 recursive containers and union branches. They preserve signed zero, subnormals,
@@ -247,7 +247,7 @@ ordered choices, list mapping and distinct string-category counts have defined
 semantics. There is no trial dispatch or implicit default branch. Duplicate authored
 map keys refuse rather than overwrite earlier operations.
 
-The unreleased `ess-normalization/2` format adds these explicit operations to both
+The `ess-normalization/2` format adds these explicit operations to both
 the reference engine and standalone Rust target:
 
 | Operation | Meaning |
@@ -340,7 +340,7 @@ The `ess-normalization-target/1` report records the canonical recipe, source roo
 schemas and emitted-file digests, excluding the report itself. Generated-crate checks
 cover default serde_json features and consumer-enabled arbitrary precision.
 
-The unreleased library API `Plan::go(package, module)` emits a standalone Go 1.26
+The library API `Plan::go(package, module)` emits a standalone Go 1.26
 module with the same source-pinned report. `New()` prepares offline validators;
 `Normalize(branch, input)` accepts JSON bytes and returns a complete `json.RawMessage`
 or a typed `Refused`. It preserves exact integer tokens, explicitly declared
@@ -360,7 +360,7 @@ refuses generation with `go_schema_pattern` at its source pointer, including
 equivalent spellings of this expression. `contentEncoding` alone does not qualify
 a pattern. General ECMA-262 matcher compatibility remains unfinished.
 
-Generate either implemented normalization library directly with the unreleased CLI:
+Generate a normalization library directly with the CLI:
 
 ```shell-session
 $ ess generate schema normalize-generate --recipe normalization.json \
@@ -384,7 +384,7 @@ assumes controlled parent directories and does not provide rollback for later I/
 failure. The output includes `normalization-report.json` with the exact library-API
 provenance and file identities.
 
-Model-owned records use the unreleased `ess-normalization/3` format.
+Model-owned records use the `ess-normalization/3` format.
 `Root::pin_model` pins a root explicitly admitted by a sealed
 `ess_gen::schema::ModelTypes` selection; `Plan::check_with_models` accepts these
 selections alongside replay-checked bundles. Identity includes the system,
@@ -411,7 +411,7 @@ not execute those predicates. Go's pattern refusal also applies to model-derived
 patterns outside the exact qualified `Bytes` expression above. Bundle-only versions
 1 and 2 keep their canonical recipe representation and version 1 report envelope.
 
-The unreleased `ess-normalization/4` format adds explicit lexical capture through
+The `ess-normalization/4` format adds explicit lexical capture through
 `raw_json_inputs`. Each branch maps to a list of field/items selectors; an empty
 path selects the root token:
 
@@ -437,14 +437,15 @@ numeric rules still apply. Selectors use declared wire fields and array items;
 duplicate or ancestor-overlapping captures and capture/binary64 overlaps refuse
 planning. Capture is never inferred from a `Bytes` type or field name.
 
-Use `Plan::run_json`, Rust `Normalizer::normalize`, Go `Normalizer.Normalize`, or
-the existing CLI `normalize-run` text edge. `Plan::run` and Rust `normalize_value`
+Use `Plan::run_json`, Rust `Normalizer::normalize`, Go `Normalizer.Normalize`,
+TypeScript `Normalizer.normalize`, or the existing CLI `normalize-run` text edge. `Plan::run` and Rust `normalize_value`
 refuse a branch with active capture selectors because decoded values have lost
 token provenance. An empty selector list does not disable those value APIs.
 
 To inspect tokens inside a retained document, use a second checked recipe and an
 explicit decoding boundary: `Plan::run_base64_json`, Rust
-`Normalizer::normalize_base64_json`, or Go `Normalizer.NormalizeBase64JSON`.
+`Normalizer::normalize_base64_json`, Go `Normalizer.NormalizeBase64JSON`, or
+TypeScript `Normalizer.normalizeBase64Json`.
 These accept unquoted base64 text, require canonical standard encoding and UTF-8,
 then pass unchanged JSON text to normal execution. Failures occur in order:
 `input_base64`, `input_utf8`, then normal text-edge findings. They do not parse and
@@ -454,18 +455,17 @@ recipe retains its own source identities; callers own their composition.
 Format 4 uses target report version 3. Versions 1–3 refuse `raw_json_inputs`, even
 an empty map, and retain their canonical recipes, generated code and file maps.
 Across package releases, reports still record the actual generator version.
-TypeScript normalization adapters remain pending.
 Expanded recursive shapes, tuples and
 intersections refuse in the earlier checker profiles; format 6 adds only the
 explicit closed-tuple support described below. Schema bounds and other refinements are
-checked at runtime boundaries, not proven by structural checking. Integer operations
-require exact signed-64-bit integral JSON tokens; equality is scalar-only, with no
-cross-kind coercion. Full language-target normalization and
-source-adapter adoption remain unfinished.
+checked at runtime boundaries, not proven by structural checking. Integer arithmetic
+requires exact signed-64-bit integral JSON tokens. Equality is scalar-only and has
+the format-5/6 floating-pair limitation described below. Source-adapter adoption
+remains a separate consumer task.
 
 #### Modeled finite floating values
 
-The unreleased `ess-normalization/5` format admits modeled `Binary64` inputs and
+The `ess-normalization/5` format admits modeled `Binary64` inputs and
 outputs from an `ess/2` specification. Every Binary64 leaf in the first input
 requires an explicit `binary64_inputs` field/items/root selector, including unused
 optional fields. Map-value and tagged-union selectors are unsupported and refuse
@@ -502,7 +502,7 @@ emitted Rust/Go file maps of formats 1–4.
 
 #### Fixed positional input arrays
 
-Use unreleased `ess-normalization/6` when the source contract explicitly constructs
+Use `ess-normalization/6` when the source contract explicitly constructs
 a fresh fixed string array. Declare the prepared field as a positive-length closed
 tuple: `prefixItems` contains exactly that many string schemas, `minItems` and
 `maxItems` equal the length, and `items` is `false`. The input policy records the
@@ -558,10 +558,71 @@ positional policies require an original-text entrypoint (`Plan::run_json`, Rust
 `Normalizer::normalize`, Go `Normalizer.Normalize`, or CLI `normalize-run`) or a
 retained-base64 helper. `Plan::run` and Rust `normalize_value` refuse them even
 when the selected field is absent.
-The existing normalize check/run/generate commands and Rust/Go targets apply.
+The existing normalize check/run/generate commands and Rust/Go/TypeScript targets apply.
 Format 6 keeps `ess-normalization-target/3`, its report fields and digest domains;
 formats 1–5 keep their complete generated maps at the same generator version.
-TypeScript normalization remains pending.
+
+#### Standalone TypeScript normalization
+
+The `Plan::typescript(package)` API and CLI emit a private ES2022 ESM
+package with strict TypeScript build inputs and no runtime dependencies:
+
+```shell-session
+$ ess generate schema normalize-generate --recipe normalization.json \
+    --bundle input.bundle.json --bundle output.bundle.json \
+    --target typescript --package settings-adapter --out generated/typescript
+$ cd generated/typescript
+$ tsc --project tsconfig.json
+```
+
+Generation installs nothing. TypeScript 6.0.3 and Node 22.23.1 are the qualified
+compiler/runtime. Package names use lowercase ASCII parts beginning with a letter,
+optionally `@scope/name`; parts can also contain digits, `-`, `_` and `.` and the
+complete identity is at most 214 bytes. `--module` is Go-only and refuses here.
+Import the emitted root entrypoint after compiling:
+
+```typescript
+import { Normalizer } from './generated/typescript/dist/index.js';
+
+const adapter = new Normalizer();
+const result = adapter.normalize('primary', '{"value":9007199254740993}');
+if (result.ok) {
+  console.log(result.json);
+} else {
+  console.error(result.findings);
+}
+```
+
+The branch and input must match the checked recipe. Successful output is compact
+JSON text; refusals carry `pointer`, `rule` and `detail`, with no partial output.
+`normalizeBase64Json(branch, encoded)` accepts strict canonical base64 containing
+UTF-8 JSON. A decoded BOM is preserved and then fails normal JSON grammar; invalid
+UTF-8 and lone Unicode surrogates are rejected. No decoded-object API is offered.
+Internal bigint preserves integer precision; ordinary JSON.parse on the returned
+text would transfer responsibility for that precision to the caller.
+
+The fixed `schema-profile.json` is hashed with the runtime and retained sources.
+It includes tuple `prefixItems` and array/string lengths, exact numeric bounds,
+source enums and the frozen Bytes pattern. It does not widen the existing Plan
+shape checker: some numeric type/enum and allOf intersections still refuse there.
+`uniqueItems: true`, unqualified patterns and other unsupported constraints refuse
+before files are returned. Formats/content encodings are annotations and defaults
+do not run. Schema findings retain the full reference multiset, sorted by escaped
+Unicode-scalar pointer; non-schema findings retain their located rule and detail.
+
+Recipe formats 1/2 use target report 1, format 3 uses report 2, and formats 4/5/6
+use report 3. The new language needs no new recipe/report version. Report files
+include all emitted runtime/profile inputs; consumer-built `dist/` is not hashed.
+Existing Rust/Go emitted maps remain unchanged at the same generator version.
+
+Static equality checking adds two typed Binary64 operands in formats 5/6 and keeps
+Binary64 output provenance distinct. The frozen evaluator also compares any two
+floating representations numerically in these formats, even when an Integer
+source schema admitted integral floats. For example, an admitted Integer equality
+can compare `1.0` with `1.0`; mixed `1`/`1.0` still refuses integer eligibility.
+TypeScript preserves this runtime limitation. It does not make a general Number
+expression comparable or allow implicit Binary64 output conversion. A separate
+core-contract change would need its own compatibility decision.
 
 ## The graph, without generating a tree
 
