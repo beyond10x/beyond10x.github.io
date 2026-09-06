@@ -1,7 +1,7 @@
 {
   "schema": "b10x-code-fence-inventory/v1",
   "phase": "rendered",
-  "sourceLockSha256": "091228b507e392eb4530bf05f0ae0cd6b4a3cabcf3e52206a5d64bfac5445ae8",
+  "sourceLockSha256": "3627739b5462acf4d6d6680e698df7268380d3adb91b0d31eb20f161557b15dd",
   "lockedSources": [
     {
       "repository": "aep",
@@ -53,7 +53,7 @@
     },
     {
       "repository": "extensions",
-      "sourceRevision": "dd96377944e1a2ff49a525b5077757bfda8d2bee"
+      "sourceRevision": "f9688b9ff24e96b877522cdd3da613e6cb5977ed"
     },
     {
       "repository": "harness",
@@ -1400,7 +1400,7 @@
     {
       "repository": "extensions",
       "sourcePath": "README.md",
-      "sourceRevision": "dd96377944e1a2ff49a525b5077757bfda8d2bee",
+      "sourceRevision": "f9688b9ff24e96b877522cdd3da613e6cb5977ed",
       "sourceKind": "documentation",
       "publicRoute": "/docs/extensions/",
       "fenceCount": 2
@@ -1408,15 +1408,15 @@
     {
       "repository": "extensions",
       "sourcePath": "docs/model.md",
-      "sourceRevision": "dd96377944e1a2ff49a525b5077757bfda8d2bee",
+      "sourceRevision": "f9688b9ff24e96b877522cdd3da613e6cb5977ed",
       "sourceKind": "documentation",
       "publicRoute": "/docs/extensions/model/",
-      "fenceCount": 1
+      "fenceCount": 2
     },
     {
       "repository": "extensions",
       "sourcePath": "docs/scenarios.md",
-      "sourceRevision": "dd96377944e1a2ff49a525b5077757bfda8d2bee",
+      "sourceRevision": "f9688b9ff24e96b877522cdd3da613e6cb5977ed",
       "sourceKind": "documentation",
       "publicRoute": "/docs/extensions/scenarios/",
       "fenceCount": 0
@@ -10578,10 +10578,10 @@
     {
       "repository": "extensions",
       "sourcePath": "README.md",
-      "sourceRevision": "dd96377944e1a2ff49a525b5077757bfda8d2bee",
+      "sourceRevision": "f9688b9ff24e96b877522cdd3da613e6cb5977ed",
       "sourceKind": "documentation",
       "publicRoute": "/docs/extensions/",
-      "line": 35,
+      "line": 37,
       "declaredLanguage": "bash",
       "normalizedLanguage": "bash",
       "semanticClass": "command",
@@ -10600,10 +10600,10 @@
     {
       "repository": "extensions",
       "sourcePath": "README.md",
-      "sourceRevision": "dd96377944e1a2ff49a525b5077757bfda8d2bee",
+      "sourceRevision": "f9688b9ff24e96b877522cdd3da613e6cb5977ed",
       "sourceKind": "documentation",
       "publicRoute": "/docs/extensions/",
-      "line": 57,
+      "line": 62,
       "declaredLanguage": "bash",
       "normalizedLanguage": "bash",
       "semanticClass": "command",
@@ -10622,7 +10622,7 @@
     {
       "repository": "extensions",
       "sourcePath": "docs/model.md",
-      "sourceRevision": "dd96377944e1a2ff49a525b5077757bfda8d2bee",
+      "sourceRevision": "f9688b9ff24e96b877522cdd3da613e6cb5977ed",
       "sourceKind": "documentation",
       "publicRoute": "/docs/extensions/model/",
       "line": 6,
@@ -10641,6 +10641,28 @@
         "matchesExpected": true,
         "position": 1,
         "verification": "client-runtime"
+      }
+    },
+    {
+      "repository": "extensions",
+      "sourcePath": "docs/model.md",
+      "sourceRevision": "f9688b9ff24e96b877522cdd3da613e6cb5977ed",
+      "sourceKind": "documentation",
+      "publicRoute": "/docs/extensions/model/",
+      "line": 232,
+      "declaredLanguage": "json",
+      "normalizedLanguage": "json",
+      "semanticClass": "source",
+      "expectedRendering": "prism",
+      "bodySha256": "4d0220fcdf73961165928d13b156d1ffaa762037c1727d23aecfc20a561fce21",
+      "rendered": {
+        "kind": "prism",
+        "found": true,
+        "language": "json",
+        "bodySha256": "4d0220fcdf73961165928d13b156d1ffaa762037c1727d23aecfc20a561fce21",
+        "meaningfulTokens": true,
+        "matchesExpected": true,
+        "position": 2
       }
     },
     {
@@ -14065,7 +14087,7 @@
     }
   ],
   "summary": {
-    "fenceCount": 550,
+    "fenceCount": 551,
     "fencedSourceCount": 142,
     "routeCount": 142,
     "languages": {
@@ -14073,7 +14095,7 @@
       "go": 1,
       "http": 2,
       "javascript": 1,
-      "json": 31,
+      "json": 32,
       "markdown": 1,
       "mermaid": 30,
       "rust": 15,
@@ -14088,15 +14110,15 @@
       "command": 200,
       "diagram": 30,
       "output": 80,
-      "source": 128,
+      "source": 129,
       "transcript": 112
     },
-    "renderedCount": 550,
-    "meaningfullyTokenizedCount": 424,
+    "renderedCount": 551,
+    "meaningfullyTokenizedCount": 425,
     "lockedRepositoryCount": 24,
     "markdownSourceCount": 225,
     "renderedRouteCount": 349,
-    "renderedBlockCount": 570,
+    "renderedBlockCount": 571,
     "unattributedRenderedCount": 0,
     "componentRenderedCount": 3,
     "fieldNoteProjectionCount": 17,
@@ -20829,9 +20851,9 @@
           "sourceFence": {
             "repository": "extensions",
             "sourcePath": "README.md",
-            "sourceRevision": "dd96377944e1a2ff49a525b5077757bfda8d2bee",
+            "sourceRevision": "f9688b9ff24e96b877522cdd3da613e6cb5977ed",
             "publicRoute": "/docs/extensions/",
-            "line": 35
+            "line": 37
           }
         },
         {
@@ -20845,9 +20867,9 @@
           "sourceFence": {
             "repository": "extensions",
             "sourcePath": "README.md",
-            "sourceRevision": "dd96377944e1a2ff49a525b5077757bfda8d2bee",
+            "sourceRevision": "f9688b9ff24e96b877522cdd3da613e6cb5977ed",
             "publicRoute": "/docs/extensions/",
-            "line": 57
+            "line": 62
           }
         }
       ]
@@ -20867,9 +20889,25 @@
           "sourceFence": {
             "repository": "extensions",
             "sourcePath": "docs/model.md",
-            "sourceRevision": "dd96377944e1a2ff49a525b5077757bfda8d2bee",
+            "sourceRevision": "f9688b9ff24e96b877522cdd3da613e6cb5977ed",
             "publicRoute": "/docs/extensions/model/",
             "line": 6
+          }
+        },
+        {
+          "position": 2,
+          "kind": "prism",
+          "language": "json",
+          "bodySha256": "4d0220fcdf73961165928d13b156d1ffaa762037c1727d23aecfc20a561fce21",
+          "meaningfulTokens": true,
+          "projectionOf": null,
+          "classification": "source-fence",
+          "sourceFence": {
+            "repository": "extensions",
+            "sourcePath": "docs/model.md",
+            "sourceRevision": "f9688b9ff24e96b877522cdd3da613e6cb5977ed",
+            "publicRoute": "/docs/extensions/model/",
+            "line": 232
           }
         }
       ]
