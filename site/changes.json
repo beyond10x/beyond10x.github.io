@@ -2,6 +2,28 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "ess/source-driven-realization-0.19.0",
+      "id": "ess/source-driven-realization-0.19.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-05T21:00:00Z",
+      "title": "Checked schema imports and structural data realizations",
+      "summary": "Import complete JSON Schema roots with source identity; generate structural Go, Rust and TypeScript libraries; and run source-pinned normalization recipes. Rust normalization has a library API; Go/TypeScript support is pending. Rust/Web synthesis returns checked failures, and sliced provenance names its digest profile.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.19.0",
+        "version": "0.19.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
       "key": "ess/early-stop-assertion-0.18.0",
       "id": "ess/early-stop-assertion-0.18.0",
       "repository": "ess",

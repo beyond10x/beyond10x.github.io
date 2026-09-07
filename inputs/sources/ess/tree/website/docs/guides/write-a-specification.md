@@ -41,6 +41,34 @@ offline gate is `task check`, which exercises the schema contract alongside the 
 
 ## Validate early, read the refusals
 
+The unreleased `ess/2` format adds `Binary64` for finite IEEE-754 values. Use it
+when a source contract requires binary floating-point rounding and signed zero:
+
+```yaml
+format: ess/2
+system: sample
+version: v1
+domains: [sample.settings]
+domain: sample.settings
+types:
+  - name: sample.settings.Ratio
+    kind: newtype
+    of: Binary64
+```
+
+`Integer` retains exact signed integer identity; `Decimal` retains its patterned
+string representation. Neither implicitly assigns to `Binary64`. Map keys cannot
+be Binary64. Format 1 refuses the new primitive, including fields in headerless
+fragments. Authored numeric predicates may compare Binary64 to numeric literals,
+using the existing Number predicate rules; that comparison does not construct a
+floating value.
+
+The qualified executable boundary is [format-5 normalization](generate-artifacts.md).
+Standalone structural Rust/Go codecs and whole-system/conformance targets currently
+refuse Binary64; TypeScript structural output reports the finite codec obligation.
+Adding a Binary64 type to a model selected in full therefore requires checking
+every intended target's support before adopting it.
+
 ```shell-session
 $ ess specify validate --path examples/billing
 billing v3 — 5 file(s), valid
@@ -251,11 +279,22 @@ because conflating them is how a domain model turns into a description of a depl
 | **binding** | `InvoiceCreated` causes `SendEmail` | which queue carries it |
 | **topology** | the system is not correct with one instance | how many pods to start |
 
-One component word does reach further than the rest: `reached_by:`, a closed set of `in_process` —
-the default, and what silence has always meant — and `network`. It says where a component's callers
-are, and that is enough for the generators to derive an HTTP surface rather than a document beside
-one. `examples/billing/` declares neither and gets the default; `examples/gatepass/components.yaml`
-declares `reached_by: network`, which is why that example has a served contract and billing does not.
+`reached_by:` is a closed set of `in_process` (the default), `network` and `command_line`. It
+declares where a component's callers reach its surface. `examples/billing/` omits it and gets
+`in_process`; `examples/gatepass/components.yaml` declares `network`, which selects HTTP server
+generation in the current Rust and Go targets. Projecting an OpenAPI document alone does not run
+a server.
+
+For `command_line`, supply a `cli:` block naming the binary and placing every accepted command
+exactly once at the root or in a group. Command words derive from their wire names, and flags from
+input fields and their wire names. A CLI block without `command_line`, or `command_line` without a
+CLI block, is refused. Reach and CLI layout belong to the authored/compiled model and participate
+in its identity; physical argv or URL invocation belongs to realization.
+
+Each logical component currently has one reach value. Several physical entrypoint records do not
+add simultaneous semantic CLI and HTTP surfaces, and duplicating domain ownership is refused.
+See [Logical, interface and delivery owners](../concepts/ess.md#logical-interface-and-delivery-owners)
+for the separate contracts, identity consequences and bounded examples.
 
 ## Check what you just wrote resolved
 
@@ -340,6 +379,13 @@ bindings:
 
 Conflating any two costs a rename later: an HTTP path that changes because someone improved a domain
 term is an outage caused by a wording fix.
+
+Field `wire` overrides change JSON property keys, not logical field identities.
+Effective wire keys must be distinct within each object: structs, command inputs,
+event/error payloads, entity identity/fields/state and view rows. View parameters have
+their own namespace. An entity field or identity cannot use the reserved `state` wire
+key. Validation accumulates collisions before any projection can overwrite a property;
+display names and identical keys in separate objects do not conflict.
 
 ## Next
 
