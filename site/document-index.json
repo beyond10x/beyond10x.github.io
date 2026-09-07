@@ -3086,7 +3086,7 @@
       "qualifiedTitle": "Synthesize code from a specification | ESS",
       "project": "ess",
       "projectName": "ESS",
-      "description": "The synthesis plan, the four targets behind it, obligations as the contract with the human, and how the generated code is proven against the generated suite.",
+      "description": "The synthesis plan, the three emitters behind it, obligations as the contract with the human, and how the generated code is proven against the generated suite.",
       "documentType": "how-to",
       "audiences": [
         "adopter",
@@ -3109,7 +3109,7 @@
       "qualifiedTitle": "Track specification change | ESS",
       "project": "ess",
       "projectName": "ESS",
-      "description": "Compare compiled specification revisions and explain which scenarios and generated artifacts need another check.",
+      "description": "Compare two revisions semantically with ess verify diff, and compute what the change invalidates — scenarios and generated artifacts — with ess verify impact.",
       "documentType": "how-to",
       "audiences": [
         "adopter",
@@ -3216,29 +3216,6 @@
       "sourcePath": "website/docs/reference/cli.md"
     },
     {
-      "route": "/docs/ess/reference/formats/",
-      "title": "Formats and digests",
-      "qualifiedTitle": "Formats and digests | ESS",
-      "project": "ess",
-      "projectName": "ESS",
-      "description": "Identify ESS documents, their readers, and the bytes each digest names.",
-      "documentType": "reference",
-      "audiences": [
-        "adopter",
-        "developer"
-      ],
-      "experiences": [
-        "try-spec-driven-development"
-      ],
-      "support": "preview",
-      "access": "public",
-      "compatibility": false,
-      "tasks": [
-        "reference"
-      ],
-      "sourcePath": "website/docs/reference/formats.md"
-    },
-    {
       "route": "/docs/ess/status/",
       "title": "Status",
       "qualifiedTitle": "Status | ESS",
@@ -3283,29 +3260,6 @@
       "sourcePath": "website/docs/status/limitations.md"
     },
     {
-      "route": "/docs/ess/status/outlook/",
-      "title": "Outlook — making ESS dependable",
-      "qualifiedTitle": "Outlook — making ESS dependable | ESS",
-      "project": "ess",
-      "projectName": "ESS",
-      "description": "The proposed priorities, vocabulary, and evidence needed for ESS to mature.",
-      "documentType": "status",
-      "audiences": [
-        "adopter",
-        "developer"
-      ],
-      "experiences": [
-        "try-spec-driven-development"
-      ],
-      "support": "preview",
-      "access": "public",
-      "compatibility": false,
-      "tasks": [
-        "reference"
-      ],
-      "sourcePath": "website/docs/status/outlook.md"
-    },
-    {
       "route": "/docs/ess/status/roadmap/",
       "title": "Roadmap",
       "qualifiedTitle": "Roadmap | ESS",
@@ -3334,7 +3288,7 @@
       "qualifiedTitle": "Where this stands | ESS",
       "project": "ess",
       "projectName": "ESS",
-      "description": "Current-source ESS capabilities, a dated release observation, and their evidence boundaries.",
+      "description": "Shipped ESS capabilities and the evidence behind them.",
       "documentType": "status",
       "audiences": [
         "adopter",
