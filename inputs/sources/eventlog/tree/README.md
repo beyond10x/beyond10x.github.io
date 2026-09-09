@@ -51,6 +51,14 @@ EVENTLOG_TEST_POSTGRES_URL=postgresql://postgres:<password>@127.0.0.1:55999/post
 docker rm -f eventlog-test-pg
 ```
 
+## Public input validation
+
+`TenantId` and `StreamId` enforce their constructor checks during deserialization. Both adapters
+validate publicly mutable event and claim fields before starting an append, including every event
+in a batch. Invalid names, coordinates, claim fields or non-object event bodies are refused before
+events, receipts, claims or projections can change. Valid serialized representations and exact
+command retries retain their existing behavior.
+
 ## Hosted PostgreSQL composition
 
 `PostgresEventStore::connect` remains the isolated local convenience constructor. It accepts only
@@ -61,14 +69,14 @@ verifies both certificate chain and server name. Credentials stay in the host's 
 Run `PostgresEventStore::migrate(config, options, projections)` with the migration role before
 opening traffic. It serializes additive migrations, checks the complete old physical shape and
 records schema version/checksum plus the exact projection roster. Supply every legacy projection's
-name and indexed paths explicitly. Unknown, partial, altered, unlogged, RLS/policy/trigger or
+name and indexed paths explicitly. Unknown, partial, altered, unlogged, RLS/policy/trigger/rewrite-rule or
 foreign-sequence or inherited-table shapes refuse admission. Event sequence CACHE 1, positive unit increment and
 non-cycling BIGSERIAL range are part of admission; column collations must match and be deterministic. Existing event envelopes and the committed-transaction
 feed watermark predicate stays unchanged. Readers also stop before the first position withheld
 by that predicate: an unrelated transaction can hold xmin between already committed append XIDs,
 so filtering individual rows alone could skip a lower position. A separate transaction publication gate prevents a
 reader from advancing past an in-flight lower position when transaction-id and position order
-differ: append/redaction/erasure hold a shared owner gate; feed/catch-up/rebuild take it exclusively
+differ: append/redaction hold a shared owner gate; erasure/feed/catch-up/rebuild take it exclusively
 before a fresh READ COMMITTED query. Connections force that isolation even if inherited URL/role
 options differ. All active writers and feed/fold readers must use this protocol; deployment cutover
 fences older binaries. Registration compares the persisted roster and physical shape.
@@ -120,6 +128,38 @@ callbacks. The permit grants a storage operation, not authorization to another t
 policy, installation lifecycle membership, current authority and namespace bindings remain with
 the owning service. The internal stored shapes have an ESS home under `ess/admission/`.
 
+## Snapshot provenance
+
+A snapshot is a cache of an observed history. Capture `snapshot_generation` before reading a
+snapshot or folding events, then pass that token to `save_snapshot_checked`. A `false` result
+means redaction or erasure changed that history; discard the cache candidate and fold again.
+The legacy `save_snapshot` method refuses unproven writes with `Invalid`.
+
+`Repository` carries this token through its load and automatic cache write. Automatic caching
+is best effort after append, so a cache failure does not turn a committed command into an error.
+`snapshot_now` retries one stale write, then reports that history changed. Store wrappers without
+checked-snapshot support fold from events and skip caching.
+
+Both adapters add a per-stream generation table without changing existing event or snapshot
+columns. Redaction rotates the generation, erasure removes it, and recreated streams receive a
+new generation. Old caches without provenance are ignored. PostgreSQL's migration role upgrades
+the exact supported older checksum and physical shape transactionally; application-role open
+requires the complete new schema. Stop older binaries before this protocol cutover.
+
+## Guard refusals and effect metadata
+
+A guard can return `EventLogError::GuardRefused { code }` with an owner-defined stable code.
+Both adapters preserve the code and roll back the entire refused append, including writes made
+through the guard's transactional projection view.
+
+`EffectStage`, `EffectEvidence` and `EffectBoundaryCoverage` describe generic external-effect
+evidence using existing command attribution. Owners explicitly validate this metadata before
+embedding it in their events. Identifiers, references, outcome codes and inventory boundary names
+must be bounded opaque values; names and addresses are refused. Eventlog does not interpret
+owner event bodies or decide effect policy. The semantic vocabulary lives in `ess/effects/`;
+the five Rust serde stage forms are tested directly because ESS cannot currently project their
+exact internally tagged wire layout.
+
 ## Required proof and comparative laboratory
 
 `bash scripts/gate.sh --production-proof` refuses missing URL, hosted-role URL or test CA, a selected
@@ -157,12 +197,13 @@ service fixtures separately prove current authority and old-reader namespace rep
 
 | path | holds |
 |---|---|
-| `docs/stories/` | the backlog, one file per story, with a hand-written index |
+| `.engineering/planning/` | governed stories, review findings and implementation evidence |
+| `docs/stories/` | historical foundation stories with backlinks to current planning records |
 | `scripts/` | the repository gate and component checks |
 
 ## Read more
 
-- [`docs/stories/README.md`](docs/stories/README.md) — the backlog and what each story delivered.
+- [`docs/stories/README.md`](docs/stories/README.md) — the historical foundation stories and what each delivered.
 - [`CHANGELOG.md`](CHANGELOG.md) — every capability the kit has, in the order it arrived.
 - [`AGENTS.md`](AGENTS.md) — working agreements and the invariants this kit holds.
 
