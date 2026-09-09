@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "eventlog/0.1.0",
+      "id": "eventlog/0.1.0",
+      "repository": "eventlog",
+      "publishedAt": "2026-09-09T01:41:45Z",
+      "title": "Eventlog 0.1.0",
+      "summary": "Eventlog released version 0.1.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/eventlog/releases/tag/0.1.0",
+        "version": "0.1.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "eventlog/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "entity-runtime/0.18.0",
       "id": "entity-runtime/0.18.0",
       "repository": "entity-runtime",
