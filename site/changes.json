@@ -2,6 +2,190 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "harness/0.12.1",
+      "id": "harness/0.12.1",
+      "repository": "harness",
+      "publishedAt": "2026-09-10T22:19:10Z",
+      "title": "Harness 0.12.1",
+      "summary": "Harness released version 0.12.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/harness/releases/tag/0.12.1",
+        "version": "0.12.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "harness/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "substrate/0.7.7",
+      "id": "substrate/0.7.7",
+      "repository": "substrate",
+      "publishedAt": "2026-09-10T22:08:38Z",
+      "title": "Substrate 0.7.7",
+      "summary": "Substrate released version 0.7.7.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/substrate/releases/tag/0.7.7",
+        "version": "0.7.7"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "substrate/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "eventlog/0.2.1",
+      "id": "eventlog/0.2.1",
+      "repository": "eventlog",
+      "publishedAt": "2026-09-10T20:55:21Z",
+      "title": "Eventlog 0.2.1",
+      "summary": "Eventlog released version 0.2.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/eventlog/releases/tag/0.2.1",
+        "version": "0.2.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "eventlog/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "entity-runtime/0.18.1",
+      "id": "entity-runtime/0.18.1",
+      "repository": "entity-runtime",
+      "publishedAt": "2026-09-10T20:50:17Z",
+      "title": "Entity Runtime 0.18.1",
+      "summary": "Entity Runtime released version 0.18.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.18.1",
+        "version": "0.18.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "entity-runtime/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "gates/0.1.2",
+      "id": "gates/0.1.2",
+      "repository": "gates",
+      "publishedAt": "2026-09-10T20:36:10Z",
+      "title": "Gates 0.1.2",
+      "summary": "Gates released version 0.1.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/gates/releases/tag/0.1.2",
+        "version": "0.1.2"
+      },
+      "journeys": [
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "gates/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "docs-system/0.7.0",
+      "id": "docs-system/0.7.0",
+      "repository": "docs-system",
+      "publishedAt": "2026-09-10T20:34:18Z",
+      "title": "Docs System 0.7.0",
+      "summary": "Docs System released version 0.7.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/docs-system/releases/tag/0.7.0",
+        "version": "0.7.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "docs-system/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "worktree/0.4.1",
+      "id": "worktree/0.4.1",
+      "repository": "worktree",
+      "publishedAt": "2026-09-10T20:28:49Z",
+      "title": "Worktree 0.4.1",
+      "summary": "Worktree released version 0.4.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.4.1",
+        "version": "0.4.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "ess/0.22.2",
+      "id": "ess/0.22.2",
+      "repository": "ess",
+      "publishedAt": "2026-09-10T20:11:55Z",
+      "title": "ESS 0.22.2",
+      "summary": "ESS released version 0.22.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.22.2",
+        "version": "0.22.2"
+      },
+      "journeys": [
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "gates/0.1.1",
       "id": "gates/0.1.1",
       "repository": "gates",
