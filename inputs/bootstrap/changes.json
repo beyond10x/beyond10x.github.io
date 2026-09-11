@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "ess/0.23.0",
+      "id": "ess/0.23.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-11T14:14:26Z",
+      "title": "ESS 0.23.0",
+      "summary": "ESS released version 0.23.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.23.0",
+        "version": "0.23.0"
+      },
+      "journeys": [
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "harness/0.12.1",
       "id": "harness/0.12.1",
       "repository": "harness",
