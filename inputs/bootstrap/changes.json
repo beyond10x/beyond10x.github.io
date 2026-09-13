@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "connectors/v0.8.0",
+      "id": "connectors/v0.8.0",
+      "repository": "connectors",
+      "publishedAt": "2026-09-13T07:23:47Z",
+      "title": "Connectors v0.8.0",
+      "summary": "Connectors released version v0.8.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.8.0",
+        "version": "v0.8.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "connectors/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "ess/0.23.0",
       "id": "ess/0.23.0",
       "repository": "ess",
