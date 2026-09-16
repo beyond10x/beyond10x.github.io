@@ -4,6 +4,16 @@
     <link>https://beyond10x.github.io/changes/</link>
     <description>Important releases, migrations, capabilities, and adopter actions across the public beyond10x ecosystem.</description>
     <item>
+      <guid isPermaLink="false">ess/component-settings-0.24.0</guid>
+      <title>A component declares its settings, and the runtime slots are derived from them</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.24.0</link>
+      <pubDate>Sat, 12 Sep 2026 00:00:00 GMT</pubDate>
+      <description>`settings:` states each of a component&apos;s configuration inputs once, typed from the specification&apos;s own `types:`. `ess specify runtime compile` derives the `ess-runtime/1` config and secret slots from it, and refuses a hand-authored slot or two settings binding one environment variable twice. Absence is stated with `Optional&lt;...&gt;` and nothing else.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
       <guid isPermaLink="false">ess/source-driven-realization-0.19.0</guid>
       <title>Checked schema imports and structural data realizations</title>
       <link>https://github.com/beyond10x/ess/releases/tag/0.19.0</link>
@@ -200,16 +210,6 @@
       <pubDate>Tue, 01 Sep 2026 12:00:00 GMT</pubDate>
       <description>Agent Platform is now public and advertises its source, local service documentation, generated OpenAPI contract, dependencies, and first-run path through the shared b10x docs contract.</description>
       <category>agent-platform</category>
-      <category>significant</category>
-      <category>impact</category>
-    </item>
-    <item>
-      <guid isPermaLink="false">connectors/public-surface-2026-09-01</guid>
-      <title>Connectors joins the public ecosystem surface</title>
-      <link>https://github.com/beyond10x/connectors</link>
-      <pubDate>Tue, 01 Sep 2026 12:00:00 GMT</pubDate>
-      <description>Connectors now exposes its catalog, architecture, adoption guides, dependencies, and current maturity through the shared b10x documentation contract.</description>
-      <category>connectors</category>
       <category>significant</category>
       <category>impact</category>
     </item>

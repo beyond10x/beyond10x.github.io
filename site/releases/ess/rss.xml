@@ -4,6 +4,16 @@
     <link>https://beyond10x.github.io/releases/</link>
     <description>Important releases, migrations, capabilities, and adopter actions across the public beyond10x ecosystem.</description>
     <item>
+      <guid isPermaLink="false">ess/component-settings-0.24.0</guid>
+      <title>A component declares its settings, and the runtime slots are derived from them</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.24.0</link>
+      <pubDate>Sat, 12 Sep 2026 00:00:00 GMT</pubDate>
+      <description>`settings:` states each of a component&apos;s configuration inputs once, typed from the specification&apos;s own `types:`. `ess specify runtime compile` derives the `ess-runtime/1` config and secret slots from it, and refuses a hand-authored slot or two settings binding one environment variable twice. Absence is stated with `Optional&lt;...&gt;` and nothing else.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
       <guid isPermaLink="false">ess/0.23.0</guid>
       <title>ESS 0.23.0</title>
       <link>https://github.com/beyond10x/ess/releases/tag/0.23.0</link>

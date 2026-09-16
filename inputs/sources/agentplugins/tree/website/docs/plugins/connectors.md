@@ -8,10 +8,16 @@ The `connectors` plugin provides one shared `connectors` skill for Claude Code a
 guides provider setup, connection diagnostics, and the search → describe → invoke sequence for
 admitted integrations. It ships no binary, credentials, daemon, hooks, or automatic MCP connection.
 
-Install the standalone CLI from [Connectors releases](https://github.com/beyond10x/connectors/releases)
-and verify `connectors --version`. The skill targets the grouped commands in `0.7.1` and reads the
-installed binary's help before selecting options. Service setup and credentials are separate from
-plugin installation.
+Install the standalone CLI from the
+[Connectors `v0.7.2` release](https://github.com/beyond10x/connectors/releases/tag/v0.7.2), the
+last release of the v1 line, and verify `connectors --version`. The skill targets the grouped
+commands in `0.7.x` and reads the installed binary's help before selecting options.
+`beyond10x/connectors`' default branch and its *Latest* release are the connectors_v2 lineage
+(`v0.8.0` and up), which is a different CLI — `setup`, `adapters`, `connections`, `operations`,
+`describe`, `invoke`, `serve` — per Atlas ADR 0051 on the `beyond10x/connectors` lineage
+(accepted 2026-09-15); this skill drives the v1 CLI, `0.7.x`, so the generic releases page and
+its *Latest* entry are not the CLI these instructions teach. Service setup and credentials are separate
+from plugin installation.
 
 Operation, connection and event commands default to local even when a hosted login is saved.
 Choose `--target hosted` explicitly for a hosted workflow and keep that target throughout
@@ -23,15 +29,15 @@ rate-limit responses.
 
 ## Install in either host
 
-Release `0.9.1` includes this plugin. For a fresh marketplace registration, use the release pin:
+Release `0.9.2` includes this plugin. For a fresh marketplace registration, use the release pin:
 
 ```bash
-claude plugin marketplace add https://github.com/beyond10x/agentplugins.git#0.9.1
+claude plugin marketplace add https://github.com/beyond10x/agentplugins.git#0.9.2
 claude plugin install connectors@beyond10x
 ```
 
 ```bash
-codex plugin marketplace add https://github.com/beyond10x/agentplugins.git --ref 0.9.1
+codex plugin marketplace add https://github.com/beyond10x/agentplugins.git --ref 0.9.2
 codex plugin add connectors@beyond10x
 ```
 
