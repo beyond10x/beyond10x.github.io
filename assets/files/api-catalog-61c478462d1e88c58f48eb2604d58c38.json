@@ -1,0 +1,126 @@
+{
+  "schema": "b10x-public-api-catalog/v1",
+  "repositories": [
+    {
+      "id": "aep-service",
+      "displayName": "AEP Service",
+      "route": "/api/aep-service/",
+      "sourceUrl": "https://github.com/beyond10x/aep-service/tree/45ab5132fc6c39914523ae3c00bc0d03e7f09ffb",
+      "revision": "45ab5132fc6c39914523ae3c00bc0d03e7f09ffb",
+      "specifications": [
+        {
+          "id": "http-api",
+          "kind": "openapi",
+          "route": "/api/aep-service/http-api/",
+          "sourceUrl": "https://github.com/beyond10x/aep-service/blob/45ab5132fc6c39914523ae3c00bc0d03e7f09ffb/website/static/openapi.json",
+          "title": "AEP Service API",
+          "version": "0.1.8",
+          "operationCount": 9
+        }
+      ]
+    },
+    {
+      "id": "agentide",
+      "displayName": "AgentIDE",
+      "route": "/api/agentide/",
+      "sourceUrl": "https://github.com/beyond10x/agentide/tree/80a0bfd174bd06ca298d260c86f984714a21baad",
+      "revision": "80a0bfd174bd06ca298d260c86f984714a21baad",
+      "specifications": [
+        {
+          "id": "intent-engine",
+          "kind": "openapi",
+          "route": "/api/agentide/intent-engine/",
+          "sourceUrl": "https://github.com/beyond10x/agentide/blob/80a0bfd174bd06ca298d260c86f984714a21baad/generated/ess/openapi/agentide-engine.yaml",
+          "title": "agentide-engine",
+          "version": "v1",
+          "operationCount": 53
+        }
+      ]
+    },
+    {
+      "id": "devcenter",
+      "displayName": "Devcenter",
+      "route": "/api/devcenter/",
+      "sourceUrl": "https://github.com/beyond10x/devcenter/tree/69d0f397bf0af2df6d085ef29750cd49ac5a42a4",
+      "revision": "69d0f397bf0af2df6d085ef29750cd49ac5a42a4",
+      "specifications": [
+        {
+          "id": "http-api",
+          "kind": "openapi",
+          "route": "/api/devcenter/http-api/",
+          "sourceUrl": "https://github.com/beyond10x/devcenter/blob/69d0f397bf0af2df6d085ef29750cd49ac5a42a4/openapi.json",
+          "title": "Devcenter API",
+          "version": "0.8.33",
+          "operationCount": 85
+        }
+      ]
+    },
+    {
+      "id": "docs-system",
+      "displayName": "Docs System",
+      "route": "/api/docs-system/",
+      "sourceUrl": "https://github.com/beyond10x/docs-system/tree/c429fa1c7d7e579da4afedf7566c96769a56d3f4",
+      "revision": "c429fa1c7d7e579da4afedf7566c96769a56d3f4",
+      "specifications": [
+        {
+          "id": "bundle-v1",
+          "kind": "json-schema",
+          "route": "/api/docs-system/bundle-v1/",
+          "sourceUrl": "https://github.com/beyond10x/docs-system/blob/c429fa1c7d7e579da4afedf7566c96769a56d3f4/schema/b10x.docs.bundle.v1.schema.json",
+          "title": "Beyond10x normalized documentation bundle v1",
+          "propertyCount": 8
+        },
+        {
+          "id": "change-v2",
+          "kind": "json-schema",
+          "route": "/api/docs-system/change-v2/",
+          "sourceUrl": "https://github.com/beyond10x/docs-system/blob/c429fa1c7d7e579da4afedf7566c96769a56d3f4/schema/b10x.change.v2.schema.json",
+          "title": "b10x typed ecosystem change v2",
+          "propertyCount": 13
+        },
+        {
+          "id": "manifest-v3",
+          "kind": "json-schema",
+          "route": "/api/docs-system/manifest-v3/",
+          "sourceUrl": "https://github.com/beyond10x/docs-system/blob/c429fa1c7d7e579da4afedf7566c96769a56d3f4/schema/b10x.docs.v3.schema.json",
+          "title": "b10x unified documentation source v3",
+          "propertyCount": 5
+        },
+        {
+          "id": "redirects",
+          "kind": "json-schema",
+          "route": "/api/docs-system/redirects/",
+          "sourceUrl": "https://github.com/beyond10x/docs-system/blob/c429fa1c7d7e579da4afedf7566c96769a56d3f4/schema/b10x.redirects.schema.json",
+          "title": "b10x Pages compatibility routes",
+          "propertyCount": 3
+        },
+        {
+          "id": "source-lock",
+          "kind": "json-schema",
+          "route": "/api/docs-system/source-lock/",
+          "sourceUrl": "https://github.com/beyond10x/docs-system/blob/c429fa1c7d7e579da4afedf7566c96769a56d3f4/schema/b10x.sources.schema.json",
+          "title": "b10x unified documentation source lock",
+          "propertyCount": 2
+        }
+      ]
+    },
+    {
+      "id": "secrets",
+      "displayName": "Secrets",
+      "route": "/api/secrets/",
+      "sourceUrl": "https://github.com/beyond10x/secrets/tree/a8b23dcf4842bf9b9d2d1ca503cbdf2dcac45b88",
+      "revision": "a8b23dcf4842bf9b9d2d1ca503cbdf2dcac45b88",
+      "specifications": [
+        {
+          "id": "http-api",
+          "kind": "openapi",
+          "route": "/api/secrets/http-api/",
+          "sourceUrl": "https://github.com/beyond10x/secrets/blob/a8b23dcf4842bf9b9d2d1ca503cbdf2dcac45b88/docs/openapi.json",
+          "title": "Secrets API",
+          "version": "0.1.4",
+          "operationCount": 14
+        }
+      ]
+    }
+  ]
+}
