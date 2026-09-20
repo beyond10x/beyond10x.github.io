@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+    <title>beyond10x impactful changes</title>
+    <link>https://beyond10x.github.io/changes/</link>
+    <description>Important releases, migrations, capabilities, and adopter actions across the public beyond10x ecosystem.</description>
+    <item>
+      <guid isPermaLink="false">ess/enum-variant-wire-names-0.27.0</guid>
+      <title>An enum variant carries its own wire spelling</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.27.0</link>
+      <pubDate>Sun, 20 Sep 2026 10:12:14 GMT</pubDate>
+      <description>A variant is authored as a bare name or as a mapping that also carries `wire`, `display`, `summary` and `code`, so a variant whose wire form is not derivable from its name can be declared at all. Specification format `ess/5`; delta format `ess-diff/5` adds three `TypeChange` cases, so a moved spelling no longer returns an empty delta.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/a-branch-can-clear-a-field-0.26.0</guid>
+      <title>A branch may say the field it owns holds nothing</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.26.0</link>
+      <pubDate>Thu, 17 Sep 2026 00:07:24 GMT</pubDate>
+      <description>`sets: {field: {cleared: true}}` states absence. Before it, a branch either left the field alone, wrote a literal that synthesis dropped, or wrote an empty string, which is a different reading. The field&apos;s type must be `Optional&lt;...&gt;` and the source must be an entity; an event payload is refused because an undetermined field is not the outcome&apos;s to set.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/code-emitter-names-0.25.0</guid>
+      <title>An author names the identifier a code emitter spells a declaration as</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.25.0</link>
+      <pubDate>Wed, 16 Sep 2026 07:42:42 GMT</pubDate>
+      <description>`naming: { code: ... }` settles a collision the emitter cannot: a target without dotted type names flattens `X.State` and an authored view `XState` to one identifier. Only code emitters read it, so wire names, document schemas and qualified names are untouched and setting one cannot break a deployed consumer. The source format stays `ess/4`.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/component-settings-0.24.0</guid>
+      <title>A component declares its settings, and the runtime slots are derived from them</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.24.0</link>
+      <pubDate>Sat, 12 Sep 2026 00:00:00 GMT</pubDate>
+      <description>`settings:` states each of a component&apos;s configuration inputs once, typed from the specification&apos;s own `types:`. `ess specify runtime compile` derives the `ess-runtime/1` config and secret slots from it, and refuses a hand-authored slot or two settings binding one environment variable twice. Absence is stated with `Optional&lt;...&gt;` and nothing else.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/held-state-guards-0.23.0</guid>
+      <title>A branch can turn on the state a subject is already in</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.23.0</link>
+      <pubDate>Fri, 11 Sep 2026 14:14:26 GMT</pubDate>
+      <description>`when_subject_state` in `ess/3` combines a declared held lifecycle state with input guards, so equal input applied to two different existing states is distinguished. `ess/4` declares error wire names without merging semantic identities and fills emitted event payloads from typed command response fields. New deltas use `ess-diff/3` and `ess-diff/4`.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/at-most-once-delivery-0.22.0</guid>
+      <title>A binding can declare one delivery attempt and no redelivery</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.22.0</link>
+      <pubDate>Thu, 10 Sep 2026 12:27:04 GMT</pubDate>
+      <description>`delivery: at_most_once` states that a binding is tried once. Loss stays possible and no idempotency obligation is imposed on the handler. OpenAPI requires `Idempotency-Key` only for `at_least_once` commands, conformance records `BindingGap::DeliverySingleAttempt` instead of synthesizing a redelivery, and the format stays `ess/1`.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/declared-coverage-0.21.0</guid>
+      <title>A conformance suite records what it covers, and what it left out</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.21.0</link>
+      <pubDate>Wed, 09 Sep 2026 22:16:05 GMT</pubDate>
+      <description>Opt-in `ess-conformance/5` records selected generated and authored coverage, omitted scenarios, source identities and every refusal occurrence. Report 2 then distinguishes complete passing conformance from empty, unknown or incomplete coverage — a pass over nothing and a pass over everything stop reading the same.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/binary64-fields-0.20.0</guid>
+      <title>A specification can declare a finite floating-point field</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.20.0</link>
+      <pubDate>Sun, 06 Sep 2026 16:07:45 GMT</pubDate>
+      <description>Authored `ess/2` adds `Binary64` fields, distinct from integer and decimal values. Reference, Rust and Go preserve signed zero, subnormals and nearest-even rounding; two typed operands use IEEE equality. Synthesis and conformance refuse unsupported `Binary64` before publication rather than emitting a target that would disagree.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/source-driven-realization-0.19.0</guid>
+      <title>Checked schema imports and structural data realizations</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.19.0</link>
+      <pubDate>Sat, 05 Sep 2026 21:00:00 GMT</pubDate>
+      <description>Import complete JSON Schema roots with source identity; generate structural Go, Rust and TypeScript libraries; and run source-pinned normalization recipes. Rust normalization has a library API; Go/TypeScript support is pending. Rust/Web synthesis returns checked failures, and sliced provenance names its digest profile.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/early-stop-assertion-0.18.0</guid>
+      <title>An authored scenario can claim that a consumer halted an ordered scan</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.18.0</link>
+      <pubDate>Fri, 04 Sep 2026 14:08:16 GMT</pubDate>
+      <description>`halts_after: &lt;n&gt;` lets an authored scenario require a consumer to stop an ordered scan after n rows. The target reports rows produced and whether the consumer ended the read. Targets without incremental reads report `unsupported`. This adds a claim to `ess-conformance/4`.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/scenario-player-0.18.0</guid>
+      <title>A specification&apos;s scenarios can be played in a browser</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.18.0</link>
+      <pubDate>Fri, 04 Sep 2026 14:08:16 GMT</pubDate>
+      <description>`ess verify conform web` emits a browser page that walks authored scenarios, showing actors, state, selected views, and declared consequences. It replays model-determined behavior without executing an implementation, so authors can inspect a specification before filling its obligations.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/authored-scenarios-0.15.0</guid>
+      <title>A specification carries the scenarios an author wrote, not only the ones it obliges</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.16.0</link>
+      <pubDate>Fri, 04 Sep 2026 13:13:51 GMT</pubDate>
+      <description>Authors can declare modelled instances, command timelines, and expectations in `ess-scenario/1`. These scenarios compile into `ess-conformance/2` with identities distinct from synthesized suites. Twenty-seven refusals check their names against the model. Included in the published 0.16.0 release.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/elapsed-time-claims-0.16.0</guid>
+      <title>An authored scenario can claim a length of time, and a target has to answer for it</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.16.0</link>
+      <pubDate>Fri, 04 Sep 2026 13:13:51 GMT</pubDate>
+      <description>Authored scenarios gain `mark:` and `elapsed:` with `not_before`, `within`, and `quiet` bounds. The suite states a duration and its anchor; the target reports an observed or advanced clock. Targets without clock support report `unsupported`. The claims use `ess-conformance/3`.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/command-line-surface-0.14.0</guid>
+      <title>A component can declare a command-line surface, and ESS synthesizes its parser</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.14.0</link>
+      <pubDate>Fri, 04 Sep 2026 10:01:53 GMT</pubDate>
+      <description>`reached_by: command_line` and a `cli:` block state that a component&apos;s callers are people at a terminal and where each command sits in the tree. `ess generate synthesize --target clap` emits the parser, the handler obligations and the completion scripts from that declaration.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">aep/rendered-plans-0.43.0</guid>
+      <title>The plan renders itself, and a conformance report becomes evidence without being retyped</title>
+      <link>https://github.com/beyond10x/aep/releases/tag/0.43.0</link>
+      <pubDate>Thu, 03 Sep 2026 00:00:00 GMT</pubDate>
+      <description>AEP 0.43.0 lets a documentation site publish plans directly — `artifact board --format markdown` renders the page, `artifact graph --format mermaid` renders the diagram, and each column reads its own ladder `descriptions:`. `artifact evidence --from` converts an `ess-conformance-report/1` into evidence using the report&apos;s recorded run instant.</description>
+      <category>aep</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">aep/second-adopter-0.42.0</guid>
+      <title>aep doctor, classified ambiguities in the templates, and the install path that exists</title>
+      <link>https://github.com/beyond10x/aep/releases/tag/0.42.0</link>
+      <pubDate>Wed, 02 Sep 2026 18:18:01 GMT</pubDate>
+      <description>AEP 0.42.0 answers the second adopter&apos;s report — aep doctor says in six ok/warn/fail lines whether a checkout is ready to be planned in, the epic, story and specification templates seed an Ambiguities section classifying each gap as inferable or requires-stakeholder-input, and the README and site name beyond10x/agentplugins as where the plugins come from.</description>
+      <category>aep</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">agentplugins/second-adopter-0.4.0</guid>
+      <title>Planning gains a critic panel, a golden path and a domain-first rule</title>
+      <link>https://github.com/beyond10x/agentplugins/releases/tag/0.4.0</link>
+      <pubDate>Wed, 02 Sep 2026 17:59:11 GMT</pubDate>
+      <description>Agent Plugins 0.4.0 answers the second adopter&apos;s report — a copy-paste install block, a recorded golden-path page from feature idea to critiqued plan, a decomposer that files a decision-blocker for every undecided domain relation, four read-only plan critics with a bounded revision loop, and a domain-first guardrail backed by the minimal ess/1 document.</description>
+      <category>agentplugins</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">devcenter/identity-routes-0.6.1</guid>
+      <title>Devcenter activates scoped Identity administration</title>
+      <link>https://github.com/beyond10x/devcenter/releases/tag/0.6.1</link>
+      <pubDate>Wed, 02 Sep 2026 14:28:12 GMT</pubDate>
+      <description>Devcenter 0.6.1 exposes Identity&apos;s exact CLI discovery and scoped access-token routes, pins the SIP-disabled Connector embedding seam, and authenticates private frontend dependencies without leaking credentials into image layers.</description>
+      <category>devcenter</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">aep/external-work-refs-0.41.0</guid>
+      <title>AEP links planning artifacts to external work</title>
+      <link>https://github.com/beyond10x/aep/releases/tag/0.41.0</link>
+      <pubDate>Wed, 02 Sep 2026 14:13:58 GMT</pubDate>
+      <description>AEP 0.41.0 gives planning artifacts typed external references, provider-level URL patterns, reference filtering, and a read-only reverse-ticket audit so repository plans can be joined to trackers without parsing prose or granting write authority.</description>
+      <category>aep</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">agentplugins/aep-refs-0.3.7</guid>
+      <title>Planning skills preserve external work references</title>
+      <link>https://github.com/beyond10x/agentplugins/releases/tag/0.3.7</link>
+      <pubDate>Wed, 02 Sep 2026 14:00:12 GMT</pubDate>
+      <description>Agent Plugins 0.3.7 teaches planning and story migration to record AEP 0.41.0 refs as typed frontmatter, documents the safe already-exists refusal on repeated migration, and corrects the guidance&apos;s published version claims.</description>
+      <category>agentplugins</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">agentplugins/workspace-hygiene-0.3.3</guid>
+      <title>Workspace Hygiene guides guarded stale-relocation recovery</title>
+      <link>https://github.com/beyond10x/agentplugins/releases/tag/0.3.3</link>
+      <pubDate>Wed, 02 Sep 2026 02:25:27 GMT</pubDate>
+      <description>Agent Plugins 0.3.3 refreshes Workspace Hygiene so agents can recover a finished external legacy tree stranded by stale pre-0.3 relocation intent without bypassing exact source, destination, HEAD, proof, or confirmation gates.</description>
+      <category>agentplugins</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">worktree/external-retirement-recovery-0.3.1</guid>
+      <title>Worktree safely recovers stale external relocation state</title>
+      <link>https://github.com/beyond10x/worktree/releases/tag/0.3.1</link>
+      <pubDate>Wed, 02 Sep 2026 02:22:14 GMT</pubDate>
+      <description>Worktree 0.3.1 lets exact-id reconciliation retire a finished external legacy tree stranded by a stale pre-0.3 relocation intent, while preserving source, destination, HEAD, proof, and confirmation gates.</description>
+      <category>worktree</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">agentplugins/workspace-hygiene-0.3.2</guid>
+      <title>Workspace cleanup becomes review-bound and recoverable</title>
+      <link>https://github.com/beyond10x/agentplugins/releases/tag/0.3.2</link>
+      <pubDate>Wed, 02 Sep 2026 01:24:07 GMT</pubDate>
+      <description>Agent Plugins 0.3.2 refreshes Workspace Hygiene so agents apply cleanup only to exact reviewed ids and safely reconcile interrupted provisioning, durable removals, missing records, and legacy trees.</description>
+      <category>agentplugins</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">docs-system/passive-data-sources-0.3.1</guid>
+      <title>Repository datasets become typed documentation inputs</title>
+      <link>https://github.com/beyond10x/docs-system/releases/tag/0.3.1</link>
+      <pubDate>Tue, 01 Sep 2026 20:00:00 GMT</pubDate>
+      <description>Docs System 0.3.1 collects declared passive data for principle catalogs, labs, and dependency views without executing repository code.</description>
+      <category>docs-system</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">docs-system/unified-source-contracts-0.3.0</guid>
+      <title>Documentation becomes one safely collected public system</title>
+      <link>https://github.com/beyond10x/docs-system/releases/tag/0.3.0</link>
+      <pubDate>Tue, 01 Sep 2026 18:00:00 GMT</pubDate>
+      <description>Docs System 0.3.0 adds repository-owned passive source declarations, pinned content digests, central delivery, compatibility redirects, and generated discovery blocks.</description>
+      <category>docs-system</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">docs-system/passive-docusaurus-markers-0.3.3</guid>
+      <title>Passive Docusaurus markers enter the locked documentation corpus</title>
+      <link>https://github.com/beyond10x/docs-system/releases/tag/0.3.3</link>
+      <pubDate>Tue, 01 Sep 2026 15:18:01 GMT</pubDate>
+      <description>Docs System 0.3.3 admits inert whole-line MDX comments and explicit heading ids without allowing executable expressions or changing collected bytes.</description>
+      <category>docs-system</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">docs-system/node-safe-manifest-export-0.3.2</guid>
+      <title>Website collection receives a Node-safe manifest entry point</title>
+      <link>https://github.com/beyond10x/docs-system/releases/tag/0.3.2</link>
+      <pubDate>Tue, 01 Sep 2026 14:52:23 GMT</pubDate>
+      <description>Docs System 0.3.2 exposes manifest and source-lock operations without importing the Docusaurus UI graph into plain Node builds.</description>
+      <category>docs-system</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">agent-platform/public-surface-2026-09-01</guid>
+      <title>Agent Platform joins the public ecosystem surface</title>
+      <link>https://github.com/beyond10x/agent-platform</link>
+      <pubDate>Tue, 01 Sep 2026 12:00:00 GMT</pubDate>
+      <description>Agent Platform is now public and advertises its source, local service documentation, generated OpenAPI contract, dependencies, and first-run path through the shared b10x docs contract.</description>
+      <category>agent-platform</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">eventlog/public-surface-2026-09-01</guid>
+      <title>Eventlog joins the public ecosystem surface</title>
+      <link>https://github.com/beyond10x/eventlog</link>
+      <pubDate>Tue, 01 Sep 2026 12:00:00 GMT</pubDate>
+      <description>Eventlog now publishes its library boundary, crate layout, adoption path, and downstream role through the shared b10x documentation contract.</description>
+      <category>eventlog</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">identity/public-surface-2026-09-01</guid>
+      <title>Identity joins the public ecosystem surface</title>
+      <link>https://github.com/beyond10x/identity</link>
+      <pubDate>Tue, 01 Sep 2026 12:00:00 GMT</pubDate>
+      <description>Identity now advertises its service boundary, local adoption path, API reference, dependencies, and deployment maturity through the shared b10x documentation contract.</description>
+      <category>identity</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">research/public-surface-2026-09-01</guid>
+      <title>Agent interaction research joins public discovery</title>
+      <link>https://github.com/beyond10x/research</link>
+      <pubDate>Tue, 01 Sep 2026 12:00:00 GMT</pubDate>
+      <description>The reproducible interaction study now publishes its question, deterministic pipeline, adoption path, and relationship to agent guidance through the shared b10x documentation contract.</description>
+      <category>research</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">workflow/public-surface-2026-09-01</guid>
+      <title>Workflow joins the public ecosystem surface</title>
+      <link>https://github.com/beyond10x/workflow</link>
+      <pubDate>Tue, 01 Sep 2026 12:00:00 GMT</pubDate>
+      <description>Workflow now publishes its product-neutral boundary, current maturity, adoption path, and dependencies through the shared b10x documentation contract.</description>
+      <category>workflow</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">docs-system/adoption-and-change-contracts-0.2.0</guid>
+      <title>Adoption and ecosystem changes become typed public contracts</title>
+      <link>https://github.com/beyond10x/docs-system/releases/tag/0.2.0</link>
+      <pubDate>Tue, 01 Sep 2026 11:22:04 GMT</pubDate>
+      <description>Docs System 0.2.0 adds explicit first-run outcomes, repository-owned impact records, deterministic release enrichment, and RSS and JSON feeds.</description>
+      <category>docs-system</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">agentplugins/workspace-hygiene-0.3.0</guid>
+      <title>Agents gain shared workspace-hygiene guidance</title>
+      <link>https://github.com/beyond10x/agentplugins/releases/tag/0.3.0</link>
+      <pubDate>Tue, 01 Sep 2026 09:16:40 GMT</pubDate>
+      <description>Agent Plugins 0.3.0 adds the workspace-hygiene plugin and a Worktree-generated skill for consistent, recoverable checkout lifecycle across supported agents.</description>
+      <category>agentplugins</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">worktree/managed-worktrees-0.1.0</guid>
+      <title>Managed worktrees gain a reusable lifecycle toolchain</title>
+      <link>https://github.com/beyond10x/worktree/releases/tag/0.1.0</link>
+      <pubDate>Tue, 01 Sep 2026 09:12:28 GMT</pubDate>
+      <description>Worktree 0.1.0 publishes the embeddable lifecycle service, Git and SQLite adapters, CLI, hook protocol, and generated agent skill.</description>
+      <category>worktree</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">aep/canonical-command-0.40.0</guid>
+      <title>AEP becomes the canonical protocol command</title>
+      <link>https://github.com/beyond10x/aep/releases/tag/0.40.0</link>
+      <pubDate>Tue, 01 Sep 2026 06:47:23 GMT</pubDate>
+      <description>AEP 0.40.0 establishes aep as the authored command, retains protocol as an exact compatibility alias, and keeps ESS adaptation at one optional evidence boundary.</description>
+      <category>aep</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/standalone-0.1.0</guid>
+      <title>ESS becomes a standalone executable specification toolchain</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.1.0</link>
+      <pubDate>Tue, 01 Sep 2026 02:32:47 GMT</pubDate>
+      <description>ESS 0.1.0 extracts system modeling, schema contracts, generators, and conformance into an independent repository with no AEP dependency.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+  </channel></rss>

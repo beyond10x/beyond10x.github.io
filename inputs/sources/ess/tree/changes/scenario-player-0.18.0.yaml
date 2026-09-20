@@ -1,0 +1,16 @@
+schema: b10x-change/v1
+id: ess/scenario-player-0.18.0
+repository: ess
+publishedAt: 2026-09-04T14:08:16Z
+title: A specification's scenarios can be played in a browser
+summary: >-
+  `ess verify conform web` emits a browser page that walks authored scenarios, showing actors,
+  state, selected views, and declared consequences. It replays model-determined behavior without
+  executing an implementation, so authors can inspect a specification before filling its obligations.
+kind: capability
+impact: significant
+source:
+  url: https://github.com/beyond10x/ess/releases/tag/0.18.0
+  version: 0.18.0
+journeys: [specify]
+affectedSurfaces: [ess/docs]
