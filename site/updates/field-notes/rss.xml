@@ -4,10 +4,334 @@
         <title>beyond10x Blog</title>
         <link>https://beyond10x.github.io/updates/field-notes/</link>
         <description>beyond10x Blog</description>
-        <lastBuildDate>Wed, 26 Aug 2026 00:45:30 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 21 Sep 2026 09:30:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[0.22–0.27 — what a binding promises, and the names nobody may invent]]></title>
+            <link>https://beyond10x.github.io/updates/field-notes/ess/names-nobody-may-invent/</link>
+            <guid>https://beyond10x.github.io/updates/field-notes/ess/names-nobody-may-invent/</guid>
+            <pubDate>Mon, 21 Sep 2026 09:30:00 GMT</pubDate>
+            <description><![CDATA[A binding declares one delivery attempt. A branch turns on the state a subject is already in, or says the field it owns holds nothing. A component declares its settings and the runtime slots are derived. An author names the identifier a code emitter spells, and the wire name a variant carries. Source formats ess/3, ess/4 and ess/5.
+]]></description>
+            <content:encoded><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.22–0.27 — what a binding promises, and the names nobody may invent | ESS</span><span data-pagefind-meta="description">A binding declares one delivery attempt. A branch turns on the state a subject is already in, or says the field it owns holds nothing. A component declares its settings and the runtime slots are derived. An author names the identifier a code emitter spells, and the wire name a variant carries. Source formats ess/3, ess/4 and ess/5.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/809d7e31c3b22840643d56f47768fc22d605048a/website/blog/2026-09-21-1130-names-nobody-may-invent.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-21-1130-names-nobody-may-invent.md</a> · revision <code class="b10x-revision" title="809d7e31c3b22840643d56f47768fc22d605048a">809d7e31c3b2</code></p>
+</blockquote></div>
+<p>Six releases with one shape between them: each takes a fact that a generator was inferring, or a
+consumer was assuming, and makes it something an author states. Three of them cost a source format
+version — <code>ess/3</code>, <code>ess/4</code> and <code>ess/5</code> — and
+<a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a> says which.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="one-attempt-and-no-obligation-on-the-handler">One attempt, and no obligation on the handler<a href="https://beyond10x.github.io/updates/field-notes/ess/names-nobody-may-invent/#one-attempt-and-no-obligation-on-the-handler" class="hash-link" aria-label="Direct link to One attempt, and no obligation on the handler" title="Direct link to One attempt, and no obligation on the handler" translate="no">​</a></h2>
+<p><code>delivery: at_most_once</code> states that a binding is tried once. Loss stays possible, and <strong>no
+idempotency obligation is imposed on the handler</strong>, which is the point: the existing default made
+every consumer responsible for redelivery it might never see.</p>
+<p>OpenAPI requires <code>Idempotency-Key</code> only for <code>at_least_once</code> commands, and conformance records
+<code>BindingGap::DeliverySingleAttempt</code> instead of synthesizing a redelivery scenario that the binding
+has just said will not happen. The format stays <code>ess/1</code> — this is a declaration the existing
+vocabulary could carry.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-state-a-subject-is-already-in">The state a subject is already in<a href="https://beyond10x.github.io/updates/field-notes/ess/names-nobody-may-invent/#the-state-a-subject-is-already-in" class="hash-link" aria-label="Direct link to The state a subject is already in" title="Direct link to The state a subject is already in" translate="no">​</a></h2>
+<p><code>when_subject_state</code> in <code>ess/3</code> combines a declared held lifecycle state with input guards, so
+<strong>equal input applied to two different existing states is distinguished</strong>. Without it, two branches
+that differ only in where the subject started were one branch as far as the model could see.</p>
+<p><code>ess/3</code> also brings bounded binding accessors, binding-local <code>selection_inputs</code> with ordered
+<code>selections</code>, periodic host causes and clock-reading attachments. <code>ess/4</code> declares error wire names
+without merging semantic identities, and fills emitted event payloads from typed command response
+fields. New deltas use <code>ess-diff/3</code> and <code>ess-diff/4</code>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="settings-declared-once">Settings, declared once<a href="https://beyond10x.github.io/updates/field-notes/ess/names-nobody-may-invent/#settings-declared-once" class="hash-link" aria-label="Direct link to Settings, declared once" title="Direct link to Settings, declared once" translate="no">​</a></h2>
+<p><code>settings:</code> states each of a component's configuration inputs once, typed from the specification's
+own <code>types:</code>. <code>ess specify runtime compile</code> <strong>derives</strong> the <code>ess-runtime/1</code> config and secret slots
+from it, and refuses a hand-authored slot, or two settings binding one environment variable twice.</p>
+<p>Absence is stated with <code>Optional&lt;...&gt;</code> and nothing else — a convention about an empty string is a
+second reading of the same bytes.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="three-names-a-generator-must-not-choose">Three names a generator must not choose<a href="https://beyond10x.github.io/updates/field-notes/ess/names-nobody-may-invent/#three-names-a-generator-must-not-choose" class="hash-link" aria-label="Direct link to Three names a generator must not choose" title="Direct link to Three names a generator must not choose" translate="no">​</a></h2>
+<p><strong><code>naming: { code: ... }</code></strong> settles a collision the emitter cannot. A target without dotted type
+names flattens <code>X.State</code> and an authored view <code>XState</code> to one identifier, and only the author knows
+which should move. Only code emitters read it, so wire names, document schemas and qualified names
+are untouched, and setting one <strong>cannot break a deployed consumer</strong>. The source format stays <code>ess/4</code>.</p>
+<p><strong><code>sets: {field: {cleared: true}}</code></strong> states absence. Before it a branch either left the field alone,
+wrote a literal that synthesis dropped, or wrote an empty string — which is a different reading. The
+field's type must be <code>Optional&lt;...&gt;</code> and the source must be an entity; an event payload is refused,
+because an undetermined field is not the outcome's to set.</p>
+<p><strong>A variant's own wire spelling</strong>, in <code>ess/5</code>. <code>TypeBody::Enum</code> carried <code>Vec&lt;String&gt;</code>, so naming was
+reachable from a domain, a command, an event, an error, a view and a field — and not from a variant.
+A variant whose wire form is not derivable from its name could not be declared at all. The case that
+asked for it: one command over three route shapes, where one variant's path suffix is empty and the
+others are not. Without a declared spelling the alternatives were splitting the command to satisfy a
+path, or writing the table again in every target.</p>
+<p>A variant is now authored either as a bare name or as a mapping carrying <code>wire</code>, <code>display</code>, <code>summary</code>
+and <code>code</code>. An authored empty string is a spelling rather than an absent one. Every specification and
+IR document written before this keeps its bytes, and <code>ess-diff/5</code> adds three <code>TypeChange</code> cases so
+that <strong>a moved spelling no longer returns an empty delta</strong> — which is what it did while the variant
+set and the variant order both stayed the same.</p>]]></content:encoded>
+            <category>release</category>
+            <category>ess</category>
+        </item>
+        <item>
+            <title><![CDATA[0.19–0.21 — adopter schemas, a number that behaves, and a pass over nothing]]></title>
+            <link>https://beyond10x.github.io/updates/field-notes/ess/a-pass-over-nothing/</link>
+            <guid>https://beyond10x.github.io/updates/field-notes/ess/a-pass-over-nothing/</guid>
+            <pubDate>Mon, 21 Sep 2026 09:00:00 GMT</pubDate>
+            <description><![CDATA[Checked JSON Schema imports with source identity and source-pinned normalization recipes; a `Binary64` field that preserves signed zero, subnormals and nearest-even rounding across three languages; and a conformance suite that records what it left out, so a pass over nothing and a pass over everything stop reading the same.
+]]></description>
+            <content:encoded><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.19–0.21 — adopter schemas, a number that behaves, and a pass over nothing | ESS</span><span data-pagefind-meta="description">Checked JSON Schema imports with source identity and source-pinned normalization recipes; a <code>Binary64</code> field that preserves signed zero, subnormals and nearest-even rounding across three languages; and a conformance suite that records what it left out, so a pass over nothing and a pass over everything stop reading the same.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/809d7e31c3b22840643d56f47768fc22d605048a/website/blog/2026-09-21-1100-a-pass-over-nothing.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-21-1100-a-pass-over-nothing.md</a> · revision <code class="b10x-revision" title="809d7e31c3b22840643d56f47768fc22d605048a">809d7e31c3b2</code></p>
+</blockquote></div>
+<p>Three releases that each close a place where the toolchain was quietly agreeable: an adopter's own
+schemas, floating-point arithmetic, and a green suite.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="somebody-elses-schemas-checked">Somebody else's schemas, checked<a href="https://beyond10x.github.io/updates/field-notes/ess/a-pass-over-nothing/#somebody-elses-schemas-checked" class="hash-link" aria-label="Direct link to Somebody else's schemas, checked" title="Direct link to Somebody else's schemas, checked" translate="no">​</a></h2>
+<p><code>ess</code> can import complete JSON Schema roots <strong>with source identity</strong> and generate structural Go,
+Rust and TypeScript libraries from them, then run source-pinned normalization recipes over the
+result. Rust normalization has a library API; Go and TypeScript support is pending and says so.</p>
+<p>Rust and Web synthesis return checked failures rather than emitting a target that would disagree,
+and sliced provenance names its digest profile instead of implying one.</p>
+<p>The theme is the same as everywhere else in this repository: an adopter's document is an authority
+about itself, admitted or refused, never quietly adapted.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-field-that-is-a-floating-point-number">A field that is a floating-point number<a href="https://beyond10x.github.io/updates/field-notes/ess/a-pass-over-nothing/#a-field-that-is-a-floating-point-number" class="hash-link" aria-label="Direct link to A field that is a floating-point number" title="Direct link to A field that is a floating-point number" translate="no">​</a></h2>
+<p>Authored <code>ess/2</code> adds <code>Binary64</code> fields, distinct from integer and decimal values. The reference,
+Rust and Go implementations preserve <strong>signed zero, subnormals and nearest-even rounding</strong>, and two
+typed operands compare with IEEE equality.</p>
+<p>The interesting part is the refusal: synthesis and conformance refuse an unsupported <code>Binary64</code>
+<strong>before publication</strong>, rather than emitting a target that would disagree with the specification at
+run time. A generator that emits something plausible for a semantics it does not implement produces
+a passing suite and a wrong system.</p>
+<p><code>Binary64</code> requires major 2 or later at every declared position, and map keys refuse it.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-suite-that-says-what-it-left-out">A suite that says what it left out<a href="https://beyond10x.github.io/updates/field-notes/ess/a-pass-over-nothing/#a-suite-that-says-what-it-left-out" class="hash-link" aria-label="Direct link to A suite that says what it left out" title="Direct link to A suite that says what it left out" translate="no">​</a></h2>
+<p>This is the one that changes what a green run means.</p>
+<p>Opt-in <code>ess-conformance/5</code> records the selected generated and authored coverage, the omitted
+scenarios, the source identities and <strong>every refusal occurrence</strong>. Report 2 then distinguishes
+complete passing conformance from empty, unknown or incomplete coverage.</p>
+<p>Before it, a suite that executed nothing and a suite that executed everything both reported "all
+pass". Ordinary coverage remains unknown, including for an all-pass run — that is stated rather
+than inferred. Only a nonempty all-pass execution with a complete inventory and no in-scope refusal
+qualifies, and it qualifies <strong>for that exact selection</strong>, not for the system.</p>
+<p>An extended suite requires explicit <code>--report-format 2</code>; suites /5 and later with report/1 refuse
+before execution, including when no output destination is requested. Report 1 keeps its historical
+non-pass aggregate and does not establish exact suite-byte identity.</p>]]></content:encoded>
+            <category>release</category>
+            <category>ess</category>
+            <category>conformance</category>
+        </item>
+        <item>
+            <title><![CDATA[0.16–0.18 — the scenarios an author writes, and a browser that plays them]]></title>
+            <link>https://beyond10x.github.io/updates/field-notes/ess/the-scenarios-an-author-writes/</link>
+            <guid>https://beyond10x.github.io/updates/field-notes/ess/the-scenarios-an-author-writes/</guid>
+            <pubDate>Mon, 21 Sep 2026 08:30:00 GMT</pubDate>
+            <description><![CDATA[A specification can carry authored scenarios, not only the ones it obliges: modelled instances, command timelines, expectations, a claimed length of time, and a consumer that halted an ordered scan. `ess verify conform web` walks them in a browser without executing an implementation. Also: why there is no 0.17.0 release.
+]]></description>
+            <content:encoded><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.16–0.18 — the scenarios an author writes, and a browser that plays them | ESS</span><span data-pagefind-meta="description">A specification can carry authored scenarios, not only the ones it obliges: modelled instances, command timelines, expectations, a claimed length of time, and a consumer that halted an ordered scan. <code>ess verify conform web</code> walks them in a browser without executing an implementation. Also: why there is no 0.17.0 release.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/809d7e31c3b22840643d56f47768fc22d605048a/website/blog/2026-09-21-1030-the-scenarios-an-author-writes.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-21-1030-the-scenarios-an-author-writes.md</a> · revision <code class="b10x-revision" title="809d7e31c3b22840643d56f47768fc22d605048a">809d7e31c3b2</code></p>
+</blockquote></div>
+<p>Synthesis writes the scenarios a specification <em>obliges</em>. These releases let an author write the
+ones it merely <em>permits</em>, and give three of them claims the format previously could not carry.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="authored-scenarios">Authored scenarios<a href="https://beyond10x.github.io/updates/field-notes/ess/the-scenarios-an-author-writes/#authored-scenarios" class="hash-link" aria-label="Direct link to Authored scenarios" title="Direct link to Authored scenarios" translate="no">​</a></h2>
+<p><code>ess-scenario/1</code> lets an author declare modelled instances, command timelines and expectations.
+They compile into <code>ess-conformance/2</code> with <strong>identities distinct from synthesized suites</strong>, so a
+target's report says which kind of claim it answered. Twenty-seven refusals check the names in an
+authored scenario against the model, because a scenario naming a command that does not exist is a
+test of nothing that passes.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-claim-about-time">A claim about time<a href="https://beyond10x.github.io/updates/field-notes/ess/the-scenarios-an-author-writes/#a-claim-about-time" class="hash-link" aria-label="Direct link to A claim about time" title="Direct link to A claim about time" translate="no">​</a></h2>
+<p><code>mark:</code> and <code>elapsed:</code> add <code>not_before</code>, <code>within</code> and <code>quiet</code> bounds. The suite states a duration and
+its anchor; the target reports an observed or advanced clock. A target with no clock support reports
+<code>unsupported</code> rather than passing — the distinction the whole conformance model rests on. These
+claims select <code>ess-conformance/3</code>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-claim-about-stopping">A claim about stopping<a href="https://beyond10x.github.io/updates/field-notes/ess/the-scenarios-an-author-writes/#a-claim-about-stopping" class="hash-link" aria-label="Direct link to A claim about stopping" title="Direct link to A claim about stopping" translate="no">​</a></h2>
+<p>The six assertion forms are all predicates over the rows a read returned — <code>contains</code>, <code>excludes</code>,
+<code>counts</code>, <code>ranked</code>, <code>at</code>, <code>satisfies</code> — and <strong>two implementations that return the same rows are
+indistinguishable under every one of them</strong>. "The producer stopped" is exactly the fact that
+separates them, and the format could not say it.</p>
+<p><code>halts_after: &lt;n&gt;</code> requires a consumer to stop an ordered scan after n rows. The target reports rows
+produced and whether the consumer ended the read; a target without incremental reads reports
+<code>unsupported</code>. This adds a claim to <code>ess-conformance/4</code>.</p>
+<p>A migration of forty-five ACD slotmatcher cases hit that wall twice before the key existed.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-browser-that-plays-a-specification">A browser that plays a specification<a href="https://beyond10x.github.io/updates/field-notes/ess/the-scenarios-an-author-writes/#a-browser-that-plays-a-specification" class="hash-link" aria-label="Direct link to A browser that plays a specification" title="Direct link to A browser that plays a specification" translate="no">​</a></h2>
+<p><code>ess verify conform web</code> emits a page that walks authored scenarios, showing actors, state, selected
+views and declared consequences. It replays <strong>model-determined behaviour without executing an
+implementation</strong>, so an author can inspect a specification before filling a single obligation.</p>
+<p>That is a different use for a conformance suite than checking a target with one. It is the first
+form in which a specification answers back to the person writing it.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="there-is-no-0170-release">There is no 0.17.0 release<a href="https://beyond10x.github.io/updates/field-notes/ess/the-scenarios-an-author-writes/#there-is-no-0170-release" class="hash-link" aria-label="Direct link to There is no 0.17.0 release" title="Direct link to There is no 0.17.0 release" translate="no">​</a></h2>
+<p>The <code>0.17.0</code> tag exists and its changelog section describes the halt assertion. Neither is the whole
+story, and the section now says so at the top.</p>
+<p><code>0.17.0</code> was cut from a branch off 0.16.0 holding the scenario player, while <code>halts_after</code> was on
+<code>main</code>. <strong>Neither commit is an ancestor of the other</strong>, and <code>halts_after</code> appears zero times at the
+tag. Everything written under 0.17.0 first ships in <strong>0.18.0</strong>, which is the first release holding
+both.</p>
+<p>A binary calling itself 0.17.0 has one of the two features, and which one depends on where it was
+built — check it for <code>halts_after</code> rather than trusting the number. The tag stays public because
+deleting a tag that has been public for weeks breaks whatever pins it, to tidy a report.</p>]]></content:encoded>
+            <category>release</category>
+            <category>ess</category>
+            <category>conformance</category>
+        </item>
+        <item>
+            <title><![CDATA[0.12–0.14 — four areas, and a command line as a declared surface]]></title>
+            <link>https://beyond10x.github.io/updates/field-notes/ess/four-areas-and-a-command-line/</link>
+            <guid>https://beyond10x.github.io/updates/field-notes/ess/four-areas-and-a-command-line/</guid>
+            <pubDate>Mon, 21 Sep 2026 08:00:00 GMT</pubDate>
+            <description><![CDATA[`ess --help` lists four commands, one per area, and every flat spelling stays a hidden alias that prints the same bytes. A component can declare that its callers are people at a terminal, and `--target clap` synthesizes the parser from that declaration. Release execution gets an explicit executor boundary.
+]]></description>
+            <content:encoded><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.12–0.14 — four areas, and a command line as a declared surface | ESS</span><span data-pagefind-meta="description"><code>ess --help</code> lists four commands, one per area, and every flat spelling stays a hidden alias that prints the same bytes. A component can declare that its callers are people at a terminal, and <code>--target clap</code> synthesizes the parser from that declaration. Release execution gets an explicit executor boundary.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/809d7e31c3b22840643d56f47768fc22d605048a/website/blog/2026-09-21-1000-four-areas-and-a-command-line.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-21-1000-four-areas-and-a-command-line.md</a> · revision <code class="b10x-revision" title="809d7e31c3b22840643d56f47768fc22d605048a">809d7e31c3b2</code></p>
+</blockquote></div>
+<p>Three releases about surfaces: the one this tool presents, and the one a specified component
+presents to a person at a terminal.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-first-level-is-four-words">The first level is four words<a href="https://beyond10x.github.io/updates/field-notes/ess/four-areas-and-a-command-line/#the-first-level-is-four-words" class="hash-link" aria-label="Direct link to The first level is four words" title="Direct link to The first level is four words" translate="no">​</a></h2>
+<p><code>ess --help</code> lists <code>specify</code>, <code>generate</code>, <code>verify</code>, <code>infra</code> and nothing else. The crates had moved
+under <code>crates/{specify,generate,verify,infra}/</code> in 0.11.1; the command surface now says the same
+thing, so <strong>where a thing is implemented and how it is spelled are one fact instead of two</strong>.</p>
+<p>Every flat spelling survives as a hidden alias of its area path. <code>ess validate --path .</code> is
+<code>ess specify validate --path .</code>: the same arguments, and when the command runs, the same stdout, the
+same stderr and the same exit status, with no deprecation line anywhere. For a refusal the argument
+parser writes, and for <code>--help</code>, only the <code>Usage:</code> line differs — it names the path that was typed,
+which is what the flat spelling has always printed.</p>
+<p>Both spellings are mounted from one definition in the derive, so they cannot drift apart, and a test
+enumerates every leaf of the clap tree and asserts the pairing rather than checking a list somebody
+maintains. Nothing is deprecated, and no pinned caller needs changing.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-execution-gets-a-boundary-not-a-capability">Release execution gets a boundary, not a capability<a href="https://beyond10x.github.io/updates/field-notes/ess/four-areas-and-a-command-line/#release-execution-gets-a-boundary-not-a-capability" class="hash-link" aria-label="Direct link to Release execution gets a boundary, not a capability" title="Direct link to Release execution gets a boundary, not a capability" translate="no">​</a></h2>
+<p>0.13.0 makes the implementation repository the owner of its semantic, realization, build, runtime and
+release units through <code>ess-component/1</code> and canonical <code>ess-component-ir/1</code>, and carries the complete
+verified release chain as one OCI payload in <code>ess-release-bundle/1</code>.</p>
+<p>It also, for the first time, invokes things: <code>publish</code> uses ORAS at the credential edge, <code>fetch</code>
+requires a <strong>digest-pinned source</strong> and revalidates canonical bytes, <code>build execute</code> invokes Docker
+Buildx Bake, and <code>deployment reconcile</code> computes the affected release set, follows the rollout DAG,
+fetches charts by digest and invokes Helm <strong>only for changed releases</strong>. It refuses implicit removal.</p>
+<p>The design point is in the phrasing of the changelog: <em>side effects are an explicit CLI executor
+boundary</em>. The deployment compiler and every projection stay deterministic and offline and reuse
+their exact IR. What changed is that there is now one named place where a command may reach the
+world, rather than a capability spread through the projections.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-component-whose-callers-are-people">A component whose callers are people<a href="https://beyond10x.github.io/updates/field-notes/ess/four-areas-and-a-command-line/#a-component-whose-callers-are-people" class="hash-link" aria-label="Direct link to A component whose callers are people" title="Direct link to A component whose callers are people" translate="no">​</a></h2>
+<p><code>reached_by: command_line</code> is a third answer to the question <code>in_process</code> and <code>network</code> already
+answer — <em>where are the callers</em> — and like them it names no wire, no port, no path and no verb.
+What it states is the one fact neither of the others can: <strong>the surface leaves the process as a
+grammar rather than as a call</strong>, and a command-line caller is deployed with the binary and is not a
+program.</p>
+<p>A <code>cli:</code> block then says where each accepted command sits in that grammar. Paths within a group are
+derived from <code>naming.wire</code>, as OpenAPI paths already are. Grouping is declared, because which
+<em>activity</em> a command belongs to cannot be derived from anything the model holds.</p>
+<p>Eight refusals come with it, and they are the reason the tree is declared here rather than written
+beside a parser: a block on a component reached another way, a command-line surface with no block, a
+placed command the component does not accept, a placed view no domain it owns projects, an accepted
+command or projected view the tree places nowhere, and either placed twice.</p>
+<p>The view half exists because of a defect found in a consuming repository rather than imagined here.
+<code>connectors</code> serves <code>kubernetes.workloads</code> from its local daemon and had no command-line verb that
+reads a datasource at all — so an operator on that machine could not reach a projection the process
+beside them was already publishing. Nobody wrote that down until somebody noticed.</p>
+<p><code>ess generate synthesize --target clap</code> emits the parser, the handler obligations and the completion
+scripts from the declaration.</p>]]></content:encoded>
+            <category>release</category>
+            <category>ess</category>
+        </item>
+        <item>
+            <title><![CDATA[0.10–0.11 — the claims a generated scenario could not make]]></title>
+            <link>https://beyond10x.github.io/updates/field-notes/ess/the-claims-a-scenario-could-not-make/</link>
+            <guid>https://beyond10x.github.io/updates/field-notes/ess/the-claims-a-scenario-could-not-make/</guid>
+            <pubDate>Mon, 21 Sep 2026 07:30:00 GMT</pubDate>
+            <description><![CDATA[A command outcome says which entity fields it determines and from what, so a generated scenario asserts the values a row holds rather than only that the row exists. On the billing example the negative-total fault went from caught by 6 of 29 scenarios to 13. A wrong-state branch can also accept, and a view can take parameters.
+]]></description>
+            <content:encoded><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.10–0.11 — the claims a generated scenario could not make | ESS</span><span data-pagefind-meta="description">A command outcome says which entity fields it determines and from what, so a generated scenario asserts the values a row holds rather than only that the row exists. On the billing example the negative-total fault went from caught by 6 of 29 scenarios to 13. A wrong-state branch can also accept, and a view can take parameters.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/809d7e31c3b22840643d56f47768fc22d605048a/website/blog/2026-09-21-0930-the-claims-a-scenario-could-not-make.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-21-0930-the-claims-a-scenario-could-not-make.md</a> · revision <code class="b10x-revision" title="809d7e31c3b22840643d56f47768fc22d605048a">809d7e31c3b2</code></p>
+</blockquote></div>
+<p>A conformance suite is worth what its assertions are worth. These releases are about three claims
+the model had no way to state, each found by an implementation that passed while being wrong.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sets--which-fields-the-branch-determines-and-from-what"><code>sets:</code> — which fields the branch determines, and from what<a href="https://beyond10x.github.io/updates/field-notes/ess/the-claims-a-scenario-could-not-make/#sets--which-fields-the-branch-determines-and-from-what" class="hash-link" aria-label="Direct link to sets--which-fields-the-branch-determines-and-from-what" title="Direct link to sets--which-fields-the-branch-determines-and-from-what" translate="no">​</a></h2>
+<p><code>sets:</code> is the twin of <code>payload:</code>, pointed at the subject instead of an emitted event. Before it,
+<strong>nothing in the model related a command's input to the entity state it produced</strong>. A generated
+scenario could find the row it had just created and say nothing about what was in it, so an
+implementation that stored somebody else's amount passed.</p>
+<p>It is validated like <code>payload:</code>: the field must exist on the entity, the source must be an input the
+command takes, and the types must be assignable or carry a declared conversion.</p>
+<p>A generated <code>contains</code> then names the values the row holds rather than only which row it is — read
+from <code>sets:</code> where the source is an input the scenario chose, where the types do not cross a
+conversion, and where the view projects the field at the entity's own type. Left out rather than
+guessed at otherwise.</p>
+<p>Measured on the normative billing example, which declares <code>sets:</code> on <code>CreateInvoice</code>: the deliberate
+negative-total fault was <strong>caught by 6 of 29 scenarios before, and 13 after</strong>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="refuses-false--a-branch-that-accepts"><code>refuses: false</code> — a branch that accepts<a href="https://beyond10x.github.io/updates/field-notes/ess/the-claims-a-scenario-could-not-make/#refuses-false--a-branch-that-accepts" class="hash-link" aria-label="Direct link to refuses-false--a-branch-that-accepts" title="Direct link to refuses-false--a-branch-that-accepts" translate="no">​</a></h2>
+<p><code>wrong_state:</code> could say one thing: the command refuses here, and reports this error. A command that
+is deliberately idempotent had no way to be written down. ACD's <code>EndCall</code> on a call that has already
+ended answers and does nothing, on purpose and documented — and its specification claimed a refusal
+the code never makes, which was filed as a defect against ACD before anybody read the code.</p>
+<p>It is a key rather than "leave <code>error:</code> out", and the distinction matters. A branch missing its error
+is a mistake the validator has caught since <code>wrong_state:</code> shipped. Making the omission mean
+<em>accepts</em> would have turned every one of those mistakes into a silent claim.</p>
+<p>The generated scenario's id says which claim it carries: <code>…/accepts/EndCall</code> beside
+<code>…/refuses/CancelInvoice</code>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="params--a-view-that-is-not-one-answer"><code>params:</code> — a view that is not one answer<a href="https://beyond10x.github.io/updates/field-notes/ess/the-claims-a-scenario-could-not-make/#params--a-view-that-is-not-one-answer" class="hash-link" aria-label="Direct link to params--a-view-that-is-not-one-answer" title="Direct link to params--a-view-that-is-not-one-answer" translate="no">​</a></h2>
+<p>Most views are one answer the whole system shares. A position in a queue is not: it is per queue,
+and one ranked list of every queued call is a different thing from what the implementation can be
+asked.</p>
+<p>A parameter is read in the filter as <code>param.&lt;name&gt;</code>, so the predicate grammar needs nothing new, and
+<code>params:</code> must be exactly the set the filter reads. Synthesis binds each from what the arrangement
+settled — the scenario asks for the lane it just put the order in — and <strong>the runner refuses to send
+a request with a parameter it could not resolve</strong>, because a query with a made-up parameter reads a
+different set of rows and still returns something.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="and-the-crates-moved">And the crates moved<a href="https://beyond10x.github.io/updates/field-notes/ess/the-claims-a-scenario-could-not-make/#and-the-crates-moved" class="hash-link" aria-label="Direct link to And the crates moved" title="Direct link to And the crates moved" translate="no">​</a></h2>
+<p>0.11.1 moved the crates under <code>crates/{specify,generate,verify,infra}/</code>. On its own that is
+housekeeping; it matters because the command surface follows it one release later, and where a thing
+is implemented stops being a second fact from how it is spelled.</p>]]></content:encoded>
+            <category>release</category>
+            <category>ess</category>
+            <category>conformance</category>
+        </item>
+        <item>
+            <title><![CDATA[0.8–0.9 — a deployment described, and still nothing applied]]></title>
+            <link>https://beyond10x.github.io/updates/field-notes/ess/a-deployment-described/</link>
+            <guid>https://beyond10x.github.io/updates/field-notes/ess/a-deployment-described/</guid>
+            <pubDate>Mon, 21 Sep 2026 07:00:00 GMT</pubDate>
+            <description><![CDATA[A physical realization binds one exact specification digest to the artifacts that implement it, and seven typed formats lower a semantic system to independently released Helm deployments. ESS projects the inputs and verifies the evidence; it builds nothing, publishes nothing, applies nothing.
+]]></description>
+            <content:encoded><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.8–0.9 — a deployment described, and still nothing applied | ESS</span><span data-pagefind-meta="description">A physical realization binds one exact specification digest to the artifacts that implement it, and seven typed formats lower a semantic system to independently released Helm deployments. ESS projects the inputs and verifies the evidence; it builds nothing, publishes nothing, applies nothing.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/809d7e31c3b22840643d56f47768fc22d605048a/website/blog/2026-09-21-0900-a-deployment-described.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-21-0900-a-deployment-described.md</a> · revision <code class="b10x-revision" title="809d7e31c3b22840643d56f47768fc22d605048a">809d7e31c3b2</code></p>
+</blockquote></div>
+<p>The releases through 0.7.1 established that a specification can judge an implementation, and that
+the same pattern points at a running cluster. What neither could say is <strong>which artifact implements
+which component</strong>, and what it takes to run it. These two releases say it, as typed data, without
+acquiring the ability to do anything about it.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-realization-is-authored-not-inferred">A realization is authored, not inferred<a href="https://beyond10x.github.io/updates/field-notes/ess/a-deployment-described/#a-realization-is-authored-not-inferred" class="hash-link" aria-label="Direct link to A realization is authored, not inferred" title="Direct link to A realization is authored, not inferred" translate="no">​</a></h2>
+<p><code>ess-realization/1</code> is an adopter-authored document that binds <strong>one exact ESS system, version and
+semantic digest</strong> to resolved components and actors, immutable implementation artifacts, typed
+runtime requirements, and local, loopback or network entrypoints.</p>
+<p>The binding is to a digest, which is the whole point: a realization that named a system by name
+would still look valid after the specification moved underneath it. <code>ess realization compile</code> emits
+deterministic <code>ess-realization-ir/1</code> and rejects a stale lock, an unresolved or out-of-subset
+reference, incomplete implementation coverage, a malformed placeholder, and <strong>an inline secret
+argument</strong> — the last because a document that can carry a credential is a document somebody will
+put one in.</p>
+<p><code>EssIr</code> did not change. A realization is a separate authority about the same system, which is why
+it can be wrong about it and be told so.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="seven-formats-one-lowering-seam">Seven formats, one lowering seam<a href="https://beyond10x.github.io/updates/field-notes/ess/a-deployment-described/#seven-formats-one-lowering-seam" class="hash-link" aria-label="Direct link to Seven formats, one lowering seam" title="Direct link to Seven formats, one lowering seam" translate="no">​</a></h2>
+<p>0.9.0 adds <code>ess-build/1</code>, <code>ess-runtime/1</code>, <code>ess-release/1</code>, <code>ess-stack/1</code>, <code>ess-stack-lock/1</code>,
+<code>ess-environment/1</code> and <code>ess-deployment/1</code>. Together they are the deterministic path from a
+semantic system to independently released Helm deployments.</p>
+<p>The CLI compiles build and runtime IR, verifies releases, resolves stacks from <strong>an explicit offline
+catalogue</strong>, projects BuildKit and Helm files, compiles environment deployments, and reports the
+exact component releases that changed between two deployment documents.</p>
+<p>Every one of those verbs stops at a file. ESS refuses unresolved stage-owned obligations rather than
+filling them, and it still never builds, publishes or applies anything. The executor boundary — the
+place where a command may reach BuildKit, an OCI registry or Helm — does not exist yet; it arrives
+in 0.13.0, and when it does it is explicit, named, and separate from every projection.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-this-order">Why this order<a href="https://beyond10x.github.io/updates/field-notes/ess/a-deployment-described/#why-this-order" class="hash-link" aria-label="Direct link to Why this order" title="Direct link to Why this order" translate="no">​</a></h2>
+<p>The temptation with deployment modelling is to start from the thing that applies and work backwards
+to a description. That produces a description shaped by one applier. Starting from typed data and
+refusing to apply anything means the first consumer of these formats is a diff, and a diff is the
+artefact that survives a change of applier.</p>]]></content:encoded>
+            <category>release</category>
+            <category>ess</category>
+            <category>infrastructure</category>
+        </item>
         <item>
             <title><![CDATA[0.24.0 — the docs say what the tooling does, and a tag cuts its own release]]></title>
             <link>https://beyond10x.github.io/updates/field-notes/aep/the-docs-catch-up/</link>
@@ -581,366 +905,6 @@ Rust change at all</strong>, which was the point of the exercise.</p>
             <category>release</category>
             <category>aep</category>
             <category>planning</category>
-        </item>
-        <item>
-            <title><![CDATA[We read 100 agent sessions to find out what the human actually contributes]]></title>
-            <link>https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/</link>
-            <guid>https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/</guid>
-            <pubDate>Tue, 25 Aug 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[A transcript study of 1,567 human turns in coding-agent sessions, separating the turns that carried information from the turns that only carried permission.]]></description>
-            <content:encoded><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">We read 100 agent sessions to find out what the human actually contributes | Agentic Principles</span><span data-pagefind-meta="description">A transcript study of 1,567 human turns in coding-agent sessions, separating the turns that carried information from the turns that only carried permission.</span><span data-pagefind-meta="project">Agentic Principles</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">agentic-principles</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">evaluator</span><span data-pagefind-filter="audience">researcher</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
-<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/agentic-principles/blob/594a7a6308cfead09e55f8afbc48aa2d34c1540e/blog/2026-08-25-what-the-operator-actually-contributes.md" target="_blank" rel="noopener noreferrer" class="">blog/2026-08-25-what-the-operator-actually-contributes.md</a> · revision <code class="b10x-revision" title="594a7a6308cfead09e55f8afbc48aa2d34c1540e">594a7a6308cf</code></p>
-</blockquote></div>
-<p>The median instruction given to a coding agent in our sample is <strong>eleven words long</strong> and sets off
-<strong>eight tool calls</strong>. That ratio is the whole economics of agentic work in one line: a very small
-amount of human input steering a very large amount of machine work.</p>
-<p>So we went looking for the obvious follow-up question. Of those eleven words — how many mattered?</p>
-<!-- -->
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-question">The question<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#the-question" class="hash-link" aria-label="Direct link to The question" title="Direct link to The question" translate="no">​</a></h2>
-<p>Any team running agents at volume eventually asks where to put the automation boundary. The honest
-version of the question is uncomfortable: <strong>which of the human's turns carry information the agent
-could not have obtained, and which are ceremony — permission, nudging, repetition — that a script or
-a fixed policy could emit instead?</strong></p>
-<p>We can now answer it with numbers rather than vibes, because agent harnesses record everything.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-we-measured">What we measured<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#what-we-measured" class="hash-link" aria-label="Direct link to What we measured" title="Direct link to What we measured" translate="no">​</a></h2>
-<p>We took the 100 most recently active Claude Code sessions from one heavy operator's machine, spanning
-twelve days and 22 working directories, and rebuilt each one as a sequence of
-<code>human turn → agent operations → outcome</code>.</p>
-<div class="b10x-table-wrap"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>sessions</td><td>100 (18 of them already fully headless)</td></tr><tr><td>human turns</td><td>1,567</td></tr><tr><td>agent messages</td><td>33,327</td></tr><tr><td>tool calls</td><td>33,293</td></tr><tr><td>wall-clock</td><td>673 h elapsed, 222 h with gaps over 5 min removed</td></tr><tr><td>compute</td><td>~$10,200 at API list prices (these ran on a subscription; this is an equivalence, not a bill)</td></tr></tbody></table></div><p class="b10x-table-guidance" id="b10x-table-_R_aallq5_-instructions" hidden="" data-pagefind-ignore="true">More columns: swipe horizontally, or focus the table and use the arrow keys.</p>
-<p>Two things in that table are worth pausing on. Agent messages and tool calls are nearly <strong>1:1</strong> —
-almost every turn the model takes, it takes an action. And 18 sessions had no human in them at all;
-that is the automation baseline this operator had already built before anyone measured anything.</p>
-<p><strong>On method.</strong> Counts, costs, latencies and sequence motifs are <em>observed</em> — read directly off the
-transcripts. The labels on each human turn (intent, motivation, what information it carried, whether
-it could be replaced) are <em>inferred</em> by an LLM classifier over a closed taxonomy, and they are
-judgements, not measurements. We keep the two apart everywhere below, and we spot-checked labels
-against raw turn text before trusting them.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-shape-of-a-turn">The shape of a turn<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#the-shape-of-a-turn" class="hash-link" aria-label="Direct link to The shape of a turn" title="Direct link to The shape of a turn" translate="no">​</a></h2>
-<div class="b10x-table-wrap"><table><thead><tr><th>metric</th><th>value</th></tr></thead><tbody><tr><td>median human turn</td><td>11 words / 65 characters</td></tr><tr><td>turns under 10 words</td><td>44%</td></tr><tr><td>median tool calls triggered</td><td>8</td></tr><tr><td>turns triggering no tool at all</td><td>15%</td></tr><tr><td>turns that interrupted a running agent</td><td>1%</td></tr></tbody></table></div><p class="b10x-table-guidance" id="b10x-table-_R_eallq5_-instructions" hidden="" data-pagefind-ignore="true">More columns: swipe horizontally, or focus the table and use the arrow keys.</p>
-<p>And the number that reframes the problem:</p>
-<blockquote>
-<p>The agent spent <strong>229 hours idle waiting for a human to reply</strong> — <strong>34% of all session wall-clock</strong>.
-Median wait after the agent stops: <strong>2 minutes</strong>. Ninth decile: <strong>21 minutes</strong>.</p>
-</blockquote>
-<p>A third of the elapsed time of agentic work, in this sample, was the machine waiting for a person to
-read something and type a short reply. That is the cost being paid for whatever the human turns
-contribute. So: what do they contribute?</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-the-turns-were">What the turns were<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#what-the-turns-were" class="hash-link" aria-label="Direct link to What the turns were" title="Direct link to What the turns were" translate="no">​</a></h2>
-<div class="b10x-table-wrap"><table><thead><tr><th>intent</th><th>share</th></tr></thead><tbody><tr><td>open new work</td><td>21%</td></tr><tr><td>approve / green-light</td><td>12%</td></tr><tr><td>narrow or expand scope</td><td>9%</td></tr><tr><td>manage the agent itself (context, config, tooling)</td><td>9%</td></tr><tr><td>ask a question</td><td>8%</td></tr><tr><td>correct an agent error</td><td>8%</td></tr><tr><td>supply outside information</td><td>8%</td></tr><tr><td>commit / push / release chores</td><td>6%</td></tr><tr><td>"keep going"</td><td>4%</td></tr><tr><td>ask for status</td><td>4%</td></tr></tbody></table></div><p class="b10x-table-guidance" id="b10x-table-_R_jallq5_-instructions" hidden="" data-pagefind-ignore="true">More columns: swipe horizontally, or focus the table and use the arrow keys.</p>
-<p>Then we asked a sharper question of each turn: <em>did it carry anything the agent did not already
-have?</em></p>
-<div class="b10x-table-wrap"><table><thead><tr><th>information contributed</th><th>share</th></tr></thead><tbody><tr><td><strong>nothing new</strong></td><td><strong>42%</strong></td></tr><tr><td>a new goal</td><td>16%</td></tr><tr><td>state only a human could see</td><td>12%</td></tr><tr><td>a taste or priority preference</td><td>11%</td></tr><tr><td>a judgement between options the agent had already surfaced</td><td>10%</td></tr><tr><td>domain knowledge the agent lacked</td><td>8%</td></tr></tbody></table></div><p class="b10x-table-guidance" id="b10x-table-_R_lallq5_-instructions" hidden="" data-pagefind-ignore="true">More columns: swipe horizontally, or focus the table and use the arrow keys.</p>
-<p>Nearly half of all human turns added no information to the conversation. Widen it slightly — include
-pure approvals, status requests and continuation nudges — and <strong>48% of turns (748 of 1,567) carried
-no new information</strong>, arriving in 355 consecutive runs, the longest of them nine turns deep.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="which-turns-could-be-replaced">Which turns could be replaced<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#which-turns-could-be-replaced" class="hash-link" aria-label="Direct link to Which turns could be replaced" title="Direct link to Which turns could be replaced" translate="no">​</a></h2>
-<p>The classifier judged each turn against four options: a deterministic rule could have emitted it, a
-fixed agent policy could have, another AI with context could have, or it genuinely needed the human.</p>
-<div class="b10x-table-wrap"><table><thead><tr><th>replaceable by</th><th>share</th></tr></thead><tbody><tr><td>human only</td><td>44%</td></tr><tr><td>a fixed agent policy</td><td>23%</td></tr><tr><td>a deterministic rule</td><td>20%</td></tr><tr><td>another AI with context</td><td>14%</td></tr></tbody></table></div><p class="b10x-table-guidance" id="b10x-table-_R_pallq5_-instructions" hidden="" data-pagefind-ignore="true">More columns: swipe horizontally, or focus the table and use the arrow keys.</p>
-<p><strong>43% of human turns could be produced by a rule or a policy.</strong> Not "eventually" — from the
-transcript alone, with the trigger visible.</p>
-<p>The interesting part is <em>which</em> intents concentrate the removable turns:</p>
-<div class="b10x-table-wrap"><table><thead><tr><th>intent</th><th>n</th><th>% a rule or policy could emit</th></tr></thead><tbody><tr><td>manage the agent itself</td><td>136</td><td><strong>73%</strong></td></tr><tr><td>approve / green-light</td><td>190</td><td><strong>61%</strong></td></tr><tr><td>ask a question</td><td>130</td><td>35%</td></tr><tr><td>open new work</td><td>324</td><td>19%</td></tr><tr><td>narrow or expand scope</td><td>145</td><td>8%</td></tr></tbody></table></div><p class="b10x-table-guidance" id="b10x-table-_R_sallq5_-instructions" hidden="" data-pagefind-ignore="true">More columns: swipe horizontally, or focus the table and use the arrow keys.</p>
-<p>Two clusters are almost pure overhead. <strong>Context management</strong> — compacting, clearing, re-orienting the
-agent after it lost the thread — is the agent's own housekeeping, delegated upward to a human who
-notices before it does. And <strong>approval</strong> is mostly a human saying yes to something they were always
-going to say yes to.</p>
-<p>Scope refinement goes the other way: only 8% of those turns reduce to a rule or a policy, and 70%
-were judged to need the human outright. That is the reassuring half of the result. Deciding <em>what</em>
-and <em>how much</em> survives automation. Deciding <em>whether to proceed with the thing you already asked
-for</em> does not.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-repair-tax">The repair tax<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#the-repair-tax" class="hash-link" aria-label="Direct link to The repair tax" title="Direct link to The repair tax" translate="no">​</a></h2>
-<p><strong>20% of human turns (313) existed only because the agent erred or stopped short.</strong> The dominant
-cause was not wrong answers:</p>
-<div class="b10x-table-wrap"><table><thead><tr><th>friction</th><th>share of turns</th></tr></thead><tbody><tr><td>agent stopped short of the task</td><td>18%</td></tr><tr><td>agent got something wrong</td><td>7%</td></tr><tr><td>missing context</td><td>3%</td></tr><tr><td>tool failure</td><td>3%</td></tr><tr><td>ambiguous instruction</td><td>1%</td></tr></tbody></table></div><p class="b10x-table-guidance" id="b10x-table-_R_11allq5_-instructions" hidden="" data-pagefind-ignore="true">More columns: swipe horizontally, or focus the table and use the arrow keys.</p>
-<p>Omission outweighs error two and a half to one. The operator's most common corrective act is not "that's wrong",
-it is "you didn't finish". Tone tracks this: 44% of turns read as terse and pressing, 5% as
-frustrated.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="does-more-human-involvement-produce-better-outcomes">Does more human involvement produce better outcomes?<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#does-more-human-involvement-produce-better-outcomes" class="hash-link" aria-label="Direct link to Does more human involvement produce better outcomes?" title="Direct link to Does more human involvement produce better outcomes?" translate="no">​</a></h2>
-<div class="b10x-table-wrap"><table><thead><tr><th>human turns in session</th><th>n</th><th>success</th><th>partial</th><th>abandoned / failed</th><th>open-ended</th></tr></thead><tbody><tr><td>0 (headless)</td><td>18</td><td>10</td><td>–</td><td>6</td><td>2</td></tr><tr><td>1–3</td><td>26</td><td>17</td><td>–</td><td>8</td><td>1</td></tr><tr><td>4–10</td><td>16</td><td>6</td><td>9</td><td>1</td><td>–</td></tr><tr><td>11–30</td><td>21</td><td>6</td><td>13</td><td>2</td><td>–</td></tr><tr><td>31+</td><td>19</td><td><strong>2</strong></td><td><strong>17</strong></td><td>–</td><td>–</td></tr></tbody></table></div><p class="b10x-table-guidance" id="b10x-table-_R_14allq5_-instructions" hidden="" data-pagefind-ignore="true">More columns: swipe horizontally, or focus the table and use the arrow keys.</p>
-<p>Sessions with more than thirty human turns finished cleanly twice out of nineteen.</p>
-<p>We are <strong>not</strong> claiming that talking to the agent more makes it worse. The obvious competing
-explanation is confounding by difficulty: hard, sprawling, poorly specified work attracts both more
-human turns and worse outcomes. That explanation is at least as consistent with this table as any
-causal story, and this study cannot separate them.</p>
-<p>What the table does support is narrower and still useful: <strong>a long human-turn count is an early
-distress signal</strong>, not a sign of diligence. A session past its twentieth human turn is, empirically,
-a session in trouble — and something should notice that and say so.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="from-turns-to-workflows">From turns to workflows<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#from-turns-to-workflows" class="hash-link" aria-label="Direct link to From turns to workflows" title="Direct link to From turns to workflows" translate="no">​</a></h2>
-<p>Grouping sessions by the shape of the work gives a small, repeating catalogue: incident
-investigation, agent-harness tuning, greenfield scaffolding, refactor sweeps, review-and-gate runs,
-backlog grooming, multi-agent fan-out, release cuts. Thirteen named archetypes plus a catch-all
-cover all 100 sessions; the six largest named ones cover 63 of them.</p>
-<p>Judged per session, <strong>64 of 100 could run unattended or with a small number of gates</strong>. The gates
-that survive scrutiny fall into exactly four categories, and they are worth naming because they are
-the actual specification for a human-in-the-loop design:</p>
-<ol>
-<li class=""><strong>Irreversible writes</strong> — production changes, published artifacts, anything with no undo.</li>
-<li class=""><strong>Outward-facing communication</strong> — a message that goes to a customer or a colleague under someone's name.</li>
-<li class=""><strong>Priority and taste calls</strong> — which of these three defensible options we want.</li>
-<li class=""><strong>Facts from outside the machine</strong> — what a person said, what a dashboard showed, what the device did.</li>
-</ol>
-<p>Everything else in the observed recipes — resolving the trigger, gathering context, running the gate,
-reading the failure, patching, re-running, committing, reporting — appeared in the transcripts as
-mechanical work that a human was narrating rather than performing.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="limitations">Limitations<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#limitations" class="hash-link" aria-label="Direct link to Limitations" title="Direct link to Limitations" translate="no">​</a></h2>
-<p>One operator, one harness, twelve days, one machine's habits. The corpus skews toward infrastructure
-and agent-tooling work and contains almost no greenfield product code. The replaceability labels are
-an LLM's opinion about a single turn in context; that classifier does not know what an automated
-replacement would have cost, or what it would have broken. The outcome-versus-turn-count table is
-confounded as described. And the analysis of these sessions was itself performed by an agent of the
-same family as the one under study — which is either efficient or a conflict of interest, depending
-on how the next replication goes.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-we-would-test-next">What we would test next<a href="https://beyond10x.github.io/updates/field-notes/agentic-principles/what-the-operator-actually-contributes/#what-we-would-test-next" class="hash-link" aria-label="Direct link to What we would test next" title="Direct link to What we would test next" translate="no">​</a></h2>
-<p>The cheapest falsification is a <strong>turn-count tripwire</strong>: have the harness announce, at the twentieth
-human turn, that this session is now in the population that historically finishes partial, and offer
-to restate the goal from scratch. If outcomes do not move, the distress-signal reading is wrong and
-the confound was the whole story.</p>
-<p>The second is a <strong>default-approval policy</strong> for the 61% of approvals the classifier called removable:
-state the intended action with its default, act after a fixed pause unless contradicted, and keep a
-hard stop on the four gate categories above. That converts approval from a blocking request into a
-revocable one — and reclaims most of a third of the wall-clock.</p>]]></content:encoded>
-            <category>transcripts</category>
-            <category>automation</category>
-            <category>human-in-the-loop</category>
-            <category>measurement</category>
-        </item>
-        <item>
-            <title><![CDATA[0.12.0 — a workflow declares where a run may write]]></title>
-            <link>https://beyond10x.github.io/updates/field-notes/aep/where-a-run-may-write/</link>
-            <guid>https://beyond10x.github.io/updates/field-notes/aep/where-a-run-may-write/</guid>
-            <pubDate>Mon, 24 Aug 2026 14:18:54 GMT</pubDate>
-            <description><![CDATA[A step now declares the files it is handed and the paths it may write, with partial-only as the word that earns the shape. Measured on four live runs rather than asserted — and the toolset stopped a run the prose had only warned about.
-]]></description>
-            <content:encoded><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.12.0 — a workflow declares where a run may write | AEP</span><span data-pagefind-meta="description">A step now declares the files it is handed and the paths it may write, with partial-only as the word that earns the shape. Measured on four live runs rather than asserted — and the toolset stopped a run the prose had only warned about.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
-<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/81fb70f0c1cc700575e7e00b2fdd907d4336bc89/website/blog/2026-08-24-1618-where-a-run-may-write.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-24-1618-where-a-run-may-write.md</a> · revision <code class="b10x-revision" title="81fb70f0c1cc700575e7e00b2fdd907d4336bc89">81fb70f0c1cc</code></p>
-</blockquote></div>
-<p>A workflow step now declares two things it never could: <strong>the files it is given</strong>, and <strong>the paths
-it may write</strong>.</p>
-<!-- -->
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-shape">The shape<a href="https://beyond10x.github.io/updates/field-notes/aep/where-a-run-may-write/#the-shape" class="hash-link" aria-label="Direct link to The shape" title="Direct link to The shape" translate="no">​</a></h2>
-<p><code>context:</code> names files a run is <strong>handed</strong> rather than has to find. <code>scope:</code> is an ordered list of
-paths and one of three words — <code>allowed</code>, <code>partial-only</code>, <code>denied</code> — <strong>first match wins</strong>, and <strong>the
-last rule must name <code>**</code></strong>, so a path nobody thought of has an answer rather than a default.</p>
-<p>Requiring the catch-all is the small decision that matters. A default is a policy nobody wrote; a
-required final rule is a policy somebody had to type.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-partial-only-earns-the-shape">Why <code>partial-only</code> earns the shape<a href="https://beyond10x.github.io/updates/field-notes/aep/where-a-run-may-write/#why-partial-only-earns-the-shape" class="hash-link" aria-label="Direct link to why-partial-only-earns-the-shape" title="Direct link to why-partial-only-earns-the-shape" translate="no">​</a></h2>
-<p>It is the planning store's own rule. <strong>The CLI owns the frontmatter</strong>, so a body edit is legitimate
-and a whole-file rewrite re-types it by hand.</p>
-<p><strong>No set of operations can express that</strong>, because a file write and a file edit are both writes. So
-the document speaks <strong>granularity, not identity</strong> — and which of an adapter's operations replace a
-file whole stays the adapter's own fact.</p>
-<p>The rule already existed, in the driver's <code>store_integrity</code> check, <strong>written in one vendor's tool
-names</strong> — so every arm but one walked past it for a year. A policy written in one harness's
-vocabulary is a policy that only holds for that harness.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-corpus-stopped-naming-vendors">The corpus stopped naming vendors<a href="https://beyond10x.github.io/updates/field-notes/aep/where-a-run-may-write/#the-corpus-stopped-naming-vendors" class="hash-link" aria-label="Direct link to The corpus stopped naming vendors" title="Direct link to The corpus stopped naming vendors" translate="no">​</a></h2>
-<p>A call selector now takes a set of tools, an operation set and a subject, so a row meaning <em>"the
-test was written before the code"</em> <strong>decides on any harness</strong> instead of being blind to the one that
-used a differently-named edit verb.</p>
-<p>The three-arm programme became four. The fourth is our own loop, <strong>where there is no decision seam
-at all and the published toolset is the policy</strong>.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="measured-not-asserted">Measured, not asserted<a href="https://beyond10x.github.io/updates/field-notes/aep/where-a-run-may-write/#measured-not-asserted" class="hash-link" aria-label="Direct link to Measured, not asserted" title="Direct link to Measured, not asserted" translate="no">​</a></h2>
-<p>Four live runs, recorded with their transcript digests:</p>
-<div class="b10x-table-wrap"><table><thead><tr><th>run</th><th>result</th></tr></thead><tbody><tr><td>unscoped</td><td>10 of 11 expectations held; <strong>three artifact files rewritten whole</strong></td></tr><tr><td>scoped and stated</td><td>11 held; discovery calls down from <strong>ten of fifty-two to three of forty-nine</strong></td></tr><tr><td>scoped and unstated</td><td><strong>five calls refused and the rule still held</strong></td></tr></tbody></table></div><p class="b10x-table-guidance" id="b10x-table-_R_gallq5_-instructions" hidden="" data-pagefind-ignore="true">More columns: swipe horizontally, or focus the table and use the arrow keys.</p>
-<p>The last one is the only run that measures this feature's own claim: with the prose warning removed,
-<strong>the toolset stopped the run</strong> rather than the instructions doing it. Everything else could have
-been the model being agreeable.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="and-the-gate">And the gate<a href="https://beyond10x.github.io/updates/field-notes/aep/where-a-run-may-write/#and-the-gate" class="hash-link" aria-label="Direct link to And the gate" title="Direct link to And the gate" translate="no">​</a></h2>
-<p>Green for the first time that session, <strong>read from its own exit status rather than a pipeline's</strong> —
-the same mistake this repository already paid for once and wrote down.</p>
-<hr>
-<p><em>Written retrospectively from this release's <code>CHANGELOG.md</code> section and its annotated tag; no
-re-run command output.</em></p>]]></content:encoded>
-            <category>release</category>
-            <category>aep</category>
-            <category>driver</category>
-        </item>
-        <item>
-            <title><![CDATA[0.11.0 — the corpus becomes ground truth, and a gate that lied gets caught]]></title>
-            <link>https://beyond10x.github.io/updates/field-notes/aep/ground-truth-and-docs/</link>
-            <guid>https://beyond10x.github.io/updates/field-notes/aep/ground-truth-and-docs/</guid>
-            <pubDate>Fri, 21 Aug 2026 23:05:33 GMT</pubDate>
-            <description><![CDATA[An outside adopter re-issued the horizons corpus as ground truth, and the scanner followed. Plus the process lesson that cost the most: two gates that aborted at their first step were read as green through a piped exit status.
-]]></description>
-            <content:encoded><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.11.0 — the corpus becomes ground truth, and a gate that lied gets caught | AEP</span><span data-pagefind-meta="description">An outside adopter re-issued the horizons corpus as ground truth, and the scanner followed. Plus the process lesson that cost the most: two gates that aborted at their first step were read as green through a piped exit status.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
-<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/81fb70f0c1cc700575e7e00b2fdd907d4336bc89/website/blog/2026-08-22-0105-ground-truth-and-docs.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-22-0105-ground-truth-and-docs.md</a> · revision <code class="b10x-revision" title="81fb70f0c1cc700575e7e00b2fdd907d4336bc89">81fb70f0c1cc</code></p>
-</blockquote></div>
-<p>The most useful thing in this release is a mistake it documents.</p>
-<!-- -->
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-corpus-becomes-ground-truth">The corpus becomes ground truth<a href="https://beyond10x.github.io/updates/field-notes/aep/ground-truth-and-docs/#the-corpus-becomes-ground-truth" class="hash-link" aria-label="Direct link to The corpus becomes ground truth" title="Direct link to The corpus becomes ground truth" translate="no">​</a></h2>
-<p>The adopter fixed <strong>their</strong> reference against this repository's scanner and re-issued
-<code>expected.json</code>: <strong>43 raw, 43 parsed, <code>missed_by_reference</code> zero</strong> — adding a seventh position and a
-rule running the other way. <strong>An annotation inside a fenced code block is an illustration</strong>,
-excluded from parsing <em>and</em> from the coverage denominator both.</p>
-<p>The scanner follows, with the <strong>fence-stripping implemented twice on purpose</strong> so the denominator
-stays independent evidence. Two implementations agreeing is evidence; one implementation checking
-itself is a tautology.</p>
-<p>This is what ground truth is supposed to look like: the corpus is not ours, and it corrected us as
-often as we corrected it.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-gate-that-was-read-as-green">The gate that was read as green<a href="https://beyond10x.github.io/updates/field-notes/aep/ground-truth-and-docs/#the-gate-that-was-read-as-green" class="hash-link" aria-label="Direct link to The gate that was read as green" title="Direct link to The gate that was read as green" translate="no">​</a></h2>
-<p>Two gates had <strong>aborted at their first step</strong> and were misread as green <strong>through a piped exit
-status</strong> — <code>$?</code> was the pipeline's, not the gate's.</p>
-<p>The record is corrected <strong>in git notes</strong> rather than by rewriting history, and <strong>the first honestly
-captured gate immediately caught a stale test</strong>. Which is the point: the reason to fix the reading
-is not tidiness, it is that the gate had something to say and nobody heard it.</p>
-<p>The rule that came out of it — <em>read the gate's own exit code, never a pipeline's</em> — has been
-applied on every gate run since, including the one that cut this release.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="also">Also<a href="https://beyond10x.github.io/updates/field-notes/aep/ground-truth-and-docs/#also" class="hash-link" aria-label="Direct link to Also" title="Direct link to Also" translate="no">​</a></h2>
-<p><code>protocol evidence inspect</code> no longer refuses a record <strong>the day it is written</strong>: the future check
-now runs at the reference date's own granularity.</p>
-<p>And the documentation caught up with the tree under one rule: <strong>every number from a command, every
-reference resolving, every quoted output reproduced.</strong></p>
-<hr>
-<p><em>Written retrospectively from this release's <code>CHANGELOG.md</code> section and its annotated tag; no
-re-run command output.</em></p>]]></content:encoded>
-            <category>release</category>
-            <category>aep</category>
-            <category>evidence</category>
-        </item>
-        <item>
-            <title><![CDATA[0.10.0 — evidence gets a shelf life, and the first governed run stops]]></title>
-            <link>https://beyond10x.github.io/updates/field-notes/aep/horizons-and-the-first-governed-run/</link>
-            <guid>https://beyond10x.github.io/updates/field-notes/aep/horizons-and-the-first-governed-run/</guid>
-            <pubDate>Fri, 21 Aug 2026 21:43:54 GMT</pubDate>
-            <description><![CDATA[A fact decays to Unknown past its horizon, never to False, and no API can extend one. Then the protocol governs a real story out of this repository's own backlog — and blocks four states short of where it was meant to.
-]]></description>
-            <content:encoded><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.10.0 — evidence gets a shelf life, and the first governed run stops | AEP</span><span data-pagefind-meta="description">A fact decays to Unknown past its horizon, never to False, and no API can extend one. Then the protocol governs a real story out of this repository's own backlog — and blocks four states short of where it was meant to.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
-<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/81fb70f0c1cc700575e7e00b2fdd907d4336bc89/website/blog/2026-08-21-2343-horizons-and-the-first-governed-run.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-21-2343-horizons-and-the-first-governed-run.md</a> · revision <code class="b10x-revision" title="81fb70f0c1cc700575e7e00b2fdd907d4336bc89">81fb70f0c1cc</code></p>
-</blockquote></div>
-<p>Two things, and the second is the one that matters.</p>
-<!-- -->
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="evidence-horizons">Evidence horizons<a href="https://beyond10x.github.io/updates/field-notes/aep/horizons-and-the-first-governed-run/#evidence-horizons" class="hash-link" aria-label="Direct link to Evidence horizons" title="Direct link to Evidence horizons" translate="no">​</a></h2>
-<p>An evidence record carries <code>observed_at</code> as <strong>the identity of the fact</strong> — not metadata about it. A
-requirement may declare a <strong>horizon</strong>, past which the fact decays to <strong><code>Unknown</code>, and never to
-<code>False</code></strong>.</p>
-<p>That asymmetry is the design. A lapsed check has not failed; <strong>nobody has run it</strong>. A tool that
-reported a stale pass as a failure would train people to re-run things to clear noise; one that
-reported it as a pass would be lying.</p>
-<p><strong>No API can extend a horizon.</strong> There is deliberately no <code>extend</code> verb: if extending were as easy
-to call as re-checking, it is the one that gets called by whoever is trying to get a gate green.</p>
-<p>Against the adopter's vendored corpus: <strong>42 of 42</strong>, with self-reported coverage. It closed the
-first adopter's ranked-first finding, and was designed and adversarially reviewed the same day it
-was built.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-first-governed-run--and-it-stopped">The first governed run — and it stopped<a href="https://beyond10x.github.io/updates/field-notes/aep/horizons-and-the-first-governed-run/#the-first-governed-run--and-it-stopped" class="hash-link" aria-label="Direct link to The first governed run — and it stopped" title="Direct link to The first governed run — and it stopped" translate="no">​</a></h2>
-<p><code>protocol drive</code> walked a real story out of this repository's own store under <code>development.driven</code>.
-Four headless model sessions, hooks as the enforcement arm, <strong>80 decisions, 11 denies one-for-one
-with the transcripts</strong>.</p>
-<p><strong>It blocked in <code>establish_verifiers</code>, four states short of the person it was meant to stop at.</strong></p>
-<p>Both reasons the engine printed were correct refusals. The model wrote its failing checks as shell
-scripts — the idiom the story's own acceptance is written in — while the map it was driving under
-ran <code>cargo</code> in every state naming a verifier, so the suite came back green and <code>test-driven</code> refused
-to advance.</p>
-<p><strong>Nothing was changed to make the run go through.</strong> The run is the finding: four new gap-register
-rows, none patched to pass.</p>
-<p>That is the whole reason to dogfood. A run engineered into a pass measures the engineering.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-lab">The lab<a href="https://beyond10x.github.io/updates/field-notes/aep/horizons-and-the-first-governed-run/#the-lab" class="hash-link" aria-label="Direct link to The lab" title="Direct link to The lab" translate="no">​</a></h2>
-<p><code>/lab</code> executes the synthesised billing realization as WebAssembly over its real boundary —
-deterministic, asserted outside a browser, and <strong>a page without a module says so instead of
-pretending</strong>.</p>
-<hr>
-<p><em>Written retrospectively from this release's <code>CHANGELOG.md</code> section and its annotated tag; no
-re-run command output.</em></p>]]></content:encoded>
-            <category>release</category>
-            <category>aep</category>
-            <category>evidence</category>
-            <category>driver</category>
-        </item>
-        <item>
-            <title><![CDATA[0.9.0 — something walks the workflow, on evidence alone]]></title>
-            <link>https://beyond10x.github.io/updates/field-notes/aep/the-reference-driver/</link>
-            <guid>https://beyond10x.github.io/updates/field-notes/aep/the-reference-driver/</guid>
-            <pubDate>Fri, 21 Aug 2026 19:20:50 GMT</pubDate>
-            <description><![CDATA[The reference driver exists: protocol drive walks a workflow, blocks with the engine's reasons verbatim, and is held to the protocol verbs by enforcement hooks. Preceded by an adversarial review of six architecture decisions, with all seventeen corrections applied before a line was built.
-]]></description>
-            <content:encoded><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.9.0 — something walks the workflow, on evidence alone | AEP</span><span data-pagefind-meta="description">The reference driver exists: protocol drive walks a workflow, blocks with the engine's reasons verbatim, and is held to the protocol verbs by enforcement hooks. Preceded by an adversarial review of six architecture decisions, with all seventeen corrections applied before a line was built.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
-<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/81fb70f0c1cc700575e7e00b2fdd907d4336bc89/website/blog/2026-08-21-2120-the-reference-driver.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-21-2120-the-reference-driver.md</a> · revision <code class="b10x-revision" title="81fb70f0c1cc700575e7e00b2fdd907d4336bc89">81fb70f0c1cc</code></p>
-</blockquote></div>
-<p>Everything before this release <em>answered questions</em>. This one <strong>walks a workflow</strong> — and the design
-of it was argued out and corrected before any of it was written.</p>
-<!-- -->
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="wave-2-the-decisions-judged-before-the-build">Wave 2: the decisions, judged before the build<a href="https://beyond10x.github.io/updates/field-notes/aep/the-reference-driver/#wave-2-the-decisions-judged-before-the-build" class="hash-link" aria-label="Direct link to Wave 2: the decisions, judged before the build" title="Direct link to Wave 2: the decisions, judged before the build" translate="no">​</a></h2>
-<p>The driver's six open architecture questions became taken decisions, and an <strong>adversarial
-feasibility review judged every one against the code</strong>: 23 confirmed, 14 needs-change, 3 infeasible.
-<strong>All seventeen corrections were applied before a line was built.</strong></p>
-<p>Seventeen corrections is what a design document costs when somebody is genuinely trying to break it.
-Paying that before implementation is the whole argument for having the document.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="wave-3-the-driver">Wave 3: the driver<a href="https://beyond10x.github.io/updates/field-notes/aep/the-reference-driver/#wave-3-the-driver" class="hash-link" aria-label="Direct link to Wave 3: the driver" title="Direct link to Wave 3: the driver" translate="no">​</a></h2>
-<ul>
-<li class=""><code>aep-driver-spec</code> and <code>aep-driver</code>, with step maps under <code>drivers/</code>.</li>
-<li class=""><strong><code>protocol drive</code> walks a workflow on evidence alone</strong>, and blocks <strong>with the engine's reasons
-verbatim</strong>. Not summarised, not re-worded — the driver is not allowed to become a second place
-where the meaning of a refusal is decided.</li>
-<li class=""><strong>Enforcement hooks</strong> holding the planning store's frontmatter and a driven shell to the protocol
-verbs, <strong>with every adjudication logged</strong>.</li>
-<li class="">A <strong>driven eval</strong> running a live session under the hooks, answering an open question empirically
-rather than by argument.</li>
-<li class="">The <code>development.driven</code> profile — the only one that grants a shell, and it is held to the
-<code>protocol</code> CLI by the driver's own per-call policy.</li>
-<li class=""><code>env.tool_available</code> as the fiftieth trace expectation kind.</li>
-<li class=""><strong><code>protocol workflow render</code></strong>, drawing a workflow and its live run in four formats.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-split-that-makes-it-safe">The split that makes it safe<a href="https://beyond10x.github.io/updates/field-notes/aep/the-reference-driver/#the-split-that-makes-it-safe" class="hash-link" aria-label="Direct link to The split that makes it safe" title="Direct link to The split that makes it safe" translate="no">​</a></h2>
-<p><strong>Gates are evaluated only by the engine. The driver asks and does what it is told.</strong> A driver that
-could evaluate a gate would be a second protocol implementation, and the two would disagree —
-eventually, quietly, on the case that mattered.</p>
-<p>Also in this release: the repository begins <strong>planning itself</strong> in <code>.engineering/</code>.</p>
-<hr>
-<p><em>Written retrospectively from this release's <code>CHANGELOG.md</code> section and its annotated tag; no
-re-run command output.</em></p>]]></content:encoded>
-            <category>release</category>
-            <category>aep</category>
-            <category>driver</category>
-        </item>
-        <item>
-            <title><![CDATA[0.8.0 — the repository starts planning itself, and a transcript gets judged]]></title>
-            <link>https://beyond10x.github.io/updates/field-notes/aep/the-plan-and-the-transcript/</link>
-            <guid>https://beyond10x.github.io/updates/field-notes/aep/the-plan-and-the-transcript/</guid>
-            <pubDate>Fri, 21 Aug 2026 15:08:47 GMT</pubDate>
-            <description><![CDATA[Planning artifacts become markdown in the repository, moved only through lifecycle-validated verbs. And an agent transcript normalises into an event IR judged against a typed specification — the third observation domain after a specification and a cluster.
-]]></description>
-            <content:encoded><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.8.0 — the repository starts planning itself, and a transcript gets judged | AEP</span><span data-pagefind-meta="description">Planning artifacts become markdown in the repository, moved only through lifecycle-validated verbs. And an agent transcript normalises into an event IR judged against a typed specification — the third observation domain after a specification and a cluster.</span><span data-pagefind-meta="project">AEP</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">aep</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="experience">understand-safe-agentic-coding</span><span data-pagefind-filter="task">research</span></div>
-<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/aep/blob/81fb70f0c1cc700575e7e00b2fdd907d4336bc89/website/blog/2026-08-21-1708-the-plan-and-the-transcript.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-08-21-1708-the-plan-and-the-transcript.md</a> · revision <code class="b10x-revision" title="81fb70f0c1cc700575e7e00b2fdd907d4336bc89">81fb70f0c1cc</code></p>
-</blockquote></div>
-<p>Two waves in one release, and they are the same idea applied twice: <strong>take something that was prose
-and make it a typed thing a program can refuse.</strong></p>
-<!-- -->
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="harness-wave-1--the-plan-becomes-data">Harness wave 1 — the plan becomes data<a href="https://beyond10x.github.io/updates/field-notes/aep/the-plan-and-the-transcript/#harness-wave-1--the-plan-becomes-data" class="hash-link" aria-label="Direct link to Harness wave 1 — the plan becomes data" title="Direct link to Harness wave 1 — the plan becomes data" translate="no">​</a></h2>
-<p>Planning artifacts live in the repository as markdown under <code>.engineering/planning/</code>, and are
-<strong>moved only through lifecycle-validated CLI verbs</strong>. The consequence of choosing markdown over a
-database is concrete: the diff of a status move is one line, and <code>git log</code> already knows who made
-it.</p>
-<p>A <strong>Claude Code plugin</strong> — one skill, two agents, no hooks at this point — teaches the store's rules
-and <strong>discovers its vocabulary at use time</strong> rather than hard-coding it, so the plugin does not go
-stale when the vocabulary grows.</p>
-<p>And a <strong>repeatable hermetic eval</strong> checks the plugin's behaviour with mechanical assertions, run
-metrics, and an advisory adversarial review.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="trace-wave-1--a-run-becomes-a-judgeable-object">Trace wave 1 — a run becomes a judgeable object<a href="https://beyond10x.github.io/updates/field-notes/aep/the-plan-and-the-transcript/#trace-wave-1--a-run-becomes-a-judgeable-object" class="hash-link" aria-label="Direct link to Trace wave 1 — a run becomes a judgeable object" title="Direct link to Trace wave 1 — a run becomes a judgeable object" translate="no">​</a></h2>
-<p>A harness transcript normalises into a <strong>content-addressed event IR</strong> and is judged against a
-<code>trace-spec/1</code> document: <strong>forty-nine expectation kinds</strong>, verdicts <code>ok</code> / <code>gap</code> / <code>unk</code>, exit codes
-0 / 1 / 3.</p>
-<p>The third value earns its place here more than anywhere: <code>unk</code> means <strong>the adapter did not
-understand the event</strong>, which is a different thing from the expectation failing, and a checker that
-reported those as failures would be unusable against any harness it did not fully model.</p>
-<p>A passing check <strong>mints <code>trace_conformance</code> evidence the engine admits</strong>, produced by the
-<code>trace-checker</code> verifier class and fed back through <code>protocol evaluate --evidence</code>. That is the same
-join as the ESS half: an observation becomes a fact a completion rule can read.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="and-a-narrowing-stated">And a narrowing, stated<a href="https://beyond10x.github.io/updates/field-notes/aep/the-plan-and-the-transcript/#and-a-narrowing-stated" class="hash-link" aria-label="Direct link to And a narrowing, stated" title="Direct link to And a narrowing, stated" translate="no">​</a></h2>
-<p>The vision's refusal of "a workflow engine" was <strong>narrowed to admit a reference driver</strong> — decided
-and designed, not built. A boundary that moves should move in writing, with the reason attached, or
-it looks later like it was never there.</p>
-<hr>
-<p><em>Written retrospectively from this release's <code>CHANGELOG.md</code> section and its annotated tag; no
-re-run command output.</em></p>]]></content:encoded>
-            <category>release</category>
-            <category>aep</category>
-            <category>planning</category>
-            <category>trace</category>
         </item>
     </channel>
 </rss>
