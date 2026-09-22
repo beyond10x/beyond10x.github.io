@@ -2,8 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://beyond10x.github.io/releases/ess/atom.xml</id>
   <title>ESS releases</title>
-  <updated>2026-09-20T10:12:14Z</updated>
+  <updated>2026-09-22T06:46:21Z</updated>
   <link rel="self" href="https://beyond10x.github.io/releases/ess/atom.xml"/>
+  <entry>
+    <id>ess/retained-command-results-0.29.0</id>
+    <title>Verify retries against their original command results</title>
+    <updated>2026-09-22T06:46:21Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.29.0"/>
+    <summary>Source ess/7 declares silent retries of original command results and finite state refusals. Conformance suites 12/13 compare actual retained responses and complete subjects in Rust and Go; unsupported runners refuse. Native APIs preserve typed results, and diff/6 records the new semantics.</summary>
+  </entry>
+  <entry>
+    <id>ess/observed-subject-history-0.28.0</id>
+    <title>Conformance observes history and independently arranged failures</title>
+    <updated>2026-09-21T16:57:25Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.28.0"/>
+    <summary>Source format ess/6 models input eligibility for external failures and enum subject history. Suite formats 10/11 compare actual before-and-after subject values and assert silent success. Rust, Go and TypeScript runners reject changed, missing or duplicate subjects; older formats refuse the new vocabulary.</summary>
+  </entry>
   <entry>
     <id>ess/enum-variant-wire-names-0.27.0</id>
     <title>An enum variant carries its own wire spelling</title>

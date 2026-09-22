@@ -4,6 +4,26 @@
     <link>https://beyond10x.github.io/changes/</link>
     <description>Important releases, migrations, capabilities, and adopter actions across the public beyond10x ecosystem.</description>
     <item>
+      <guid isPermaLink="false">ess/retained-command-results-0.29.0</guid>
+      <title>Verify retries against their original command results</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.29.0</link>
+      <pubDate>Tue, 22 Sep 2026 06:46:21 GMT</pubDate>
+      <description>Source ess/7 declares silent retries of original command results and finite state refusals. Conformance suites 12/13 compare actual retained responses and complete subjects in Rust and Go; unsupported runners refuse. Native APIs preserve typed results, and diff/6 records the new semantics.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/observed-subject-history-0.28.0</guid>
+      <title>Conformance observes history and independently arranged failures</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.28.0</link>
+      <pubDate>Mon, 21 Sep 2026 16:57:25 GMT</pubDate>
+      <description>Source format ess/6 models input eligibility for external failures and enum subject history. Suite formats 10/11 compare actual before-and-after subject values and assert silent success. Rust, Go and TypeScript runners reject changed, missing or duplicate subjects; older formats refuse the new vocabulary.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
       <guid isPermaLink="false">ess/enum-variant-wire-names-0.27.0</guid>
       <title>An enum variant carries its own wire spelling</title>
       <link>https://github.com/beyond10x/ess/releases/tag/0.27.0</link>

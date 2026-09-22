@@ -2,6 +2,144 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "aep/0.57.0",
+      "id": "aep/0.57.0",
+      "repository": "aep",
+      "publishedAt": "2026-09-22T10:20:04Z",
+      "title": "AEP 0.57.0",
+      "summary": "AEP released version 0.57.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.57.0",
+        "version": "0.57.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "entity-runtime/0.19.0",
+      "id": "entity-runtime/0.19.0",
+      "repository": "entity-runtime",
+      "publishedAt": "2026-09-22T08:57:08Z",
+      "title": "Entity Runtime 0.19.0",
+      "summary": "Entity Runtime released version 0.19.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.19.0",
+        "version": "0.19.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "entity-runtime/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "eventlog/0.3.0",
+      "id": "eventlog/0.3.0",
+      "repository": "eventlog",
+      "publishedAt": "2026-09-22T08:35:00Z",
+      "title": "Eventlog 0.3.0",
+      "summary": "Eventlog released version 0.3.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/eventlog/releases/tag/0.3.0",
+        "version": "0.3.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "eventlog/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "ess/retained-command-results-0.29.0",
+      "id": "ess/retained-command-results-0.29.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-22T06:46:21Z",
+      "title": "Verify retries against their original command results",
+      "summary": "Source ess/7 declares silent retries of original command results and finite state refusals. Conformance suites 12/13 compare actual retained responses and complete subjects in Rust and Go; unsupported runners refuse. Native APIs preserve typed results, and diff/6 records the new semantics.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.29.0",
+        "version": "0.29.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "gates/0.1.6",
+      "id": "gates/0.1.6",
+      "repository": "gates",
+      "publishedAt": "2026-09-22T04:09:01Z",
+      "title": "Gates 0.1.6",
+      "summary": "Gates released version 0.1.6.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/gates/releases/tag/0.1.6",
+        "version": "0.1.6"
+      },
+      "journeys": [
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "gates/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "ess/observed-subject-history-0.28.0",
+      "id": "ess/observed-subject-history-0.28.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-21T16:57:25Z",
+      "title": "Conformance observes history and independently arranged failures",
+      "summary": "Source format ess/6 models input eligibility for external failures and enum subject history. Suite formats 10/11 compare actual before-and-after subject values and assert silent success. Rust, Go and TypeScript runners reject changed, missing or duplicate subjects; older formats refuse the new vocabulary.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.28.0",
+        "version": "0.28.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
       "key": "ess/enum-variant-wire-names-0.27.0",
       "id": "ess/enum-variant-wire-names-0.27.0",
       "repository": "ess",
