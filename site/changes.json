@@ -2,6 +2,76 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "entity-runtime/0.20.0",
+      "id": "entity-runtime/0.20.0",
+      "repository": "entity-runtime",
+      "publishedAt": "2026-09-23T21:37:55Z",
+      "title": "Entity Runtime 0.20.0",
+      "summary": "Entity Runtime released version 0.20.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.20.0",
+        "version": "0.20.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "entity-runtime/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.10.0",
+      "id": "agentplugins/0.10.0",
+      "repository": "agentplugins",
+      "publishedAt": "2026-09-23T21:13:24Z",
+      "title": "Agent Plugins 0.10.0",
+      "summary": "Agent Plugins released version 0.10.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.10.0",
+        "version": "0.10.0"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "ess/agent-plugin-0.30.0",
+      "id": "ess/agent-plugin-0.30.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-23T16:00:00Z",
+      "title": "ESS ships its own agent plugin, and the binary prints its skills",
+      "summary": "The ESS agent plugin (ess@ess) now ships from this repository at the binary's version, with skills for writing, retrofitting and conformance-testing a specification. `ess skill` prints the same skills from the binary, and the release gate refuses a plugin version that differs from the workspace.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.30.0",
+        "version": "0.30.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
       "key": "mandate/v0.5.1",
       "id": "mandate/v0.5.1",
       "repository": "mandate",

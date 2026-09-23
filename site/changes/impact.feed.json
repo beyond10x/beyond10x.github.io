@@ -5,6 +5,20 @@
   "feed_url": "https://beyond10x.github.io/changes/feed.json",
   "items": [
     {
+      "id": "ess/agent-plugin-0.30.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.30.0",
+      "title": "ESS ships its own agent plugin, and the binary prints its skills",
+      "content_text": "The ESS agent plugin (ess@ess) now ships from this repository at the binary's version, with skills for writing, retrofitting and conformance-testing a specification. `ess skill` prints the same skills from the binary, and the release gate refuses a plugin version that differs from the workspace.",
+      "date_published": "2026-09-23T16:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "significant",
+        "impact",
+        "specify"
+      ]
+    },
+    {
       "id": "ess/retained-command-results-0.29.0",
       "url": "https://github.com/beyond10x/ess/releases/tag/0.29.0",
       "title": "Verify retries against their original command results",
