@@ -31,7 +31,7 @@ jobs:
       contents: read
       pages: write
       id-token: write
-    uses: beyond10x/website/.github/workflows/deploy-root.yml@28d658f17966effcbaf63b27111f3811872593d3
+    uses: beyond10x/website/.github/workflows/deploy-root.yml@a175d5d89cdee33d5149d7a444c6f66ea5cc7441
     with:
       published_sha: ${{ inputs.published_sha }}
       control_sha: ${{ inputs.control_sha }}
