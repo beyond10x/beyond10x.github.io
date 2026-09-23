@@ -11,7 +11,7 @@ XDG-state SQLite registry.
 ## Install
 
 ```bash
-cargo install --git https://github.com/beyond10x/worktree --tag 0.4.1 b10x-worktree-cli
+cargo install --git https://github.com/beyond10x/worktree --tag 0.5.0 b10x-worktree-cli
 ```
 
 ## Use
@@ -33,10 +33,12 @@ worktree doctor --check
 ```
 
 Managed trees default to `$XDG_STATE_HOME/worktree/trees/<profile>/<repository>/<id>`. Activate a
-workspace profile with `worktree activate --profile profile.toml --workspace /path/to/workspace`.
-Workspace and managed roots are canonical, disjoint paths. Create plans resolve the requested base
-to an immutable commit and revalidate the repository, policy-derived destination, and exact Git
-worktree membership before changing state.
+workspace profile with `worktree activate --profile profile.toml --workspace /path/to/workspace`;
+add `--install-agent-guidance` to write a managed guidance block into `~/.codex/AGENTS.md` and
+`~/.claude/CLAUDE.md`, replacing only the block between its markers. Workspace and managed roots
+are canonical, disjoint paths. Create plans resolve the requested base to an immutable commit and
+revalidate the repository, policy-derived destination, and exact Git worktree membership before
+changing state.
 
 Generate portable agent guidance from the exact installed command surface:
 
@@ -62,6 +64,15 @@ advertisements, and proves that the exact HEAD is reachable. Local-only tags and
 fabricated remote-tracking refs do not count. Replacement refs and grafted ancestry are disabled;
 repository graft files cause refusal. Offline, changed, or ambiguous advertisements cause refusal.
 
+Work that was rebased or cherry-picked before it was merged has new commit ids on the remote, so
+its exact HEAD is reachable from no advertised ref. The manager then accepts a second, recorded
+proof kind, `patch-equivalent`: one advertised ref must carry a commit with a whitespace-exact
+identical patch for every commit that no advertised ref holds, and Git's own cherry-pick
+equivalence must agree. A unique root, merge, or empty commit has no single patch another commit
+could carry and defeats the proof. Binary changes compare by their full binary patch. The proof
+records the refs and the equivalent commits; the local branch and its commit ids are not removed,
+only the linked tree.
+
 Use `worktree repo list --repo <path>` to inventory linked trees without adopting or deleting them.
 Existing trees only become manager-owned through the explicit `repo adopt` command. Hook integrations
 can maintain cleanup-blocking leases with `hook session-start`, `hook heartbeat`, and
@@ -76,9 +87,10 @@ remote recovery evidence. Storage scans are bounded and flag incomplete results;
 are observations, not guaranteed reclaimable space. Inspection does not change lifecycle or infer
 story completion or abandonment. Cleanup still requires a reviewed GC assessment.
 
-Dry-runs may assess all candidates or selected ids. Both `gc --apply` and `reconcile --apply`
-require one or more exact, reviewed `--id` values; repeat the option to apply more than one result.
-Ordinary GC remains restricted to the managed root.
+Dry-runs may assess all candidates or selected ids. Without ids, `gc --repo <path>` assesses every
+record under the activated profile that repository selects, not only that repository. Both
+`gc --apply` and `reconcile --apply` require one or more exact, reviewed `--id` values; repeat the
+option to apply more than one result. Ordinary GC remains restricted to the managed root.
 
 `worktree reconcile` repairs manager-owned legacy and interrupted state without weakening that GC
 boundary. It can recover a provisioning record when Git created the exact linked tree, migrate an
@@ -88,6 +100,12 @@ a legacy tree that cannot be moved across filesystems; it still requires an idle
 tree, a HEAD stable across final proof/removal observations, and fresh advertised-remote proof.
 Applying that action additionally requires `--allow-external-retirement`, so an id reviewed for
 migration cannot silently drift into an external deletion.
+
+A missing record whose recorded commit no ref holds stays refused. Once its owner has established
+that the commit is gone for good, `reconcile --apply --id <reviewed-id>
+--acknowledge-unrecoverable <commit>` tombstones it. The command refuses while any local branch,
+tag, remote-tracking ref or remote advertisement still contains that commit, deletes nothing, and
+records no recovery proof.
 
 For legacy state created before 0.3, a finished external tree may still carry a stale relocation
 intent. Reconciliation proposes `retire-external` only when that intent names the exact source and
@@ -100,8 +118,10 @@ and registry lifecycle, evidence, and intent completion are committed atomically
 operation is interrupted, rerun GC while the path exists or reconciliation once it is absent; the
 same dry-run and exact-id apply discipline safely finishes the recorded transition.
 
-Non-hook CLI JSON uses protocol version 2, reconciliation JSON uses version 2, and lifecycle hooks
-remain on version 1. Configuration and workspace-policy schemas also remain on version 1.
+Non-hook CLI JSON uses protocol version 3, reconciliation JSON uses version 3, inspection reports
+use `worktree.inspection/2`, and lifecycle hooks remain on version 1. Version 3 and inspection 2
+add the recovery proof `kind` and `equivalent_commits` fields. Configuration and workspace-policy
+schemas also remain on version 1.
 
 ## Embed
 

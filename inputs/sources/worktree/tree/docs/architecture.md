@@ -40,7 +40,7 @@ flowchart LR
     clean -->|yes| advertise["read every configured remote's<br/>exact advertised refs"]
     advertise -->|offline / malformed| refuse
     advertise --> fetch["fetch required missing objects<br/>without creating local refs"]
-    fetch --> recovery{"re-advertise and prove exact HEAD<br/>reachable with local ancestry overrides disabled?"}
+    fetch --> recovery{"re-advertise; exact HEAD reachable, or every<br/>unique commit patch-equivalent on one ref,<br/>with local ancestry overrides disabled?"}
     recovery -->|no| refuse
     recovery -->|yes| reobserve["re-observe clean tree<br/>and exact proven HEAD"]
     reobserve -->|changed| refuse
@@ -55,14 +55,22 @@ flowchart LR
 Dry-run garbage collection traverses the proof without claiming lifecycle state, writing the
 registry, or removing a worktree; it may refresh remote advertisements and fetch missing objects
 into the local object database. Apply requires the exact ids reviewed in a preceding assessment.
-Final observations are repeated before mutation;
-the proof-bearing removal intent makes an interruption after filesystem removal recoverable.
+Final observations are repeated before mutation; the proof-bearing removal intent makes an
+interruption after filesystem removal recoverable.
 
 Remote evidence is derived from `ls-remote --refs` advertisements, so any advertised branch, tag,
 pull-request ref, or custom namespace can qualify. Required missing objects are fetched with
 source-only refspecs and blob filtering, then the remote is read again before ancestry is checked.
 Local tags and local remote-tracking refs are never proof by themselves. Unknown, offline, dirty,
 locked, live, local-only, changed, and ambiguous states retain the tree.
+
+Ancestry is tried first. When no advertised ref contains the exact HEAD, the adapter lists the
+commits HEAD adds over every confirmed advertised tip. Each must have exactly one parent and a
+non-empty patch. One tip must then pass two checks: Git's `--cherry-pick` equivalence leaves no
+commit on the HEAD side, and `git patch-id --verbatim` over `--binary` patches finds every unique
+commit's whitespace-exact patch among the tip's own commits. Default branches are tried first. The
+resulting proof has kind `patch-equivalent` and names the unique commits it covers; the final
+re-observation before removal repeats the same two-kind check.
 
 ## Creation and membership
 
@@ -96,9 +104,9 @@ completion clears both intents atomically.
 
 When a registered path is already absent, reconciliation changes registry state only after Git no
 longer reports the worktree and either a matching removal intent exists or the stored final HEAD is
-freshly reachable from an advertised remote ref. A provisioning or failed record can be activated
-when Git already created the exact linked tree, or tombstoned without a HEAD only when no filesystem
-or Git artifact exists.
+freshly proven recoverable from an advertised remote ref, by ancestry or patch equivalence. A
+provisioning or failed record can be activated when Git already created the exact linked tree, or
+tombstoned without a HEAD only when no filesystem or Git artifact exists.
 
 A record whose stored HEAD is reachable from nothing is otherwise stuck forever, so an operator who
 has established that the commit is gone for good may say so: a reviewed exact-id apply carrying
@@ -127,8 +135,9 @@ in one transaction.
 
 | Surface | Version | Contract |
 | --- | ---: | --- |
-| Non-hook CLI JSON | 2 | Stable success and error envelopes with `version` and `ok`. |
-| Reconciliation JSON | 2 | Includes provisioning recovery, migration, external retirement, and missing-record actions. |
+| Non-hook CLI JSON | 3 | Stable success and error envelopes with `version` and `ok`; recovery proof carries `kind` and `equivalent_commits`. |
+| Reconciliation JSON | 3 | Includes provisioning recovery, migration, external retirement, and missing-record actions, with version-3 recovery proof. |
+| Inspection report | `worktree.inspection/2` | Proven recovery carries `kind` and `equivalent_commits`. |
 | Lifecycle hooks | 1 | Session start, heartbeat, and session end remain wire-compatible. |
 | Configuration and workspace policy | 1 | Existing activated profiles remain on schema version 1. |
 
