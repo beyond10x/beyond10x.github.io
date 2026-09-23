@@ -1,0 +1,16 @@
+schema: b10x-change/v1
+id: ess/early-stop-assertion-0.18.0
+repository: ess
+publishedAt: 2026-09-04T14:08:16Z
+title: An authored scenario can claim that a consumer halted an ordered scan
+summary: >-
+  `halts_after: <n>` lets an authored scenario require a consumer to stop an ordered scan after
+  n rows. The target reports rows produced and whether the consumer ended the read. Targets without
+  incremental reads report `unsupported`. This adds a claim to `ess-conformance/4`.
+kind: capability
+impact: significant
+source:
+  url: https://github.com/beyond10x/ess/releases/tag/0.18.0
+  version: 0.18.0
+journeys: [specify]
+affectedSurfaces: [ess/docs]
