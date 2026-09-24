@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "mandate/v0.6.0",
+      "id": "mandate/v0.6.0",
+      "repository": "mandate",
+      "publishedAt": "2026-09-24T00:13:51Z",
+      "title": "Mandate v0.6.0",
+      "summary": "Mandate released version v0.6.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/mandate/releases/tag/v0.6.0",
+        "version": "v0.6.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "mandate/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "entity-runtime/0.20.0",
       "id": "entity-runtime/0.20.0",
       "repository": "entity-runtime",
