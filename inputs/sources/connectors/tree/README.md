@@ -25,9 +25,10 @@ separate steps.
 
 ## Where the project stands
 
-Source release **v0.11.0** serves GitLab from its pinned OpenAPI source through
-the catalog provider and retires the native GitLab adapter. The
-[changelog](CHANGELOG.md) records its scope and remaining work.
+Source release **v0.13.3** keeps connection metadata in Entity Runtime over an
+Eventlog SQLite store, specified at ESS source format `ess/14`, with GitLab served from its pinned OpenAPI source through
+the catalog provider. The [changelog](CHANGELOG.md) records its scope and
+remaining work.
 
 The local CLI implements setup, configured adapter management, protected
 connect/repair, saved-credential revalidation, connection inspection/revoke, cached operation discovery and

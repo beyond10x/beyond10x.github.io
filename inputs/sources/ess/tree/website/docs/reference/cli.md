@@ -10,27 +10,17 @@ description: The canonical ESS command, the four areas its first level is made o
 semantics, unsupported projection, or a failed check.
 
 Its first level is the four areas ESS is built out of, one per crate directory, and `ess --help`
-lists exactly those, then `skill`:
+lists exactly those:
 
 | Area | The verbs it holds |
 |---|---|
-| `ess specify` | `cli`, `validate`, `compile`, `compose`, `inspect`, `graph`, `realization`, `runtime` |
+| `ess specify` | `cli`, `validate`, `compile`, `compose`, `inspect`, `graph`, `realization`, `runtime`, `toolchain` |
 | `ess generate` | `generate`, `cli`, `types`, `synthesize`, `project`, `schema`, `output`, `build`, `component`, `release`, `stack`, `deployment` |
 | `ess verify` | `bindings`, `conform`, `diff`, `impact` |
 | `ess infra` | `infra`, `import` |
 
-`ess skill` follows the areas. It belongs to none because it reads no specification: it prints the
-agent skills and agents embedded in the binary from `plugins/ess/`, so an agent reads the guidance
-for the exact `ess` it runs.
-
-| Call | Prints |
-|---|---|
-| `ess skill` | the front-door skill and an index of every skill and agent |
-| `ess skill <skill>` | that skill's `SKILL.md` on stdout, and `ess <version>: <path>` on stderr |
-| `ess skill agents/<agent>` | that agent's charter |
-| `ess skill --json` | the index as `{version, entries: [{path, kind, name, description}]}` |
-
-An unknown path exits `2` and lists every path the binary carries.
+The agent guidance for these commands is the `ess` plugin in
+[`beyond10x/agentplugins`](https://github.com/beyond10x/agentplugins); `ess` itself carries none.
 
 ## Flat spellings
 
@@ -57,34 +47,38 @@ refused with exit 2 rather than run against the current directory.
 
 ## Directory input selection
 
-This optional manifest capability was introduced in 0.21.0.
-An explicitly supplied directory may opt into [the `ess-inputs/1` configuration](formats.md#directory-input-configuration)
-through its immediate `ess-inputs.yaml`. No new flag, ancestor search or implicit scenarios are
-introduced. Model arguments select `specification`; `--scenarios` selects `scenarios`. Both lists are
-structurally checked, and only the active list's files are opened in sorted relative-identity order.
+Every command that reads a specification takes `--path` (or `--spec`, `--system`, `--from`/`--to`
+where it reads two). The path is one of:
 
-This model loader is shared by validate/compile/inspect/graph, composition service paths,
-realization `--spec`, runtime `--system`, generation/projection/synthesis, `types --path`, normalization
-`--model`, both diff/impact revisions, fresh conformance, observed-bindings `--spec`, and qualified
-release `--spec`. Authored synthesize IR/Go, author, web and fresh run use the same exact scenario
-selection for suite/4 and suite/5, with unchanged flat aliases and presentation choices.
+| `--path` names | What is read |
+|---|---|
+| a file | that file alone, whatever its extension; no parent directory is consulted |
+| a directory with an `ess-inputs.yaml` | exactly the files its `specification:` list names |
+| a directory with a `system.yaml` and no `ess-inputs.yaml` | every lowercase `.yaml` and `.yml` file below it |
 
-Omitted scenarios select nothing. Explicit files bypass directory configuration. Without a manifest,
-model directories retain recursive YAML discovery and immediate `system.yaml`; scenario directories
-retain shallow YAML discovery. Malformed configuration refuses without fallback. Model-types and
-normalization retain their input/output containment checks. A manifest does not authorize writing
-generated type libraries into the selected input directory.
+[`ess-inputs.yaml`](formats.md#directory-input-configuration), introduced in 0.21.0, lets a
+specification share its directory with generated output and authored scenarios: only the listed
+files are opened, in sorted order, and nothing else in the directory is scanned. Input selection reads it only in
+the directory you name; only the release pin below is looked up in parent directories. A malformed manifest is
+refused rather than ignored. `--scenarios` reads the same manifest's `scenarios:` list, and
+`ess specify validate` also compiles a nonempty `scenarios:` list and reports its `ESS-AUTHOR-*`
+refusals.
 
-Committed conformance run/select branches retain their bypass. OpenAPI `--ir`, BuildKit/Helm,
-infrastructure observation/intent and ordinary consistency-only release inputs keep their existing
-readers; they do not acquire authored specifications through this configuration.
+`format: ess-inputs/2` can pin the `ess` release with `requires:`. An older `ess` refuses and a
+newer one warns; the global `--strict-requires`, accepted in any position, refuses instead. See
+[the release a project runs](#the-release-a-project-runs).
+
+A manifest selects inputs; it does not permit writing generated output into the specification's
+directory, and the commands that refuse to write inside their input still refuse. Inputs that are
+not specifications — a committed suite given to `ess verify conform run --suite`, an OpenAPI `--ir`,
+build and runtime IR, infrastructure observations — are read as given and never through a manifest.
 
 ## `ess specify` — a system, resolved
 
 | Command | Purpose |
 |---|---|
 | `ess specify cli --path MODEL --binding FILE [--format text\|yaml\|json]` | Resolve a closed `ess-cli/1` presentation binding against the selected ESS model. |
-| `ess specify validate [--path PATH] [--format text\|yaml\|json]` | Load, resolve, and validate one specification. |
+| `ess specify validate [--path PATH] [--format text\|yaml\|json]` | Load, resolve, and validate one specification, and compile the authored scenarios its `ess-inputs.yaml` lists. |
 | `ess specify compile [--path PATH] [--out FILE] [--format …]` | Produce canonical typed IR. |
 | `ess specify compose --path PATH --service KEY=PATH… [--out FILE] [--client-plan-out FILE] [--client-rust-out DIR]` | Compile selected component surfaces into composition IR, a client plan and a Rust client with byte-buffer transport. |
 | `ess specify inspect --path PATH NAME [--format …]` | Resolve and render one declaration. |
@@ -93,6 +87,21 @@ readers; they do not acquire authored specifications through this configuration.
 | `ess specify realization compile …` | Emit deterministic `ess-realization-ir/1` or `/2`, matching the authored format. |
 | `ess specify realization generate …` | Render a run-mode guide from the resolved realization. |
 | `ess specify runtime compile …` | Compile `ess-runtime/1` against exact semantic, realization, and build inputs. |
+| `ess specify toolchain install X.Y.Z [--pin]` | Download a released `ess`, verify it against the release's `SHA256SUMS`, and cache it; `--pin` also writes `requires: ess X.Y.Z` (0.34.0 or later) into the nearest `ess-inputs.yaml`. Only `https://` or a local directory is fetched from; git revisions are not installable. |
+| `ess specify toolchain list` | List the cached releases, oldest first. |
+| `ess specify toolchain which` | Print the release that would run here and why: `ESS_TOOLCHAIN`, the pin, or this `ess`. |
+
+### The release a project runs
+
+When the nearest `ess-inputs.yaml` above the working directory carries an exact
+`requires: ess X.Y.Z` naming another release, or `ESS_TOOLCHAIN=X.Y.Z` is set, any `ess` runs that
+release from its cache (`$XDG_CACHE_HOME/ess/toolchains/X.Y.Z/ess`, else
+`~/.cache/ess/toolchains/`) with the same arguments and environment, installing it first when it is
+not cached. A minor line `ess X.Y`, or no pin, runs the `ess` you called. `ess --version` then names
+both the dispatcher and the release it delegated to. A release that cannot be installed is refused,
+naming the newest cached one. This walk upwards reads only the pin; input selection still reads
+only the manifest of the directory it is given. The `toolchain` commands always run in the `ess`
+you called.
 
 ### CLI presentation bindings
 
@@ -120,8 +129,8 @@ already owned by that family; unowned destinations refuse. `--check` detects dri
 without writing or recovery. See [repeated generation and recovery](../guides/generate-artifacts.md#repeated-generation-and-recovery).
 `--check` compares generated bytes without replacing them. See the
 [binding design](https://github.com/beyond10x/ess/blob/main/docs/design/cli-presentation-binding.md)
-for the complete input and handler contracts. This capability is in current
-source and has not been released.
+for the complete input and handler contracts. CLI presentation bindings were
+introduced in 0.21.0.
 
 ### Composition clients: selected operations and byte transport
 
@@ -228,7 +237,14 @@ Run `ess generate synthesize --help` and `ess generate <command> --help` for tar
 arguments.
 
 Omitting `--kind` generates every projection. Omitting `--out` lists or serializes artifacts
-without writing them. The repository-only `cargo xtask generate` command reconciles the committed
+without writing them.
+
+`openapi` and `asyncapi` write one document per component, so a domain no component `owns` is in
+neither, and a specification without components projects to `0 artifact(s)`. That is legal, and
+`--kind openapi`, `--kind asyncapi`, no `--kind` and `ess generate project openapi --path …` each
+print `note: no component owns <domain>; declare it in components.yaml` on stderr for every such
+domain, and exit 0. `--strict` makes the same condition a refusal: the line reads `refused:`,
+nothing is written, and the exit is 1. The other kinds do not read components and print no note. The repository-only `cargo xtask generate` command reconciles the committed
 `generated/` projection tree; `cargo xtask generate --check` compares it without writing.
 
 Generated tree outputs use their output root as the ownership root; a standalone generated file
@@ -314,6 +330,12 @@ These operations are offline. Schema identity comes from `$id`; filenames only l
 |---|---|
 | `ess verify conform synthesize …` | Generate the semantic suite required by a specification. |
 | `ess verify conform run …` | Execute a suite against a supported target and emit a standalone report. |
+| `ess verify conform mutate [--path SPEC] --target billing\|oracle-fixture\|interpreted [--class CLASS]… [--report-out FILE] [--format text\|json\|yaml]` | Audit the synthesized suite with specification mutants run against a reference target; exit 0 every mutant that ran killed, 1 a survivor, 3 refused, inconclusive or nothing ran. |
+| `ess verify conform mutate [--path SPEC] --emit DIR [--class CLASS]… [--format text\|json\|yaml]` | Write the same audit for your own runner, and run nothing: the baseline suite as `DIR/baseline/suite.json`, each mutant's suite as `DIR/<mutant-id>/suite.json` beside `mutant.json` (its class, site and change) and `ir.json`, and an `ess-mutation-manifest/1` as `DIR/manifest.json`. `DIR` must be new or empty. Exit 0; 1 the specification did not load; 3 `ESS-MUTATE-003`. |
+| `ess verify conform mutate --collect DIR [--report-out FILE] [--format text\|json\|yaml]` | Score the `ess-conformance-report/1` or `/2` your runner wrote as `report.json` beside each emitted suite into `ess-mutation-report/1`. A baseline report that did not pass is `ESS-MUTATE-001` (exit 3). A missing report, or one of another suite or implementation, makes its mutant `inconclusive`, with the reason as `unscored`. Exit statuses as with `--target`. |
+| `ess verify conform check-history [--path SPEC] --history FILE [--budget STEPS] [--format text\|json]` | Check an `ess-history/1` document for linearizability against the specification's model; exit 0 linearizable, 1 violation (with the longest partial linearization and a shrunk history), 3 unknown when the budget ran out, 2 refused. |
+| `ess verify conform web [--path SPEC] --history FILE [--out DIR]` | Draw an `ess-history/1` document, checked as `check-history` checks it, as one self-contained `index.html`: a lane per client, each call's invoke–return interval, the linearization points found, and for a violation the failing call, the call it conflicts with and the state each needed. Printed when `--out` is absent; exit 0 once rendered. |
+| `ess verify conform import-history [--path SPEC] --log FILE --adapter FILE [--output FILE]` | Convert a JSON Lines call log into `ess-history/1` through an `ess-history-adapter/1` document that maps each operation field to a JSON pointer or declares it `absent`; coverage gaps on stderr and, with `--output FILE`, in `FILE.gaps.json`; exit 0 written, 2 refused (every refusal names its log line and field; an output naming the log or adapter is refused). |
 | `ess verify diff --from PATH --to PATH [--format text\|json]` | Compare two revisions semantically. |
 | `ess verify impact --from PATH --to PATH [--suite PATH] [--format …]` | Name invalidated scenarios and generated artifacts. |
 | `ess verify bindings --spec PATH --realization FILE --bindings FILE (--infra FILE \| --live --observation-out FILE) [--format text\|json] [--markdown-out FILE]` | Compare an exact implementation selection with scoped workload templates; exit 0 satisfied, 1 violated/refused, 2 unknown. |
@@ -327,7 +349,7 @@ Run `ess verify conform <command> --help` for target-specific arguments.
 
 | Command | Direction |
 |---|---|
-| `ess infra import openapi --path FILE [--out FILE] …` | OpenAPI 3.1 subset → `ess-openapi-import/1` with retained source, SHA-256 and durable accounting. `--format` selects terminal presentation; `--out` always writes the canonical import envelope. |
+| `ess infra import openapi --path FILE [--out FILE] …` | OpenAPI 3.0 or 3.1 subset → `ess-openapi-import/1` with retained source, SHA-256 and durable accounting. `--format` selects terminal presentation; `--out` always writes the canonical import envelope. |
 | `ess infra import kubernetes …` | sanitized bundle or explicitly selected live cluster → infrastructure IR. |
 | `ess generate project openapi (--ir FILE \| --path SPEC) …` | Checked import envelope or native ESS specification → OpenAPI. `--ir` refuses semantic gaps, unresolved references or legacy interface-only input before output; reimport original OpenAPI to replace legacy files. |
 | `ess generate project kubernetes …` | infrastructure intent and observation → manifests and obligations. |

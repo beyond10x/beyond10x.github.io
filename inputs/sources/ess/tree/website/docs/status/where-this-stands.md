@@ -8,16 +8,15 @@ description: Current-source ESS capabilities, a dated release observation, and t
 
 ESS is experimental and standalone.
 
-Latest published release observed on 20 September 2026:
-[0.27.0](https://github.com/beyond10x/ess/releases/tag/0.27.0). Its release record lists archives
+Latest published release observed on 28 September 2026:
+[0.40.0](https://github.com/beyond10x/ess/releases/tag/0.40.0). Its release record lists archives
 for Linux and macOS on x86-64 and ARM64, plus SHA256SUMS. This is a dated asset-list observation;
 it does not claim that the archives were downloaded, their checksums verified, or the binary
-installed or executed. The release adds specification format `ess/5` and delta format
-`ess-diff/5`, so an enum variant can declare the name it is called on the wire.
-[Format version history](../reference/spec-versions.md) says what every format version number
-changed and which release introduced it.
-
-The dated conformance observations below remain scoped to their original release and execution.
+installed or executed. The release adds composition format `ess-composition/3` (reader-side
+conformance), and its generated Go and TypeScript runtimes run suites `ess-conformance/22` to `/27`;
+0.39.0 added concurrent-history conformance, `ess/17` and suites `/28` and `/29`. [Format version history](../reference/spec-versions.md) says what every format
+version number changed and which release introduced it, and the
+[changelog](https://github.com/beyond10x/ess/blob/main/CHANGELOG.md) lists every release.
 
 ## Current source capabilities
 
@@ -50,7 +49,7 @@ this complete maintained block. It does not verify remote release records.
 
 [ess-source-support-begin]: #
 
-The source checkout’s workspace version is `0.30.0` and includes separately documented unreleased changes.
+The source checkout’s workspace version is `0.40.0` and includes separately documented unreleased changes.
 
 | Capability | Current source | Limits and evidence |
 |---|---|---|
@@ -61,7 +60,7 @@ The source checkout’s workspace version is `0.30.0` and includes separately do
 | JSON Schema | `https://json-schema.org/draft/2020-12/schema` | Named types, entities, command inputs, events and errors; structural validation does not establish behavior. [schema emitter/tests](https://github.com/beyond10x/ess/blob/main/crates/generate/ess-gen/src/schema.rs). |
 | Native API projections | OpenAPI `3.1.0`; AsyncAPI `3.0.0` | Projection directions; [OpenAPI emitter/tests](https://github.com/beyond10x/ess/blob/main/crates/generate/ess-gen/src/openapi.rs) and [AsyncAPI emitter/tests](https://github.com/beyond10x/ess/blob/main/crates/generate/ess-gen/src/asyncapi.rs) own their structural coverage. |
 | Adapter directions | `infra import`: `kubernetes`, `openapi`; `generate project`: `buildkit`, `helm`, `kubernetes`, `openapi` | Availability comes from CLI help. No AsyncAPI importer is declared; the following rows qualify each adapter. |
-| OpenAPI adapter | Supported 3.1 service/interface import to `ess-openapi-import/1`, retaining source and accounting; checked projection | External references refuse. Semantic gaps, unresolved references and legacy interface-only inputs block checked projection; annotation normalization alone may be allowed. [accounting tests](https://github.com/beyond10x/ess/blob/main/crates/generate/ess-openapi/tests/accounting.rs) and [import/refusal owner](https://github.com/beyond10x/ess/blob/main/crates/generate/ess-openapi/src/lib.rs). |
+| OpenAPI adapter | Supported 3.0 and 3.1 service/interface import to `ess-openapi-import/1`, retaining source and accounting; checked projection | External references refuse. Semantic gaps, unresolved references and legacy interface-only inputs block checked projection; annotation normalization alone may be allowed. [accounting tests](https://github.com/beyond10x/ess/blob/main/crates/generate/ess-openapi/tests/accounting.rs) and [import/refusal owner](https://github.com/beyond10x/ess/blob/main/crates/generate/ess-openapi/src/lib.rs). |
 | Kubernetes import | Sanitized observation bundle or explicit live context to infrastructure IR | The live scanner is the credential edge. A fixed category list and empty `coverage_gaps` do not prove complete observation. [import/redaction owner](https://github.com/beyond10x/ess/blob/main/crates/infra/ess-kubernetes/src/lib.rs). |
 | Kubernetes projection | Intent plus observed IR to patches, new objects and obligations | No apply operation; unstated decisions remain obligations and unsupported conditions may refuse. [projection/refusal tests](https://github.com/beyond10x/ess/blob/main/crates/infra/infra-project/tests/projection.rs). |
 | BuildKit and Helm projection | Checked build IR to Dockerfile/Bake inputs; runtime IR to a configuration-neutral Helm chart | These projections neither execute BuildKit nor apply a chart or establish live resource availability. [deployment projection tests](https://github.com/beyond10x/ess/blob/main/crates/generate/ess-deployment/tests/deployment.rs). |
@@ -71,6 +70,7 @@ The source checkout’s workspace version is `0.30.0` and includes separately do
 | Conformance targets | `billing`, `oracle-fixture`, `interpreted` | Built-in reference implementations. A production adapter must establish its own execution boundary; these targets do not prove independent deployment. |
 | Conformance formats | Defaults: `ess-conformance/4`, `ess-conformance-report/1`. Explicit count surfaces: `ess-conformance-report/2`, `ess-conformance-run/2`. CLI suite choices: `4`, `5` (default `4`); report choices: `1`, `2` (default `1`). | Actual report markers and CLI metadata; all-pass legacy execution can still mean inconclusive conformance. [count-report tests](https://github.com/beyond10x/ess/blob/main/crates/edge/ess-cli/tests/count_reports.rs). |
 | Coverage qualification | Current-source `ess-conformance/5` requires explicit report/2 before execution | Only a nonempty all-pass selection with complete inventory and no in-scope refusal can qualify. Suite/5, carrier and paired replay were introduced in 0.21.0. [coverage CLI tests](https://github.com/beyond10x/ess/blob/main/crates/edge/ess-cli/tests/coverage_cli.rs) and [conformance guide](../guides/verify-conformance.md#opt-into-declared-coverage). |
+| Mutation audit | `verify conform mutate` against `billing`, `oracle-fixture`, `interpreted`; classes `from-drop`, `transition-to`, `guard-boundary`, `sets-retarget`, `guard-negate`, `guard-connective`, `error-swap`, `emit-drop`, `order-flip`; writes `ess-mutation-report/1` | Mutates the specification, not the implementation, and runs no authored scenario: a survivor is a rule synthesis does not pin, answered by the model or a synthesis gap. [mutation audit tests](https://github.com/beyond10x/ess/blob/main/crates/verify/ess-conformance/tests/mutation_audit.rs) and [conformance guide](../guides/verify-conformance.md#audit-the-suite-with-specification-mutants). |
 | Browser conformance | Replay presentation with no execution report | A green replay is not independent execution evidence; digest comparison does not authenticate the publisher. [browser admission tests](https://github.com/beyond10x/ess/blob/main/crates/edge/ess-cli/tests/coverage_browser.rs). |
 | Runtime compilation | Checks supplied identities, component coverage, replica bounds and stateful storage | Does not establish live provisioning or all resource requirements. [runtime checks/tests](https://github.com/beyond10x/ess/blob/main/crates/generate/ess-deployment/src/runtime.rs). |
 | Explicit executors | `execute`, `publish`, `fetch`, `reconcile` invoke external clients; reconciliation requires `--authority` naming a protected registry entry and refuses without one, compares an admitted baseline desired deployment with the desired one, and attempts at most one admitted mutation per release | Caller-supplied state, authority and credentials remain material; a supplied baseline is admitted intent rather than proof of application, and a stopped invocation leaves the affected release unknown rather than absent or rolled back. [CLI executor owner](https://github.com/beyond10x/ess/blob/main/crates/edge/ess-cli/src/main.rs). The support check invokes none of these verbs. |
@@ -78,9 +78,10 @@ The source checkout’s workspace version is `0.30.0` and includes separately do
 
 [ess-source-support-end]: #
 
-The CLI presents four areas: `specify`, `generate`, `verify`, and `infra`, then `skill`, which
-prints the embedded agent guidance. Earlier flat spellings remain hidden aliases with the same
-accepted-command output and exit status.
+The CLI presents four areas: `specify`, `generate`, `verify`, and `infra`. Earlier flat spellings
+remain hidden aliases with the same accepted-command output and exit status. The agent guidance that
+`ess skill` printed in 0.30.0 is the `ess` plugin in
+[`beyond10x/agentplugins`](https://github.com/beyond10x/agentplugins).
 
 Compilation and projection remain deterministic and offline. Live Kubernetes import and the
 commands named `execute`, `publish`, `fetch`, and `reconcile` are explicit credential edges; they do

@@ -72,6 +72,43 @@ commit's whitespace-exact patch among the tip's own commits. Default branches ar
 resulting proof has kind `patch-equivalent` and names the unique commits it covers; the final
 re-observation before removal repeats the same two-kind check.
 
+## Archive proof
+
+A tree whose work may not be published is covered by a local archive instead. The Git adapter lists
+the commits HEAD adds over the confirmed advertised tips with the same query patch equivalence uses,
+so the archive and the recovery check cannot disagree about what is unpublished. It bundles them
+from a scratch bare repository whose objects are the source's alternates, and hashes the tree's
+files without filters into a scratch object directory and a scratch index. The repository gains no
+ref and no object beyond the advertised objects the recovery check itself fetches, and the tree's
+index is not rewritten.
+
+```mermaid
+flowchart LR
+    tree["dirty or local-only tree,<br/>no remote proof, no hidden state"] --> archived{"archive present<br/>for this record?"}
+    archived -->|no| refuse["refusal as before"]
+    archived -->|yes| manifest{"manifest names this id,<br/>path and current HEAD?"}
+    manifest -->|no| stale["archive-stale / archive-invalid"]
+    manifest -->|yes| digests{"every file has its<br/>recorded SHA-256?"}
+    digests -->|no| mismatch["archive-digest-mismatch /<br/>archive-incomplete"]
+    digests -->|yes| bundle{"bundle verify, and its own pack holds<br/>every object HEAD adds over freshly<br/>advertised refs?"}
+    bundle -->|no| incomplete["archive-incomplete /<br/>archive-bundle-invalid"]
+    bundle -->|yes| state{"complete on-disk content equals<br/>the archived fingerprint, dirty or not?"}
+    state -->|no| stale
+    state -->|yes| proof["recovery kind archive"]
+    proof --> discard["after durable intent: reset the index,<br/>re-hash each file before restoring or deleting it"]
+    discard --> remove["git worktree remove<br/>without --force"]
+```
+
+Before either kind of proof counts, the adapter refuses state `git status` does not report but
+removal would destroy: assume-unchanged and skip-worktree entries (`ls-files -v`), staged content
+that differs from both HEAD and the working copy, any `.git` found by walking the tree's
+filesystem below its root, and refs in the per-worktree namespaces `refs/worktree/`,
+`refs/bisect/` and `refs/rewritten/`.
+
+The pack check indexes the bundle in an isolated bare repository and compares its object list with
+`rev-list --objects` over the same range, because `git bundle verify` and the bundle's head list
+both pass for a bundle that names HEAD but omits its parents' objects.
+
 ## Creation and membership
 
 Activated workspace and managed roots are canonical and disjoint, and profile names are a single
@@ -117,6 +154,15 @@ or any other ambiguous observation refuses. Abandonment removes nothing from dis
 ref, because the tree is already gone, and it records no recovery proof, because it has none. It is
 the one reconciliation outcome with no proof behind it, and it is deliberately reachable only by an
 operator naming the exact commit being given up.
+
+When the repository itself is gone, there is no Git left to corroborate the assertion. The Git port
+reports `repository_absent` from the filesystem alone — the recorded root does not exist, or is a
+directory with no `.git` — because Git run there would answer for an enclosing repository instead;
+the default port never reports it. Such a record is always a `tombstone-missing` candidate, even
+while its tree exists, so a workspace dry-run neither fails on it nor hides it. It is refused as
+`repository-missing` until the operator acknowledges the exact recorded commit, and as
+`worktree-path-exists` while the tree path or any relocation or removal intent path still exists.
+Apply records the same `reconcile-abandoned` tombstone and touches nothing on disk.
 
 ## Durable state
 

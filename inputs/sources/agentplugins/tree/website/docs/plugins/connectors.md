@@ -4,7 +4,7 @@ title: Connectors
 
 # Connectors
 
-The `connectors` plugin provides one shared `connectors` skill for Claude Code and Codex. It
+The `connectors` plugin provides one shared `integrating` skill for Claude Code and Codex. It
 guides provider setup, connection diagnostics, and the search → describe → invoke sequence for
 admitted integrations. It ships no binary, credentials, daemon, hooks, or automatic MCP connection.
 
@@ -29,27 +29,25 @@ rate-limit responses.
 
 ## Install in either host
 
-Release `0.10.0` includes this plugin. For a fresh marketplace registration, use the release pin:
+Setup offers this plugin as optional. To add it by hand:
 
 ```bash
-claude plugin marketplace add https://github.com/beyond10x/agentplugins.git#0.10.0
-claude plugin install connectors@beyond10x
+claude plugin marketplace add beyond10x/agentplugins
+claude plugin install connectors@b10x
 ```
 
 ```bash
-codex plugin marketplace add https://github.com/beyond10x/agentplugins.git --ref 0.10.0
-codex plugin add connectors@beyond10x
+codex plugin marketplace add beyond10x/agentplugins
+codex plugin add connectors@b10x
 ```
 
-An existing `beyond10x` registration pinned to `0.7.0` must be repointed before it can offer this
-plugin; refreshing an immutable tag does not add newer content. Follow the
-[upgrade instructions](../install.md) and preserve the other installed plugins when changing
-that registration. For development, both marketplace-add commands also accept the absolute path
+[Setup](../install.md) replaces an older or pinned registration and keeps the other installed
+plugins. For development, both marketplace-add commands also accept the absolute path
 to a current local checkout containing both marketplace files.
 
 Reload Claude Code's plugins with `/reload-plugins`, or start a new Codex thread. In Claude Code,
-invoke `/connectors:connectors`; in Codex select the `connectors` skill or invoke `$connectors:connectors`.
-Both manifests load the same `skills/connectors/SKILL.md` bytes. These layouts follow the
+invoke `/connectors:integrating`; in Codex select the `integrating` skill or invoke `$connectors:integrating`.
+Both manifests load the same `skills/integrating/SKILL.md` bytes. These layouts follow the
 [OpenAI plugin packaging contract](https://developers.openai.com/plugins/build/plugins) and
 [Claude Code plugin reference](https://code.claude.com/docs/en/plugins-reference).
 

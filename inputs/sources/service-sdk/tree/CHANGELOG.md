@@ -2,9 +2,42 @@
 
 ## Unreleased
 
+## 0.7.0 - 2026-09-26
+
+### Changed
+
+- Build on Eventlog 0.5.0, Entity Runtime 0.24.1 and ESS 0.33.0, one version of each across the
+  SDK and the ESS lowerer. On PostgreSQL a resumed feed page now reads the stream identity instead
+  of rewriting and committing its row, so a quiescent feed catch-up writes nothing and no longer
+  pays one commit per page. Persisted `service-runtime-ir/4` documents name Entity Runtime 0.24.1
+  as their accepted target; a `/4` document naming 0.23.0 is refused on reload and must be
+  recompiled.
+
+### Tests
+
+- The two-process PostgreSQL workload proof fails when a quiescent feed catch-up writes any durable
+  row, naming the table, and reports per-store-call timing, database commits and container CPU
+  throttling for the catch-up interval.
+
+## 0.6.0 - 2026-09-25
+
+This release supersedes 0.5.9, 0.5.10 and 0.5.11. Tags exist only up to 0.5.9 and GitHub
+Releases only up to 0.5.8, so the changes in those three sections below are first published here.
+
+- Build on ESS 0.31.0, Entity Runtime 0.23.0 and Eventlog 0.4.0, each pinned to its release so
+  one `entity-core` and one `eventlog-core` resolve across the SDK and the ESS lowerer. Persisted
+  `service-runtime-ir/4` documents name Entity Runtime 0.23.0 as their accepted target.
+- Treat numerically equal JSON values alike in `/4` intent digests, retries and query or
+  projection selectors, so `12.5` and `12.50` are one intent under serde_json's arbitrary
+  precision.
+- Add strict opt-in `service-definition/4`, runtime IR, realization plan, and generated service
+  support that delegates domain decisions and replay to Entity Runtime while retaining SDK
+  authentication, queries, durable Eventlog recovery, projections, and declared effects. Historical
+  retries return their original receipt after later subject changes, while an authenticated repair
+  route redelivers failed post-commit projections and durable effects from recorded authority.
 - Stop service generation when ESS returns a checked target failure, refusal, weakening, or
   unexpected target, preserving the original diagnostic before any generated output is written.
-  Keep valid output and current ESS dependency pins unchanged.
+  Valid output is unchanged.
 
 ## 0.5.11 - 2026-09-05
 
@@ -124,7 +157,7 @@
 - Align generated-service Connector factories and conformance contracts with Connectors 0.5.2,
   retaining delegated execution provenance across the released composition boundary.
 
-## Unreleased
+## 0.7.0 - 2026-09-26
 
 - Align generated Connector factories and conformance with Connectors 0.5.0, preserving
   receiver-verified agent, attempt, delegation, and grant provenance through service execution.

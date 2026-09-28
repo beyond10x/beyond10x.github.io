@@ -25,9 +25,18 @@ nobody has decided, and what the plan does with that instead of guessing.
 
 ## Prerequisites
 
-Install `aep-plan` and `aep-drive` from the marketplace — see [Install](./install.md) — and the
-`ess` plugin from the [ESS repository](https://github.com/beyond10x/ess#point-your-agent-here),
-and have the `aep` CLI on your PATH. Step 3 also uses the `ess` CLI.
+Install the `aep` and `ess` plugins and their command-line tools with `b10x` (see
+[Install](./install.md)):
+
+```shell-session
+$ b10x init aep,ess --out plan.json
+$ b10x setup apply --plan plan.json --yes
+```
+
+Step 3 models a new noun in ESS. If you have not written an ESS specification before, [Your first
+ESS specification](./tutorials/first-ess-specification.md) walks through one first.
+
+The recording on this page was made with these releases:
 
 ```shell-session
 $ aep --version
@@ -36,8 +45,8 @@ $ ess --version
 ess 0.5.1
 ```
 
-That build produced every output on this page. The binary prints `protocol` in `--version` and in
-its `--help` usage lines; the command you install and type is `aep`.
+That build produced every output on this page. It printed `protocol` in `--version` and in its
+`--help` usage lines; current releases print `aep`, the command you install and type.
 
 ## 1. Adopt the repository
 
@@ -63,7 +72,9 @@ $ aep plan reverse init --protocols 'git+https://github.com/beyond10x/aep#8b4342
 
 `reverse init` refuses the two things that break quietly later — an absolute path, and a `git+`
 source pinned to a branch rather than a commit — which is why the source above carries a full commit
-hash.
+hash. A current `aep` writes the project as `aep.project/5` (`store: {git: {}}`) and prints one more
+line saying so: the artifact files under `.engineering/planning/` are the store, and a move appends
+one line to the artifact's `transitions`.
 
 ```shell-session
 $ aep plan reverse scan
@@ -280,8 +291,8 @@ its story's body.
 ```
 
 The scopers are read-only, so run one per story and run them at once. The write-back is serial — the
-store's journal is append-only and parallel writers race — and it goes through the CLI like every
-other change to a body:
+store takes one writer at a time, and each write bumps the story's revision — and it goes through
+the CLI like every other change to a body:
 
 ```shell-session
 $ aep plan artifact body story:commercial-client-record --from record-body.md
@@ -342,7 +353,7 @@ story:commercial-client-record moved proposed -> active (revision 4)
 ```
 
 ```text
-Take story:commercial-client-record through the aep-drive wave: scope it into units, implement the units,
+Take story:commercial-client-record through the aep wave: scope it into units, implement the units,
 and have the adversary review the result against the story's acceptance and this repository's gate.
 ```
 
@@ -368,7 +379,7 @@ Drive story:commercial-client-record. Run aep doctor first and stop if anything 
 the run will cost before you launch it, and print the run id and how to follow it.
 ```
 
-The `drive` skill checks the checkout, points `metaharness aep drive run` at the task document that names the
+The drive mode of `aep:implementing` checks the checkout, points `metaharness aep drive run` at the task document that names the
 story, launches it against the project's step map, and prints the run id. It moves no artifact
 itself — the moves are the driver's, which is the whole property being tested — and it relays a
 refusal (a held lock, missing evidence, two step maps that both fit) verbatim and stops.

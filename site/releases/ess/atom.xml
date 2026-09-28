@@ -2,8 +2,92 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://beyond10x.github.io/releases/ess/atom.xml</id>
   <title>ESS releases</title>
-  <updated>2026-09-23T16:00:00Z</updated>
+  <updated>2026-09-28T21:00:00Z</updated>
   <link rel="self" href="https://beyond10x.github.io/releases/ess/atom.xml"/>
+  <entry>
+    <id>ess/runtime-parity-0.40.0</id>
+    <title>Generated Go and TypeScript runtimes run every suite, and reader-side composition checks</title>
+    <updated>2026-09-28T21:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.40.0"/>
+    <summary>The generated Go and TypeScript runtimes run suites `ess-conformance/22` to `/27` with the Rust runner&apos;s verdicts, where 0.38.0 refused them. `ess-composition/3` adds `reader: true`, admitting the widenings a consumer may read. Duplicate names are refused once, and the schema publishes name charsets.</summary>
+  </entry>
+  <entry>
+    <id>ess/concurrent-history-0.39.0</id>
+    <title>Concurrent histories checked against the model, and direct library returns</title>
+    <updated>2026-09-28T18:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.39.0"/>
+    <summary>`ess verify conform check-history` checks an `ess-history/1` run of several clients for linearizability against the interpreted model and holds each view to its declared consistency; the Go and TypeScript explorers record concurrent histories and inject declared faults. Source format `ess/17` adds `returns: true`, checked as a typed direct response.</summary>
+  </entry>
+  <entry>
+    <id>ess/retrofit-findings-0.38.0</id>
+    <title>Set effects, caller values, existence-selected outcomes, bounded retries and paged views</title>
+    <updated>2026-09-28T12:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.38.0"/>
+    <summary>Source format `ess/16` adds literal fallbacks, `defined()` over optional aggregates, bodiless requests, related-record values, `now` in guards, create-or-update outcomes, caller attributes, bounded retries, view paging and outcomes over every record a filter selects. `ess-composition/2` checks consumer types.</summary>
+  </entry>
+  <entry>
+    <id>ess/retrofit-findings-0.37.0</id>
+    <title>Outcome shapes, subject guards over the input, new value types and a pinned toolchain</title>
+    <updated>2026-09-27T20:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.37.0"/>
+    <summary>Source format `ess/15` adds outcome shapes (`deletes:`, `into:`, `unknown_instance:`, `accepts: nothing`, `preconditions:`), `input.` in subject guards, case-insensitive text, optional aggregates, `prefix:`, `Json` and field `presence:`. Synthesis kills more mutants; `ess` can run a pinned release.</summary>
+  </entry>
+  <entry>
+    <id>ess/value-expressions-0.36.0</id>
+    <title>Payload and sets values read the subject, increment, fall back and nest</title>
+    <updated>2026-09-27T12:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.36.0"/>
+    <summary>Source format `ess/14` adds `{subject: &lt;field&gt;}`, `{increment: &lt;n&gt;}`, `{input: &lt;field&gt;, else: {generated: true}}`, nested struct mappings and `{generated: true}` in `sets:`. Decimal literals are admitted in every format; `subject.&lt;field&gt;` as text is refused. Older readers refuse `ess/14`.</summary>
+  </entry>
+  <entry>
+    <id>ess/0.35.1</id>
+    <title>ESS 0.35.1</title>
+    <updated>2026-09-27T03:25:28Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.35.1"/>
+    <summary>ESS released version 0.35.1.</summary>
+  </entry>
+  <entry>
+    <id>ess/fixture-inputs-0.35.0</id>
+    <title>Typed fixture values resolved before a scenario starts</title>
+    <updated>2026-09-26T15:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.35.0"/>
+    <summary>Source format `ess/13` adds `fixture_inputs:` and `ess-scenario/3` adds `fixtures:` with `{$fixture: name}` references, compiled to `ess-conformance/18`/`19`. Rust, Go and TypeScript resolve and type-check the values from an independent provider before the scenario starts. Older readers refuse the new formats; fixture-free models and suites keep their bytes.</summary>
+  </entry>
+  <entry>
+    <id>ess/aggregate-views-0.34.0</id>
+    <title>String operators, subject guards, aggregate views and outcome groups, and a mutation audit</title>
+    <updated>2026-09-26T12:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.34.0"/>
+    <summary>Source formats `ess/8`–`ess/12` add `starts_with`/`ends_with`/`contains`, `when_subject: {predicate: …}`, aggregate views with `group_by:`, `alphabet:` and input `example:`, and `outcome_groups:`. `ess verify conform mutate` audits a suite with specification mutants. Older readers refuse each new format; models that use none keep their bytes.</summary>
+  </entry>
+  <entry>
+    <id>ess/secret-presence-0.33.0</id>
+    <title>A scan records only that a Secret value exists, and a bound workload can acknowledge foreign containers</title>
+    <updated>2026-09-26T12:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.33.0"/>
+    <summary>A Kubernetes scan writes `infra-observation/3` and `infra-ir/3`, recording each Secret key as `{&quot;present&quot;: true}` instead of a digest that confirms a guessed value; `infra-drift/3` no longer reports a rotated Secret. `ess-observed-bindings/2` acknowledges a mesh proxy or vendor agent by name and reason. Breaking: older readers refuse each new version.</summary>
+  </entry>
+  <entry>
+    <id>ess/0.32.1</id>
+    <title>ESS 0.32.1</title>
+    <updated>2026-09-25T20:58:36Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.32.1"/>
+    <summary>ESS released version 0.32.1.</summary>
+  </entry>
+  <entry>
+    <id>ess/openapi-3-0-import-0.32.0</id>
+    <title>OpenAPI 3.0 imports, and a bound workload&apos;s unbound sidecars are violations</title>
+    <updated>2026-09-25T18:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.32.0"/>
+    <summary>`ess infra import openapi` reads OpenAPI 3.0 by rewriting each schema to its 3.1 form, refusing a construct with no faithful one. `ess verify bindings` reports OBS-BIND-008 for a container or native sidecar in a bound workload that no binding names. Synthesize orders `Timestamp` values by the instant they name.</summary>
+  </entry>
+  <entry>
+    <id>ess/entity-runtime-lowering-0.31.0</id>
+    <title>A service contract lowers to Entity Runtime definitions</title>
+    <updated>2026-09-25T12:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.31.0"/>
+    <summary>ess-service-contract extracts an admitted component&apos;s service contract, and ess-entity-runtime lowers it into validated Entity Runtime 0.23.0 definitions and typed host binding obligations, refusing what it cannot express by name. Breaking: `ess skill` and the in-repository plugin are removed; the plugin ships from beyond10x/agentplugins.</summary>
+  </entry>
   <entry>
     <id>ess/agent-plugin-0.30.0</id>
     <title>ESS ships its own agent plugin, and the binary prints its skills</title>

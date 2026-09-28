@@ -258,12 +258,12 @@
     },
     {
       "route": "/docs/aep/",
-      "title": "Introduction",
-      "qualifiedTitle": "Introduction | AEP",
+      "title": "Overview",
+      "qualifiedTitle": "Overview | AEP",
       "project": "aep",
       "projectName": "AEP",
-      "description": "Typed, executable rules for agent-performed engineering work.",
-      "documentType": "reference",
+      "description": "What AEP is, what it decides, and where to start.",
+      "documentType": "explanation",
       "audiences": [
         "adopter",
         "developer"
@@ -304,12 +304,12 @@
       "sourcePath": null
     },
     {
-      "route": "/docs/aep/concepts/aep/",
-      "title": "AEP: governing engineering work",
-      "qualifiedTitle": "AEP: governing engineering work | AEP",
+      "route": "/docs/aep/concepts/artifacts/",
+      "title": "Artifacts, kinds and relations",
+      "qualifiedTitle": "Artifacts, kinds and relations | AEP",
       "project": "aep",
       "projectName": "AEP",
-      "description": "The document types, how a task resolves into a plan, how capabilities compose, how a workflow advances on evidence, and what actually runs the steps.",
+      "description": "What an artifact is, the kinds AEP knows and the ones you add, the relation vocabulary, blockers, and which fields are yours to edit.",
       "documentType": "explanation",
       "audiences": [
         "adopter",
@@ -323,9 +323,9 @@
       "access": "public",
       "compatibility": false,
       "tasks": [
-        "govern-work"
+        "reference"
       ],
-      "sourcePath": "website/docs/concepts/aep.md"
+      "sourcePath": "website/docs/concepts/artifacts.md"
     },
     {
       "route": "/docs/aep/concepts/design-principles/",
@@ -357,7 +357,7 @@
       "qualifiedTitle": "Evidence and completion | AEP",
       "project": "aep",
       "projectName": "AEP",
-      "description": "Evidence records, the two times they carry, producers and independence, horizons and decay to Unknown, three-valued evaluation, ordering facts, and the join between AEP and ESS.",
+      "description": "The two places evidence lives — per-artifact records in the planning store and typed records submitted to the engine — the two times a record carries, producers and independence, horizons, three-valued evaluation, and the join with ESS.",
       "documentType": "explanation",
       "audiences": [
         "adopter",
@@ -376,12 +376,36 @@
       "sourcePath": "website/docs/concepts/evidence.md"
     },
     {
-      "route": "/docs/aep/concepts/lifecycles/",
-      "title": "Lifecycles, decided as data",
-      "qualifiedTitle": "Lifecycles, decided as data | AEP",
+      "route": "/docs/aep/concepts/governance/",
+      "title": "Governed tasks",
+      "qualifiedTitle": "Governed tasks | AEP",
       "project": "aep",
       "projectName": "AEP",
-      "description": "The status ladder every plan item climbs is a YAML file, not a Rust enum. What that buys — a new artifact kind with its own rungs, evidence-gated and date-gated moves, and an append-only history — plus the IO-free kernel that decides it.",
+      "description": "The document types, how a task resolves into a plan, how capabilities compose, how a workflow advances on evidence, and what actually runs the steps.",
+      "documentType": "explanation",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "govern-work"
+      ],
+      "sourcePath": "website/docs/concepts/governance.md"
+    },
+    {
+      "route": "/docs/aep/concepts/lifecycles/",
+      "title": "Lifecycles and rungs",
+      "qualifiedTitle": "Lifecycles and rungs | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "The status ladder each artifact kind climbs is a YAML file. A rung can cost evidence or open on a date, and a refusal says which kind of no it is.",
       "documentType": "explanation",
       "audiences": [
         "adopter",
@@ -401,11 +425,59 @@
     },
     {
       "route": "/docs/aep/concepts/overview/",
-      "title": "Architecture overview",
-      "qualifiedTitle": "Architecture overview | AEP",
+      "title": "How AEP fits together",
+      "qualifiedTitle": "How AEP fits together | AEP",
       "project": "aep",
       "projectName": "AEP",
-      "description": "AEP's deterministic core, provider edges, profiles, driver, trace checker, and external boundaries.",
+      "description": "The two halves of AEP — the governed planning store and the governed-task engine — the documents both read, and the crates behind them.",
+      "documentType": "explanation",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "govern-work"
+      ],
+      "sourcePath": "website/docs/concepts/overview.md"
+    },
+    {
+      "route": "/docs/aep/concepts/planning-store/",
+      "title": "The Git-native planning store",
+      "qualifiedTitle": "The Git-native planning store | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "aep.project/5 keeps the plan as one Markdown file per artifact and one JSON file per evidence record. Git is the history. What a write touches, how branches merge, and what validate checks.",
+      "documentType": "explanation",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "govern-work"
+      ],
+      "sourcePath": "website/docs/concepts/planning-store.md"
+    },
+    {
+      "route": "/docs/aep/concepts/reviews/",
+      "title": "Reviews and findings",
+      "qualifiedTitle": "Reviews and findings | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "A review is an immutable review-result artifact whose findings are data. What became of it is a review_outcome record, and two rounds can be compared.",
       "documentType": "explanation",
       "audiences": [
         "adopter",
@@ -421,7 +493,55 @@
       "tasks": [
         "reference"
       ],
-      "sourcePath": "website/docs/concepts/overview.md"
+      "sourcePath": "website/docs/concepts/reviews.md"
+    },
+    {
+      "route": "/docs/aep/concepts/waves/",
+      "title": "Scope and waves",
+      "qualifiedTitle": "Scope and waves | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "A story records the surfaces it lands on. waves derives which stories can be implemented at the same time, and prints every collision and every story nobody assessed.",
+      "documentType": "explanation",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/concepts/waves.md"
+    },
+    {
+      "route": "/docs/aep/concepts/workspaces/",
+      "title": "Workspaces",
+      "qualifiedTitle": "Workspaces | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "One question across several repositories' plans — members, cross-repository edges, and why a member nobody has checked out is a normal condition.",
+      "documentType": "explanation",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/concepts/workspaces.md"
     },
     {
       "route": "/docs/aep/examples/",
@@ -470,11 +590,11 @@
     },
     {
       "route": "/docs/aep/getting-started/",
-      "title": "Getting started",
-      "qualifiedTitle": "Getting started | AEP",
+      "title": "Quickstart",
+      "qualifiedTitle": "Quickstart | AEP",
       "project": "aep",
       "projectName": "AEP",
-      "description": "Build the CLI, validate the document tree, resolve a task, and watch the protocol refuse an action — in about ten minutes.",
+      "description": "Install aep, adopt a Git repository, plan a story, move it on recorded evidence and validate the plan, in about ten minutes.",
       "documentType": "how-to",
       "audiences": [
         "adopter",
@@ -541,6 +661,30 @@
       "sourcePath": "website/docs/guides/check-a-transcript.md"
     },
     {
+      "route": "/docs/aep/guides/gate-a-move-on-evidence/",
+      "title": "Gate a move on evidence",
+      "qualifiedTitle": "Gate a move on evidence | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "Write a lifecycle for your own kind of work whose rungs cost evidence, record that evidence from CI or a person, and see what the move rested on.",
+      "documentType": "how-to",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "govern-work"
+      ],
+      "sourcePath": "website/docs/guides/gate-a-move-on-evidence.md"
+    },
+    {
       "route": "/docs/aep/guides/govern-a-task/",
       "title": "Govern a task",
       "qualifiedTitle": "Govern a task | AEP",
@@ -587,6 +731,126 @@
         "run-agents"
       ],
       "sourcePath": "website/docs/guides/integrate-a-harness.md"
+    },
+    {
+      "route": "/docs/aep/guides/migrate-an-older-store/",
+      "title": "Migrate an older store",
+      "qualifiedTitle": "Migrate an older store | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "Move an aep.project/1 Markdown store, a planning directory with no project file, or an event-log store (aep.project/2–4) to the Git-native aep.project/5 store.",
+      "documentType": "how-to",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/guides/migrate-an-older-store.md"
+    },
+    {
+      "route": "/docs/aep/guides/plan-work/",
+      "title": "Plan work",
+      "qualifiedTitle": "Plan work | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "Create, relate, write, tag, move and read artifacts day to day — the commands a planning session actually uses.",
+      "documentType": "how-to",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "govern-work"
+      ],
+      "sourcePath": "website/docs/guides/plan-work.md"
+    },
+    {
+      "route": "/docs/aep/guides/review-with-findings/",
+      "title": "Review with findings",
+      "qualifiedTitle": "Review with findings | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "Record a review as an immutable review-result with machine-readable findings, compare two rounds, record what became of each review, and see which reviewers change things.",
+      "documentType": "how-to",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/guides/review-with-findings.md"
+    },
+    {
+      "route": "/docs/aep/guides/run-waves/",
+      "title": "Run waves",
+      "qualifiedTitle": "Run waves | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "Scope stories, derive which can be implemented at the same time, work one wave, and close it on evidence.",
+      "documentType": "how-to",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/guides/run-waves.md"
+    },
+    {
+      "route": "/docs/aep/guides/validate-in-ci/",
+      "title": "Validate the plan in CI",
+      "qualifiedTitle": "Validate the plan in CI | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "Run aep plan artifact validate as a required check on every pull request, with a pinned aep and an optional strict mode.",
+      "documentType": "how-to",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "govern-work"
+      ],
+      "sourcePath": "website/docs/guides/validate-in-ci.md"
     },
     {
       "route": "/docs/aep/guides/write-a-principle/",
@@ -636,12 +900,36 @@
       "sourcePath": null
     },
     {
+      "route": "/docs/aep/reference/artifact-file/",
+      "title": "The artifact file",
+      "qualifiedTitle": "The artifact file | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "The aep.planning-md/3 format — YAML front matter and a Markdown body — with a fully annotated example and the owner of every field.",
+      "documentType": "reference",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/reference/artifact-file.md"
+    },
+    {
       "route": "/docs/aep/reference/cli/",
       "title": "CLI reference",
       "qualifiedTitle": "CLI reference | AEP",
       "project": "aep",
       "projectName": "AEP",
-      "description": "Every subcommand of the AEP reference CLI, under the four areas its first level offers — govern, plan, drive and observe — plus doctor, with every earlier flat spelling still accepted.",
+      "description": "Every aep command, grouped under the four areas of its first level — govern, plan, drive and observe — plus doctor, with the flags each one accepts.",
       "documentType": "reference",
       "audiences": [
         "adopter",
@@ -682,6 +970,30 @@
         "govern-work"
       ],
       "sourcePath": "website/docs/reference/documents.md"
+    },
+    {
+      "route": "/docs/aep/reference/evidence-file/",
+      "title": "The evidence file",
+      "qualifiedTitle": "The evidence file | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "The JSON file aep plan artifact evidence writes for each record in an aep.project/5 store — path, name, fields, and the immutability rule.",
+      "documentType": "reference",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "govern-work"
+      ],
+      "sourcePath": "website/docs/reference/evidence-file.md"
     },
     {
       "route": "/docs/aep/reference/glossary/",
@@ -730,6 +1042,78 @@
         "run-agents"
       ],
       "sourcePath": "website/docs/reference/harnesses.md"
+    },
+    {
+      "route": "/docs/aep/reference/lifecycle-file/",
+      "title": "Lifecycle files",
+      "qualifiedTitle": "Lifecycle files | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "The format of an artifact lifecycle document — initial status, transitions, evidence-priced rungs, date-guarded rungs and descriptions — and how a kind finds its lifecycle.",
+      "documentType": "reference",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/reference/lifecycle-file.md"
+    },
+    {
+      "route": "/docs/aep/reference/planning-stores/",
+      "title": "Planning stores",
+      "qualifiedTitle": "Planning stores | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "Which planning store backends AEP supports, how project.yaml selects each one, and the migration path for every store AEP has removed.",
+      "documentType": "reference",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "govern-work"
+      ],
+      "sourcePath": "website/docs/reference/planning-stores.md"
+    },
+    {
+      "route": "/docs/aep/reference/project-file/",
+      "title": "project.yaml",
+      "qualifiedTitle": "project.yaml | AEP",
+      "project": "aep",
+      "projectName": "AEP",
+      "description": "Every field of .engineering/project.yaml, the file that makes a repository an AEP project.",
+      "documentType": "reference",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development",
+        "understand-safe-agentic-coding"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/reference/project-file.md"
     },
     {
       "route": "/docs/aep/reference/vocabulary/",
@@ -1615,7 +1999,7 @@
       "qualifiedTitle": "Agent Plugins",
       "project": "agentplugins",
       "projectName": "Agent Plugins",
-      "description": "The curated beyond10x marketplace for focused engineering-agent guidance.",
+      "description": "The curated b10x marketplace for focused engineering-agent guidance.",
       "documentType": "reference",
       "audiences": [
         "adopter",
@@ -1728,12 +2112,12 @@
       "sourcePath": null
     },
     {
-      "route": "/docs/agentplugins/plugins/aep-drive/",
-      "title": "AEP Drive",
-      "qualifiedTitle": "AEP Drive | Agent Plugins",
+      "route": "/docs/agentplugins/plugins/aep/",
+      "title": "AEP",
+      "qualifiedTitle": "AEP | Agent Plugins",
       "project": "agentplugins",
       "projectName": "Agent Plugins",
-      "description": "AEP Drive in the source-owned Agent Plugins documentation.",
+      "description": "AEP in the source-owned Agent Plugins documentation.",
       "documentType": "reference",
       "audiences": [
         "adopter",
@@ -1749,39 +2133,15 @@
       "tasks": [
         "govern-work"
       ],
-      "sourcePath": "website/docs/plugins/aep-drive.md"
+      "sourcePath": "website/docs/plugins/aep.md"
     },
     {
-      "route": "/docs/agentplugins/plugins/aep-plan/",
-      "title": "AEP Plan",
-      "qualifiedTitle": "AEP Plan | Agent Plugins",
+      "route": "/docs/agentplugins/plugins/b10x/",
+      "title": "b10x",
+      "qualifiedTitle": "b10x | Agent Plugins",
       "project": "agentplugins",
       "projectName": "Agent Plugins",
-      "description": "AEP Plan in the source-owned Agent Plugins documentation.",
-      "documentType": "reference",
-      "audiences": [
-        "adopter",
-        "developer"
-      ],
-      "experiences": [
-        "build-agent-systems",
-        "try-spec-driven-development"
-      ],
-      "support": "preview",
-      "access": "public",
-      "compatibility": false,
-      "tasks": [
-        "govern-work"
-      ],
-      "sourcePath": "website/docs/plugins/aep-plan.md"
-    },
-    {
-      "route": "/docs/agentplugins/plugins/beyond10x/",
-      "title": "Beyond10x",
-      "qualifiedTitle": "Beyond10x | Agent Plugins",
-      "project": "agentplugins",
-      "projectName": "Agent Plugins",
-      "description": "Beyond10x in the source-owned Agent Plugins documentation.",
+      "description": "b10x in the source-owned Agent Plugins documentation.",
       "documentType": "reference",
       "audiences": [
         "adopter",
@@ -1797,7 +2157,7 @@
       "tasks": [
         "reference"
       ],
-      "sourcePath": "website/docs/plugins/beyond10x.md"
+      "sourcePath": "website/docs/plugins/b10x.md"
     },
     {
       "route": "/docs/agentplugins/plugins/connectors/",
@@ -1824,12 +2184,12 @@
       "sourcePath": "website/docs/plugins/connectors.md"
     },
     {
-      "route": "/docs/agentplugins/plugins/workspace-hygiene/",
-      "title": "Workspace Hygiene",
-      "qualifiedTitle": "Workspace Hygiene | Agent Plugins",
+      "route": "/docs/agentplugins/plugins/ess/",
+      "title": "ESS",
+      "qualifiedTitle": "ESS | Agent Plugins",
       "project": "agentplugins",
       "projectName": "Agent Plugins",
-      "description": "Workspace Hygiene in the source-owned Agent Plugins documentation.",
+      "description": "ESS in the source-owned Agent Plugins documentation.",
       "documentType": "reference",
       "audiences": [
         "adopter",
@@ -1845,7 +2205,55 @@
       "tasks": [
         "reference"
       ],
-      "sourcePath": "website/docs/plugins/workspace-hygiene.md"
+      "sourcePath": "website/docs/plugins/ess.md"
+    },
+    {
+      "route": "/docs/agentplugins/plugins/worktree/",
+      "title": "Worktree",
+      "qualifiedTitle": "Worktree | Agent Plugins",
+      "project": "agentplugins",
+      "projectName": "Agent Plugins",
+      "description": "Worktree in the source-owned Agent Plugins documentation.",
+      "documentType": "reference",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "try-spec-driven-development"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/plugins/worktree.md"
+    },
+    {
+      "route": "/docs/agentplugins/structure/",
+      "title": "How the plugins are organised",
+      "qualifiedTitle": "How the plugins are organised | Agent Plugins",
+      "project": "agentplugins",
+      "projectName": "Agent Plugins",
+      "description": "How the plugins are organised in the source-owned Agent Plugins documentation.",
+      "documentType": "reference",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "try-spec-driven-development"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/structure.md"
     },
     {
       "route": "/docs/agentplugins/trust-and-scope/",
@@ -1870,6 +2278,76 @@
         "reference"
       ],
       "sourcePath": "website/docs/trust-and-scope.md"
+    },
+    {
+      "route": "/docs/agentplugins/tutorials/",
+      "title": "Tutorials",
+      "qualifiedTitle": "Tutorials | Agent Plugins",
+      "project": "agentplugins",
+      "projectName": "Agent Plugins",
+      "description": "Browse the Tutorials section of the source-owned Agent Plugins documentation.",
+      "documentType": "reference",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "try-spec-driven-development"
+      ],
+      "tasks": [
+        "govern-work",
+        "specify"
+      ],
+      "sourcePath": null
+    },
+    {
+      "route": "/docs/agentplugins/tutorials/first-ess-specification/",
+      "title": "Your first ESS specification",
+      "qualifiedTitle": "Your first ESS specification | Agent Plugins",
+      "project": "agentplugins",
+      "projectName": "Agent Plugins",
+      "description": "With an agent, write an Executable System Specification for a small lending library, validate it, and hold a Go implementation to the conformance suite it generates.",
+      "documentType": "tutorial",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "try-spec-driven-development"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "specify"
+      ],
+      "sourcePath": "website/docs/tutorials/first-ess-specification.md"
+    },
+    {
+      "route": "/docs/agentplugins/tutorials/first-governed-plan/",
+      "title": "Your first governed plan",
+      "qualifiedTitle": "Your first governed plan | Agent Plugins",
+      "project": "agentplugins",
+      "projectName": "Agent Plugins",
+      "description": "Continue the ESS tutorial's lending library with AEP. Adopt a planning store, plan a feature that adds a new state, have four critics review the plan, and implement the first story in a reviewed wave.",
+      "documentType": "tutorial",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "try-spec-driven-development"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "govern-work"
+      ],
+      "sourcePath": "website/docs/tutorials/first-governed-plan.md"
     },
     {
       "route": "/docs/connectors/",
@@ -2659,7 +3137,7 @@
       "qualifiedTitle": "Getting started | ESS",
       "project": "ess",
       "projectName": "ESS",
-      "description": "Validate, compile, inspect, generate, and check the committed billing specification.",
+      "description": "Install ess, write a one-file specification, generate a contract from it, and hold a small implementation to the conformance suite it obliges.",
       "documentType": "how-to",
       "audiences": [
         "adopter",
@@ -2925,6 +3403,29 @@
         "reference"
       ],
       "sourcePath": "website/docs/reference/formats.md"
+    },
+    {
+      "route": "/docs/ess/reference/predicates/",
+      "title": "Predicates",
+      "qualifiedTitle": "Predicates | ESS",
+      "project": "ess",
+      "projectName": "ESS",
+      "description": "Every predicate form ESS accepts, where each one is accepted, and which ones synthesis can build a scenario for.",
+      "documentType": "reference",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/reference/predicates.md"
     },
     {
       "route": "/docs/ess/reference/spec-versions/",
@@ -3577,7 +4078,7 @@
       "qualifiedTitle": "Status and limitations | Harness",
       "project": "harness",
       "projectName": "Harness",
-      "description": "What Harness 0.13.0 can do today and which claims are not yet earned.",
+      "description": "What Harness 0.13.3 can do today and which claims are not yet earned.",
       "documentType": "status",
       "audiences": [
         "adopter",
@@ -3655,6 +4156,619 @@
         "reference"
       ],
       "sourcePath": "README.md"
+    },
+    {
+      "route": "/docs/llm/",
+      "title": "Composable model inference",
+      "qualifiedTitle": "Composable model inference | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "A Rust library for calling language models through one neutral interface, with injected credentials, explained TOML routing, ordered fallback, and usage accounting that never turns an unknown into a zero.",
+      "documentType": "reference",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/index.md"
+    },
+    {
+      "route": "/docs/llm/concepts/",
+      "title": "Concepts",
+      "qualifiedTitle": "Concepts | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Browse the Concepts section of the source-owned LLM documentation.",
+      "documentType": "reference",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": null
+    },
+    {
+      "route": "/docs/llm/concepts/accounting/",
+      "title": "Accounting",
+      "qualifiedTitle": "Accounting | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Exact decimal money, six separate totals, and an unknown that stays unknown.",
+      "documentType": "explanation",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/concepts/accounting.md"
+    },
+    {
+      "route": "/docs/llm/concepts/credentials/",
+      "title": "Credentials",
+      "qualifiedTitle": "Credentials | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "An opaque reference, resolution at request time, coordinated renewal, and optional local adapters that read but never write.",
+      "documentType": "explanation",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/concepts/credentials.md"
+    },
+    {
+      "route": "/docs/llm/concepts/gateway/",
+      "title": "The gateway",
+      "qualifiedTitle": "The gateway | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "An authenticated single-owner HTTP surface that reports liveness and readiness and lets its owner read which routes it serves. It does not translate or proxy model calls yet.",
+      "documentType": "explanation",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/concepts/gateway.md"
+    },
+    {
+      "route": "/docs/llm/concepts/hosting/",
+      "title": "Hosting",
+      "qualifiedTitle": "Hosting | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "The owned-resource lifecycle every GPU hosting adapter is held to, and the Runpod adapter built on it, verified against an in-process emulator.",
+      "documentType": "explanation",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/concepts/hosting.md"
+    },
+    {
+      "route": "/docs/llm/concepts/neutral-boundary/",
+      "title": "The neutral turn",
+      "qualifiedTitle": "The neutral turn | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "One asynchronous port, bounded validation before any network I/O, and opaque state bound to its exact target.",
+      "documentType": "explanation",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/concepts/neutral-boundary.md"
+    },
+    {
+      "route": "/docs/llm/concepts/overview/",
+      "title": "The five concepts",
+      "qualifiedTitle": "The five concepts | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Protocol, provider account, credential source, model and hosting provider stay distinct, and none of them implies another.",
+      "documentType": "explanation",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/concepts/overview.md"
+    },
+    {
+      "route": "/docs/llm/concepts/protocols/",
+      "title": "Protocol projections",
+      "qualifiedTitle": "Protocol projections | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Chat Completions, Messages and Responses, each projected onto the neutral turn for a declared subset, in both directions, refusing what the subset does not carry.",
+      "documentType": "explanation",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/concepts/protocols.md"
+    },
+    {
+      "route": "/docs/llm/concepts/routing/",
+      "title": "Routing",
+      "qualifiedTitle": "Routing | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "A strict TOML catalog, ordered opt-in selection and fallback, capability admission, and an explanation that resolves no secret.",
+      "documentType": "explanation",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/concepts/routing.md"
+    },
+    {
+      "route": "/docs/llm/getting-started/",
+      "title": "Getting started",
+      "qualifiedTitle": "Getting started | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Build the workspace, run the examples that need no provider account, and depend on a crate from your own project.",
+      "documentType": "how-to",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "install"
+      ],
+      "sourcePath": "website/docs/getting-started.md"
+    },
+    {
+      "route": "/docs/llm/guides/",
+      "title": "Guides",
+      "qualifiedTitle": "Guides | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Browse the Guides section of the source-owned LLM documentation.",
+      "documentType": "reference",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": null
+    },
+    {
+      "route": "/docs/llm/guides/call-a-local-endpoint/",
+      "title": "Call a local endpoint",
+      "qualifiedTitle": "Call a local endpoint | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Declare an anonymous vLLM-compatible server in TOML, build a Chat Completions client from the catalog, and run one turn through the neutral port.",
+      "documentType": "how-to",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/guides/call-a-local-endpoint.md"
+    },
+    {
+      "route": "/docs/llm/guides/explain-a-route/",
+      "title": "Explain a route",
+      "qualifiedTitle": "Explain a route | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Read the routing library's explanation of a catalog, and see why a candidate was refused.",
+      "documentType": "how-to",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/guides/explain-a-route.md"
+    },
+    {
+      "route": "/docs/llm/guides/price-recorded-usage/",
+      "title": "Price recorded usage",
+      "qualifiedTitle": "Price recorded usage | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Quote a price book against fixture observations, and read the six separate totals.",
+      "documentType": "how-to",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/guides/price-recorded-usage.md"
+    },
+    {
+      "route": "/docs/llm/guides/resolve-a-local-secret/",
+      "title": "Resolve a local secret",
+      "qualifiedTitle": "Resolve a local secret | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Bind a route's opaque reference to a protected file or an explicitly chosen keychain entry.",
+      "documentType": "how-to",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/guides/resolve-a-local-secret.md"
+    },
+    {
+      "route": "/docs/llm/guides/run-a-local-turn/",
+      "title": "Run a local turn",
+      "qualifiedTitle": "Run a local turn | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Complete a model turn through the neutral port without a gateway, a network or a credential.",
+      "documentType": "how-to",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/guides/run-a-local-turn.md"
+    },
+    {
+      "route": "/docs/llm/guides/run-the-checks/",
+      "title": "Run the checks",
+      "qualifiedTitle": "Run the checks | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "What each stage of the repository gate proves, and what it deliberately does not.",
+      "documentType": "how-to",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/guides/run-the-checks.md"
+    },
+    {
+      "route": "/docs/llm/guides/start-the-gateway/",
+      "title": "Start the gateway",
+      "qualifiedTitle": "Start the gateway | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Compose the authenticated single-owner gateway with a route inventory, and query its probes and inspection routes with curl.",
+      "documentType": "how-to",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/guides/start-the-gateway.md"
+    },
+    {
+      "route": "/docs/llm/reference/",
+      "title": "Reference",
+      "qualifiedTitle": "Reference | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Browse the Reference section of the source-owned LLM documentation.",
+      "documentType": "reference",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": null
+    },
+    {
+      "route": "/docs/llm/reference/crates/",
+      "title": "Crate layout",
+      "qualifiedTitle": "Crate layout | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Fourteen workspace crates. Twelve are implemented, two are empty placeholders.",
+      "documentType": "reference",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/reference/crates.md"
+    },
+    {
+      "route": "/docs/llm/reference/formats/",
+      "title": "Versioned formats",
+      "qualifiedTitle": "Versioned formats | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Every persisted document carries an explicit version, and an unknown version refuses.",
+      "documentType": "reference",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/reference/formats.md"
+    },
+    {
+      "route": "/docs/llm/status/",
+      "title": "Status",
+      "qualifiedTitle": "Status | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "Browse the Status section of the source-owned LLM documentation.",
+      "documentType": "reference",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "tasks": [
+        "reference",
+        "troubleshoot"
+      ],
+      "sourcePath": null
+    },
+    {
+      "route": "/docs/llm/status/limitations/",
+      "title": "Limitations and trust boundary",
+      "qualifiedTitle": "Limitations and trust boundary | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "What the tests do not establish, and what this boundary refuses to promise.",
+      "documentType": "status",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "troubleshoot"
+      ],
+      "sourcePath": "website/docs/status/limitations.md"
+    },
+    {
+      "route": "/docs/llm/status/roadmap/",
+      "title": "Not yet",
+      "qualifiedTitle": "Not yet | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "What is not implemented, what blocks each item, and the order the remaining work has to happen in.",
+      "documentType": "status",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/status/roadmap.md"
+    },
+    {
+      "route": "/docs/llm/status/where-this-stands/",
+      "title": "What works today",
+      "qualifiedTitle": "What works today | LLM",
+      "project": "llm",
+      "projectName": "LLM",
+      "description": "What is built, what evidence stands behind each part, and what that evidence does not establish.",
+      "documentType": "status",
+      "audiences": [
+        "developer",
+        "operator"
+      ],
+      "experiences": [
+        "build-agent-systems",
+        "deploy-operate-products"
+      ],
+      "support": "experimental",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/status/where-this-stands.md"
     },
     {
       "route": "/docs/mandate/",
@@ -4657,7 +5771,7 @@
       "qualifiedTitle": "Architecture | Secrets",
       "project": "secrets",
       "projectName": "Secrets",
-      "description": "Architecture in the source-owned Secrets documentation.",
+      "description": "Ownership boundaries, the request path, key operations and the deployment boundary.",
       "documentType": "reference",
       "audiences": [
         "evaluator",
@@ -4673,6 +5787,190 @@
         "reference"
       ],
       "sourcePath": "docs/architecture.md"
+    },
+    {
+      "route": "/docs/secrets/authentication/",
+      "title": "Authentication",
+      "qualifiedTitle": "Authentication | Secrets",
+      "project": "secrets",
+      "projectName": "Secrets",
+      "description": "How workloads and people authenticate, how tenant and actions are established, and the action each route requires.",
+      "documentType": "reference",
+      "audiences": [
+        "evaluator",
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "docs/authentication.md"
+    },
+    {
+      "route": "/docs/secrets/getting-started/",
+      "title": "Getting started",
+      "qualifiedTitle": "Getting started | Secrets",
+      "project": "secrets",
+      "projectName": "Secrets",
+      "description": "Build Secrets, create a keyring, and migrate a local PostgreSQL database.",
+      "documentType": "how-to",
+      "audiences": [
+        "evaluator",
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "install"
+      ],
+      "sourcePath": "docs/getting-started.md"
+    },
+    {
+      "route": "/docs/secrets/http-api/",
+      "title": "HTTP API",
+      "qualifiedTitle": "HTTP API | Secrets",
+      "project": "secrets",
+      "projectName": "Secrets",
+      "description": "Every route of the Secrets API with its action, request body, success response and error codes.",
+      "documentType": "reference",
+      "audiences": [
+        "evaluator",
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "docs/http-api.md"
+    },
+    {
+      "route": "/docs/secrets/limitations/",
+      "title": "Known limitations",
+      "qualifiedTitle": "Known limitations | Secrets",
+      "project": "secrets",
+      "projectName": "Secrets",
+      "description": "What Secrets 0.4.0 does not do, or does differently from what its model implies.",
+      "documentType": "status",
+      "audiences": [
+        "evaluator",
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "troubleshoot"
+      ],
+      "sourcePath": "docs/limitations.md"
+    },
+    {
+      "route": "/docs/secrets/operations/",
+      "title": "Operations",
+      "qualifiedTitle": "Operations | Secrets",
+      "project": "secrets",
+      "projectName": "Secrets",
+      "description": "Configure, deploy, observe, rotate keys for, and back up a Secrets service.",
+      "documentType": "reference",
+      "audiences": [
+        "evaluator",
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "operate"
+      ],
+      "sourcePath": "docs/operations.md"
+    },
+    {
+      "route": "/docs/secrets/roadmap/",
+      "title": "Roadmap",
+      "qualifiedTitle": "Roadmap | Secrets",
+      "project": "secrets",
+      "projectName": "Secrets",
+      "description": "Planned, not shipped. Named, scoped secrets behind the OS keychain, read-only 1Password and the custody service, with a local CLI that never prints a secret.",
+      "documentType": "status",
+      "audiences": [
+        "evaluator",
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "docs/roadmap.md"
+    },
+    {
+      "route": "/docs/secrets/rust-client/",
+      "title": "Rust client",
+      "qualifiedTitle": "Rust client | Secrets",
+      "project": "secrets",
+      "projectName": "Secrets",
+      "description": "Use the secrets-client crate from a Rust workload to store, read, list, delete and batch secrets.",
+      "documentType": "reference",
+      "audiences": [
+        "evaluator",
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "docs/rust-client.md"
+    },
+    {
+      "route": "/docs/secrets/security-model/",
+      "title": "Security model",
+      "qualifiedTitle": "Security model | Secrets",
+      "project": "secrets",
+      "projectName": "Secrets",
+      "description": "Envelope encryption, keyring rotation and rewrap, associated data, disclosure, revoke versus delete, and audit records.",
+      "documentType": "reference",
+      "audiences": [
+        "evaluator",
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "operate"
+      ],
+      "sourcePath": "docs/security-model.md"
     },
     {
       "route": "/docs/service-sdk/",

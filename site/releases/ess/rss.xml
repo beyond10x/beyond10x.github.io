@@ -4,6 +4,126 @@
     <link>https://beyond10x.github.io/releases/</link>
     <description>Important releases, migrations, capabilities, and adopter actions across the public beyond10x ecosystem.</description>
     <item>
+      <guid isPermaLink="false">ess/runtime-parity-0.40.0</guid>
+      <title>Generated Go and TypeScript runtimes run every suite, and reader-side composition checks</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.40.0</link>
+      <pubDate>Mon, 28 Sep 2026 21:00:00 GMT</pubDate>
+      <description>The generated Go and TypeScript runtimes run suites `ess-conformance/22` to `/27` with the Rust runner&apos;s verdicts, where 0.38.0 refused them. `ess-composition/3` adds `reader: true`, admitting the widenings a consumer may read. Duplicate names are refused once, and the schema publishes name charsets.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/concurrent-history-0.39.0</guid>
+      <title>Concurrent histories checked against the model, and direct library returns</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.39.0</link>
+      <pubDate>Mon, 28 Sep 2026 18:00:00 GMT</pubDate>
+      <description>`ess verify conform check-history` checks an `ess-history/1` run of several clients for linearizability against the interpreted model and holds each view to its declared consistency; the Go and TypeScript explorers record concurrent histories and inject declared faults. Source format `ess/17` adds `returns: true`, checked as a typed direct response.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/retrofit-findings-0.38.0</guid>
+      <title>Set effects, caller values, existence-selected outcomes, bounded retries and paged views</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.38.0</link>
+      <pubDate>Mon, 28 Sep 2026 12:00:00 GMT</pubDate>
+      <description>Source format `ess/16` adds literal fallbacks, `defined()` over optional aggregates, bodiless requests, related-record values, `now` in guards, create-or-update outcomes, caller attributes, bounded retries, view paging and outcomes over every record a filter selects. `ess-composition/2` checks consumer types.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/retrofit-findings-0.37.0</guid>
+      <title>Outcome shapes, subject guards over the input, new value types and a pinned toolchain</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.37.0</link>
+      <pubDate>Sun, 27 Sep 2026 20:00:00 GMT</pubDate>
+      <description>Source format `ess/15` adds outcome shapes (`deletes:`, `into:`, `unknown_instance:`, `accepts: nothing`, `preconditions:`), `input.` in subject guards, case-insensitive text, optional aggregates, `prefix:`, `Json` and field `presence:`. Synthesis kills more mutants; `ess` can run a pinned release.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/value-expressions-0.36.0</guid>
+      <title>Payload and sets values read the subject, increment, fall back and nest</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.36.0</link>
+      <pubDate>Sun, 27 Sep 2026 12:00:00 GMT</pubDate>
+      <description>Source format `ess/14` adds `{subject: &lt;field&gt;}`, `{increment: &lt;n&gt;}`, `{input: &lt;field&gt;, else: {generated: true}}`, nested struct mappings and `{generated: true}` in `sets:`. Decimal literals are admitted in every format; `subject.&lt;field&gt;` as text is refused. Older readers refuse `ess/14`.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/0.35.1</guid>
+      <title>ESS 0.35.1</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.35.1</link>
+      <pubDate>Sun, 27 Sep 2026 03:25:28 GMT</pubDate>
+      <description>ESS released version 0.35.1.</description>
+      <category>ess</category>
+      <category>notable</category>
+      <category>releases</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/fixture-inputs-0.35.0</guid>
+      <title>Typed fixture values resolved before a scenario starts</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.35.0</link>
+      <pubDate>Sat, 26 Sep 2026 15:00:00 GMT</pubDate>
+      <description>Source format `ess/13` adds `fixture_inputs:` and `ess-scenario/3` adds `fixtures:` with `{$fixture: name}` references, compiled to `ess-conformance/18`/`19`. Rust, Go and TypeScript resolve and type-check the values from an independent provider before the scenario starts. Older readers refuse the new formats; fixture-free models and suites keep their bytes.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/aggregate-views-0.34.0</guid>
+      <title>String operators, subject guards, aggregate views and outcome groups, and a mutation audit</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.34.0</link>
+      <pubDate>Sat, 26 Sep 2026 12:00:00 GMT</pubDate>
+      <description>Source formats `ess/8`–`ess/12` add `starts_with`/`ends_with`/`contains`, `when_subject: {predicate: …}`, aggregate views with `group_by:`, `alphabet:` and input `example:`, and `outcome_groups:`. `ess verify conform mutate` audits a suite with specification mutants. Older readers refuse each new format; models that use none keep their bytes.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/secret-presence-0.33.0</guid>
+      <title>A scan records only that a Secret value exists, and a bound workload can acknowledge foreign containers</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.33.0</link>
+      <pubDate>Sat, 26 Sep 2026 12:00:00 GMT</pubDate>
+      <description>A Kubernetes scan writes `infra-observation/3` and `infra-ir/3`, recording each Secret key as `{&quot;present&quot;: true}` instead of a digest that confirms a guessed value; `infra-drift/3` no longer reports a rotated Secret. `ess-observed-bindings/2` acknowledges a mesh proxy or vendor agent by name and reason. Breaking: older readers refuse each new version.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/0.32.1</guid>
+      <title>ESS 0.32.1</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.32.1</link>
+      <pubDate>Fri, 25 Sep 2026 20:58:36 GMT</pubDate>
+      <description>ESS released version 0.32.1.</description>
+      <category>ess</category>
+      <category>notable</category>
+      <category>releases</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/openapi-3-0-import-0.32.0</guid>
+      <title>OpenAPI 3.0 imports, and a bound workload&apos;s unbound sidecars are violations</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.32.0</link>
+      <pubDate>Fri, 25 Sep 2026 18:00:00 GMT</pubDate>
+      <description>`ess infra import openapi` reads OpenAPI 3.0 by rewriting each schema to its 3.1 form, refusing a construct with no faithful one. `ess verify bindings` reports OBS-BIND-008 for a container or native sidecar in a bound workload that no binding names. Synthesize orders `Timestamp` values by the instant they name.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/entity-runtime-lowering-0.31.0</guid>
+      <title>A service contract lowers to Entity Runtime definitions</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.31.0</link>
+      <pubDate>Fri, 25 Sep 2026 12:00:00 GMT</pubDate>
+      <description>ess-service-contract extracts an admitted component&apos;s service contract, and ess-entity-runtime lowers it into validated Entity Runtime 0.23.0 definitions and typed host binding obligations, refusing what it cannot express by name. Breaking: `ess skill` and the in-repository plugin are removed; the plugin ships from beyond10x/agentplugins.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
       <guid isPermaLink="false">ess/agent-plugin-0.30.0</guid>
       <title>ESS ships its own agent plugin, and the binary prints its skills</title>
       <link>https://github.com/beyond10x/ess/releases/tag/0.30.0</link>

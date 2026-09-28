@@ -21,6 +21,19 @@ $ ess verify conform synthesize \
 The suite is deterministic. Its provenance names the model and contract digests from which it was
 derived.
 
+A generated scenario pins what the specification declares, not only that a command answered:
+
+| declaration | what the suite requires |
+| --- | --- |
+| a transition `B → C`, where a view projects `state` | the row is read back in `C` |
+| `from: [A, B]` on a transition | the move runs from `A` and from `B`, each on its own instance |
+| an update's `sets:` | each field is sent a value the row does not already hold: not what the setup wrote, and not an enum's first variant where nothing wrote it |
+| `when: n >= 1` over an input | the branch is taken at `n: 1`, and its default refuses at `n: 0` with every other conjunct satisfied |
+
+Boundaries are probed for comparisons of a number or a timestamp with a literal. Text and equality
+comparisons are not. The extra checks reuse the existing steps and scenario ids, so the suite format
+does not change.
+
 Add `--compact` to fresh `synthesize` output to write deterministic JSON without
 indentation, followed by one newline. The decoded suite is unchanged; its exact
 byte digest changes, so retain that original compact file when producing reports
@@ -29,37 +42,31 @@ not rewrite an already committed suite.
 
 ## Select authored scenarios explicitly
 
-The manifest capability described here was introduced in 0.21.0.
-`--scenarios` accepts one file or one directory. An immediate `ess-inputs.yaml` in that directory
-selects its exact `scenarios` list, including explicitly listed nested files of any extension.
-The [mixed-layout example](write-a-specification.md#keep-sources-and-generated-output-together)
-can serve both roles:
+Scenarios a person wrote (`ess-scenario/*` documents) join the generated ones only when
+`--scenarios` names them. It takes one file or one directory:
+
+| `--scenarios` names | What is read |
+|---|---|
+| a file | that file, whatever its extension |
+| a directory with an `ess-inputs.yaml` | exactly the files its `scenarios:` list names, nested or not, of any extension |
+| a directory without one | its immediate lowercase `.yaml` and `.yml` files; subdirectories are not searched |
+| nothing | no authored scenarios, even when the model's `ess-inputs.yaml` lists some |
+
+An empty selection is refused before anything is written or run. The
+[mixed-layout example](write-a-specification.md#keep-sources-and-generated-output-together) keeps
+the model and the scenarios in one directory, so the same directory serves both options:
 
 ```shell-session
 $ ess verify conform author --path . --scenarios . --suite-format 5 --out output/authored.json
 ```
 
-Without that immediate manifest, a directory selects only immediate lowercase `.yaml`/`.yml`
-entries; subdirectories are not searched. An explicit file bypasses extension filtering and parent
-configuration. An explicit empty selection refuses before outputs or execution. Omitted
-`--scenarios` selects no authored inputs, even if the model's manifest lists scenarios or the working
-directory contains `scenarios/`.
+`ess-inputs.yaml` refuses duplicate paths, a path listed as both a specification and a scenario,
+a path that leaves the directory, and a symlink. A coverage suite (`--suite-format 5`) records each
+scenario's relative path and source text: moving the directory or reordering the list leaves the
+suite unchanged, and changing line endings changes it. Its coverage describes the selected
+scenarios, not every scenario file below the directory.
 
-The manifest validates both lists but opens only the active role. It rejects duplicate paths,
-paths shared by both roles, escaping paths and selected symlinks. Suite/4 legacy invocations retain
-their supported file/root links; manifest invocations require real contained files. Each listed
-document still reaches its existing semantic reader, including malformed or foreign documents.
-
-Suite/5 retains the exact listed relative identities and original source text. Relocating the root
-or reordering the lists preserves these bytes; changing LF to CRLF changes source evidence. Copies
-and hardlinks with distinct paths remain separate requested identities. The manifest itself adds
-no suite source entry or provenance digest. Coverage describes this explicit selection, not every
-scenario that might exist below the directory.
-
-Committed `run --suite` and `run --suite-input` retain their acquisition bypass and argument
-conflicts. Impact still loads both model revisions, and release qualification still loads its
-explicit model. Discovery refusals precede output or runner activity; existing document-level
-semantic refusals can still retain incomplete diagnostic evidence.
+`ess verify conform run --suite FILE` runs the committed suite as it is and selects nothing.
 
 ## Establish backend state in an authored scenario
 
@@ -181,9 +188,11 @@ $ ess verify conform run \
 The command executes the generated or committed scenarios against the selected reference target.
 The built-in choices are `billing`, `oracle-fixture` and `interpreted`; a production adapter must
 establish its own execution boundary. `billing` and `oracle-fixture` are hand-written reference
-implementations of their examples. `interpreted` selects the specification itself and derives no
-behaviour yet: it executes nothing, so every scenario comes back as an unsatisfied obligation, and
-a run over a suite holding at least one scenario fails.
+implementations of their examples. `interpreted` selects the specification itself, named by
+`--path`, and refuses one whose `spec_digest` is not the suite's. It executes commands from the
+model — outcomes, transitions, `sets:` writes, emitted events and declared refusals — and does not
+yet interpret views or bindings, so a scenario that reads one comes back as an unsatisfied
+obligation, and a run over a suite holding at least one such scenario fails.
 The default standalone report is `ess-conformance-report/1`. Its historical `scenarios_failed`
 count includes every non-pass, including Go skips and Rust errors or unsupported results. Those
 legacy bytes and meanings remain unchanged.
@@ -197,7 +206,283 @@ $ ess verify conform run \
     --format json
 ```
 
+## Hold your own implementation to the suite
+
+`ess verify conform run` runs a suite only against the targets built into `ess`. Your own
+implementation is held to its suite through a test package that `ess` writes in Go or TypeScript:
+
+```shell-session
+$ ess verify conform synthesize --path spec --target go --out internal/conformance
+$ ess verify conform synthesize --path spec --target typescript --out conformance
+```
+
+Each writes one package, `essconform`, below `--out`: the suite (`suite.json`), the compiled model
+(`ir.json`), the runner, a predicate evaluator and a `README.md` describing the wiring. Nothing in it
+is edited by hand; regenerate it after every change to the specification. Files you add beside the
+generated ones, such as your test file, are kept.
+
+The runner asks the implementation questions through one interface, `Target`, and asserts the
+answers itself:
+
+| Method (Go / TypeScript) | What it answers |
+|---|---|
+| `Identity` / `identity` | the implementation's name and version, for the report |
+| `BeginScenario`, `EndScenario` / `beginScenario`, `endScenario` | bracket one scenario; state from one scenario must not satisfy another |
+| `ExecuteCommand` / `executeCommand` | run one command as the named actor; return the outcome taken, the declared error if it refused, and the events it emitted directly |
+| `QueryView` / `queryView` | read one view; a `read_your_writes` view must already show the command that just returned |
+| `ObserveEvents` / `observeEvents` | the events seen for one activity, away from the command that caused them |
+| `ConfigureExternalOutcome` / `configureExternalOutcome` | force an outcome declared `external:` |
+| `RedeliverEvent` / `redeliverEvent` | deliver an event a second time, for `delivery: at_least_once` |
+| `ObserveInvocations` / `observeInvocations` | the commands one binding invoked and what it passed |
+
+A refused command reports both the outcome name and the error, for example
+`{outcome: "rejected", error: "tasks.list.InvalidPriority"}`. A method the implementation cannot
+answer returns `ErrUnsupported` (Go) or throws it (TypeScript). The scenario is then reported as
+skipped, which is a different fact from failed, and a run with a skipped scenario is
+`inconclusive`, not `passed`. Specifications that declare backend setup, clock readings or periodic
+hosts ask for further optional interfaces (`EntitySetupTarget`, `ClockReadingTarget`,
+`PeriodicTarget`); the generated `README.md` names the ones a suite needs.
+
+Hand a factory to the runner from one test. The runner builds one target per scenario:
+
+```go
+func TestConformance(t *testing.T) {
+    essconform.Run(t, func() essconform.Target { return newTarget() })
+}
+```
+
+```ts
+await test("conformance", async (t) => {
+  await run(t, (): Target => newTarget());
+});
+```
+
+Then run the language's own test command. For a suite at `ess-conformance/5` or later, the
+generated runner executes only with `ESS_REPORT_FORMAT=2` set, and without it stops before the first
+scenario; the package's `README.md` names the suite's version and the command. `ESS_REPORT_OUT`
+names a file for the standalone report:
+
+```shell-session
+$ ESS_REPORT_FORMAT=2 ESS_REPORT_OUT=$PWD/report.json go test ./...
+$ ESS_REPORT_FORMAT=2 ESS_REPORT_OUT=$PWD/report.json npm test
+```
+
+[Getting started](../getting-started.md#hold-an-implementation-to-the-specification) builds a
+complete TypeScript target for a small specification and runs it green. For separate passed, failed
+and skipped counts, see [explicit outcome counts](#opt-into-explicit-outcome-counts). A target
+reports what it observed; it must not report its own unobserved success.
+
+## Audit the suite with specification mutants
+
+A green run shows only that the suite asks for nothing the target cannot answer. `mutate` asks the
+other question: does the suite notice a wrong specification?
+
+```shell-session
+$ ess verify conform mutate \
+    --path examples/billing \
+    --target billing \
+    --report-out target/billing-mutation.json
+```
+
+It changes the **specification**, one edit per mutant, and runs each mutant's freshly synthesized
+suite against the unchanged reference target. A mutant is *killed* when its suite fails there. A
+*survivor* is a declared rule that no synthesized scenario pins down. The nine classes are
+`from-drop`, `transition-to`, `guard-boundary`, `sets-retarget`, `guard-negate`,
+`guard-connective`, `error-swap`, `emit-drop` and `order-flip`; `--class` selects some of them and
+repeats. Every class *changes* the specification rather than weakening it: a mutant that only says
+less could never be killed by a correct target.
+
+A mutant the model refuses is *stillborn*, with the refusing check's own code. For example, a
+transition sent to another state is stillborn wherever its old arrival state has no other way in
+(`ESS-ENTITY-011`), and so is dropping the only event of an outcome that names no error
+(`ESS-COMMAND-007`). A stillborn mutant says something about the operator, not about the suite, and
+does not change the exit status.
+
+**A survivor is not answered by authoring a scenario.** An authored scenario's expectations are its
+author's, not the model's, so it runs identically in every mutant's suite and can never kill one;
+`mutate` runs none. Answer a survivor by declaring what makes the rule observable, such as a view
+projecting the field a `sets` entry writes, or by filing a synthesis gap.
+
+| Exit | When |
+|---|---|
+| 0 | The baseline passed, at least one mutant ran, and every mutant that ran was killed. |
+| 1 | The specification did not load, or at least one mutant survived. |
+| 3 | `ESS-MUTATE-001` (the unmutated suite did not pass), `ESS-MUTATE-003` (no site), or no survivor and at least one mutant inconclusive, or every mutant stillborn. |
+
+The text output prints one summary line, then survivors, inconclusive, stillborn and killed
+mutants, one line each. `--report-out` writes an
+[`ess-mutation-report/1`](../reference/formats.md#change-and-conformance-records) document, and
+`--format json` prints the same bytes. Only the built-in targets are supported; replaying mutant
+suites in an adopter's own language is not implemented yet.
+
+## Explore random command sequences
+
+Generated and authored scenarios are short, fixed paths. The TypeScript and Go packages that
+`ess verify conform synthesize --target typescript|go` writes also carry an explorer: seeded random
+walks over the commands, driven through the same `Target` you implement for the suite, and checked
+after every step against a reference model interpreted from the specification. It finds faults
+that only show later in a sequence: a view that drops rows after the fifth, a refusal that still
+writes, an identity reused on the fourth create.
+
+```ts
+import { assertExplored, explore } from './index.js';
+
+const result = await explore(() => newTarget(), { seeds: 200, steps: 60 });
+assertExplored(result);                          // fails on a disagreement or an unreached outcome
+assertExplored(result, { allowExcluded: true }); // also accepts outcomes the explorer left out
+```
+
+```go
+result, err := essconform.Explore(func() essconform.Target { return newTarget() },
+    essconform.ExploreOptions{Seeds: 200, Steps: 60})
+if err != nil { t.Fatal(err) }
+essconform.AssertExplored(t, result, essconform.AssertOptions{})
+```
+
+`seeds` sequences run, seeded 1 to `seeds`, each on a fresh target; `steps` is the number of
+commands in each (defaults 200 and 60). A failure names its seed, and `seed` runs exactly that one
+sequence again. One seed draws the same sequence in both languages.
+
+After every step the explorer compares the outcome, the error, the direct events and every payload
+field the specification determines, then every view without parameters over an entity: its row
+count, identities, determined fields and `order_by`. A `read_your_writes` view is read once with the
+command's consistency token; an `eventual` view is polled until it agrees, up to the eight attempts
+an `eventually` step allows. Last, every invariant is evaluated over the model's records; a record
+that breaks one is reported as a specification defect, because the guards allowed a sequence the
+invariants forbid. A failure is shrunk by removing steps while the shorter trace still fails the
+same way, for at most 1,000 replays.
+
+`assertExplored` (`AssertExplored`) fails on a disagreement, on a declared outcome of an included
+command that no sequence reached, and on the outcomes of an excluded command. The explorer models a
+subset: `when`, `otherwise` and `wrong_state` conditions; `creates` with an observed identity and
+`moves`/`updates` of a supplied subject; integer, boolean, string and UUID inputs, their newtypes,
+enums and structs of them. Anything else is excluded with the reason in `excluded`, and accepting
+that is an explicit `allowExcluded`. Where two guards both hold — which the model admits over an
+infinite domain — the draw is reported in `ambiguous` and redrawn rather than decided; a view
+filter or invariant over a field no command set is reported in `undetermined`. Neither fails.
+
+The model is `ir.json`, the compact IR the suite's `spec_digest` is taken over. The explorer refuses
+a package whose `ir.json` does not hash to `suite.json`'s digest; regenerate the package rather than
+editing either file.
+
+## Check a concurrent history
+
+A suite and the explorer drive a target one call at a time, so a race between two clients never
+happens under them. `check-history` reads an
+`ess-history/1` document, one run of several clients with each call's invoke and return instants,
+and searches for an order of the calls that the specification's own model accepts, answer for
+answer.
+
+```shell-session
+$ ess verify conform check-history \
+    --path examples/billing \
+    --history target/history.json
+```
+
+| exit | meaning |
+|---|---|
+| 0 | `Linearizable`: some order of the calls explains every recorded answer. |
+| 1 | `Violation`: no order does. The report names the longest partial order found and a shrunk history that is still a violation. |
+| 3 | `Unknown`: the search spent `--budget` model executions (default 1,000,000) first. Unknown is not a pass. |
+| 2 | The specification did not load, or the history was refused, for example because it was recorded against another specification. |
+
+The search is split by subject: calls on different instances are checked apart. A call that never
+answered may have taken effect or not, and is placed after every other call. A history records no
+inputs, so a call is explained by any input the suite would submit for its command. A read of a view
+that records its rows is judged at the consistency the view declares: under `read_your_writes` no
+client reads a state older than its own last write, and under `eventual` each client's reads converge
+once its first `--settle` reads after the last write (default 4) are past. Reads that cannot be judged
+are listed with their reason. The same history and budget always print the same report;
+`--format json` prints it as JSON.
+
+### Draw a history as client lanes
+
+```shell-session
+$ ess verify conform web \
+    --path examples/billing \
+    --history target/history.json \
+    --out target/lanes
+```
+
+`web --history` checks the history as `check-history` does and writes one `index.html`, or prints
+it when `--out` is absent. Each client is a lane, each call a bar from its invoke to its return, and
+each call the search placed carries its position in the order found. A history that declares more
+than 16 clients draws a lane for each client that made a call and counts the rest in one row. For a violation, the page
+marks the call where the search failed. Where one other call explains the failure, it names that
+call too, with the state each of the two needed and the state the other order left. Below that is
+the shrunk history, drawn the same way. The page carries its stylesheet and no script, so it opens
+from disk and fetches nothing. The same history renders to the same bytes. It exits 0 whatever the
+verdict; the verdict as an exit status is `check-history`'s.
+
+`--out` replaces the files `ess` owns in that directory, including a scenario player's, so write
+history pages and the player to different directories.
+### Import a recorded log
+
+A service that logs its calls can be judged from its log. `import-history` reads a JSON Lines log,
+one call per line in the log's own shape, through an adapter you write, and writes `ess-history/1`:
+
+```yaml
+format: ess-history-adapter/1
+fields:
+  operation_id: { pointer: /correlation }
+  client: { pointer: /request/client }
+  command: { pointer: /request/command }
+  subject_key: { pointer: /request/subject }
+  invoked_at: { pointer: /request/at_ms }
+  returned_at: { pointer: /response/at_ms }
+  outcome: { pointer: /response/outcome }
+  completion:
+    pointer: /response/status
+    values: { ok: Returned, timeout: Indeterminate }
+```
+
+```shell-session
+$ ess verify conform import-history --path examples/billing \
+    --log calls.jsonl --adapter adapter.yaml --output target/history.json
+$ ess verify conform check-history --path examples/billing --history target/history.json
+```
+
+Every field is either a JSON pointer or `absent`. Nothing is guessed. If a line lacks a field that
+the call cannot be judged without, the import is refused (exit 2) and each such field is named on
+its line. Those fields are the client, command, subject, invoke instant and completion, plus the
+return instant and outcome of a `Returned` call. Refusals name the log line and the field. Other
+fields can be missing, and each case is reported as a `coverage-gap`:
+
+- A missing `operation_id` is given a generated version-8 UUID. No ESS writer uses version 8, so a
+  generated ID cannot collide with a carried one.
+- `rows` is optional in the adapter. A view read without rows is imported, but `check-history` will
+  not judge it.
+- The document's `seed` is never carried and is written as 0.
+
+Gaps are printed on stderr. With `--output FILE`, they are also written as a JSON array to
+`FILE.gaps.json`. This file is always written; it is never empty because `seed` is always a gap.
+A history imported with gaps carries seed 0 and generated IDs by construction, and only the gaps
+file records which values were not in the log. An `--output` is refused if it or its gaps file is
+the `--log` or `--adapter` file (hard links included) or a file of the `--path` specification.
+Both files are written to temporary siblings, and replace existing files only once both writes have
+succeeded.
+
+Instants must be unsigned integers, such as epoch milliseconds. Client labels are numbered in the
+order they first appear.
+
 ## Opt into explicit outcome counts
+
+### Where passed, failed and skipped live
+
+`ess-conformance-report/1` has no passed or skipped count, and it lists a skip as `skipped <id>`
+inside `failed_scenarios`. The three numbers are in `ess-conformance-report/2`, as `counts.passed`,
+`counts.failed` and `counts.skipped`, and the skipped ids are in `outcomes.skipped`, apart from
+`outcomes.failed`. A baseline that floors `passed + failed` and caps `skipped` reads them from
+there. Select it for each runner:
+
+| runner | selection |
+|---|---|
+| `ess verify conform run` | `--report-format 2 --report-out <file>` |
+| generated Go | `ESS_REPORT_FORMAT=2 ESS_REPORT_OUT=<file> go test ./...` |
+| generated TypeScript | `ESS_REPORT_FORMAT=2 ESS_REPORT_OUT=<file> npm test` |
+
+`/1` stays the default and keeps its meaning. [Why the counts are a separate
+version](https://github.com/beyond10x/ess/blob/main/docs/design/truthful-conformance-counts.md).
 
 ```shell-session
 $ ess verify conform run \
@@ -352,9 +637,10 @@ does not prove that the target is independently operated, deployed in production
 behavior the suite never exercised. A consumer may translate this report into its own evidence
 vocabulary at that consumer’s boundary; ESS itself publishes no workflow or planning record.
 
-## Add a target
+## A target in Rust
 
-The built-in targets demonstrate the runner contract. A new target implements the Rust
-`ConformanceTarget` boundary and must preserve scenario identity, request/response correlation,
-refusal semantics, and deterministic reporting. It must not report its own unobserved success as a
-verifier result.
+The generated Go and TypeScript packages [above](#hold-your-own-implementation-to-the-suite) are the
+route for an implementation outside this repository. A Rust implementation can instead implement
+the `ConformanceTarget` trait of the `ess-conformance` crate, which is what the built-in targets do.
+It must preserve scenario identity, request/response correlation and refusal semantics, and it must
+not report its own unobserved success.

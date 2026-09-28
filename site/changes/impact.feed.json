@@ -5,6 +5,149 @@
   "feed_url": "https://beyond10x.github.io/changes/feed.json",
   "items": [
     {
+      "id": "ess/runtime-parity-0.40.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.40.0",
+      "title": "Generated Go and TypeScript runtimes run every suite, and reader-side composition checks",
+      "content_text": "The generated Go and TypeScript runtimes run suites `ess-conformance/22` to `/27` with the Rust runner's verdicts, where 0.38.0 refused them. `ess-composition/3` adds `reader: true`, admitting the widenings a consumer may read. Duplicate names are refused once, and the schema publishes name charsets.",
+      "date_published": "2026-09-28T21:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "significant",
+        "impact",
+        "specify"
+      ]
+    },
+    {
+      "id": "ess/concurrent-history-0.39.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.39.0",
+      "title": "Concurrent histories checked against the model, and direct library returns",
+      "content_text": "`ess verify conform check-history` checks an `ess-history/1` run of several clients for linearizability against the interpreted model and holds each view to its declared consistency; the Go and TypeScript explorers record concurrent histories and inject declared faults. Source format `ess/17` adds `returns: true`, checked as a typed direct response.",
+      "date_published": "2026-09-28T18:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "significant",
+        "impact",
+        "specify"
+      ]
+    },
+    {
+      "id": "ess/retrofit-findings-0.38.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.38.0",
+      "title": "Set effects, caller values, existence-selected outcomes, bounded retries and paged views",
+      "content_text": "Source format `ess/16` adds literal fallbacks, `defined()` over optional aggregates, bodiless requests, related-record values, `now` in guards, create-or-update outcomes, caller attributes, bounded retries, view paging and outcomes over every record a filter selects. `ess-composition/2` checks consumer types.",
+      "date_published": "2026-09-28T12:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "significant",
+        "impact",
+        "specify"
+      ]
+    },
+    {
+      "id": "ess/retrofit-findings-0.37.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.37.0",
+      "title": "Outcome shapes, subject guards over the input, new value types and a pinned toolchain",
+      "content_text": "Source format `ess/15` adds outcome shapes (`deletes:`, `into:`, `unknown_instance:`, `accepts: nothing`, `preconditions:`), `input.` in subject guards, case-insensitive text, optional aggregates, `prefix:`, `Json` and field `presence:`. Synthesis kills more mutants; `ess` can run a pinned release.",
+      "date_published": "2026-09-27T20:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "significant",
+        "impact",
+        "specify"
+      ]
+    },
+    {
+      "id": "ess/value-expressions-0.36.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.36.0",
+      "title": "Payload and sets values read the subject, increment, fall back and nest",
+      "content_text": "Source format `ess/14` adds `{subject: <field>}`, `{increment: <n>}`, `{input: <field>, else: {generated: true}}`, nested struct mappings and `{generated: true}` in `sets:`. Decimal literals are admitted in every format; `subject.<field>` as text is refused. Older readers refuse `ess/14`.",
+      "date_published": "2026-09-27T12:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "significant",
+        "impact",
+        "specify"
+      ]
+    },
+    {
+      "id": "ess/fixture-inputs-0.35.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.35.0",
+      "title": "Typed fixture values resolved before a scenario starts",
+      "content_text": "Source format `ess/13` adds `fixture_inputs:` and `ess-scenario/3` adds `fixtures:` with `{$fixture: name}` references, compiled to `ess-conformance/18`/`19`. Rust, Go and TypeScript resolve and type-check the values from an independent provider before the scenario starts. Older readers refuse the new formats; fixture-free models and suites keep their bytes.",
+      "date_published": "2026-09-26T15:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "significant",
+        "impact",
+        "specify"
+      ]
+    },
+    {
+      "id": "ess/aggregate-views-0.34.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.34.0",
+      "title": "String operators, subject guards, aggregate views and outcome groups, and a mutation audit",
+      "content_text": "Source formats `ess/8`–`ess/12` add `starts_with`/`ends_with`/`contains`, `when_subject: {predicate: …}`, aggregate views with `group_by:`, `alphabet:` and input `example:`, and `outcome_groups:`. `ess verify conform mutate` audits a suite with specification mutants. Older readers refuse each new format; models that use none keep their bytes.",
+      "date_published": "2026-09-26T12:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "significant",
+        "impact",
+        "specify"
+      ]
+    },
+    {
+      "id": "ess/secret-presence-0.33.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.33.0",
+      "title": "A scan records only that a Secret value exists, and a bound workload can acknowledge foreign containers",
+      "content_text": "A Kubernetes scan writes `infra-observation/3` and `infra-ir/3`, recording each Secret key as `{\"present\": true}` instead of a digest that confirms a guessed value; `infra-drift/3` no longer reports a rotated Secret. `ess-observed-bindings/2` acknowledges a mesh proxy or vendor agent by name and reason. Breaking: older readers refuse each new version.",
+      "date_published": "2026-09-26T12:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "significant",
+        "impact",
+        "specify",
+        "operate-services"
+      ]
+    },
+    {
+      "id": "ess/openapi-3-0-import-0.32.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.32.0",
+      "title": "OpenAPI 3.0 imports, and a bound workload's unbound sidecars are violations",
+      "content_text": "`ess infra import openapi` reads OpenAPI 3.0 by rewriting each schema to its 3.1 form, refusing a construct with no faithful one. `ess verify bindings` reports OBS-BIND-008 for a container or native sidecar in a bound workload that no binding names. Synthesize orders `Timestamp` values by the instant they name.",
+      "date_published": "2026-09-25T18:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "significant",
+        "impact",
+        "specify",
+        "operate-services"
+      ]
+    },
+    {
+      "id": "ess/entity-runtime-lowering-0.31.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.31.0",
+      "title": "A service contract lowers to Entity Runtime definitions",
+      "content_text": "ess-service-contract extracts an admitted component's service contract, and ess-entity-runtime lowers it into validated Entity Runtime 0.23.0 definitions and typed host binding obligations, refusing what it cannot express by name. Breaking: `ess skill` and the in-repository plugin are removed; the plugin ships from beyond10x/agentplugins.",
+      "date_published": "2026-09-25T12:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "significant",
+        "impact",
+        "specify",
+        "operate-services"
+      ]
+    },
+    {
       "id": "ess/agent-plugin-0.30.0",
       "url": "https://github.com/beyond10x/ess/releases/tag/0.30.0",
       "title": "ESS ships its own agent plugin, and the binary prints its skills",
@@ -44,6 +187,21 @@
         "significant",
         "impact",
         "specify"
+      ]
+    },
+    {
+      "id": "llm/public-surface-2026-09-20",
+      "url": "https://github.com/beyond10x/llm",
+      "title": "LLM joins the public ecosystem surface",
+      "content_text": "LLM now publishes its neutral inference boundary, implemented library set, accounting contract and honest implementation status through the shared b10x documentation contract.",
+      "date_published": "2026-09-20T12:00:00Z",
+      "tags": [
+        "llm",
+        "capability",
+        "notable",
+        "impact",
+        "build-agents",
+        "operate-services"
       ]
     },
     {

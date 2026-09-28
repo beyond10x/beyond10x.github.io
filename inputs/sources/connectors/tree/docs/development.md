@@ -3,13 +3,16 @@
 Run these commands from the repository root. For service configuration and invocation,
 see [Run adapter services](running-services.md).
 
-Rust 1.88.0 is the checked minimum. The full test/generation gate uses the ESS pin in
+Rust 1.88.0 remains the checked minimum for independent libraries. The local
+Eventlog-backed CLI/host runtime is checked on Rust 1.91.0. The full
+test/generation gate uses the ESS pin in
 [`crates/connectors-spec/toolchain.json`](../crates/connectors-spec/toolchain.json)
 and the rustfmt recorded in the GitLab generated manifest (currently Rust 1.98.1).
 Planning validation uses the separate [AEP executable pin](../crates/connectors-build/aep-toolchain.json).
 The protocol document pin in `.engineering/project.yaml` selects governance documents;
 it does not identify an installed executable.
-`--msrv` additionally checks all targets on installed Rust 1.88.0. The Rust gate runs
+`--msrv` additionally checks the pure workspace surface on installed Rust 1.88.0
+and the Eventlog-backed runtime roots on installed Rust 1.91.0. The Rust gate runs
 formatting, descriptor drift, offline builds/tests/Clippy, library dependency
 boundaries, the [shared ESS provider boundary](../adapters/README.md),
 independent adapter-model compilation and AEP validation. It uses a task-owned temporary directory under
@@ -17,15 +20,26 @@ independent adapter-model compilation and AEP validation. It uses a task-owned t
 its `msrv/` subdirectory (default `target/msrv`). This local repository has no
 configured CI or publication target.
 
+The local Entity Runtime/Eventlog adapter rebuilds complete recorded snapshots
+while processing mutations. A long-lived fixture accumulates replay work, so
+unoptimized dev/test binaries can exhaust the synchronous bridge's 30-second
+operation deadline. Both dev (including the actual CLI) and test profiles use
+`opt-level = 1`; debug assertions and overflow checks remain enabled. The
+release profile and the bridge deadline are unchanged.
+
 ## Pinned tools
 
-The 2026-09-11 selection is ESS 0.22.2 at
-`6b666e58f2e87dd8798d27f935e9a012203296a3` and AEP 0.55.0 at
-`4eb999e0ae3cc77d1c387152e23a85ad4eae86dc`. Both versions were checked against
-upstream release tags and source main. AEP additionally carries the digest-pinned
+The ESS evolution selection is ESS 0.36.0 at
+`be44a3365eb273cb3d447b74cd5b0e75181d284e` and AEP 0.61.1 at
+`b6213e1fc28df03c11ec99f5c015e8cf6302f3f7`. The Cargo dependencies select Entity
+Runtime 0.23.0 at `77aac6eac95d0392a00e8dee8d04038ef70e47de` and Eventlog 0.4.0 at
+`70096af8c231fedf6d2206c97ce2940b99aecdb8`; ESS 0.36.0 additionally brings Entity
+Runtime Core 0.24.1 at `4746bd7cc37d27c7cc5815c44a62a96f3ddc1f44` through
+`ess-entity-runtime`. AEP additionally carries the digest-pinned
 [findings correction](../crates/connectors-build/aep-findings.patch): it recognizes
 explicit empty findings blocks and source-bound transcriptions of immutable legacy
-reviews. This is a local patch on current AEP source, not an upstream released fix.
+reviews. This is a local patch on current AEP source, not an upstream released fix;
+AEP 0.61.1 does not contain it, so the patch is carried forward onto that source.
 Remove the patch when selecting an upstream commit that contains the correction.
 
 The transcription practice the second clause was written for stopped on 2026-09-15:
