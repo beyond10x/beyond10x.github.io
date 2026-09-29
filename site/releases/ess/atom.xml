@@ -2,8 +2,15 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://beyond10x.github.io/releases/ess/atom.xml</id>
   <title>ESS releases</title>
-  <updated>2026-09-28T21:00:00Z</updated>
+  <updated>2026-09-29T12:00:00Z</updated>
   <link rel="self" href="https://beyond10x.github.io/releases/ess/atom.xml"/>
+  <entry>
+    <id>ess/defect-batch-0.41.0</id>
+    <title>State-scoped refusals, guards over a related row, delivery context, and a synthesis and mutation defect batch</title>
+    <updated>2026-09-29T12:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.41.0"/>
+    <summary>`ess/18` adds state-scoped refusals, `state` in a `when_subject` predicate, guards over a related row (`when_related:`) and a binding&apos;s delivery context. Synthesis now witnesses map inputs, identity and link view filters, every creating command and the record a refusal needs; mutation scores gained refusals apart from survivors.</summary>
+  </entry>
   <entry>
     <id>ess/runtime-parity-0.40.0</id>
     <title>Generated Go and TypeScript runtimes run every suite, and reader-side composition checks</title>
