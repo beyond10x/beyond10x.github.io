@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "connectors/v0.14.0",
+      "id": "connectors/v0.14.0",
+      "repository": "connectors",
+      "publishedAt": "2026-09-29T01:13:03Z",
+      "title": "Connectors v0.14.0",
+      "summary": "Connectors released version v0.14.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.14.0",
+        "version": "v0.14.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "connectors/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "ess/runtime-parity-0.40.0",
       "id": "ess/runtime-parity-0.40.0",
       "repository": "ess",
