@@ -2,6 +2,50 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "ess/defect-batch-0.43.0",
+      "id": "ess/defect-batch-0.43.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-29T20:00:00Z",
+      "title": "Instance references inside structured values, one refusal precedence and unstated external answers refused",
+      "summary": "`{$instance}` works inside lists, maps, structs and unions (suites `ess-conformance/32` and `/33`); acts claiming an unstated external answer are refused `ESS-AUTHOR-037`. An input refusal may sit beside held-state branches under one precedence order the explorer follows; synthesis meets nested input invariants and witnesses absent fields and stored maps.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.43.0",
+        "version": "0.43.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/defect-batch-0.42.0",
+      "id": "ess/defect-batch-0.42.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-29T18:00:00Z",
+      "title": "Link-field guards, overlap precedence, counter limits and unkillable mutants scored apart",
+      "summary": "Synthesis witnesses a guard comparing a link field with an input and a stored counter at its limit; the first declared of overlapping accepting branches answers; a relation may ride on the identity. `ess-diff/11` names newtype prefix changes, and mutation report and manifest `/3` score unkillable mutants apart from survivors.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.42.0",
+        "version": "0.42.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
       "key": "ess/defect-batch-0.41.0",
       "id": "ess/defect-batch-0.41.0",
       "repository": "ess",
@@ -22,6 +66,30 @@
       ],
       "automatic": false,
       "channel": "impact"
+    },
+    {
+      "key": "agentplugins/0.19.0",
+      "id": "agentplugins/0.19.0",
+      "repository": "agentplugins",
+      "publishedAt": "2026-09-29T09:51:24Z",
+      "title": "Agent Plugins 0.19.0",
+      "summary": "Agent Plugins released version 0.19.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.19.0",
+        "version": "0.19.0"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
     },
     {
       "key": "connectors/v0.15.1",

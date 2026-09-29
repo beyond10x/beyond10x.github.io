@@ -176,6 +176,12 @@ false` and `id-required: ticket_id == ""`, the input `{ticket_id: "", open: fals
 `id-required`, and the generated suite sends it and requires that. An accepting branch cannot read
 the identity to step aside, so this precedence is how such a command is written.
 
+Two accepting branches may overlap as well. The first declared whose guard holds answers: with
+`small: amount < 100` written before `flagged: amount > 50`, the input `{amount: 75}` takes
+`small`, and the generated suite sends an input in that overlap and requires `small`. Write the
+narrower branch first when it should win. An `external:` branch takes its place in the same order: written after
+`small`, it is asked only for an input `small` does not claim.
+
 ### An invariant reads only what every creation sets
 
 An entity invariant that reads a required field needs every `creates:` branch of that entity to set
@@ -384,6 +390,33 @@ one answer:
 Every state no guard claims falls to the default, whose move must start there. The synthesized
 suite arranges an order in `Delivered` and one in `Cancelled`, each refused with `Gone` and left
 unchanged.
+
+An input-guarded refusal — `when:` with an `error:`, naming no subject — may sit beside the
+state-guarded branches, at every format that has `when_subject_state`. It is answered before the
+record is looked up and before its state is read, so "the new value is refused whatever the record's
+state" is written once:
+
+```yaml
+- name: too-short
+  when: secret.count < 12
+  error: demo.secrets.SecretTooShort
+- name: rotated
+  when_subject_state: Configured
+  updates: demo.secrets.Configuration
+  instance: tenant_id
+  sets: {secret: input.secret}
+- name: not-configured
+  error: demo.secrets.NotConfigured
+```
+
+Of two refusals one input selects, the first declared answers.
+
+The refusal still names no subject: with `updates:` or `preserves:` it is refused as
+`refusal_mutated_state`. The synthesized suite sends the refused input for an identity nothing
+stores, then for a record arranged in each state of the lifecycle, and requires the error, no event
+and the record unchanged each time. Where a state-guarded branch also reads the input, the record in
+its state is sent an input both guards admit. A target that reads the held state or looks the record
+up before it checks the input fails the refusal's scenario.
 
 ### Guard an outcome by the subject's stored fields
 
@@ -902,13 +935,17 @@ From source `ess/16` a value can come from a field of the row the subject refere
 ```
 
 `via` is a field of the subject as it was before the outcome (on `creates:`, a field the
-branch sets from its input), or `input.<field>`, and its type is the identity of the entity it
-names — exactly, not `Optional<…>` or a list. Where several entities share that identity type, the
-relation on the subject field says which one: a `references` relation of cardinality `one` that
-the subject declares on it, or the `owns` relation of the subject's owner; an input is settled by
-the relation on the field the branch sets from it. `field` is a field of that entity, typed as the
-target admits. One hop only. `{related: …}` is written alone and holds exactly `via` and `field`;
-any other mapping under `related` is a nested mapping, and below `ess/16` so is this one.
+branch sets from its input, or the identity it fills from its input), or `input.<field>`, and its
+type is the identity of the entity it names — exactly, not `Optional<…>` or a list. Where several
+entities share that identity type, the relation on the subject field says which one: a
+`references` relation of cardinality `one` that the subject declares on it, or the `owns` relation
+of the subject's owner; an input is settled by the relation on the field the branch sets from it,
+or on the identity the branch names its instance by. The field may be the subject's identity: an
+entity keyed by `user_id` that declares `{name: user, kind: references, target: User,
+cardinality: one, via: user_id}` reads the user with the same id. `field` is a field of that
+entity, typed as the target admits. One hop only. `{related: …}` is written alone and holds
+exactly `via` and `field`; any other mapping under `related` is a nested mapping, and below
+`ess/16` so is this one.
 
 The scenario creates the referenced row between two others of its entity, points the subject at
 it, and asserts that row's value, so an implementation that reads another row, the first or the
