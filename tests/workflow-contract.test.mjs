@@ -17,7 +17,7 @@ test('deployment remains a manual bot-only action from main', () => {
 });
 
 test('the caller pins the accepted immutable Website deployment runtime', () => {
-  assert.equal(count('beyond10x/website/.github/workflows/deploy-root.yml@bb9e8f17258785b73bc8aecb1e926439d99989d8'), 1);
+  assert.equal(count('beyond10x/website/.github/workflows/deploy-root.yml@d5686d5434675a709d60b67de0d353af1e621c80'), 1);
   assert.equal(count('uses:'), 1);
   assert.match(workflow, /permissions: \{\}/);
   assert.match(workflow, /control_sha: \$\{\{ inputs\.control_sha \}\}/);
