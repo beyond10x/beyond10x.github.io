@@ -1151,6 +1151,75 @@
       }
     },
     {
+      "audiences": [
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "availability": "published",
+      "canonicalUrl": "https://beyond10x.github.io/engineering-protocols/",
+      "capabilities": [
+        "aep",
+        "engineering-workflows",
+        "evidence-gates",
+        "contract-generation"
+      ],
+      "discoverability": "public",
+      "id": "docs",
+      "journeys": [
+        "specify",
+        "build-agents",
+        "operate-services"
+      ],
+      "kind": "documentation",
+      "maturity": "development",
+      "name": "Engineering Protocols",
+      "relationships": [
+        {
+          "kind": "specifies",
+          "target": "aep-service/docs"
+        }
+      ],
+      "routeBase": "/engineering-protocols/docs/",
+      "sections": [
+        {
+          "kind": "docs",
+          "label": "What engineering protocols are",
+          "url": "https://beyond10x.github.io/engineering-protocols/docs/"
+        },
+        {
+          "kind": "reference",
+          "label": "Protocols",
+          "url": "https://beyond10x.github.io/engineering-protocols/docs/protocols/"
+        },
+        {
+          "kind": "reference",
+          "label": "Assertion catalog and CLI",
+          "url": "https://beyond10x.github.io/engineering-protocols/docs/reference/assertions/"
+        },
+        {
+          "kind": "status",
+          "label": "Status",
+          "url": "https://beyond10x.github.io/engineering-protocols/docs/status/"
+        },
+        {
+          "kind": "source",
+          "label": "Source",
+          "url": "https://github.com/beyond10x/engineering-protocols"
+        }
+      ],
+      "summary": "Typed, portable, machine-executable specifications for performing and proving autonomous engineering work.",
+      "key": "engineering-protocols/docs",
+      "repository": {
+        "displayName": "Engineering Protocols",
+        "id": "engineering-protocols",
+        "url": "https://github.com/beyond10x/engineering-protocols"
+      },
+      "independentDiscovery": true,
+      "independentSourceCommit": "9967d43493aa255d5b2755fdf9d33885aaa830e0",
+      "independentProvenanceSha256": "91583fda676ad5dc978f9587d0019ea8caa1ad7fad1a595b63d09bbc3ce1f381"
+    },
+    {
       "accent": "#f0b35c",
       "adoption": {
         "estimatedMinutes": 10,

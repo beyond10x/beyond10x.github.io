@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_beyond10x_website=self.webpackChunk_beyond10x_website||[]).push([["96653"],{66236(e,s,b){b.d(s,{createCynefinServices:()=>n.t});var n=b(49760);b(80184)}}]);

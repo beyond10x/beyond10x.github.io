@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_beyond10x_website=self.webpackChunk_beyond10x_website||[]).push([["5995"],{24678(e,s,b){b.d(s,{createPieServices:()=>c.f});var c=b(48701);b(80184)}}]);

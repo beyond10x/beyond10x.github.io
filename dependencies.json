@@ -38,6 +38,10 @@
       "label": "Docs System"
     },
     {
+      "id": "engineering-protocols",
+      "label": "Engineering Protocols"
+    },
+    {
       "id": "entity-runtime",
       "label": "Entity Runtime"
     },
@@ -220,6 +224,11 @@
       "from": "devcenter",
       "to": "workspace",
       "label": "uses"
+    },
+    {
+      "from": "engineering-protocols",
+      "to": "aep-service",
+      "label": "specifies"
     },
     {
       "from": "eventlog",

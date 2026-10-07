@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_beyond10x_website=self.webpackChunk_beyond10x_website||[]).push([["99200"],{56931(e,s,a){a.d(s,{createRadarServices:()=>b.f});var b=a(97608);a(80184)}}]);
