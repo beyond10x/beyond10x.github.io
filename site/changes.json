@@ -2,6 +2,30 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "agentplugins/0.22.2",
+      "id": "agentplugins/0.22.2",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-08T09:53:28Z",
+      "title": "Agent Plugins 0.22.2",
+      "summary": "Agent Plugins released version 0.22.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.22.2",
+        "version": "0.22.2"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "worktree/0.13.0",
       "id": "worktree/0.13.0",
       "repository": "worktree",
