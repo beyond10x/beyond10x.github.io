@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "eventlog/0.8.2",
+      "id": "eventlog/0.8.2",
+      "repository": "eventlog",
+      "publishedAt": "2026-10-08T10:38:33Z",
+      "title": "Eventlog 0.8.2",
+      "summary": "Eventlog released version 0.8.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/eventlog/releases/tag/0.8.2",
+        "version": "0.8.2"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "eventlog/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "agentplugins/0.22.2",
       "id": "agentplugins/0.22.2",
       "repository": "agentplugins",
