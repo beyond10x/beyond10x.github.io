@@ -1,0 +1,826 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://beyond10x.github.io/updates/field-notes/</id>
+    <title>beyond10x Blog</title>
+    <updated>2026-10-06T20:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://beyond10x.github.io/updates/field-notes/"/>
+    <subtitle>beyond10x Blog</subtitle>
+    <icon>https://beyond10x.github.io/img/favicon.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[0.55 — Json in CLI results, and optional values an implementation supplies]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/json-cli-results-and-optional-generator-ports/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/json-cli-results-and-optional-generator-ports/"/>
+        <updated>2026-10-06T20:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.55.0 lets a CLI result carry a JSON document as JSON, and routes an optional generated value through a port the implementation answers.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.55 — Json in CLI results, and optional values an implementation supplies | ESS</span><span data-pagefind-meta="description">0.55.0 lets a CLI result carry a JSON document as JSON, and routes an optional generated value through a port the implementation answers.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-10-06-2200-json-cli-results-and-optional-generator-ports.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-06-2200-json-cli-results-and-optional-generator-ports.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>0.55.0 is a feature release. Specifications, suites and deltas keep their formats. It follows
+0.54.0, released the same day with source format <code>ess/23</code>; the
+<a href="https://github.com/beyond10x/ess/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="">changelog</a> lists both.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-cli-result-carries-json-as-json">A CLI result carries JSON as JSON<a href="https://beyond10x.github.io/updates/field-notes/ess/json-cli-results-and-optional-generator-ports/#a-cli-result-carries-json-as-json" class="hash-link" aria-label="Direct link to A CLI result carries JSON as JSON" title="Direct link to A CLI result carries JSON as JSON" translate="no">​</a></h2>
+<p>A CLI result field may now be typed <code>Json</code>, alone or under <code>Optional</code>, <code>List</code> or a <code>String</code>-keyed
+<code>Map</code>. The generated adapter writes the value as JSON, so a caller parses the answer once instead
+of decoding JSON text out of a JSON answer.</p>
+<ul>
+<li class="">The result check accepts any JSON value in that field and refuses a reply outside the declared
+shape as <code>cli_result</code>.</li>
+<li class="">A <code>Json</code> input field is refused: an argv word has no JSON spelling a binding declares. A <code>Json</code>
+error field is refused too.</li>
+<li class="">Generated CLI packages carry new <code>src/wire.rs</code> bytes, so <code>ess generate cli --check</code> reports drift
+until they are regenerated (beyond10x/ess#468).</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="an-optional-generated-value-comes-from-the-implementation">An optional generated value comes from the implementation<a href="https://beyond10x.github.io/updates/field-notes/ess/json-cli-results-and-optional-generator-ports/#an-optional-generated-value-comes-from-the-implementation" class="hash-link" aria-label="Direct link to An optional generated value comes from the implementation" title="Direct link to An optional generated value comes from the implementation" translate="no">​</a></h2>
+<p><code>{generated: true}</code> on a value of type <code>Optional&lt;T&gt;</code> used to be filled absent every time. From
+0.55.0 the generated Rust and Go behaviours read it from a context port that answers an optional
+<code>T</code>, so a value that is absent only when there is nothing to report can reach the event.</p>
+<ul>
+<li class="">The port is <code>generate_optional_&lt;t&gt;</code> returning <code>Option&lt;T&gt;</code> in Rust and <code>GenerateOptional&lt;T&gt;</code>
+returning <code>*T</code> in Go. A context that implements the port adds the method; the generated
+demonstration context answers it absent.</li>
+<li class="">A field nothing sets stays absent and asks no port (beyond10x/ess#467).</li>
+</ul>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.51 — Branches selected by existence, and output that regenerates anywhere]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/existence-lookup-and-portable-output/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/existence-lookup-and-portable-output/"/>
+        <updated>2026-10-01T21:30:00.000Z</updated>
+        <summary type="html"><![CDATA[0.51.0 generates the existence lookup a Rust server needs to choose between creating and refusing, and lets committed generated output regenerate in another checkout.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.51 — Branches selected by existence, and output that regenerates anywhere | ESS</span><span data-pagefind-meta="description">0.51.0 generates the existence lookup a Rust server needs to choose between creating and refusing, and lets committed generated output regenerate in another checkout.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-10-01-2330-existence-lookup-and-portable-output.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-01-2330-existence-lookup-and-portable-output.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>0.51.0 is a feature and fix release. Specifications, suites and deltas keep their formats.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="branches-selected-by-whether-the-record-exists">Branches selected by whether the record exists<a href="https://beyond10x.github.io/updates/field-notes/ess/existence-lookup-and-portable-output/#branches-selected-by-whether-the-record-exists" class="hash-link" aria-label="Direct link to Branches selected by whether the record exists" title="Direct link to Branches selected by whether the record exists" translate="no">​</a></h2>
+<p>A command with an <code>existing_instance:</code> refusal beside a creation, or a creating
+<code>unknown_instance:</code> branch beside an update, needs to know whether the record is already stored.
+Until now the generated Rust server owed such a command as an obligation. From 0.51.0 it looks the
+input identity up in the storage port before dispatch and selects the branch itself.</p>
+<ul>
+<li class="">A command whose lookup would not match its creations (another entity, another input field, an
+identity that is not an input) stays an obligation.</li>
+<li class="">Go, Web and Clap still refuse both forms by name.</li>
+<li class="">If your realization implemented one of these commands' <code>…Behavior</code> obligation, <code>Generated&lt;P&gt;</code>
+now runs the generated behaviour and no longer forwards that command to it
+(beyond10x/ess#310).</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="committed-output-regenerates-in-another-checkout">Committed output regenerates in another checkout<a href="https://beyond10x.github.io/updates/field-notes/ess/existence-lookup-and-portable-output/#committed-output-regenerates-in-another-checkout" class="hash-link" aria-label="Direct link to Committed output regenerates in another checkout" title="Direct link to Committed output regenerates in another checkout" translate="no">​</a></h2>
+<p>Generated output committed with its <code>.ess-output</code> now regenerates in a clone, a second worktree or
+CI, under any umask, when its owned files still have their recorded bytes:</p>
+<ul>
+<li class="">a regeneration that changes nothing leaves <code>state.json</code> byte-identical, and the first one that
+writes records the new root;</li>
+<li class="">a state carried without matching files refuses, lists them, and prints the steps to re-enroll
+with <code>ess generate output adopt</code>;</li>
+<li class="">a root replaced by a copy mid-transaction refuses recovery there (beyond10x/ess#306).</li>
+</ul>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.50 — Aggregates over rows a when_related guard admits]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/aggregates-over-related-guards/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/aggregates-over-related-guards/"/>
+        <updated>2026-10-01T20:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.50.0 is one synthesis fix: an aggregate view whose creating command has a when_related guard gets its aggregate scenario instead of being refused with ESS-SYNTH-017.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.50 — Aggregates over rows a when_related guard admits | ESS</span><span data-pagefind-meta="description">0.50.0 is one synthesis fix: an aggregate view whose creating command has a when_related guard gets its aggregate scenario instead of being refused with ESS-SYNTH-017.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-10-01-2200-aggregates-over-related-guards.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-01-2200-aggregates-over-related-guards.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>0.50.0 is a fix release. Specifications, suites and deltas keep their formats.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="aggregates-over-a-when_related-guarded-creator">Aggregates over a <code>when_related</code>-guarded creator<a href="https://beyond10x.github.io/updates/field-notes/ess/aggregates-over-related-guards/#aggregates-over-a-when_related-guarded-creator" class="hash-link" aria-label="Direct link to aggregates-over-a-when_related-guarded-creator" title="Direct link to aggregates-over-a-when_related-guarded-creator" translate="no">​</a></h2>
+<p>Until now, an aggregate view over rows created by a command with a <code>when_related</code> guard was
+refused with ESS-SYNTH-017: synthesis could not create the rows the view counts, because each
+needed a related row the guard would accept. From 0.50.0 the view gets its <code>&lt;view&gt;/aggregate</code>
+scenario:</p>
+<ul>
+<li class="">each row's related row is arranged first, and rows given one value of the guard's input share
+it;</li>
+<li class="">every input a guard predicate compares with the related row's owner link names an owner that
+is arranged too;</li>
+<li class="">a group key read from a related row's owner link holds one owner per value, so a target that
+groups under the wrong owner fails.</li>
+</ul>
+<p>Where a row still cannot be arranged, the refusal names the reason (beyond10x/ess#272).</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.49 — Served surfaces enforce actor grants, and a related row's state]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/actor-grants-and-related-state/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/actor-grants-and-related-state/"/>
+        <updated>2026-10-01T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.49.0 makes generated servers refuse a caller the specification does not grant a command, with suites that witness the refusal, adds ess/20 for a related row's lifecycle state in a when_related guard, and closes six synthesis and diff gaps.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.49 — Served surfaces enforce actor grants, and a related row's state | ESS</span><span data-pagefind-meta="description">0.49.0 makes generated servers refuse a caller the specification does not grant a command, with suites that witness the refusal, adds ess/20 for a related row's lifecycle state in a when_related guard, and closes six synthesis and diff gaps.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-10-01-1800-actor-grants-and-related-state.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-01-1800-actor-grants-and-related-state.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>0.49.0 adds the source format <code>ess/20</code>, described in
+<a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the format history</a>. It changes the signature of generated
+servers in a specification that declares actors, so a caller of <code>dispatch</code>, <code>handle</code> or <code>serve</code>
+has one change to make.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="served-surfaces-enforce-actor-grants">Served surfaces enforce actor grants<a href="https://beyond10x.github.io/updates/field-notes/ess/actor-grants-and-related-state/#served-surfaces-enforce-actor-grants" class="hash-link" aria-label="Direct link to Served surfaces enforce actor grants" title="Direct link to Served surfaces enforce actor grants" translate="no">​</a></h2>
+<p>In a specification that declares actors, the generated server's <code>dispatch</code> and <code>handle</code> (Rust)
+and <code>dispatch</code> (Go) take the caller your realization authenticated the request as, and <code>serve</code> /
+<code>Serve&lt;Component&gt;</code> take an <code>authenticate</code> function that returns it. <code>admit</code> (Rust) and <code>Admit</code>
+(Go) expose the check on its own.</p>
+<p>Before a command runs, a request with no caller, or with an actor the specification does not
+grant the command, gets <code>403 {"refused": "not granted", "actor": &lt;name or null&gt;}</code>. A command no
+actor is granted is refused to every caller; views are not grant-checked. The OpenAPI contract of
+a served component declares the refusal on every command.</p>
+<p>For served components the synthesized suite adds <code>&lt;command&gt;/grant/denied</code>, which borrows a
+scenario whose send the command accepts and requires that the target's event log grows by nothing, and
+<code>&lt;command&gt;/grant/admitted/&lt;actor&gt;</code> where a granted actor would otherwise never send its command.
+Authored scenarios can expect the refusal with <code>refused: not_granted</code>. How a request proves its
+actor stays the realization's job.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-related-rows-state-in-when_related">A related row's state in <code>when_related</code><a href="https://beyond10x.github.io/updates/field-notes/ess/actor-grants-and-related-state/#a-related-rows-state-in-when_related" class="hash-link" aria-label="Direct link to a-related-rows-state-in-when_related" title="Direct link to a-related-rows-state-in-when_related" translate="no">​</a></h2>
+<p>From <code>ess/20</code>, a <code>when_related</code> predicate may read the related row's held lifecycle state as
+<code>state</code>, as a <code>when_subject</code> predicate reads the subject's:
+<code>when_related: {via: input.candidate, predicate: state != Accepted}</code>. Earlier formats refuse the
+path with <code>unsupported_format_version</code> naming <code>ess/20</code>. Synthesis arranges a related row of an
+entity already being arranged one level deep, in its initial state; suites for earlier formats
+are unchanged.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="synthesis-and-diff-fixes">Synthesis and diff fixes<a href="https://beyond10x.github.io/updates/field-notes/ess/actor-grants-and-related-state/#synthesis-and-diff-fixes" class="hash-link" aria-label="Direct link to Synthesis and diff fixes" title="Direct link to Synthesis and diff fixes" translate="no">​</a></h2>
+<ul>
+<li class="">A value copied from a related row through the input a <code>when_related</code> guard reads gets its
+success scenario, between other accepted rows, so a target copying from the wrong one fails.</li>
+<li class="">An aggregate view grouped by a key copied from a related row gets its <code>&lt;view&gt;/aggregate</code>
+scenario.</li>
+<li class="">A <code>when_related</code> guard over the <code>via</code> field of an <code>owns</code> relation is witnessed on both sides.</li>
+<li class="">A scenario sending a command that reads the caller also runs with the callers swapped and a
+fresh caller-supplied identity.</li>
+<li class="">A branch with a <code>when:</code> beside a <code>when_subject:</code> gets its scenarios when a later sibling shares
+its <code>when:</code>.</li>
+<li class=""><code>ess verify diff</code> reports a declaration added or removed on one side only as that addition or
+removal, not <code>unclassified-changed</code>.</li>
+</ul>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.48 — UI tests by node path, and reports from an outside runner]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/ui-tests-and-supplied-results/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/ui-tests-and-supplied-results/"/>
+        <updated>2026-09-30T21:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.48.0 runs ess-ui-test/1 tests against the terminal renderer and emits a Playwright spec from the same file, turns an outside runner's per-scenario results into a conformance report, and marks a served 501 whose effect was committed.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.48 — UI tests by node path, and reports from an outside runner | ESS</span><span data-pagefind-meta="description">0.48.0 runs ess-ui-test/1 tests against the terminal renderer and emits a Playwright spec from the same file, turns an outside runner's per-scenario results into a conformance report, and marks a served 501 whose effect was committed.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-30-2300-ui-tests-and-supplied-results.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-30-2300-ui-tests-and-supplied-results.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>0.48.0 adds three formats, <code>ess-ui-test/1</code>, <code>ess-ui-test-report/1</code> and
+<code>ess-conformance-results/1</code>, described in <a class="" href="https://beyond10x.github.io/docs/ess/reference/formats/">the formats reference</a>.
+Specifications, suites and deltas keep their earlier formats.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ui-tests-by-node-path">UI tests by node path<a href="https://beyond10x.github.io/updates/field-notes/ess/ui-tests-and-supplied-results/#ui-tests-by-node-path" class="hash-link" aria-label="Direct link to UI tests by node path" title="Direct link to UI tests by node path" translate="no">​</a></h2>
+<p>An <code>ess-ui-test/1</code> file tests an <code>ess-ui/1</code> document. Each step is one line: open a page, select
+a node by its canonical node path (a row by its key), type, choose, act, page, expect text, rows
+or a section's state, play a live event, advance time, or expect a command with given input.
+A test can replace the document's fixtures.</p>
+<p><code>ess ui test --path &lt;document&gt; &lt;tests…&gt;</code> runs the tests headless against the terminal renderer
+and writes <code>ess-ui-test-report/1</code>. <code>--playwright &lt;out&gt;</code> writes a Playwright spec for the
+generated React project from the same file; it selects <code>[data-ui-path]</code>, and a step the terminal
+cannot check is <code>test.fixme</code> in the spec with the same reason, so one file has one verdict. The
+<a class="" href="https://beyond10x.github.io/docs/ess/reference/ess-ui-test/">reference</a> compares the language with selector-based browser
+tests.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="reports-from-an-outside-runner">Reports from an outside runner<a href="https://beyond10x.github.io/updates/field-notes/ess/ui-tests-and-supplied-results/#reports-from-an-outside-runner" class="hash-link" aria-label="Direct link to Reports from an outside runner" title="Direct link to Reports from an outside runner" translate="no">​</a></h2>
+<p><code>ess verify conform report --suite &amp;lt;suite&amp;gt; --results &amp;lt;results.json&amp;gt; --implementation &amp;lt;name&amp;gt; --report-out &amp;lt;path&amp;gt;</code> writes an <code>ess-conformance-report/2</code> from the per-scenario results of a
+runner written in any language. Coverage, the suite reference and policy come from ESS's own
+admission of the suite; the producer profile, <code>external-scenario-status/1</code>, says ESS executed
+nothing. aep 0.66.0 records such a report as evidence.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-served-501-says-whether-the-effect-was-committed">A served 501 says whether the effect was committed<a href="https://beyond10x.github.io/updates/field-notes/ess/ui-tests-and-supplied-results/#a-served-501-says-whether-the-effect-was-committed" class="hash-link" aria-label="Direct link to A served 501 says whether the effect was committed" title="Direct link to A served 501 says whether the effect was committed" translate="no">​</a></h2>
+<p>Every served <code>501</code> body carries <code>committed</code>: <code>false</code> for an unmet obligation, where nothing was
+written, and <code>true</code> when the command took effect and delivering what it published failed. Rust
+shells see the second case as <code>Refused::Undelivered</code>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="also">Also<a href="https://beyond10x.github.io/updates/field-notes/ess/ui-tests-and-supplied-results/#also" class="hash-link" aria-label="Direct link to Also" title="Direct link to Also" translate="no">​</a></h2>
+<ul>
+<li class=""><code>ess ui check --model &lt;dir&gt;</code> reads the specification through the directory's <code>ess-inputs.yaml</code>.</li>
+<li class="">An <code>ess</code> that delegates to a pinned release says so on stderr for every command
+(<code>ESS_TOOLCHAIN_QUIET=1</code> silences it).</li>
+</ul>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.47 — UI documents, and generated servers that answer with what a command published]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/ui-documents-and-published-answers/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/ui-documents-and-published-answers/"/>
+        <updated>2026-09-30T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.47.0 adds ess-ui/1, a renderer-neutral UI document that loads, checks, runs in the terminal and generates a React project, and makes the generated Rust and Go servers answer with the events a command published, deliver each binding on its own, and keep request headers.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.47 — UI documents, and generated servers that answer with what a command published | ESS</span><span data-pagefind-meta="description">0.47.0 adds ess-ui/1, a renderer-neutral UI document that loads, checks, runs in the terminal and generates a React project, and makes the generated Rust and Go servers answer with the events a command published, deliver each binding on its own, and keep request headers.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-30-1800-ui-documents-and-published-answers.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-30-1800-ui-documents-and-published-answers.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>0.47.0 adds two formats, <code>ess-ui/1</code> and <code>ess-ui-check/1</code>, described in
+<a class="" href="https://beyond10x.github.io/docs/ess/reference/formats/">the formats reference</a>. Specifications, suites and deltas keep their
+earlier formats.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ui-documents">UI documents<a href="https://beyond10x.github.io/updates/field-notes/ess/ui-documents-and-published-answers/#ui-documents" class="hash-link" aria-label="Direct link to UI documents" title="Direct link to UI documents" translate="no">​</a></h2>
+<p>An <code>ess-ui/1</code> document describes an application's shells, pages, sections, widgets, reads,
+commands, live channels and where each piece of state is held, without naming a renderer. Its
+schema is data, <code>schemas/ui/ess-ui.schema.yaml</code>, and the <a class="" href="https://beyond10x.github.io/docs/ess/reference/ess-ui/">reference</a>
+is rendered from it by <code>ess ui docs</code>.</p>
+<ul>
+<li class=""><code>ess ui load --path &lt;document&gt;</code> loads a document and prints how many pages and addressed nodes
+it holds, or names the node that refuses it.</li>
+<li class=""><code>ess ui check --path &lt;document&gt; [--model &lt;specification&gt;]</code> runs every check the schema declares
+and, with a model, checks that each view, command and event the document names exists and that
+some actor may read each section. Each finding names its canonical node path; any error exits 1.</li>
+<li class=""><code>ess ui run --tui --path &lt;document&gt;</code> runs the document in the terminal, answering reads from
+its fixtures and playing live events from a fixture script.</li>
+<li class=""><code>ess generate ui --target react</code> writes a Vite + React + TypeScript project.</li>
+</ul>
+<p><code>examples/partner-portal/</code> is a complete document to start from.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="generated-servers-answer-with-what-a-command-published">Generated servers answer with what a command published<a href="https://beyond10x.github.io/updates/field-notes/ess/ui-documents-and-published-answers/#generated-servers-answer-with-what-a-command-published" class="hash-link" aria-label="Direct link to Generated servers answer with what a command published" title="Direct link to Generated servers answer with what a command published" translate="no">​</a></h2>
+<p>A served command's answer now lists <code>published</code>: the events it emitted, in emit order, each as
+<code>{event, payload}</code>. The OpenAPI contract types the list item by item. <code>SystemEvent::name</code> and
+<code>wire::encode_system_event</code> name and encode any system event, so a runner needs no hand-kept
+table. <code>Request.headers</code> keeps the request's headers in arrival order; a shell that builds a
+<code>Request</code> literal must add the field.</p>
+<p>Delivery is tracked per binding. A binding whose obligation is unmet holds the event in its own
+list and tries again on a later pump; every other binding receives the event once, and an
+<code>at_most_once</code> binding is never delivered twice. A command whose effect is committed but whose
+events could not be delivered is answered 501, now declared on every command, and must not be
+retried. The generated Go server serialises dispatch, so concurrent requests are safe.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixed">Fixed<a href="https://beyond10x.github.io/updates/field-notes/ess/ui-documents-and-published-answers/#fixed" class="hash-link" aria-label="Direct link to Fixed" title="Direct link to Fixed" translate="no">​</a></h2>
+<p><code>ess verify diff</code> no longer reports <code>unclassified-changed</code> beside an added or regrouped aggregate
+view (beyond10x/ess#256).</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.43 — instance references inside structured values, one refusal order, and unstated external answers]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/instance-references-in-structured-values/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/instance-references-in-structured-values/"/>
+        <updated>2026-09-29T20:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.43.0 lets an authored step name a created instance inside a list, a map or a struct, puts every command's refusals in one declared order, refuses an authored claim that holds only on an external answer the act does not state, and lets synthesis witness guards it refused before.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.43 — instance references inside structured values, one refusal order, and unstated external answers | ESS</span><span data-pagefind-meta="description">0.43.0 lets an authored step name a created instance inside a list, a map or a struct, puts every command's refusals in one declared order, refuses an authored claim that holds only on an external answer the act does not state, and lets synthesis witness guards it refused before.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-29-2200-instance-references-in-structured-values.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-29-2200-instance-references-in-structured-values.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>0.43.0 adds the suite formats <code>ess-conformance/32</code> and <code>ess-conformance/33</code>, described in
+<a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a>. A suite that does not use what they add
+keeps its earlier format, and committed suites regenerate byte for byte.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="instance-references-inside-structured-values">Instance references inside structured values<a href="https://beyond10x.github.io/updates/field-notes/ess/instance-references-in-structured-values/#instance-references-inside-structured-values" class="hash-link" aria-label="Direct link to Instance references inside structured values" title="Direct link to Instance references inside structured values" translate="no">​</a></h2>
+<p><code>{$instance: …}</code> may now sit inside a list, a map value, a struct member or a union payload of an
+authored step, at any depth, wherever the declared type at that position is the instance's
+identity type. <code>ring_sequence: [{$instance: a}, {$instance: b}]</code> is accepted for a list of
+identities, so a command taking several identities can be authored. A reference at a position of
+another type is refused as <code>ESS-AUTHOR-022</code>, naming the position, such as <code>labels[1]</code> or
+<code>pair.note</code>. Inside an event payload or an error it is refused as <code>ESS-AUTHOR-021</code>.</p>
+<p>A suite that carries such a value is written as <code>ess-conformance/32</code>, or <code>/33</code> with coverage. The
+Rust runner resolves it; Go and TypeScript generation refuse such a suite and name the Rust runner.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="an-external-answer-the-act-does-not-state">An external answer the act does not state<a href="https://beyond10x.github.io/updates/field-notes/ess/instance-references-in-structured-values/#an-external-answer-the-act-does-not-state" class="hash-link" aria-label="Direct link to An external answer the act does not state" title="Direct link to An external answer the act does not state" translate="no">​</a></h2>
+<p>An authored act that names an <code>external:</code> branch under <code>outcome:</code> now tells the target which answer
+to give for that one call, as a synthesized scenario does. Before, no target could satisfy the act
+reliably.</p>
+<p>An act whose error, response or event claims hold only on an <code>external:</code> answer it does not state
+is refused with <code>ESS-AUTHOR-037</code>, which names every such branch as <code>command/branch</code>. That includes
+answers reached through a binding's call to another command, which an act cannot state; those
+claims are left to synthesis.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="one-order-for-refusals">One order for refusals<a href="https://beyond10x.github.io/updates/field-notes/ess/instance-references-in-structured-values/#one-order-for-refusals" class="hash-link" aria-label="Direct link to One order for refusals" title="Direct link to One order for refusals" translate="no">​</a></h2>
+<p>A refusal guarded only by the input may sit beside branches that depend on the record's held
+state, so "this value is refused whatever the record's state" can be written on a command that acts
+on an existing record. One order now answers every command: a related row's existence checks;
+then refusals guarded by the input, first declared first; then the existence of the addressed row;
+then the held state; then accepting and external branches in declaration order. The interpreter,
+synthesis and the seeded explorer in the Go and TypeScript packages all follow it, as Entity
+Runtime does, so a target that refuses a bad input in any state no longer disagrees with the
+explorer.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="synthesis">Synthesis<a href="https://beyond10x.github.io/updates/field-notes/ess/instance-references-in-structured-values/#synthesis" class="hash-link" aria-label="Direct link to Synthesis" title="Direct link to Synthesis" translate="no">​</a></h2>
+<p>Synthesis now witnesses several guards it refused before with <code>ESS-SYNTH-003</code>:</p>
+<ul>
+<li class="">a guard over an optional field the creating command leaves absent, read as absent until a later
+command sets it;</li>
+<li class=""><code>exists</code> and <code>forall</code> over a stored map's values, and over a stored list compared with an input,
+on rows that hold several entries, so a target reading only the first or last entry fails;</li>
+<li class="">invariants over the members of a struct input, which every input synthesis sends now meets;</li>
+<li class="">equality between one input and a member of another.</li>
+</ul>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.42 — unkillable mutants scored apart, overlap precedence, and counter limits]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/unkillable-mutants/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/unkillable-mutants/"/>
+        <updated>2026-09-29T18:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.42.0 scores a mutant no scenario could kill apart from a survivor, gives two overlapping accepting guards a declared answer, witnesses a stored counter at its limit and a guard over a link field, and lets a relation ride on the identity.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.42 — unkillable mutants scored apart, overlap precedence, and counter limits | ESS</span><span data-pagefind-meta="description">0.42.0 scores a mutant no scenario could kill apart from a survivor, gives two overlapping accepting guards a declared answer, witnesses a stored counter at its limit and a guard over a link field, and lets a relation ride on the identity.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-29-2000-unkillable-mutants.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-29-2000-unkillable-mutants.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>0.42.0 adds <code>ess-diff/11</code>, <code>ess-mutation-report/3</code> and <code>ess-mutation-manifest/3</code>, described in
+<a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a>.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="mutants-no-scenario-could-kill">Mutants no scenario could kill<a href="https://beyond10x.github.io/updates/field-notes/ess/unkillable-mutants/#mutants-no-scenario-could-kill" class="hash-link" aria-label="Direct link to Mutants no scenario could kill" title="Direct link to Mutants no scenario could kill" translate="no">​</a></h2>
+<p>A guard mutant that leaves its outcome's guard satisfied by no input is <code>equivalent</code>
+(<code>ESS-MUTATE-005</code>) and names the guard it left dead. A mutant on an outcome whose scenario the
+baseline already refused at synthesis is <code>unwitnessed</code> and names that refusal. Neither is scored
+<code>survived</code> any more.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="overlapping-guards">Overlapping guards<a href="https://beyond10x.github.io/updates/field-notes/ess/unkillable-mutants/#overlapping-guards" class="hash-link" aria-label="Direct link to Overlapping guards" title="Direct link to Overlapping guards" translate="no">​</a></h2>
+<p>Of two accepting guarded branches that both hold, the first declared answers; input-guarded
+refusals are still taken first, and an <code>external:</code> branch takes its place in the same order. The
+interpreter answers this way, and synthesis sends each overlap and requires the first branch.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="synthesis">Synthesis<a href="https://beyond10x.github.io/updates/field-notes/ess/unkillable-mutants/#synthesis" class="hash-link" aria-label="Direct link to Synthesis" title="Direct link to Synthesis" translate="no">​</a></h2>
+<p>Synthesis witnesses a guard comparing a link field with an input, and a branch selected by a stored
+counter at its limit, each side of it, so an off-by-one limit fails. A suite from a model whose
+actors declare <code>attributes:</code> records that model's digests.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="relations-and-deltas">Relations and deltas<a href="https://beyond10x.github.io/updates/field-notes/ess/unkillable-mutants/#relations-and-deltas" class="hash-link" aria-label="Direct link to Relations and deltas" title="Direct link to Relations and deltas" translate="no">​</a></h2>
+<p><code>via:</code> may name the entity's own identity, a one-to-one link keyed by the same id. <code>ess verify diff</code> names a newtype's <code>prefix:</code> added, removed or changed.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.41 — state-scoped refusals, guards over a related row, and a delivery context]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/state-scoped-refusals/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/state-scoped-refusals/"/>
+        <updated>2026-09-29T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.41.0 adds source format `ess/18`: a refusal scoped to some held states, `state` in a `when_subject` predicate, a guard over the row of another entity, and a binding that reads the context its event was delivered with.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.41 — state-scoped refusals, guards over a related row, and a delivery context | ESS</span><span data-pagefind-meta="description">0.41.0 adds source format <code>ess/18</code>: a refusal scoped to some held states, <code>state</code> in a <code>when_subject</code> predicate, a guard over the row of another entity, and a binding that reads the context its event was delivered with.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-29-1800-state-scoped-refusals.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-29-1800-state-scoped-refusals.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>0.41.0 adds the source format <code>ess/18</code>, described in
+<a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a>.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="refusals-by-held-state">Refusals by held state<a href="https://beyond10x.github.io/updates/field-notes/ess/state-scoped-refusals/#refusals-by-held-state" class="hash-link" aria-label="Direct link to Refusals by held state" title="Direct link to Refusals by held state" translate="no">​</a></h2>
+<p><code>when_subject_state:</code> may list several states, and a refusal may carry it without naming a
+subject, so a command can answer differently in states its moves do not start from. A
+<code>when_subject</code> predicate may read <code>state</code> beside the stored fields.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-guard-over-another-entity">A guard over another entity<a href="https://beyond10x.github.io/updates/field-notes/ess/state-scoped-refusals/#a-guard-over-another-entity" class="hash-link" aria-label="Direct link to A guard over another entity" title="Direct link to A guard over another entity" translate="no">​</a></h2>
+<p><code>when_related:</code> selects a branch by the row of another entity whose identity the input carries:
+<code>exists: false</code> when there is none, or a predicate over its stored fields.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="delivery-context">Delivery context<a href="https://beyond10x.github.io/updates/field-notes/ess/state-scoped-refusals/#delivery-context" class="hash-link" aria-label="Direct link to Delivery context" title="Direct link to Delivery context" translate="no">​</a></h2>
+<p>An event binding may declare the context its channel delivers with the event and read it as
+<code>context.&lt;field&gt;</code>; conformance delivers such an event itself.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="synthesis-and-mutation">Synthesis and mutation<a href="https://beyond10x.github.io/updates/field-notes/ess/state-scoped-refusals/#synthesis-and-mutation" class="hash-link" aria-label="Direct link to Synthesis and mutation" title="Direct link to Synthesis and mutation" translate="no">​</a></h2>
+<p>Map inputs, view filters over identities and links, every creating command, and the record an
+input refusal needs are now witnessed. The mutation audit scores gained refusals and skipped
+baselines apart from survivors.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.40 — generated runtimes run every suite, and reader-side composition]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/runtime-parity/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/runtime-parity/"/>
+        <updated>2026-09-29T10:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.40.0 runs suites `ess-conformance/22` to `/27` in the generated Go and TypeScript runtimes with the Rust runner's verdicts, and `ess-composition/3` admits the widenings a consumer reads.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.40 — generated runtimes run every suite, and reader-side composition | ESS</span><span data-pagefind-meta="description">0.40.0 runs suites <code>ess-conformance/22</code> to <code>/27</code> in the generated Go and TypeScript runtimes with the Rust runner's verdicts, and <code>ess-composition/3</code> admits the widenings a consumer reads.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-29-1200-runtime-parity.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-29-1200-runtime-parity.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>0.40.0 adds the composition format <code>ess-composition/3</code>, described in
+<a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a>.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="one-verdict-in-every-runtime">One verdict in every runtime<a href="https://beyond10x.github.io/updates/field-notes/ess/runtime-parity/#one-verdict-in-every-runtime" class="hash-link" aria-label="Direct link to One verdict in every runtime" title="Direct link to One verdict in every runtime" translate="no">​</a></h2>
+<p>The generated Go and TypeScript runtimes run suites <code>ess-conformance/22</code> to <code>/27</code>, which 0.38.0
+refused, and reach the Rust runner's verdict on each scenario.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="reader-side-composition">Reader-side composition<a href="https://beyond10x.github.io/updates/field-notes/ess/runtime-parity/#reader-side-composition" class="hash-link" aria-label="Direct link to Reader-side composition" title="Direct link to Reader-side composition" translate="no">​</a></h2>
+<p>A <code>conformances</code> entry in <code>ess-composition/3</code> may carry <code>reader: true</code>: the consumer's type reads
+every value the provider's type admits, so a widening the consumer can read is admitted rather than
+refused.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="names">Names<a href="https://beyond10x.github.io/updates/field-notes/ess/runtime-parity/#names" class="hash-link" aria-label="Direct link to Names" title="Direct link to Names" translate="no">​</a></h2>
+<p>A duplicate name is refused once, where it is declared, and the published schema states the
+characters each kind of name may use.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.39 — concurrent histories and direct library returns]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/concurrent-histories/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/concurrent-histories/"/>
+        <updated>2026-09-28T19:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.39.0 checks a run of several clients against the specification's own model, records such runs from the Go and TypeScript explorers and from production logs, and adds typed direct returns.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.39 — concurrent histories and direct library returns | ESS</span><span data-pagefind-meta="description">0.39.0 checks a run of several clients against the specification's own model, records such runs from the Go and TypeScript explorers and from production logs, and adds typed direct returns.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-28-2100-concurrent-histories.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-28-2100-concurrent-histories.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>0.39.0 adds the history format <code>ess-history/1</code> and the source format <code>ess/17</code>, described in
+<a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a>.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="several-clients-at-once">Several clients at once<a href="https://beyond10x.github.io/updates/field-notes/ess/concurrent-histories/#several-clients-at-once" class="hash-link" aria-label="Direct link to Several clients at once" title="Direct link to Several clients at once" translate="no">​</a></h2>
+<p>Every earlier check drives a target with one client and one call at a time. <code>ess verify conform check-history</code> reads a run of several clients, each call with its invoke and return instants, and
+searches for an order the specification's own model accepts. Each view read is held to the
+consistency the view declares.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="where-histories-come-from">Where histories come from<a href="https://beyond10x.github.io/updates/field-notes/ess/concurrent-histories/#where-histories-come-from" class="hash-link" aria-label="Direct link to Where histories come from" title="Direct link to Where histories come from" translate="no">​</a></h2>
+<p>The generated Go and TypeScript explorers record concurrent histories against a target and can
+inject the faults a specification declares. <code>ess verify conform import-history</code> reads a recorded
+production log through an <code>ess-history-adapter/1</code> document. <code>ess verify conform web --history</code>
+draws a failing history as client lanes.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="direct-returns">Direct returns<a href="https://beyond10x.github.io/updates/field-notes/ess/concurrent-histories/#direct-returns" class="hash-link" aria-label="Direct link to Direct returns" title="Direct link to Direct returns" translate="no">​</a></h2>
+<p><code>returns: true</code> in <code>ess/17</code> declares that a command answers with a typed value. Authored scenarios
+assert literal responses, and the Rust runner checks the actual return values.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.38 — set effects, caller values, existence-selected outcomes and paged views]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/set-effects/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/set-effects/"/>
+        <updated>2026-09-28T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.38.0 lets an outcome change every record a filter selects, read the caller's attributes, be selected by whether its record exists, bound a binding's retry and page a view.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.38 — set effects, caller values, existence-selected outcomes and paged views | ESS</span><span data-pagefind-meta="description">0.38.0 lets an outcome change every record a filter selects, read the caller's attributes, be selected by whether its record exists, bound a binding's retry and page a view.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-28-1800-set-effects.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-28-1800-set-effects.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>0.38.0 adds the source format <code>ess/16</code>, described in
+<a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a>.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="outcomes-over-many-records">Outcomes over many records<a href="https://beyond10x.github.io/updates/field-notes/ess/set-effects/#outcomes-over-many-records" class="hash-link" aria-label="Direct link to Outcomes over many records" title="Direct link to Outcomes over many records" translate="no">​</a></h2>
+<p><code>instances: {where: …}</code> on a <code>moves:</code> or <code>updates:</code> changes every stored record the predicate
+selects, and <code>{count: changed}</code> is how many it changed. <code>affects:</code> lets an outcome with one subject
+change other records a filter selects, reading <code>subject.&lt;field&gt;</code>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="which-outcome-and-for-whom">Which outcome, and for whom<a href="https://beyond10x.github.io/updates/field-notes/ess/set-effects/#which-outcome-and-for-whom" class="hash-link" aria-label="Direct link to Which outcome, and for whom" title="Direct link to Which outcome, and for whom" translate="no">​</a></h2>
+<p><code>unknown_instance:</code> beside an update makes a create-or-update, and <code>existing_instance:</code> with an
+<code>error:</code> makes a create-or-refuse. An actor may declare <code>attributes:</code>, read as <code>{caller: …}</code> in
+values and as <code>caller.&lt;attribute&gt;</code> in guards. <code>input_absent:</code> answers a request that carries no input at all.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="retries-paging-and-values">Retries, paging and values<a href="https://beyond10x.github.io/updates/field-notes/ess/set-effects/#retries-paging-and-values" class="hash-link" aria-label="Direct link to Retries, paging and values" title="Direct link to Retries, paging and values" translate="no">​</a></h2>
+<p>A binding can bound its retry with <code>attempts</code> and <code>final</code> refusals. A view with <code>order_by:</code> can
+declare <code>paging:</code>. A value may fall back to a literal after <code>else:</code>, or read a field of a related
+record with <code>{related: …}</code>. <code>ess-composition/2</code> checks a consumer's types against the service it
+imports.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.37 — outcome shapes, guards over the input, and new value types]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/outcome-shapes/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/outcome-shapes/"/>
+        <updated>2026-09-28T10:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.37.0 adds outcome shapes, subject guards that read the input, case-insensitive text, aggregates over optional fields, new value types and a pinned toolchain.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.37 — outcome shapes, guards over the input, and new value types | ESS</span><span data-pagefind-meta="description">0.37.0 adds outcome shapes, subject guards that read the input, case-insensitive text, aggregates over optional fields, new value types and a pinned toolchain.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-28-1200-outcome-shapes.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-28-1200-outcome-shapes.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>0.37.0 adds the source format <code>ess/15</code>, described in
+<a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a>.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="outcome-shapes">Outcome shapes<a href="https://beyond10x.github.io/updates/field-notes/ess/outcome-shapes/#outcome-shapes" class="hash-link" aria-label="Direct link to Outcome shapes" title="Direct link to Outcome shapes" translate="no">​</a></h2>
+<p>An outcome can delete its subject (<code>deletes:</code>), create into a declared state (<code>into:</code>), answer an
+identity no record carries (<code>unknown_instance:</code>), or accept a request without a subject
+(<code>accepts: nothing</code>). System <code>preconditions:</code> run before every scenario.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="guards-and-text">Guards and text<a href="https://beyond10x.github.io/updates/field-notes/ess/outcome-shapes/#guards-and-text" class="hash-link" aria-label="Direct link to Guards and text" title="Direct link to Guards and text" translate="no">​</a></h2>
+<p>A subject guard may compare a stored field with the input, <code>recording_id != input.recording_id</code>.
+<code>equals_ignore_case</code> and <code>in_ignore_case</code> compare text under ASCII case folding. Aggregates may skip
+absent values of optional fields, and an optional group key makes absence its own group.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="values-and-toolchain">Values and toolchain<a href="https://beyond10x.github.io/updates/field-notes/ess/outcome-shapes/#values-and-toolchain" class="hash-link" aria-label="Direct link to Values and toolchain" title="Direct link to Values and toolchain" translate="no">​</a></h2>
+<p><code>Json</code>, <code>prefix:</code> on text newtypes and field <code>presence:</code> describe payloads more exactly. An exact
+<code>requires: ess X.Y.Z</code> pin makes any <code>ess</code> run that release from a verified cache.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.34–0.36 — predicates, stored-field guards, aggregates, and values read from the row]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/values-read-from-the-row/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/values-read-from-the-row/"/>
+        <updated>2026-09-27T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.34.0 adds string predicate operators, guards over the subject's stored fields and aggregate views. 0.35.0 resolves typed fixture values before a scenario starts. 0.36.0 lets a payload or sets value read the subject, increment a stored number, fall back to a minted value and fill a struct field by field.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.34–0.36 — predicates, stored-field guards, aggregates, and values read from the row | ESS</span><span data-pagefind-meta="description">0.34.0 adds string predicate operators, guards over the subject's stored fields and aggregate views. 0.35.0 resolves typed fixture values before a scenario starts. 0.36.0 lets a payload or sets value read the subject, increment a stored number, fall back to a minted value and fill a struct field by field.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-27-1800-values-read-from-the-row.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-27-1800-values-read-from-the-row.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>Three releases, each adding a source format version described in
+<a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a>.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-a-guard-can-read">What a guard can read<a href="https://beyond10x.github.io/updates/field-notes/ess/values-read-from-the-row/#what-a-guard-can-read" class="hash-link" aria-label="Direct link to What a guard can read" title="Direct link to What a guard can read" translate="no">​</a></h2>
+<p>0.34.0 adds <code>starts_with</code>, <code>ends_with</code> and <code>contains</code> over text, and <code>when_subject: {predicate: …}</code>,
+which guards an outcome by the addressed entity's stored fields. Aggregate views count, sum and
+average rows of one entity, grouped or not. Synthesis witnesses both sides of each new guard.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="values-a-scenario-cannot-invent">Values a scenario cannot invent<a href="https://beyond10x.github.io/updates/field-notes/ess/values-read-from-the-row/#values-a-scenario-cannot-invent" class="hash-link" aria-label="Direct link to Values a scenario cannot invent" title="Direct link to Values a scenario cannot invent" translate="no">​</a></h2>
+<p>0.35.0 lets a command declare <code>fixture_inputs:</code>: a deployed resource's identity, which no generator
+can choose, is resolved from an independent provider before the scenario starts, and the same value
+is compared in the events it causes.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="values-read-from-the-row">Values read from the row<a href="https://beyond10x.github.io/updates/field-notes/ess/values-read-from-the-row/#values-read-from-the-row" class="hash-link" aria-label="Direct link to Values read from the row" title="Direct link to Values read from the row" translate="no">​</a></h2>
+<p>0.36.0 adds value expressions under <code>ess/14</code>: <code>{subject: &lt;field&gt;}</code> reads the addressed entity before
+the outcome, <code>{increment: n}</code> adds to a stored number, <code>{input: f, else: {generated: true}}</code> takes
+an optional input or a minted value, and a nested mapping fills a struct field by field. A Decimal
+literal is admitted in every format, and the text <code>subject.note</code> is refused rather than compiled as
+text.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.31–0.33 — Entity Runtime lowering, sidecars a binding must name, and a Secret that is only present]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/a-secret-is-only-present/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/a-secret-is-only-present/"/>
+        <updated>2026-09-26T10:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.31.0 lowers a service contract to Entity Runtime definitions. 0.32.0 imports OpenAPI 3.0 and makes an unbound sidecar in a bound workload a violation. 0.33.0 stops a Kubernetes scan from writing anything derived from a Secret value, and lets a binding acknowledge containers the service does not build.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.31–0.33 — Entity Runtime lowering, sidecars a binding must name, and a Secret that is only present | ESS</span><span data-pagefind-meta="description">0.31.0 lowers a service contract to Entity Runtime definitions. 0.32.0 imports OpenAPI 3.0 and makes an unbound sidecar in a bound workload a violation. 0.33.0 stops a Kubernetes scan from writing anything derived from a Secret value, and lets a binding acknowledge containers the service does not build.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-26-1200-a-secret-is-only-present.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-26-1200-a-secret-is-only-present.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>Three releases. One carries a specification into a runtime, and two tighten what an observed
+cluster is allowed to say — about the containers a workload runs, and about the Secrets it reads.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-service-contract-becomes-entity-runtime-definitions">A service contract becomes Entity Runtime definitions<a href="https://beyond10x.github.io/updates/field-notes/ess/a-secret-is-only-present/#a-service-contract-becomes-entity-runtime-definitions" class="hash-link" aria-label="Direct link to A service contract becomes Entity Runtime definitions" title="Direct link to A service contract becomes Entity Runtime definitions" translate="no">​</a></h2>
+<p>0.31.0 adds <code>ess-entity-runtime</code>, which projects an admitted service contract into validated
+Entity Runtime definitions and the typed host binding obligations they leave. Conditional outcome
+selection, exact values and event order are preserved. What cannot be lowered faithfully is
+refused by name — a cleared field, a silent preserve with no response — rather than approximated.
+0.33.0 moves the target to Entity Runtime <code>0.24.1</code>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-bound-workload-runs-nothing-it-does-not-declare">A bound workload runs nothing it does not declare<a href="https://beyond10x.github.io/updates/field-notes/ess/a-secret-is-only-present/#a-bound-workload-runs-nothing-it-does-not-declare" class="hash-link" aria-label="Direct link to A bound workload runs nothing it does not declare" title="Direct link to A bound workload runs nothing it does not declare" translate="no">​</a></h2>
+<p>0.32.0 imports OpenAPI 3.0 by rewriting each schema to its 3.1 form, and reports a <code>null</code> it cannot
+carry as a gap at its own pointer. <code>ess verify bindings</code> gains <code>OBS-BIND-008</code>: a container or native
+sidecar in a bound workload that no binding names is a violation, so binding a workload now claims
+it runs nothing else.</p>
+<p>0.33.0 adds the honest exception. <code>ess-observed-bindings/2</code> lets a binding acknowledge a mesh proxy
+or vendor agent by name and reason, and the report lists it as acknowledged, not bound.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-secret-is-only-present">A Secret is only present<a href="https://beyond10x.github.io/updates/field-notes/ess/a-secret-is-only-present/#a-secret-is-only-present" class="hash-link" aria-label="Direct link to A Secret is only present" title="Direct link to A Secret is only present" translate="no">​</a></h2>
+<p>A full Kubernetes scan used to write each Secret value's unsalted SHA-256 and byte length, which
+confirm a guessed low-entropy secret to anyone holding the file. 0.33.0 writes
+<code>infra-observation/3</code> and <code>infra-ir/3</code>, where each Secret key is <code>{"present": true}</code> and nothing
+more. Drift, in <code>infra-drift/3</code>, therefore reports added and removed keys and never a rotated value.
+The new versions are described in <a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a>.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.28–0.30 — the history a subject keeps, and what a retry returns]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/what-a-retry-returns/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/what-a-retry-returns/"/>
+        <updated>2026-09-25T10:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Source ess/6 models enum subject history and input eligibility beside an independently arranged failure. Source ess/7 declares that a retry returns the original command's result. Conformance suites compare actual subject values and actual retained responses. 0.30.0 shipped the agent plugin from this repository for one release.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.28–0.30 — the history a subject keeps, and what a retry returns | ESS</span><span data-pagefind-meta="description">Source ess/6 models enum subject history and input eligibility beside an independently arranged failure. Source ess/7 declares that a retry returns the original command's result. Conformance suites compare actual subject values and actual retained responses. 0.30.0 shipped the agent plugin from this repository for one release.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-25-1200-what-a-retry-returns.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-25-1200-what-a-retry-returns.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>Three releases. Two of them move a claim a conformance suite used to make about a subject's shape
+into a comparison of the values an implementation actually produced, and each costs a source
+format version — <code>ess/6</code> and <code>ess/7</code>, both described in
+<a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a>.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-history-a-subject-keeps">The history a subject keeps<a href="https://beyond10x.github.io/updates/field-notes/ess/what-a-retry-returns/#the-history-a-subject-keeps" class="hash-link" aria-label="Direct link to The history a subject keeps" title="Direct link to The history a subject keeps" translate="no">​</a></h2>
+<p><code>ess/6</code> (0.28.0) models bounded enum subject history with explicit silent preservation, and input
+eligibility beside an independently arranged external cause. Conformance synthesis observes
+history separately from lifecycle, so two histories that end in the same state stay distinct.</p>
+<p>Suite formats 10 and 11 add no-error assertions and actual subject snapshots. The Rust, Go and
+TypeScript runners <strong>reject a missing, duplicated or changed subject</strong> instead of accepting a row
+that merely has the right shape. Documents in older formats keep them and refuse the new
+vocabulary.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-a-retry-returns">What a retry returns<a href="https://beyond10x.github.io/updates/field-notes/ess/what-a-retry-returns/#what-a-retry-returns" class="hash-link" aria-label="Direct link to What a retry returns" title="Direct link to What a retry returns" translate="no">​</a></h2>
+<p><code>ess/7</code> (0.29.0) declares command-local <code>replays</code>: a retry returns the originating success's typed
+result and preserves its original subject. An effect-free named error can cover the remaining
+finite subject states.</p>
+<p>Suites 12 and 13 capture the original result, input, actor and identity before an unforced retry,
+and Rust and generated Go <strong>compare the exact typed response</strong> and a fresh complete observation of
+the subject. TypeScript and browser readers refuse these suites before any callback runs, and
+Decimal and Binary64 response positions remain unsupported. <code>ess-diff/6</code> records replay origins.</p>
+<p>The generated witness covers an immediate retry. Persistence, restart and retries against a later
+head remain acceptance the adopter owns.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-plugin-for-one-release">The plugin, for one release<a href="https://beyond10x.github.io/updates/field-notes/ess/what-a-retry-returns/#the-plugin-for-one-release" class="hash-link" aria-label="Direct link to The plugin, for one release" title="Direct link to The plugin, for one release" translate="no">​</a></h2>
+<p>0.30.0 shipped the ESS agent plugin from this repository at the binary's version, with <code>ess skill</code>
+printing its skills. The next release moves it to <code>beyond10x/agentplugins</code> beside every other
+plugin and removes <code>ess skill</code>.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.22–0.27 — what a binding promises, and the names nobody may invent]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/names-nobody-may-invent/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/names-nobody-may-invent/"/>
+        <updated>2026-09-21T09:30:00.000Z</updated>
+        <summary type="html"><![CDATA[A binding declares one delivery attempt. A branch turns on the state a subject is already in, or says the field it owns holds nothing. A component declares its settings and the runtime slots are derived. An author names the identifier a code emitter spells, and the wire name a variant carries. Source formats ess/3, ess/4 and ess/5.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.22–0.27 — what a binding promises, and the names nobody may invent | ESS</span><span data-pagefind-meta="description">A binding declares one delivery attempt. A branch turns on the state a subject is already in, or says the field it owns holds nothing. A component declares its settings and the runtime slots are derived. An author names the identifier a code emitter spells, and the wire name a variant carries. Source formats ess/3, ess/4 and ess/5.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-21-1130-names-nobody-may-invent.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-21-1130-names-nobody-may-invent.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>Six releases with one shape between them: each takes a fact that a generator was inferring, or a
+consumer was assuming, and makes it something an author states. Three of them cost a source format
+version — <code>ess/3</code>, <code>ess/4</code> and <code>ess/5</code> — and
+<a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a> says which.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="one-attempt-and-no-obligation-on-the-handler">One attempt, and no obligation on the handler<a href="https://beyond10x.github.io/updates/field-notes/ess/names-nobody-may-invent/#one-attempt-and-no-obligation-on-the-handler" class="hash-link" aria-label="Direct link to One attempt, and no obligation on the handler" title="Direct link to One attempt, and no obligation on the handler" translate="no">​</a></h2>
+<p><code>delivery: at_most_once</code> states that a binding is tried once. Loss stays possible, and <strong>no
+idempotency obligation is imposed on the handler</strong>, which is the point: the existing default made
+every consumer responsible for redelivery it might never see.</p>
+<p>OpenAPI requires <code>Idempotency-Key</code> only for <code>at_least_once</code> commands, and conformance records
+<code>BindingGap::DeliverySingleAttempt</code> instead of synthesizing a redelivery scenario that the binding
+has just said will not happen. The format stays <code>ess/1</code> — this is a declaration the existing
+vocabulary could carry.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-state-a-subject-is-already-in">The state a subject is already in<a href="https://beyond10x.github.io/updates/field-notes/ess/names-nobody-may-invent/#the-state-a-subject-is-already-in" class="hash-link" aria-label="Direct link to The state a subject is already in" title="Direct link to The state a subject is already in" translate="no">​</a></h2>
+<p><code>when_subject_state</code> in <code>ess/3</code> combines a declared held lifecycle state with input guards, so
+<strong>equal input applied to two different existing states is distinguished</strong>. Without it, two branches
+that differ only in where the subject started were one branch as far as the model could see.</p>
+<p><code>ess/3</code> also brings bounded binding accessors, binding-local <code>selection_inputs</code> with ordered
+<code>selections</code>, periodic host causes and clock-reading attachments. <code>ess/4</code> declares error wire names
+without merging semantic identities, and fills emitted event payloads from typed command response
+fields. New deltas use <code>ess-diff/3</code> and <code>ess-diff/4</code>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="settings-declared-once">Settings, declared once<a href="https://beyond10x.github.io/updates/field-notes/ess/names-nobody-may-invent/#settings-declared-once" class="hash-link" aria-label="Direct link to Settings, declared once" title="Direct link to Settings, declared once" translate="no">​</a></h2>
+<p><code>settings:</code> states each of a component's configuration inputs once, typed from the specification's
+own <code>types:</code>. <code>ess specify runtime compile</code> <strong>derives</strong> the <code>ess-runtime/1</code> config and secret slots
+from it, and refuses a hand-authored slot, or two settings binding one environment variable twice.</p>
+<p>Absence is stated with <code>Optional&lt;...&gt;</code> and nothing else — a convention about an empty string is a
+second reading of the same bytes.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="three-names-a-generator-must-not-choose">Three names a generator must not choose<a href="https://beyond10x.github.io/updates/field-notes/ess/names-nobody-may-invent/#three-names-a-generator-must-not-choose" class="hash-link" aria-label="Direct link to Three names a generator must not choose" title="Direct link to Three names a generator must not choose" translate="no">​</a></h2>
+<p><strong><code>naming: { code: ... }</code></strong> settles a collision the emitter cannot. A target without dotted type
+names flattens <code>X.State</code> and an authored view <code>XState</code> to one identifier, and only the author knows
+which should move. Only code emitters read it, so wire names, document schemas and qualified names
+are untouched, and setting one <strong>cannot break a deployed consumer</strong>. The source format stays <code>ess/4</code>.</p>
+<p><strong><code>sets: {field: {cleared: true}}</code></strong> states absence. Before it a branch either left the field alone,
+wrote a literal that synthesis dropped, or wrote an empty string — which is a different reading. The
+field's type must be <code>Optional&lt;...&gt;</code> and the source must be an entity; an event payload is refused,
+because an undetermined field is not the outcome's to set.</p>
+<p><strong>A variant's own wire spelling</strong>, in <code>ess/5</code>. <code>TypeBody::Enum</code> carried <code>Vec&lt;String&gt;</code>, so naming was
+reachable from a domain, a command, an event, an error, a view and a field — and not from a variant.
+A variant whose wire form is not derivable from its name could not be declared at all. The case that
+asked for it: one command over three route shapes, where one variant's path suffix is empty and the
+others are not. Without a declared spelling the alternatives were splitting the command to satisfy a
+path, or writing the table again in every target.</p>
+<p>A variant is now authored either as a bare name or as a mapping carrying <code>wire</code>, <code>display</code>, <code>summary</code>
+and <code>code</code>. An authored empty string is a spelling rather than an absent one. Every specification and
+IR document written before this keeps its bytes, and <code>ess-diff/5</code> adds three <code>TypeChange</code> cases so
+that <strong>a moved spelling no longer returns an empty delta</strong> — which is what it did while the variant
+set and the variant order both stayed the same.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.19–0.21 — adopter schemas, a number that behaves, and a pass over nothing]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/a-pass-over-nothing/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/a-pass-over-nothing/"/>
+        <updated>2026-09-21T09:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Checked JSON Schema imports with source identity and source-pinned normalization recipes; a `Binary64` field that preserves signed zero, subnormals and nearest-even rounding across three languages; and a conformance suite that records what it left out, so a pass over nothing and a pass over everything stop reading the same.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.19–0.21 — adopter schemas, a number that behaves, and a pass over nothing | ESS</span><span data-pagefind-meta="description">Checked JSON Schema imports with source identity and source-pinned normalization recipes; a <code>Binary64</code> field that preserves signed zero, subnormals and nearest-even rounding across three languages; and a conformance suite that records what it left out, so a pass over nothing and a pass over everything stop reading the same.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-21-1100-a-pass-over-nothing.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-21-1100-a-pass-over-nothing.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>Three releases that each close a place where the toolchain was quietly agreeable: an adopter's own
+schemas, floating-point arithmetic, and a green suite.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="somebody-elses-schemas-checked">Somebody else's schemas, checked<a href="https://beyond10x.github.io/updates/field-notes/ess/a-pass-over-nothing/#somebody-elses-schemas-checked" class="hash-link" aria-label="Direct link to Somebody else's schemas, checked" title="Direct link to Somebody else's schemas, checked" translate="no">​</a></h2>
+<p><code>ess</code> can import complete JSON Schema roots <strong>with source identity</strong> and generate structural Go,
+Rust and TypeScript libraries from them, then run source-pinned normalization recipes over the
+result. Rust normalization has a library API; Go and TypeScript support is pending and says so.</p>
+<p>Rust and Web synthesis return checked failures rather than emitting a target that would disagree,
+and sliced provenance names its digest profile instead of implying one.</p>
+<p>The theme is the same as everywhere else in this repository: an adopter's document is an authority
+about itself, admitted or refused, never quietly adapted.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-field-that-is-a-floating-point-number">A field that is a floating-point number<a href="https://beyond10x.github.io/updates/field-notes/ess/a-pass-over-nothing/#a-field-that-is-a-floating-point-number" class="hash-link" aria-label="Direct link to A field that is a floating-point number" title="Direct link to A field that is a floating-point number" translate="no">​</a></h2>
+<p>Authored <code>ess/2</code> adds <code>Binary64</code> fields, distinct from integer and decimal values. The reference,
+Rust and Go implementations preserve <strong>signed zero, subnormals and nearest-even rounding</strong>, and two
+typed operands compare with IEEE equality.</p>
+<p>The interesting part is the refusal: synthesis and conformance refuse an unsupported <code>Binary64</code>
+<strong>before publication</strong>, rather than emitting a target that would disagree with the specification at
+run time. A generator that emits something plausible for a semantics it does not implement produces
+a passing suite and a wrong system.</p>
+<p><code>Binary64</code> requires major 2 or later at every declared position, and map keys refuse it.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-suite-that-says-what-it-left-out">A suite that says what it left out<a href="https://beyond10x.github.io/updates/field-notes/ess/a-pass-over-nothing/#a-suite-that-says-what-it-left-out" class="hash-link" aria-label="Direct link to A suite that says what it left out" title="Direct link to A suite that says what it left out" translate="no">​</a></h2>
+<p>This is the one that changes what a green run means.</p>
+<p>Opt-in <code>ess-conformance/5</code> records the selected generated and authored coverage, the omitted
+scenarios, the source identities and <strong>every refusal occurrence</strong>. Report 2 then distinguishes
+complete passing conformance from empty, unknown or incomplete coverage.</p>
+<p>Before it, a suite that executed nothing and a suite that executed everything both reported "all
+pass". Ordinary coverage remains unknown, including for an all-pass run — that is stated rather
+than inferred. Only a nonempty all-pass execution with a complete inventory and no in-scope refusal
+qualifies, and it qualifies <strong>for that exact selection</strong>, not for the system.</p>
+<p>An extended suite requires explicit <code>--report-format 2</code>; suites /5 and later with report/1 refuse
+before execution, including when no output destination is requested. Report 1 keeps its historical
+non-pass aggregate and does not establish exact suite-byte identity.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+        <category label="conformance" term="conformance"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.16–0.18 — the scenarios an author writes, and a browser that plays them]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/the-scenarios-an-author-writes/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/the-scenarios-an-author-writes/"/>
+        <updated>2026-09-21T08:30:00.000Z</updated>
+        <summary type="html"><![CDATA[A specification can carry authored scenarios, not only the ones it obliges: modelled instances, command timelines, expectations, a claimed length of time, and a consumer that halted an ordered scan. `ess verify conform web` walks them in a browser without executing an implementation. Also: why there is no 0.17.0 release.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.16–0.18 — the scenarios an author writes, and a browser that plays them | ESS</span><span data-pagefind-meta="description">A specification can carry authored scenarios, not only the ones it obliges: modelled instances, command timelines, expectations, a claimed length of time, and a consumer that halted an ordered scan. <code>ess verify conform web</code> walks them in a browser without executing an implementation. Also: why there is no 0.17.0 release.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-21-1030-the-scenarios-an-author-writes.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-21-1030-the-scenarios-an-author-writes.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>Synthesis writes the scenarios a specification <em>obliges</em>. These releases let an author write the
+ones it merely <em>permits</em>, and give three of them claims the format previously could not carry.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="authored-scenarios">Authored scenarios<a href="https://beyond10x.github.io/updates/field-notes/ess/the-scenarios-an-author-writes/#authored-scenarios" class="hash-link" aria-label="Direct link to Authored scenarios" title="Direct link to Authored scenarios" translate="no">​</a></h2>
+<p><code>ess-scenario/1</code> lets an author declare modelled instances, command timelines and expectations.
+They compile into <code>ess-conformance/2</code> with <strong>identities distinct from synthesized suites</strong>, so a
+target's report says which kind of claim it answered. Twenty-seven refusals check the names in an
+authored scenario against the model, because a scenario naming a command that does not exist is a
+test of nothing that passes.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-claim-about-time">A claim about time<a href="https://beyond10x.github.io/updates/field-notes/ess/the-scenarios-an-author-writes/#a-claim-about-time" class="hash-link" aria-label="Direct link to A claim about time" title="Direct link to A claim about time" translate="no">​</a></h2>
+<p><code>mark:</code> and <code>elapsed:</code> add <code>not_before</code>, <code>within</code> and <code>quiet</code> bounds. The suite states a duration and
+its anchor; the target reports an observed or advanced clock. A target with no clock support reports
+<code>unsupported</code> rather than passing — the distinction the whole conformance model rests on. These
+claims select <code>ess-conformance/3</code>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-claim-about-stopping">A claim about stopping<a href="https://beyond10x.github.io/updates/field-notes/ess/the-scenarios-an-author-writes/#a-claim-about-stopping" class="hash-link" aria-label="Direct link to A claim about stopping" title="Direct link to A claim about stopping" translate="no">​</a></h2>
+<p>The six assertion forms are all predicates over the rows a read returned — <code>contains</code>, <code>excludes</code>,
+<code>counts</code>, <code>ranked</code>, <code>at</code>, <code>satisfies</code> — and <strong>two implementations that return the same rows are
+indistinguishable under every one of them</strong>. "The producer stopped" is exactly the fact that
+separates them, and the format could not say it.</p>
+<p><code>halts_after: &lt;n&gt;</code> requires a consumer to stop an ordered scan after n rows. The target reports rows
+produced and whether the consumer ended the read; a target without incremental reads reports
+<code>unsupported</code>. This adds a claim to <code>ess-conformance/4</code>.</p>
+<p>A migration of forty-five ACD slotmatcher cases hit that wall twice before the key existed.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-browser-that-plays-a-specification">A browser that plays a specification<a href="https://beyond10x.github.io/updates/field-notes/ess/the-scenarios-an-author-writes/#a-browser-that-plays-a-specification" class="hash-link" aria-label="Direct link to A browser that plays a specification" title="Direct link to A browser that plays a specification" translate="no">​</a></h2>
+<p><code>ess verify conform web</code> emits a page that walks authored scenarios, showing actors, state, selected
+views and declared consequences. It replays <strong>model-determined behaviour without executing an
+implementation</strong>, so an author can inspect a specification before filling a single obligation.</p>
+<p>That is a different use for a conformance suite than checking a target with one. It is the first
+form in which a specification answers back to the person writing it.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="there-is-no-0170-release">There is no 0.17.0 release<a href="https://beyond10x.github.io/updates/field-notes/ess/the-scenarios-an-author-writes/#there-is-no-0170-release" class="hash-link" aria-label="Direct link to There is no 0.17.0 release" title="Direct link to There is no 0.17.0 release" translate="no">​</a></h2>
+<p>The <code>0.17.0</code> tag exists and its changelog section describes the halt assertion. Neither is the whole
+story, and the section now says so at the top.</p>
+<p><code>0.17.0</code> was cut from a branch off 0.16.0 holding the scenario player, while <code>halts_after</code> was on
+<code>main</code>. <strong>Neither commit is an ancestor of the other</strong>, and <code>halts_after</code> appears zero times at the
+tag. Everything written under 0.17.0 first ships in <strong>0.18.0</strong>, which is the first release holding
+both.</p>
+<p>A binary calling itself 0.17.0 has one of the two features, and which one depends on where it was
+built — check it for <code>halts_after</code> rather than trusting the number. The tag stays public because
+deleting a tag that has been public for weeks breaks whatever pins it, to tidy a report.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+        <category label="conformance" term="conformance"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.12–0.14 — four areas, and a command line as a declared surface]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/four-areas-and-a-command-line/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/four-areas-and-a-command-line/"/>
+        <updated>2026-09-21T08:00:00.000Z</updated>
+        <summary type="html"><![CDATA[`ess --help` lists four commands, one per area, and every flat spelling stays a hidden alias that prints the same bytes. A component can declare that its callers are people at a terminal, and `--target clap` synthesizes the parser from that declaration. Release execution gets an explicit executor boundary.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.12–0.14 — four areas, and a command line as a declared surface | ESS</span><span data-pagefind-meta="description"><code>ess --help</code> lists four commands, one per area, and every flat spelling stays a hidden alias that prints the same bytes. A component can declare that its callers are people at a terminal, and <code>--target clap</code> synthesizes the parser from that declaration. Release execution gets an explicit executor boundary.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b/website/blog/2026-09-21-1000-four-areas-and-a-command-line.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-21-1000-four-areas-and-a-command-line.md</a> · revision <code class="b10x-revision" title="b3c28b5aa780d4f9ff175b56d8caf5d2bf28857b">b3c28b5aa780</code></p>
+</blockquote></div>
+<p>Three releases about surfaces: the one this tool presents, and the one a specified component
+presents to a person at a terminal.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-first-level-is-four-words">The first level is four words<a href="https://beyond10x.github.io/updates/field-notes/ess/four-areas-and-a-command-line/#the-first-level-is-four-words" class="hash-link" aria-label="Direct link to The first level is four words" title="Direct link to The first level is four words" translate="no">​</a></h2>
+<p><code>ess --help</code> lists <code>specify</code>, <code>generate</code>, <code>verify</code>, <code>infra</code> and nothing else. The crates had moved
+under <code>crates/{specify,generate,verify,infra}/</code> in 0.11.1; the command surface now says the same
+thing, so <strong>where a thing is implemented and how it is spelled are one fact instead of two</strong>.</p>
+<p>Every flat spelling survives as a hidden alias of its area path. <code>ess validate --path .</code> is
+<code>ess specify validate --path .</code>: the same arguments, and when the command runs, the same stdout, the
+same stderr and the same exit status, with no deprecation line anywhere. For a refusal the argument
+parser writes, and for <code>--help</code>, only the <code>Usage:</code> line differs — it names the path that was typed,
+which is what the flat spelling has always printed.</p>
+<p>Both spellings are mounted from one definition in the derive, so they cannot drift apart, and a test
+enumerates every leaf of the clap tree and asserts the pairing rather than checking a list somebody
+maintains. Nothing is deprecated, and no pinned caller needs changing.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-execution-gets-a-boundary-not-a-capability">Release execution gets a boundary, not a capability<a href="https://beyond10x.github.io/updates/field-notes/ess/four-areas-and-a-command-line/#release-execution-gets-a-boundary-not-a-capability" class="hash-link" aria-label="Direct link to Release execution gets a boundary, not a capability" title="Direct link to Release execution gets a boundary, not a capability" translate="no">​</a></h2>
+<p>0.13.0 makes the implementation repository the owner of its semantic, realization, build, runtime and
+release units through <code>ess-component/1</code> and canonical <code>ess-component-ir/1</code>, and carries the complete
+verified release chain as one OCI payload in <code>ess-release-bundle/1</code>.</p>
+<p>It also, for the first time, invokes things: <code>publish</code> uses ORAS at the credential edge, <code>fetch</code>
+requires a <strong>digest-pinned source</strong> and revalidates canonical bytes, <code>build execute</code> invokes Docker
+Buildx Bake, and <code>deployment reconcile</code> computes the affected release set, follows the rollout DAG,
+fetches charts by digest and invokes Helm <strong>only for changed releases</strong>. It refuses implicit removal.</p>
+<p>The design point is in the phrasing of the changelog: <em>side effects are an explicit CLI executor
+boundary</em>. The deployment compiler and every projection stay deterministic and offline and reuse
+their exact IR. What changed is that there is now one named place where a command may reach the
+world, rather than a capability spread through the projections.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-component-whose-callers-are-people">A component whose callers are people<a href="https://beyond10x.github.io/updates/field-notes/ess/four-areas-and-a-command-line/#a-component-whose-callers-are-people" class="hash-link" aria-label="Direct link to A component whose callers are people" title="Direct link to A component whose callers are people" translate="no">​</a></h2>
+<p><code>reached_by: command_line</code> is a third answer to the question <code>in_process</code> and <code>network</code> already
+answer — <em>where are the callers</em> — and like them it names no wire, no port, no path and no verb.
+What it states is the one fact neither of the others can: <strong>the surface leaves the process as a
+grammar rather than as a call</strong>, and a command-line caller is deployed with the binary and is not a
+program.</p>
+<p>A <code>cli:</code> block then says where each accepted command sits in that grammar. Paths within a group are
+derived from <code>naming.wire</code>, as OpenAPI paths already are. Grouping is declared, because which
+<em>activity</em> a command belongs to cannot be derived from anything the model holds.</p>
+<p>Eight refusals come with it, and they are the reason the tree is declared here rather than written
+beside a parser: a block on a component reached another way, a command-line surface with no block, a
+placed command the component does not accept, a placed view no domain it owns projects, an accepted
+command or projected view the tree places nowhere, and either placed twice.</p>
+<p>The view half exists because of a defect found in a consuming repository rather than imagined here.
+<code>connectors</code> serves <code>kubernetes.workloads</code> from its local daemon and had no command-line verb that
+reads a datasource at all — so an operator on that machine could not reach a projection the process
+beside them was already publishing. Nobody wrote that down until somebody noticed.</p>
+<p><code>ess generate synthesize --target clap</code> emits the parser, the handler obligations and the completion
+scripts from the declaration.</p>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+</feed>

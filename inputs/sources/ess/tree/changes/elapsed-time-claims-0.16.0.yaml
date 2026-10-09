@@ -1,0 +1,16 @@
+schema: b10x-change/v1
+id: ess/elapsed-time-claims-0.16.0
+repository: ess
+publishedAt: 2026-09-04T13:13:51Z
+title: An authored scenario can claim a length of time, and a target has to answer for it
+summary: >-
+  Authored scenarios gain `mark:` and `elapsed:` with `not_before`, `within`, and `quiet` bounds.
+  The suite states a duration and its anchor; the target reports an observed or advanced clock.
+  Targets without clock support report `unsupported`. The claims use `ess-conformance/3`.
+kind: capability
+impact: significant
+source:
+  url: https://github.com/beyond10x/ess/releases/tag/0.16.0
+  version: 0.16.0
+journeys: [specify]
+affectedSurfaces: [ess/docs]
