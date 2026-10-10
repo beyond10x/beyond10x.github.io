@@ -2,6 +2,80 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "aep/0.71.2",
+      "id": "aep/0.71.2",
+      "repository": "aep",
+      "publishedAt": "2026-10-10T04:07:11Z",
+      "title": "AEP 0.71.2",
+      "summary": "AEP released version 0.71.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.71.2",
+        "version": "0.71.2"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep/0.71.1",
+      "id": "aep/0.71.1",
+      "repository": "aep",
+      "publishedAt": "2026-10-10T03:09:25Z",
+      "title": "AEP 0.71.1",
+      "summary": "AEP released version 0.71.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.71.1",
+        "version": "0.71.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.22.5",
+      "id": "agentplugins/0.22.5",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-09T16:30:28Z",
+      "title": "Agent Plugins 0.22.5",
+      "summary": "Agent Plugins released version 0.22.5.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.22.5",
+        "version": "0.22.5"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "agentplugins/0.22.4",
       "id": "agentplugins/0.22.4",
       "repository": "agentplugins",
@@ -49,6 +123,28 @@
       ],
       "automatic": true,
       "channel": "releases"
+    },
+    {
+      "key": "ess/cli-globals-diff-caller-breaks-and-response-constraints-0.57.0",
+      "id": "ess/cli-globals-diff-caller-breaks-and-response-constraints-0.57.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-09T00:00:00Z",
+      "title": "CLI bindings may omit globals, verify diff flags caller-breaking changes, runners check constrained responses",
+      "summary": "`ess-cli/2` lets a CLI binding omit its config and output globals. `ess verify diff` classifies added and removed domains and rates changes that refuse an existing caller as breaking. Runners check responses of constrained `String` newtypes. Route-escaping wire names and always-true refusals are refused, and synthesis covers more guards.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.57.0",
+        "version": "0.57.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
     },
     {
       "key": "agentplugins/0.22.3",

@@ -5,6 +5,56 @@
   "feed_url": "https://beyond10x.github.io/changes/feed.json",
   "items": [
     {
+      "id": "aep/0.71.2",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.71.2",
+      "title": "AEP 0.71.2",
+      "content_text": "AEP released version 0.71.2.",
+      "date_published": "2026-10-10T04:07:11Z",
+      "tags": [
+        "aep",
+        "release",
+        "notable",
+        "releases",
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ]
+    },
+    {
+      "id": "aep/0.71.1",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.71.1",
+      "title": "AEP 0.71.1",
+      "content_text": "AEP released version 0.71.1.",
+      "date_published": "2026-10-10T03:09:25Z",
+      "tags": [
+        "aep",
+        "release",
+        "notable",
+        "releases",
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ]
+    },
+    {
+      "id": "agentplugins/0.22.5",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.22.5",
+      "title": "Agent Plugins 0.22.5",
+      "content_text": "Agent Plugins released version 0.22.5.",
+      "date_published": "2026-10-09T16:30:28Z",
+      "tags": [
+        "agentplugins",
+        "release",
+        "notable",
+        "releases",
+        "build-agents",
+        "plan-work",
+        "specify"
+      ]
+    },
+    {
       "id": "agentplugins/0.22.4",
       "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.22.4",
       "title": "Agent Plugins 0.22.4",
@@ -34,6 +84,20 @@
         "build-agents",
         "operate-services",
         "plan-work",
+        "specify"
+      ]
+    },
+    {
+      "id": "ess/cli-globals-diff-caller-breaks-and-response-constraints-0.57.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.57.0",
+      "title": "CLI bindings may omit globals, verify diff flags caller-breaking changes, runners check constrained responses",
+      "content_text": "`ess-cli/2` lets a CLI binding omit its config and output globals. `ess verify diff` classifies added and removed domains and rates changes that refuse an existing caller as breaking. Runners check responses of constrained `String` newtypes. Route-escaping wire names and always-true refusals are refused, and synthesis covers more guards.",
+      "date_published": "2026-10-09T00:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "notable",
+        "impact",
         "specify"
       ]
     },

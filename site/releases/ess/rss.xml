@@ -4,6 +4,16 @@
     <link>https://beyond10x.github.io/releases/</link>
     <description>Important releases, migrations, capabilities, and adopter actions across the public beyond10x ecosystem.</description>
     <item>
+      <guid isPermaLink="false">ess/cli-globals-diff-caller-breaks-and-response-constraints-0.57.0</guid>
+      <title>CLI bindings may omit globals, verify diff flags caller-breaking changes, runners check constrained responses</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.57.0</link>
+      <pubDate>Fri, 09 Oct 2026 00:00:00 GMT</pubDate>
+      <description>`ess-cli/2` lets a CLI binding omit its config and output globals. `ess verify diff` classifies added and removed domains and rates changes that refuse an existing caller as breaking. Runners check responses of constrained `String` newtypes. Route-escaping wire names and always-true refusals are refused, and synthesis covers more guards.</description>
+      <category>ess</category>
+      <category>notable</category>
+      <category>impact</category>
+    </item>
+    <item>
       <guid isPermaLink="false">ess/held-state-branch-order-0.56.0</guid>
       <title>A held-state branch must be declared before an overlapping accepting or external branch</title>
       <link>https://github.com/beyond10x/ess/releases/tag/0.56.0</link>

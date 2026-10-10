@@ -2,8 +2,15 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://beyond10x.github.io/releases/ess/atom.xml</id>
   <title>ESS releases</title>
-  <updated>2026-10-07T00:00:00Z</updated>
+  <updated>2026-10-09T00:00:00Z</updated>
   <link rel="self" href="https://beyond10x.github.io/releases/ess/atom.xml"/>
+  <entry>
+    <id>ess/cli-globals-diff-caller-breaks-and-response-constraints-0.57.0</id>
+    <title>CLI bindings may omit globals, verify diff flags caller-breaking changes, runners check constrained responses</title>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.57.0"/>
+    <summary>`ess-cli/2` lets a CLI binding omit its config and output globals. `ess verify diff` classifies added and removed domains and rates changes that refuse an existing caller as breaking. Runners check responses of constrained `String` newtypes. Route-escaping wire names and always-true refusals are refused, and synthesis covers more guards.</summary>
+  </entry>
   <entry>
     <id>ess/held-state-branch-order-0.56.0</id>
     <title>A held-state branch must be declared before an overlapping accepting or external branch</title>
