@@ -4,6 +4,26 @@
     <link>https://beyond10x.github.io/changes/</link>
     <description>Important releases, migrations, capabilities, and adopter actions across the public beyond10x ecosystem.</description>
     <item>
+      <guid isPermaLink="false">ess/authored-caller-0.59.0</guid>
+      <title>An authored act states the caller its command is sent as, and synthesis fixes two guard cases</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.59.0</link>
+      <pubDate>Sun, 11 Oct 2026 00:00:00 GMT</pubDate>
+      <description>`ess-scenario/5` lets an act state its caller under `caller:`, so a command that records `{caller: …}` runs from an authored scenario. Synthesis decides a related guard on a captured struct key ([#521](https://github.com/beyond10x/ess/issues/521)) and writes stored-field guard scenarios no view observes ([#496](https://github.com/beyond10x/ess/issues/496)).</description>
+      <category>ess</category>
+      <category>notable</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/undeclared-fields-ignored-0.58.0</guid>
+      <title>A struct or a command response may ignore undeclared fields, and generation, verify diff and runners follow</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.58.0</link>
+      <pubDate>Sat, 10 Oct 2026 00:00:00 GMT</pubDate>
+      <description>`ess/24` lets a `kind: struct` type or a command&apos;s response declare `undeclared_fields: ignored`, admitting fields it does not declare. `ess generate` writes open objects there, `ess verify diff` classifies opening and closing, and runners admit an undeclared key at exactly those objects. Authored scenarios are judged by the command&apos;s precedence plan.</description>
+      <category>ess</category>
+      <category>notable</category>
+      <category>impact</category>
+    </item>
+    <item>
       <guid isPermaLink="false">ess/cli-globals-diff-caller-breaks-and-response-constraints-0.57.0</guid>
       <title>CLI bindings may omit globals, verify diff flags caller-breaking changes, runners check constrained responses</title>
       <link>https://github.com/beyond10x/ess/releases/tag/0.57.0</link>

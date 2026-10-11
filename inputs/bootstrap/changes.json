@@ -2,6 +2,99 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "ess/authored-caller-0.59.0",
+      "id": "ess/authored-caller-0.59.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-11T00:00:00Z",
+      "title": "An authored act states the caller its command is sent as, and synthesis fixes two guard cases",
+      "summary": "`ess-scenario/5` lets an act state its caller under `caller:`, so a command that records `{caller: …}` runs from an authored scenario. Synthesis decides a related guard on a captured struct key ([#521](https://github.com/beyond10x/ess/issues/521)) and writes stored-field guard scenarios no view observes ([#496](https://github.com/beyond10x/ess/issues/496)).",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.59.0",
+        "version": "0.59.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "agentplugins/0.22.7",
+      "id": "agentplugins/0.22.7",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-10T19:11:24Z",
+      "title": "Agent Plugins 0.22.7",
+      "summary": "Agent Plugins released version 0.22.7.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.22.7",
+        "version": "0.22.7"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.22.6",
+      "id": "agentplugins/0.22.6",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-10T11:55:46Z",
+      "title": "Agent Plugins 0.22.6",
+      "summary": "Agent Plugins released version 0.22.6.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.22.6",
+        "version": "0.22.6"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "worktree/0.15.0",
+      "id": "worktree/0.15.0",
+      "repository": "worktree",
+      "publishedAt": "2026-10-10T11:39:24Z",
+      "title": "Worktree 0.15.0",
+      "summary": "Worktree released version 0.15.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.15.0",
+        "version": "0.15.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "aep/0.71.2",
       "id": "aep/0.71.2",
       "repository": "aep",
@@ -50,6 +143,28 @@
       ],
       "automatic": true,
       "channel": "releases"
+    },
+    {
+      "key": "ess/undeclared-fields-ignored-0.58.0",
+      "id": "ess/undeclared-fields-ignored-0.58.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-10T00:00:00Z",
+      "title": "A struct or a command response may ignore undeclared fields, and generation, verify diff and runners follow",
+      "summary": "`ess/24` lets a `kind: struct` type or a command's response declare `undeclared_fields: ignored`, admitting fields it does not declare. `ess generate` writes open objects there, `ess verify diff` classifies opening and closing, and runners admit an undeclared key at exactly those objects. Authored scenarios are judged by the command's precedence plan.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.58.0",
+        "version": "0.58.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
     },
     {
       "key": "agentplugins/0.22.5",

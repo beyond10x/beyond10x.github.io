@@ -4,6 +4,46 @@
     <link>https://beyond10x.github.io/changes/</link>
     <description>Important releases, migrations, capabilities, and adopter actions across the public beyond10x ecosystem.</description>
     <item>
+      <guid isPermaLink="false">ess/authored-caller-0.59.0</guid>
+      <title>An authored act states the caller its command is sent as, and synthesis fixes two guard cases</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.59.0</link>
+      <pubDate>Sun, 11 Oct 2026 00:00:00 GMT</pubDate>
+      <description>`ess-scenario/5` lets an act state its caller under `caller:`, so a command that records `{caller: …}` runs from an authored scenario. Synthesis decides a related guard on a captured struct key ([#521](https://github.com/beyond10x/ess/issues/521)) and writes stored-field guard scenarios no view observes ([#496](https://github.com/beyond10x/ess/issues/496)).</description>
+      <category>ess</category>
+      <category>notable</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">agentplugins/0.22.7</guid>
+      <title>Agent Plugins 0.22.7</title>
+      <link>https://github.com/beyond10x/agentplugins/releases/tag/0.22.7</link>
+      <pubDate>Sat, 10 Oct 2026 19:11:24 GMT</pubDate>
+      <description>Agent Plugins released version 0.22.7.</description>
+      <category>agentplugins</category>
+      <category>notable</category>
+      <category>releases</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">agentplugins/0.22.6</guid>
+      <title>Agent Plugins 0.22.6</title>
+      <link>https://github.com/beyond10x/agentplugins/releases/tag/0.22.6</link>
+      <pubDate>Sat, 10 Oct 2026 11:55:46 GMT</pubDate>
+      <description>Agent Plugins released version 0.22.6.</description>
+      <category>agentplugins</category>
+      <category>notable</category>
+      <category>releases</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">worktree/0.15.0</guid>
+      <title>Worktree 0.15.0</title>
+      <link>https://github.com/beyond10x/worktree/releases/tag/0.15.0</link>
+      <pubDate>Sat, 10 Oct 2026 11:39:24 GMT</pubDate>
+      <description>Worktree released version 0.15.0.</description>
+      <category>worktree</category>
+      <category>notable</category>
+      <category>releases</category>
+    </item>
+    <item>
       <guid isPermaLink="false">aep/0.71.2</guid>
       <title>AEP 0.71.2</title>
       <link>https://github.com/beyond10x/aep/releases/tag/0.71.2</link>
@@ -22,6 +62,16 @@
       <category>aep</category>
       <category>notable</category>
       <category>releases</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/undeclared-fields-ignored-0.58.0</guid>
+      <title>A struct or a command response may ignore undeclared fields, and generation, verify diff and runners follow</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.58.0</link>
+      <pubDate>Sat, 10 Oct 2026 00:00:00 GMT</pubDate>
+      <description>`ess/24` lets a `kind: struct` type or a command&apos;s response declare `undeclared_fields: ignored`, admitting fields it does not declare. `ess generate` writes open objects there, `ess verify diff` classifies opening and closing, and runners admit an undeclared key at exactly those objects. Authored scenarios are judged by the command&apos;s precedence plan.</description>
+      <category>ess</category>
+      <category>notable</category>
+      <category>impact</category>
     </item>
     <item>
       <guid isPermaLink="false">agentplugins/0.22.5</guid>

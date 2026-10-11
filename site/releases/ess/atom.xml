@@ -2,8 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://beyond10x.github.io/releases/ess/atom.xml</id>
   <title>ESS releases</title>
-  <updated>2026-10-09T00:00:00Z</updated>
+  <updated>2026-10-11T00:00:00Z</updated>
   <link rel="self" href="https://beyond10x.github.io/releases/ess/atom.xml"/>
+  <entry>
+    <id>ess/authored-caller-0.59.0</id>
+    <title>An authored act states the caller its command is sent as, and synthesis fixes two guard cases</title>
+    <updated>2026-10-11T00:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.59.0"/>
+    <summary>`ess-scenario/5` lets an act state its caller under `caller:`, so a command that records `{caller: …}` runs from an authored scenario. Synthesis decides a related guard on a captured struct key ([#521](https://github.com/beyond10x/ess/issues/521)) and writes stored-field guard scenarios no view observes ([#496](https://github.com/beyond10x/ess/issues/496)).</summary>
+  </entry>
+  <entry>
+    <id>ess/undeclared-fields-ignored-0.58.0</id>
+    <title>A struct or a command response may ignore undeclared fields, and generation, verify diff and runners follow</title>
+    <updated>2026-10-10T00:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.58.0"/>
+    <summary>`ess/24` lets a `kind: struct` type or a command&apos;s response declare `undeclared_fields: ignored`, admitting fields it does not declare. `ess generate` writes open objects there, `ess verify diff` classifies opening and closing, and runners admit an undeclared key at exactly those objects. Authored scenarios are judged by the command&apos;s precedence plan.</summary>
+  </entry>
   <entry>
     <id>ess/cli-globals-diff-caller-breaks-and-response-constraints-0.57.0</id>
     <title>CLI bindings may omit globals, verify diff flags caller-breaking changes, runners check constrained responses</title>
