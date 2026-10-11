@@ -2,6 +2,30 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "agentplugins/0.22.8",
+      "id": "agentplugins/0.22.8",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-11T11:29:29Z",
+      "title": "Agent Plugins 0.22.8",
+      "summary": "Agent Plugins released version 0.22.8.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.22.8",
+        "version": "0.22.8"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "ess/authored-caller-0.59.0",
       "id": "ess/authored-caller-0.59.0",
       "repository": "ess",
