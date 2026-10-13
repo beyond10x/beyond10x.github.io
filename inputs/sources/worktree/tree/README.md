@@ -30,16 +30,16 @@ worktree status
 worktree hook heartbeat --path <tree> --session <session-id>
 # Publish wanted changes.
 worktree hook session-end --path <tree> --session <session-id>
-# Review which ignored directories are recognised build cache; everything else is kept.
+# Review which ignored entries would be deleted; `.worktreekeep` and repositories are kept.
 worktree discard-cache <tree> --dry-run
-# Delete that cache, archive whatever no remote ref recovers, and finish.
+# Delete them, archive whatever no remote ref recovers, and finish.
 worktree finish --discard-cache --archive <tree>
 worktree gc --repo /path/to/repository --dry-run --id <reviewed-id>
 worktree gc --repo /path/to/repository --apply --id <reviewed-id>
 # Archives a remote now fully holds; refused ones say why and are kept.
 worktree prune-archives --repo /path/to/repository --dry-run
 worktree prune-archives --repo /path/to/repository --apply --id <reviewed-archive-directory>
-# Strip cargo build output from older archives; review, then rewrite only reviewed ones.
+# Strip build output from older archives; review, then rewrite only reviewed ones.
 worktree prune-archives --strip-build-output --repo /path/to/repository --dry-run
 worktree prune-archives --strip-build-output --repo /path/to/repository --apply --id <reviewed-archive-directory>
 worktree reconcile --repo /path/to/repository --dry-run
@@ -55,16 +55,39 @@ are canonical, disjoint paths. Create plans resolve the requested base to an imm
 revalidate the repository, policy-derived destination, and exact Git worktree membership before
 changing state.
 
-`worktree discard-cache` recognises build cache by structure, never by a directory's name: a Cargo
-profile (it holds `.fingerprint/`) inside a target carrying a valid `CACHEDIR.TAG`, that target's
-`tmp/` test scratch (Cargo's `CARGO_TARGET_TMPDIR`, whatever it holds) when the target holds a
-profile, `node_modules` at or below a tracked npm, Yarn, pnpm or Bun lockfile, a virtual environment (`pyvenv.cfg`) beside
-a tracked Python manifest, and a tagged `.pytest_cache`, `.mypy_cache` or `.ruff_cache`. Cargo
-writes the tag only when it creates the target itself, so a `target/` made before the first build
-has none; such a directory counts as tagged when a tracked `Cargo.toml` sits beside it and a
-child other than `tmp/` holds both `.fingerprint/` and `deps/`. Every other
-ignored entry, including records written inside `target/`, is kept and named in the report. It
-follows no symbolic link, and it refuses while a session lease is live, Git locks the tree, or
+`worktree discard-cache` deletes every ignored entry Git reports, file or directory, unless the
+repository keeps it. A repository keeps paths in `.worktreekeep` at the tree root: Git exclude
+patterns, matched by Git's own exclude engine, so negation, directory-only patterns and anchoring
+mean what they mean in `.gitignore`, and a path is kept when a pattern matches it or one of its
+ancestors. Git cannot re-include a path below an excluded directory, so write `dir/*` rather than
+`dir/` when a `!` line should take effect. Without the file nothing is kept; a symbolic link, a
+directory or an unreadable file there refuses the discard as `keep-file-invalid`. Records written
+into an ignored directory such as `target/` are deleted unless `.worktreekeep` keeps them.
+
+A nested repository is never deleted either, because it may hold commits no remote does: an entry
+named `.git` (a file, a directory or a symbolic link), a directory holding one, or a bare or
+`--separate-git-dir` Git directory (`HEAD`, `objects/` and `refs/`) is kept whole, and so is a
+mount point (read from `/proc/self/mountinfo` on Linux, so a bind mount from the same filesystem
+counts), an entry on another device, and one that cannot be read (a directory whose names cannot
+be listed, a file this user cannot open). A directory holding a kept path, a repository or any of
+these at any depth is never deleted whole: it falls to its direct entries, each classified by the
+same rule. A directory a keep pattern names is kept even when it holds no file. The walk that
+looks for them follows no symbolic link, and it, the mount table and the keep file run again
+immediately before each deletion (`archive` images such a repository).
+
+Each deleted entry is named by the structure that recognises it, never by a directory's name: a
+Cargo profile (it holds `.fingerprint/`) inside a target carrying a valid `CACHEDIR.TAG`, that
+target's `tmp/` test scratch (Cargo's `CARGO_TARGET_TMPDIR`) when the target holds a profile,
+`node_modules` at or below a tracked npm, Yarn, pnpm or Bun lockfile, a virtual environment
+(`pyvenv.cfg`) beside a tracked Python manifest, a Flutter app's `<P>/build/` or `<P>/.dart_tool/`
+(as `flutter-output`) when `<P>/pubspec.yaml` is a regular file beside it and neither HEAD nor the
+index tracks anything at or below it, and a tagged `.pytest_cache`, `.mypy_cache` or
+`.ruff_cache`; everything else is `ignored-output`. A directory that is a cargo target too is
+classified by the cargo rule alone. Cargo writes the tag only when it creates the target itself,
+so a `target/` made before the first build has none; such a directory counts as tagged when a
+tracked `Cargo.toml` sits beside it and a child other than `tmp/` holds both `.fingerprint/` and
+`deps/`. A target holding anything but Cargo's layout falls to its parts. A symbolic link is
+deleted itself, never followed, and it refuses while a session lease is live, Git locks the tree, or
 another process has its working directory, executable or an open file inside the tree (observed
 through `/proc` on Linux; elsewhere the report says processes were not observed).
 
@@ -140,9 +163,9 @@ modifies the tree, its index or the repository's refs:
 | File | Content |
 |---|---|
 | `commits.bundle` | every commit HEAD adds over the refs the configured remotes advertise, as `refs/worktree-archive/head`; absent when there are none |
-| `dirty.patch` | a binary patch from HEAD that recreates every tracked, untracked and ignored file byte for byte, except cargo build layout; absent when the tree's content equals HEAD |
+| `dirty.patch` | a binary patch from HEAD that recreates every tracked, untracked and ignored file byte for byte, except build layout (cargo's, or a Flutter app's output); absent when the tree's content equals HEAD |
 | `nested-<n>.tar` | one per nested Git repository in the tree's files, `n` from 1 in path-byte order: its root directory and every entry below it, `.git` included, with permission bits, modification times and symlink targets; names are relative to the tree root |
-| `manifest.json` | format `worktree.archive/1`, `worktree.archive/2` when it images nested repositories, or `worktree.archive/3` when it left cargo build layout out: tree id, repository root, path, HEAD, branch, the unique commits, each file's SHA-256 and size, `worktree_tree` (the fingerprint of the tree's on-disk content outside every nested repository and the build layout left out), `nested_repositories` (each root's path, image file, fingerprint and entry count; only in `/2` and `/3`), `created_at`, and `build_output` (only in `/3`: per target its `path`, `origin` (`archive` or `strip`), `files` and `bytes`, and the totals) |
+| `manifest.json` | format `worktree.archive/1`, `worktree.archive/2` when it images nested repositories, or `worktree.archive/3` when it left build layout out (cargo's, or a Flutter app's output): tree id, repository root, path, HEAD, branch, the unique commits, each file's SHA-256 and size, `worktree_tree` (the fingerprint of the tree's on-disk content outside every nested repository and the build layout left out), `nested_repositories` (each root's path, image file, fingerprint and entry count; only in `/2` and `/3`), `created_at`, and `build_output` (only in `/3`: per directory its `path`, `origin` (`archive` or `strip`), `files` and `bytes`, and the totals) |
 
 Cargo's own build layout is left out, because the next build recreates it from tracked sources.
 Below a cargo target that `discard-cache` recognises by structure (a valid `CACHEDIR.TAG`, or an
@@ -154,8 +177,30 @@ that structure and a profile, also when a file Git tracks below it keeps `discar
 reaching it; the tracked file stays archived. That covers `deps/`, `build/`, `.fingerprint/`, `incremental/`
 and `*.d`. Everything else below the target, such as `target/ess-conformance/report.json`, and
 every other ignored directory stays in the archive. The command prints `left out <files> file(s),
-<bytes> bytes of cargo build output under <target>`. An archive that left nothing out is written
-exactly as before, format 1 or 2.
+<bytes> bytes of build output under <directory>`. An archive that left nothing out is written
+exactly as before, format 1 or 2. A path `.worktreekeep` keeps is never build layout, wherever it
+lies: it stays in `dirty.patch`. A keep file that is a symbolic link, a directory or unreadable
+keeps every path there, so nothing is left out.
+
+A Flutter app's output is left out too: a file neither HEAD nor the index tracks strictly below
+`<P>/build/` or `<P>/.dart_tool/` (the tree root included as `<P>`), whatever it holds, when
+`<P>/pubspec.yaml` is a regular file on disk (tracked or not), the directory is a real directory,
+and neither HEAD's tree nor the index holds anything at or below it. A tracked source directory
+named `build`, and a `build/` or `.dart_tool/` with no `pubspec.yaml` beside it, stay archived. One
+classifier decides this for `archive`, `discard-cache` and `--strip-build-output`. A directory that
+is both a recognised cargo target and a Flutter output directory, such as a cargo target named
+`build/` beside a `pubspec.yaml`, is classified by the cargo rule alone in all three, so a file
+below it that is not cargo layout stays archived, as `discard-cache` keeps it. The outermost of
+a cargo target and a Flutter output directory is recorded. Verification leaves layout out only
+below the directories the manifest records, so an archive written before Flutter output was left
+out still verifies, and layout below a directory an archive did not record refuses as
+`archive-stale`.
+
+A repository is never build layout: a path with a `.git` component, or at or below a Git
+directory (`HEAD` a regular file, `objects/` and `refs/` real directories), stays in the archive
+wherever it lies, and removal never deletes it as layout. `prune-archives --strip-build-output`
+keeps such a path too, recognising a Git directory in a patch by the `HEAD` and `objects/` paths
+it adds.
 
 The fingerprint is a Git tree id computed from every file on disk except the build layout left
 out, read without filters, index flags or attributes. It is recorded for every archive, including
@@ -234,7 +279,7 @@ patch that changes an existing file.
 The bundle's prerequisites are the advertised commits it was cut against, so restoring needs a
 remote that still has them. Submodules, nested repositories that depend on state outside their
 directory, special files and paths containing a newline are refused as `archive-unsupported-entry`.
-Every ignored file other than cargo build layout is archived; discard other disposable output
+Every ignored file other than build layout is archived; discard other disposable output
 first with `worktree discard-cache`.
 
 An archive outlives its tree, and only `worktree prune-archives` deletes one. It lists each archive
@@ -265,7 +310,8 @@ a refused archive removable: an archive whose commits no remote holds is the onl
 deleting it stays the operator's decision, by hand.
 
 Archives written before build output was left out hold it in `dirty.patch` and are refused as
-`UncommittedState`. `worktree prune-archives --strip-build-output` removes it, with the same
+`UncommittedState`: cargo's before 0.15.0, a Flutter app's `build/` and `.dart_tool/` through
+0.16.0. `worktree prune-archives --strip-build-output` removes it, with the same
 `--repo`, `--scope` and `--id` selection, and never deletes an archive. A dry-run, the default,
 streams each patch and lists `directory, worktree id, bytes, verdict`, then the bytes and sections
 it would strip, the sections, bytes and nested images that stay, and the prune verdict the archive
@@ -273,8 +319,15 @@ would have afterwards. Only a section that purely adds an untracked file is stri
 mode`, a path, C-unquoted as Git writes it, that no other section names and that HEAD's tree, read
 from Git, does not track, and that is build layout below a directory the patch's own pure
 additions recognise as a target (a Cargo-signed `<t>/CACHEDIR.TAG` or `<t>/<p>/.fingerprint/…`;
-`<t>/tmp/` only beside a profile). A section whose path cannot be decoded, both halves of a type
-change, every other change to a tracked file and every nested image stay.
+`<t>/tmp/` only beside a profile), or that lies strictly below a Flutter app's output directory:
+`<P>/build/` or `<P>/.dart_tool/` (the tree root included as `<P>`) where HEAD's tree holds
+`<P>/pubspec.yaml` as anything but a directory or the patch purely adds it (that section stays), and HEAD's tree
+holds nothing at that path, so a tracked source directory named `build` and a `build/` with no
+`pubspec.yaml` beside it are never stripped. A directory the patch recognises as a cargo target is
+classified by the cargo rule alone, also beside a `pubspec.yaml`. The outermost directory whose rule strips the path, cargo target or
+Flutter output, is recorded: a cargo target inside `<P>/build/` counts as `<P>/build`. A section whose path cannot
+be decoded, both halves of a type change, every other change to a tracked file and every nested
+image stay.
 Verdicts, in this order:
 
 | Verdict | When |
@@ -354,7 +407,7 @@ same dry-run and exact-id apply discipline safely finishes the recorded transiti
 Non-hook CLI JSON uses protocol version 4, reconciliation JSON uses version 4, inspection reports
 use `worktree.inspection/2`, archive manifests use `worktree.archive/1`, or `worktree.archive/2`
 when they image nested repositories (a 0.11 reader refuses `/2` as `archive-invalid`), or
-`worktree.archive/3` when they left cargo build layout out (a 0.14 reader refuses `/3` as
+`worktree.archive/3` when they left build layout out (a 0.14 reader refuses `/3` as
 `archive-invalid`), and
 lifecycle hooks remain on version 1. Version 3 and inspection 2 add the recovery proof `kind` and `equivalent_commits`
 fields. Version 4 adds the `archive` command, the `archive` recovery kind with its `archive`

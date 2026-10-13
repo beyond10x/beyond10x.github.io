@@ -376,7 +376,29 @@ A protocol graph has nodes of kind `action`, `evidence`, `claim`, `outcome` and 
 by kind, then name; ids `<kind>:<name>`) and edges `produces` (action → evidence), `establishes`
 (evidence → claim, `qualifier` = result), `supports` (claim → claim), `requires` (claim → outcome)
 and `gates` (claim → action, a precondition, traced on hover only). Predicates keep the `canon-ir/1`
-shape (`all`, `any`, `not`, `claim`, `evidence`).
+shape (`all`, `any`, `not`, `claim`, `evidence`, `input`, `first`, `before`).
+
+The order forms come from Canon 0.3.0's `canon-ir/1`, for protocols whose obligations depend on the
+order of evidence. `{"first": {"kind": "test_result", "result": "fail"}}` holds when the first
+evidence of that kind has that result, and reads as `first evidence = fail: test_result`.
+`{"before": {"first": "test_result", "then": "implementation_change"}}` holds when evidence of the
+first kind precedes evidence of the second, and reads as `evidence test_result before
+implementation_change`. Either may name an artifact in `subject` (a non-empty string, written only
+when present), which the line ends with as `about <subject>`. `kind` and `result`, and `first` and
+`then`, are required non-empty strings; no other field is accepted. `parseProtocolGraph` refuses a
+`before` whose `first` and `then` name the same kind, naming the path; the schema cannot compare the
+two and accepts it. Both forms go wherever a predicate does, including an obligation's
+`applicable_when` and inside `all`, `any` and `not`.
+
+Case inputs follow `canon-ir/1` too, so one protocol can describe several kinds of case. An optional
+top-level `case` declares them: `{"inputs": {"change_kind": {"description": "…" or null, "values":
+["bugfix", "feature"]}}}`. An `input` predicate leaf tests one, `{"input": {"id": "change_kind",
+"in": ["bugfix"]}}`, and reads as `input change_kind in bugfix`; it may name only a declared input and
+its declared values. A node of kind `obligation` may carry `applicable_when`, a predicate saying when
+the obligation applies; any other kind carrying it is refused. The figure lists the case inputs and
+their values under the caption, and shows an obligation's "applicable when" lines before the
+predicate that discharges it, in the tooltip and in the text listing. A graph without these fields
+validates and renders as before.
 
 The graphs use the layered layout in `graph-layout`: the caller fixes the columns, the layout inserts
 dummy nodes for long edges, reduces crossings by barycentric sweeps and transposition, and places

@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.10.0 — 2026-10-13
+
+- `b10x-protocol-graph/1` carries Canon 0.3.0's order forms in the `canon-ir/1` shape: a `first`
+  predicate leaf `{"first": {"kind": <kind>, "result": <result>, "subject"?: <artifact>}}` and a
+  `before` predicate leaf `{"before": {"first": <kind>, "then": <kind>, "subject"?: <artifact>}}`,
+  each with required non-empty strings, an optional non-empty `subject` and no other field. The
+  schema and `parseProtocolGraph` refuse an unknown or missing field, and `parseProtocolGraph`
+  refuses a `before` whose `first` and `then` are the same kind, naming the path. `predicateLines`
+  reads `first` as `first evidence = <result>: <kind>` and `before` as `evidence <first> before
+  <then>`, either ending `about <subject>` when it names one; the kind stays the line's `reference`.
+  Existing graphs validate and render as before.
+
+## 0.9.0 — 2026-10-12
+
+- `b10x-protocol-graph/1` carries Canon case inputs in the `canon-ir/1` shape: an optional top-level
+  `case: {inputs: {<id>: {description, values}}}`, an `input` predicate leaf
+  `{"input": {"id": <id>, "in": [<value>, …]}}`, and `applicable_when` on `obligation` nodes only.
+  The schema and `parseProtocolGraph` refuse an input leaf that names an undeclared input or value
+  and `applicable_when` on any other node kind, naming the path. `predicateLines` reads an input
+  leaf as `input <id> in <values>` (new `PredicateLine.suffix`, and `predicateLineText` for the
+  plain-text form). `ProtocolGraph` lists the case inputs with their values under the caption and
+  shows an obligation's "applicable when" lines before its discharge rule. Existing graphs validate
+  and render as before.
+
 ## 0.8.0 — 2026-10-08
 
 - The family member `els` is named "Engineering protocols" and links https://beyond10x.github.io/engineering-protocols/

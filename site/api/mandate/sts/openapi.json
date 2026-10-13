@@ -3,13 +3,13 @@
   "info": {
     "title": "mandate-sts",
     "summary": "Planned deployment boundary; exact domain-to-library responsibilities and required adapter/worker gaps are recorded in docs/architecture/ownership.md.",
-    "description": "The HTTP surface of `mandate-sts`, one of the components of `mandate` v1.\n\nEvery path here is one semantic command, so the method is always POST and the path is the command's wire name under its domain's: a command is not a resource, and this document does not invent one. A status code is the outcome the specification declares — 202 for a branch that was taken, 422 for a refusal the input decides, 502 for a refusal decided outside the request — and the `outcome` property of every response body names the branch. Events emitted by a branch are published to consumers through the event transport; they are not returned here.",
+    "description": "The HTTP surface of `mandate-sts`, one of the components of `mandate` v1.\n\nEvery path here is one semantic command, so the method is always POST and the path is the command's wire name under its domain's: a command is not a resource, and this document does not invent one. A status code is the outcome the specification declares — 202 for a branch that was taken, 422 for a refusal the input decides, 502 for a refusal decided outside the request — and the `outcome` property of every response body names the branch. Events emitted by a branch are published to consumers through the event transport, and the `published` property of every response body lists them too, in publication order.",
     "version": "v1",
     "x-ess-provenance": {
       "system": "mandate",
       "specification_version": "v1",
-      "source_digest": "2f11d2daffc2d75bb4ca8c0485aedc56fb2a712cdaed6347fc48b8ba2b1f7ca6",
-      "contract_digest": "slice-sha256/2:16ece1d4629a99c4f705b32b6556efd9819560f0cd5b4b0de160e77dadd5ceb5"
+      "source_digest": "deae57d148a5f63c051f8fb5fcc75b60572366e23d12c3cfe66b5d1f2ca3e08c",
+      "contract_digest": "slice-sha256/2:ee37311f539a501b92f7afa7450cc34896d9793fb37bbe0152c78e93188483f8"
     }
   },
   "tags": [
@@ -38,7 +38,7 @@
         },
         "responses": {
           "202": {
-            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers, not returned here.",
+            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers and listed under `published`.",
             "content": {
               "application/json": {
                 "schema": {
@@ -53,6 +53,31 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/mandate.credential.DisableResourceServer.wrong-state.Response"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "No declared outcome: the realization is unfinished. Either a port this command runs reported an unmet obligation, and nothing was written: `committed` is `false`. Or the command's effect was committed and delivering what this command published to a binding failed: `committed` is `true`, the effect and its events stand, and each binding whose delivery failed keeps its event and is attempted again on a later delivery, while no other binding receives it twice. Do not retry: after a failed delivery a retry performs the command a second time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "committed": {
+                      "description": "`true` when the command's effect and events were committed and delivering what it published failed; `false` when an unmet obligation stopped the command before anything was written.",
+                      "type": "boolean"
+                    },
+                    "refused": {
+                      "description": "What was left unfinished, in words.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "refused",
+                    "committed"
+                  ],
+                  "type": "object"
                 }
               }
             }
@@ -90,11 +115,36 @@
         },
         "responses": {
           "202": {
-            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers, not returned here.",
+            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers and listed under `published`.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/mandate.credential.ExchangeCredential.accepted.Response"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "No declared outcome: the realization is unfinished. Either a port this command runs reported an unmet obligation, and nothing was written: `committed` is `false`. Or the command's effect was committed and delivering what this command published to a binding failed: `committed` is `true`, the effect and its events stand, and each binding whose delivery failed keeps its event and is attempted again on a later delivery, while no other binding receives it twice. Do not retry: after a failed delivery a retry performs the command a second time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "committed": {
+                      "description": "`true` when the command's effect and events were committed and delivering what it published failed; `false` when an unmet obligation stopped the command before anything was written.",
+                      "type": "boolean"
+                    },
+                    "refused": {
+                      "description": "What was left unfinished, in words.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "refused",
+                    "committed"
+                  ],
+                  "type": "object"
                 }
               }
             }
@@ -132,11 +182,36 @@
         },
         "responses": {
           "202": {
-            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers, not returned here.",
+            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers and listed under `published`.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/mandate.credential.IntrospectCredential.accepted.Response"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "No declared outcome: the realization is unfinished. Either a port this command runs reported an unmet obligation, and nothing was written: `committed` is `false`. Or the command's effect was committed and delivering what this command published to a binding failed: `committed` is `true`, the effect and its events stand, and each binding whose delivery failed keeps its event and is attempted again on a later delivery, while no other binding receives it twice. Do not retry: after a failed delivery a retry performs the command a second time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "committed": {
+                      "description": "`true` when the command's effect and events were committed and delivering what it published failed; `false` when an unmet obligation stopped the command before anything was written.",
+                      "type": "boolean"
+                    },
+                    "refused": {
+                      "description": "What was left unfinished, in words.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "refused",
+                    "committed"
+                  ],
+                  "type": "object"
                 }
               }
             }
@@ -174,11 +249,36 @@
         },
         "responses": {
           "202": {
-            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers, not returned here.",
+            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers and listed under `published`.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/mandate.credential.IssueAuthorizationCode.accepted.Response"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "No declared outcome: the realization is unfinished. Either a port this command runs reported an unmet obligation, and nothing was written: `committed` is `false`. Or the command's effect was committed and delivering what this command published to a binding failed: `committed` is `true`, the effect and its events stand, and each binding whose delivery failed keeps its event and is attempted again on a later delivery, while no other binding receives it twice. Do not retry: after a failed delivery a retry performs the command a second time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "committed": {
+                      "description": "`true` when the command's effect and events were committed and delivering what it published failed; `false` when an unmet obligation stopped the command before anything was written.",
+                      "type": "boolean"
+                    },
+                    "refused": {
+                      "description": "What was left unfinished, in words.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "refused",
+                    "committed"
+                  ],
+                  "type": "object"
                 }
               }
             }
@@ -216,11 +316,36 @@
         },
         "responses": {
           "202": {
-            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers, not returned here.",
+            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers and listed under `published`.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/mandate.credential.IssueReferenceCredential.accepted.Response"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "No declared outcome: the realization is unfinished. Either a port this command runs reported an unmet obligation, and nothing was written: `committed` is `false`. Or the command's effect was committed and delivering what this command published to a binding failed: `committed` is `true`, the effect and its events stand, and each binding whose delivery failed keeps its event and is attempted again on a later delivery, while no other binding receives it twice. Do not retry: after a failed delivery a retry performs the command a second time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "committed": {
+                      "description": "`true` when the command's effect and events were committed and delivering what it published failed; `false` when an unmet obligation stopped the command before anything was written.",
+                      "type": "boolean"
+                    },
+                    "refused": {
+                      "description": "What was left unfinished, in words.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "refused",
+                    "committed"
+                  ],
+                  "type": "object"
                 }
               }
             }
@@ -258,11 +383,36 @@
         },
         "responses": {
           "202": {
-            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers, not returned here.",
+            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers and listed under `published`.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/mandate.credential.IssueSelfContainedCredential.accepted.Response"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "No declared outcome: the realization is unfinished. Either a port this command runs reported an unmet obligation, and nothing was written: `committed` is `false`. Or the command's effect was committed and delivering what this command published to a binding failed: `committed` is `true`, the effect and its events stand, and each binding whose delivery failed keeps its event and is attempted again on a later delivery, while no other binding receives it twice. Do not retry: after a failed delivery a retry performs the command a second time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "committed": {
+                      "description": "`true` when the command's effect and events were committed and delivering what it published failed; `false` when an unmet obligation stopped the command before anything was written.",
+                      "type": "boolean"
+                    },
+                    "refused": {
+                      "description": "What was left unfinished, in words.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "refused",
+                    "committed"
+                  ],
+                  "type": "object"
                 }
               }
             }
@@ -300,7 +450,7 @@
         },
         "responses": {
           "202": {
-            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers, not returned here.",
+            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers and listed under `published`.",
             "content": {
               "application/json": {
                 "schema": {
@@ -315,6 +465,31 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/mandate.credential.RedeemAuthorizationCode.wrong-state.Response"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "No declared outcome: the realization is unfinished. Either a port this command runs reported an unmet obligation, and nothing was written: `committed` is `false`. Or the command's effect was committed and delivering what this command published to a binding failed: `committed` is `true`, the effect and its events stand, and each binding whose delivery failed keeps its event and is attempted again on a later delivery, while no other binding receives it twice. Do not retry: after a failed delivery a retry performs the command a second time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "committed": {
+                      "description": "`true` when the command's effect and events were committed and delivering what it published failed; `false` when an unmet obligation stopped the command before anything was written.",
+                      "type": "boolean"
+                    },
+                    "refused": {
+                      "description": "What was left unfinished, in words.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "refused",
+                    "committed"
+                  ],
+                  "type": "object"
                 }
               }
             }
@@ -352,11 +527,36 @@
         },
         "responses": {
           "202": {
-            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers, not returned here.",
+            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers and listed under `published`.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/mandate.credential.RegisterResourceServer.accepted.Response"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "No declared outcome: the realization is unfinished. Either a port this command runs reported an unmet obligation, and nothing was written: `committed` is `false`. Or the command's effect was committed and delivering what this command published to a binding failed: `committed` is `true`, the effect and its events stand, and each binding whose delivery failed keeps its event and is attempted again on a later delivery, while no other binding receives it twice. Do not retry: after a failed delivery a retry performs the command a second time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "committed": {
+                      "description": "`true` when the command's effect and events were committed and delivering what it published failed; `false` when an unmet obligation stopped the command before anything was written.",
+                      "type": "boolean"
+                    },
+                    "refused": {
+                      "description": "What was left unfinished, in words.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "refused",
+                    "committed"
+                  ],
+                  "type": "object"
                 }
               }
             }
@@ -394,11 +594,36 @@
         },
         "responses": {
           "202": {
-            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers, not returned here.",
+            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers and listed under `published`.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/mandate.credential.RegisterSigningKey.accepted.Response"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "No declared outcome: the realization is unfinished. Either a port this command runs reported an unmet obligation, and nothing was written: `committed` is `false`. Or the command's effect was committed and delivering what this command published to a binding failed: `committed` is `true`, the effect and its events stand, and each binding whose delivery failed keeps its event and is attempted again on a later delivery, while no other binding receives it twice. Do not retry: after a failed delivery a retry performs the command a second time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "committed": {
+                      "description": "`true` when the command's effect and events were committed and delivering what it published failed; `false` when an unmet obligation stopped the command before anything was written.",
+                      "type": "boolean"
+                    },
+                    "refused": {
+                      "description": "What was left unfinished, in words.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "refused",
+                    "committed"
+                  ],
+                  "type": "object"
                 }
               }
             }
@@ -436,7 +661,7 @@
         },
         "responses": {
           "202": {
-            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers, not returned here.",
+            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers and listed under `published`.",
             "content": {
               "application/json": {
                 "schema": {
@@ -451,6 +676,31 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/mandate.credential.RetireSigningKey.wrong-state.Response"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "No declared outcome: the realization is unfinished. Either a port this command runs reported an unmet obligation, and nothing was written: `committed` is `false`. Or the command's effect was committed and delivering what this command published to a binding failed: `committed` is `true`, the effect and its events stand, and each binding whose delivery failed keeps its event and is attempted again on a later delivery, while no other binding receives it twice. Do not retry: after a failed delivery a retry performs the command a second time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "committed": {
+                      "description": "`true` when the command's effect and events were committed and delivering what it published failed; `false` when an unmet obligation stopped the command before anything was written.",
+                      "type": "boolean"
+                    },
+                    "refused": {
+                      "description": "What was left unfinished, in words.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "refused",
+                    "committed"
+                  ],
+                  "type": "object"
                 }
               }
             }
@@ -488,7 +738,7 @@
         },
         "responses": {
           "202": {
-            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers, not returned here.",
+            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers and listed under `published`.",
             "content": {
               "application/json": {
                 "schema": {
@@ -503,6 +753,31 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/mandate.credential.RevokeAccessCredential.wrong-state.Response"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "No declared outcome: the realization is unfinished. Either a port this command runs reported an unmet obligation, and nothing was written: `committed` is `false`. Or the command's effect was committed and delivering what this command published to a binding failed: `committed` is `true`, the effect and its events stand, and each binding whose delivery failed keeps its event and is attempted again on a later delivery, while no other binding receives it twice. Do not retry: after a failed delivery a retry performs the command a second time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "committed": {
+                      "description": "`true` when the command's effect and events were committed and delivering what it published failed; `false` when an unmet obligation stopped the command before anything was written.",
+                      "type": "boolean"
+                    },
+                    "refused": {
+                      "description": "What was left unfinished, in words.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "refused",
+                    "committed"
+                  ],
+                  "type": "object"
                 }
               }
             }
@@ -540,7 +815,7 @@
         },
         "responses": {
           "202": {
-            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers, not returned here.",
+            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers and listed under `published`.",
             "content": {
               "application/json": {
                 "schema": {
@@ -555,6 +830,31 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/mandate.credential.RevokeSigningKey.wrong-state.Response"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "No declared outcome: the realization is unfinished. Either a port this command runs reported an unmet obligation, and nothing was written: `committed` is `false`. Or the command's effect was committed and delivering what this command published to a binding failed: `committed` is `true`, the effect and its events stand, and each binding whose delivery failed keeps its event and is attempted again on a later delivery, while no other binding receives it twice. Do not retry: after a failed delivery a retry performs the command a second time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "committed": {
+                      "description": "`true` when the command's effect and events were committed and delivering what it published failed; `false` when an unmet obligation stopped the command before anything was written.",
+                      "type": "boolean"
+                    },
+                    "refused": {
+                      "description": "What was left unfinished, in words.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "refused",
+                    "committed"
+                  ],
+                  "type": "object"
                 }
               }
             }
@@ -629,6 +929,51 @@
         "x-ess-kind": "newtype",
         "type": "string"
       },
+      "mandate.core.CredentialDescriptor": {
+        "title": "CredentialDescriptor",
+        "x-ess-name": "mandate.core.CredentialDescriptor",
+        "x-ess-kind": "struct",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/mandate.core.CredentialKind"
+          },
+          "subject": {
+            "$ref": "#/components/schemas/mandate.core.PrincipalId"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/mandate.core.PrincipalId"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/mandate.core.OrganizationId"
+          },
+          "audience": {
+            "$ref": "#/components/schemas/mandate.core.Audience"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/mandate.core.AuthorityScope"
+          },
+          "delegation": {
+            "$ref": "#/components/schemas/mandate.core.DelegationId"
+          },
+          "execution": {
+            "$ref": "#/components/schemas/mandate.core.ExecutionId"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "kind",
+          "subject",
+          "organization",
+          "audience",
+          "scope",
+          "expires_at"
+        ],
+        "additionalProperties": false
+      },
       "mandate.core.CredentialId": {
         "title": "CredentialId",
         "x-ess-name": "mandate.core.CredentialId",
@@ -692,6 +1037,12 @@
         "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
         "contentEncoding": "base64"
       },
+      "mandate.core.CredentialVerifier": {
+        "title": "CredentialVerifier",
+        "x-ess-name": "mandate.core.CredentialVerifier",
+        "x-ess-kind": "newtype",
+        "type": "string"
+      },
       "mandate.core.DelegationId": {
         "title": "DelegationId",
         "x-ess-name": "mandate.core.DelegationId",
@@ -714,6 +1065,14 @@
           "Unavailable",
           "StaleEpoch"
         ]
+      },
+      "mandate.core.EpochSnapshotRef": {
+        "title": "EpochSnapshotRef",
+        "x-ess-name": "mandate.core.EpochSnapshotRef",
+        "x-ess-kind": "newtype",
+        "type": "string",
+        "format": "uuid",
+        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
       },
       "mandate.core.ExecutionId": {
         "title": "ExecutionId",
@@ -847,6 +1206,27 @@
         "format": "uuid",
         "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
       },
+      "mandate.core.SigningKeyWindow": {
+        "title": "SigningKeyWindow",
+        "x-ess-name": "mandate.core.SigningKeyWindow",
+        "x-ess-kind": "struct",
+        "type": "object",
+        "properties": {
+          "not_before": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "not_before",
+          "expires_at"
+        ],
+        "additionalProperties": false
+      },
       "mandate.core.SpaceId": {
         "title": "SpaceId",
         "x-ess-name": "mandate.core.SpaceId",
@@ -895,6 +1275,232 @@
         ],
         "additionalProperties": false
       },
+      "mandate.credential.AccessCredentialRevoked.Event": {
+        "title": "AccessCredentialRevoked payload",
+        "x-ess-name": "mandate.credential.AccessCredentialRevoked",
+        "x-ess-kind": "event-payload",
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/mandate.core.VerifiedContext"
+          },
+          "id": {
+            "$ref": "#/components/schemas/mandate.core.CredentialId"
+          }
+        },
+        "required": [
+          "context",
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "mandate.credential.AuthorizationCodeIssued.Event": {
+        "title": "AuthorizationCodeIssued payload",
+        "x-ess-name": "mandate.credential.AuthorizationCodeIssued",
+        "x-ess-kind": "event-payload",
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/mandate.core.VerifiedContext"
+          },
+          "code_id": {
+            "$ref": "#/components/schemas/mandate.core.AuthorizationCodeId"
+          },
+          "client_id": {
+            "$ref": "#/components/schemas/mandate.core.OAuthClientId"
+          },
+          "session_id": {
+            "$ref": "#/components/schemas/mandate.core.SessionId"
+          },
+          "verifier": {
+            "$ref": "#/components/schemas/mandate.core.CredentialVerifier"
+          },
+          "challenge": {
+            "$ref": "#/components/schemas/mandate.core.PkceChallenge"
+          },
+          "method": {
+            "$ref": "#/components/schemas/mandate.core.PkceMethod"
+          },
+          "redirect_uri": {
+            "$ref": "#/components/schemas/mandate.core.RedirectUri"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "target": {
+            "$ref": "#/components/schemas/mandate.core.ResourceServerId"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/mandate.core.AuthorityScope"
+          }
+        },
+        "required": [
+          "context",
+          "code_id",
+          "client_id",
+          "session_id",
+          "verifier",
+          "challenge",
+          "method",
+          "redirect_uri",
+          "expires_at",
+          "target",
+          "scope"
+        ],
+        "additionalProperties": false
+      },
+      "mandate.credential.AuthorizationCodeRedeemed.Event": {
+        "title": "AuthorizationCodeRedeemed payload",
+        "x-ess-name": "mandate.credential.AuthorizationCodeRedeemed",
+        "x-ess-kind": "event-payload",
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/mandate.core.VerifiedContext"
+          },
+          "code_id": {
+            "$ref": "#/components/schemas/mandate.core.AuthorizationCodeId"
+          },
+          "credential_id": {
+            "$ref": "#/components/schemas/mandate.core.CredentialId"
+          },
+          "reference_verifier": {
+            "$ref": "#/components/schemas/mandate.core.CredentialVerifier"
+          },
+          "epochs": {
+            "$ref": "#/components/schemas/mandate.core.EpochSnapshotRef"
+          },
+          "issued_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "descriptor": {
+            "$ref": "#/components/schemas/mandate.core.CredentialDescriptor"
+          },
+          "target": {
+            "$ref": "#/components/schemas/mandate.core.ResourceServerId"
+          }
+        },
+        "required": [
+          "context",
+          "code_id",
+          "credential_id",
+          "issued_at",
+          "descriptor",
+          "target"
+        ],
+        "additionalProperties": false
+      },
+      "mandate.credential.CredentialIntrospected.Event": {
+        "title": "CredentialIntrospected payload",
+        "x-ess-name": "mandate.credential.CredentialIntrospected",
+        "x-ess-kind": "event-payload",
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/mandate.core.VerifiedContext"
+          },
+          "descriptor": {
+            "$ref": "#/components/schemas/mandate.core.CredentialDescriptor"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "credential_id": {
+            "$ref": "#/components/schemas/mandate.core.CredentialId"
+          }
+        },
+        "required": [
+          "context",
+          "active"
+        ],
+        "additionalProperties": false
+      },
+      "mandate.credential.CredentialReferenceIssued.Event": {
+        "title": "CredentialReferenceIssued payload",
+        "x-ess-name": "mandate.credential.CredentialReferenceIssued",
+        "x-ess-kind": "event-payload",
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/mandate.core.VerifiedContext"
+          },
+          "credential_id": {
+            "$ref": "#/components/schemas/mandate.core.CredentialId"
+          },
+          "reference_verifier": {
+            "$ref": "#/components/schemas/mandate.core.CredentialVerifier"
+          },
+          "epochs": {
+            "$ref": "#/components/schemas/mandate.core.EpochSnapshotRef"
+          },
+          "issued_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "descriptor": {
+            "$ref": "#/components/schemas/mandate.core.CredentialDescriptor"
+          },
+          "target": {
+            "$ref": "#/components/schemas/mandate.core.ResourceServerId"
+          },
+          "requested_scope": {
+            "$ref": "#/components/schemas/mandate.core.AuthorityScope"
+          }
+        },
+        "required": [
+          "context",
+          "credential_id",
+          "issued_at",
+          "descriptor",
+          "target",
+          "requested_scope"
+        ],
+        "additionalProperties": false
+      },
+      "mandate.credential.CredentialSelfContainedIssued.Event": {
+        "title": "CredentialSelfContainedIssued payload",
+        "x-ess-name": "mandate.credential.CredentialSelfContainedIssued",
+        "x-ess-kind": "event-payload",
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/mandate.core.VerifiedContext"
+          },
+          "credential_id": {
+            "$ref": "#/components/schemas/mandate.core.CredentialId"
+          },
+          "reference_verifier": {
+            "$ref": "#/components/schemas/mandate.core.CredentialVerifier"
+          },
+          "epochs": {
+            "$ref": "#/components/schemas/mandate.core.EpochSnapshotRef"
+          },
+          "issued_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "descriptor": {
+            "$ref": "#/components/schemas/mandate.core.CredentialDescriptor"
+          },
+          "target": {
+            "$ref": "#/components/schemas/mandate.core.ResourceServerId"
+          },
+          "requested_scope": {
+            "$ref": "#/components/schemas/mandate.core.AuthorityScope"
+          }
+        },
+        "required": [
+          "context",
+          "credential_id",
+          "issued_at",
+          "descriptor",
+          "target",
+          "requested_scope"
+        ],
+        "additionalProperties": false
+      },
       "mandate.credential.Denied.Error": {
         "title": "Denied payload",
         "description": "Fail closed; no credential, authority or lifecycle mutation on refusal.",
@@ -932,15 +1538,42 @@
       },
       "mandate.credential.DisableResourceServer.accepted.Response": {
         "additionalProperties": false,
-        "description": "Taken when no other outcome's condition matched. A `mandate.credential.ResourceServer` has moved to `Disabled`, along `disable`. The instance is the one `id` names. Emits `ResourceServerDisabled`, published to consumers rather than returned here.",
+        "description": "Taken when no other outcome's condition matched. A `mandate.credential.ResourceServer` has moved to `Disabled`, along `disable`. The instance is the one `id` names. Emits `ResourceServerDisabled`, published to consumers and listed under `published`.",
         "properties": {
           "outcome": {
             "const": "accepted",
             "description": "Which declared outcome the command took."
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "items": false,
+            "maxItems": 1,
+            "minItems": 1,
+            "prefixItems": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "event": {
+                    "const": "mandate.credential.ResourceServerDisabled",
+                    "type": "string"
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/mandate.credential.ResourceServerDisabled.Event"
+                  }
+                },
+                "required": [
+                  "event",
+                  "payload"
+                ],
+                "type": "object"
+              }
+            ],
+            "type": "array"
           }
         },
         "required": [
-          "outcome"
+          "outcome",
+          "published"
         ],
         "type": "object"
       },
@@ -959,10 +1592,16 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
+          "published",
           "error",
           "payload"
         ],
@@ -970,7 +1609,7 @@
       },
       "mandate.credential.DisableResourceServer.wrong-state.Response": {
         "additionalProperties": false,
-        "description": "Taken when the subject is in a state none of this command's declared moves start from. Which states those are is the lifecycle's answer, not this command's.",
+        "description": "Taken when the subject is in a state none of this command's declared moves start from. Which states those are is the lifecycle's answer, not this command's. For an instance no record carries, `payload` is absent, because an instance that does not exist has nothing for the error to describe.",
         "properties": {
           "error": {
             "const": "mandate.credential.Denied",
@@ -983,12 +1622,17 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
-          "error",
-          "payload"
+          "published",
+          "error"
         ],
         "type": "object"
       },
@@ -1023,21 +1667,48 @@
       },
       "mandate.credential.ExchangeCredential.accepted.Response": {
         "additionalProperties": false,
-        "description": "Taken when no other outcome's condition matched. A `mandate.credential.AccessCredential` now exists, in `Active`. Its identity is published as `credential_id` on `mandate.credential.TokenExchangeAllowed`. Emits `TokenExchangeAllowed`, published to consumers rather than returned here.",
+        "description": "Taken when no other outcome's condition matched. A `mandate.credential.AccessCredential` now exists, in `Active`. Its identity is published as `credential_id` on `mandate.credential.TokenExchangeAllowed`. Emits `TokenExchangeAllowed`, published to consumers and listed under `published`.",
         "properties": {
           "outcome": {
             "const": "accepted",
             "description": "Which declared outcome the command took."
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "items": false,
+            "maxItems": 1,
+            "minItems": 1,
+            "prefixItems": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "event": {
+                    "const": "mandate.credential.TokenExchangeAllowed",
+                    "type": "string"
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/mandate.credential.TokenExchangeAllowed.Event"
+                  }
+                },
+                "required": [
+                  "event",
+                  "payload"
+                ],
+                "type": "object"
+              }
+            ],
+            "type": "array"
           }
         },
         "required": [
-          "outcome"
+          "outcome",
+          "published"
         ],
         "type": "object"
       },
       "mandate.credential.ExchangeCredential.denied.Response": {
         "additionalProperties": false,
-        "description": "Decided outside the request: Either independently validated proof is invalid/revoked/expired/stale; actor, tenant, registered target/source, scope, space, delegation or ceiling binding fails; transitive delegation is requested; approval is required; or authority/expiry narrowing and durable audit fail..",
+        "description": "Decided outside the request: Either independently validated proof is invalid/revoked/expired/stale; actor, tenant, registered target/source, scope, space, delegation or ceiling binding fails; two current capability ceilings share one agent and organization-or-platform key; transitive delegation is requested; approval is required; or authority/expiry narrowing and durable audit fail..",
         "properties": {
           "error": {
             "const": "mandate.credential.Denied",
@@ -1050,10 +1721,16 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
+          "published",
           "error",
           "payload"
         ],
@@ -1080,15 +1757,42 @@
       },
       "mandate.credential.IntrospectCredential.accepted.Response": {
         "additionalProperties": false,
-        "description": "An active answer carries the descriptor and the credential_id of the record this log holds. An inactive answer carries neither — that is the answer for a credential this deployment revoked, one whose expiry has passed, and a well-formed proof that resolves to no record at all, which are one answer here and not three. The three are distinguished by nothing this event carries, deliberately, because a caller holding a well-formed proof learns only whether it is usable. This outcome creates, moves and updates nothing, and CredentialIntrospected folds into no record — its credential_id names an instance only when one exists in this log, and a fold reading it must not take the name for the existence of a record some other event created. The presented credential may have been issued by a deployment this log never saw, which is why the field is optional rather than the event's subject. Taken when no other outcome's condition matched. Emits `CredentialIntrospected`, published to consumers rather than returned here.",
+        "description": "An active answer carries the descriptor and the credential_id of the record this log holds. An inactive answer carries neither — that is the answer for a credential this deployment revoked, one whose expiry has passed, and a well-formed proof that resolves to no record at all, which are one answer here and not three. The three are distinguished by nothing this event carries, deliberately, because a caller holding a well-formed proof learns only whether it is usable. This outcome creates, moves and updates nothing, and CredentialIntrospected folds into no record — its credential_id names an instance only when one exists in this log, and a fold reading it must not take the name for the existence of a record some other event created. The presented credential may have been issued by a deployment this log never saw, which is why the field is optional rather than the event's subject. Taken when no other outcome's condition matched. Emits `CredentialIntrospected`, published to consumers and listed under `published`.",
         "properties": {
           "outcome": {
             "const": "accepted",
             "description": "Which declared outcome the command took."
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "items": false,
+            "maxItems": 1,
+            "minItems": 1,
+            "prefixItems": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "event": {
+                    "const": "mandate.credential.CredentialIntrospected",
+                    "type": "string"
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/mandate.credential.CredentialIntrospected.Event"
+                  }
+                },
+                "required": [
+                  "event",
+                  "payload"
+                ],
+                "type": "object"
+              }
+            ],
+            "type": "array"
           }
         },
         "required": [
-          "outcome"
+          "outcome",
+          "published"
         ],
         "type": "object"
       },
@@ -1107,10 +1811,16 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
+          "published",
           "error",
           "payload"
         ],
@@ -1166,15 +1876,42 @@
       },
       "mandate.credential.IssueAuthorizationCode.accepted.Response": {
         "additionalProperties": false,
-        "description": "STS stores only a non-reversible verifier bound to the validated client, session, exact redirect, S256 challenge, registered target, narrowed scope and bounded expiry. Only the transient code is returned to the public-client adapter. Taken when no other outcome's condition matched. A `mandate.credential.AuthorizationCode` now exists, in `Issued`. Its identity is published as `code_id` on `mandate.credential.AuthorizationCodeIssued`. Emits `AuthorizationCodeIssued`, published to consumers rather than returned here.",
+        "description": "STS stores only a non-reversible verifier bound to the validated client, session, exact redirect, S256 challenge, registered target, narrowed scope and bounded expiry. Only the transient code is returned to the public-client adapter. Taken when no other outcome's condition matched. A `mandate.credential.AuthorizationCode` now exists, in `Issued`. Its identity is published as `code_id` on `mandate.credential.AuthorizationCodeIssued`. Emits `AuthorizationCodeIssued`, published to consumers and listed under `published`.",
         "properties": {
           "outcome": {
             "const": "accepted",
             "description": "Which declared outcome the command took."
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "items": false,
+            "maxItems": 1,
+            "minItems": 1,
+            "prefixItems": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "event": {
+                    "const": "mandate.credential.AuthorizationCodeIssued",
+                    "type": "string"
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/mandate.credential.AuthorizationCodeIssued.Event"
+                  }
+                },
+                "required": [
+                  "event",
+                  "payload"
+                ],
+                "type": "object"
+              }
+            ],
+            "type": "array"
           }
         },
         "required": [
-          "outcome"
+          "outcome",
+          "published"
         ],
         "type": "object"
       },
@@ -1193,10 +1930,16 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
+          "published",
           "error",
           "payload"
         ],
@@ -1227,15 +1970,42 @@
       },
       "mandate.credential.IssueReferenceCredential.accepted.Response": {
         "additionalProperties": false,
-        "description": "Taken when no other outcome's condition matched. A `mandate.credential.AccessCredential` now exists, in `Active`. Its identity is published as `credential_id` on `mandate.credential.CredentialReferenceIssued`. Emits `CredentialReferenceIssued`, published to consumers rather than returned here.",
+        "description": "Taken when no other outcome's condition matched. A `mandate.credential.AccessCredential` now exists, in `Active`. Its identity is published as `credential_id` on `mandate.credential.CredentialReferenceIssued`. Emits `CredentialReferenceIssued`, published to consumers and listed under `published`.",
         "properties": {
           "outcome": {
             "const": "accepted",
             "description": "Which declared outcome the command took."
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "items": false,
+            "maxItems": 1,
+            "minItems": 1,
+            "prefixItems": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "event": {
+                    "const": "mandate.credential.CredentialReferenceIssued",
+                    "type": "string"
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/mandate.credential.CredentialReferenceIssued.Event"
+                  }
+                },
+                "required": [
+                  "event",
+                  "payload"
+                ],
+                "type": "object"
+              }
+            ],
+            "type": "array"
           }
         },
         "required": [
-          "outcome"
+          "outcome",
+          "published"
         ],
         "type": "object"
       },
@@ -1254,10 +2024,16 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
+          "published",
           "error",
           "payload"
         ],
@@ -1288,15 +2064,42 @@
       },
       "mandate.credential.IssueSelfContainedCredential.accepted.Response": {
         "additionalProperties": false,
-        "description": "Taken when no other outcome's condition matched. A `mandate.credential.AccessCredential` now exists, in `Active`. Its identity is published as `credential_id` on `mandate.credential.CredentialSelfContainedIssued`. Emits `CredentialSelfContainedIssued`, published to consumers rather than returned here.",
+        "description": "Taken when no other outcome's condition matched. A `mandate.credential.AccessCredential` now exists, in `Active`. Its identity is published as `credential_id` on `mandate.credential.CredentialSelfContainedIssued`. Emits `CredentialSelfContainedIssued`, published to consumers and listed under `published`.",
         "properties": {
           "outcome": {
             "const": "accepted",
             "description": "Which declared outcome the command took."
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "items": false,
+            "maxItems": 1,
+            "minItems": 1,
+            "prefixItems": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "event": {
+                    "const": "mandate.credential.CredentialSelfContainedIssued",
+                    "type": "string"
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/mandate.credential.CredentialSelfContainedIssued.Event"
+                  }
+                },
+                "required": [
+                  "event",
+                  "payload"
+                ],
+                "type": "object"
+              }
+            ],
+            "type": "array"
           }
         },
         "required": [
-          "outcome"
+          "outcome",
+          "published"
         ],
         "type": "object"
       },
@@ -1315,10 +2118,16 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
+          "published",
           "error",
           "payload"
         ],
@@ -1357,15 +2166,42 @@
       },
       "mandate.credential.RedeemAuthorizationCode.accepted.Response": {
         "additionalProperties": false,
-        "description": "STS atomically consumes the code and persists the narrowed credential and audit outbox. The returned credential remains bound to the code target, scope, session and expiry; a failed or replayed transaction produces no credential. The command takes no context input and admits no caller-supplied selector — the generated context on the emitted event takes its subject, organization and audience from the code record and the session it names through the STS's session port, its credential as the credential_id this outcome issues, its correlation as the one the outcome mints for this request, and its actor, delegation and execution as absent unless the code record names them. The audience is the one published by the registration the code record's target names. The epoch whose staleness the denial names is the session's own, resolved through that same port, because a redemption presents no source credential of its own. The credential this outcome issues is recorded by mandate.credential.AuthorizationCodeRedeemed, which carries the whole mandate.credential.AccessCredential record, and the epoch snapshot it binds is the one this command answers in its response; the outcome's one subject stays the code it consumes, so the seeding is declared in this domain's header. Taken when no other outcome's condition matched. A `mandate.credential.AuthorizationCode` has moved to `Consumed`, along `consume`. The instance is the one `code_id` names. Emits `AuthorizationCodeRedeemed`, published to consumers rather than returned here.",
+        "description": "STS atomically consumes the code and persists the narrowed credential and audit outbox. The returned credential remains bound to the code target, scope, session and expiry; a failed or replayed transaction produces no credential. The command takes no context input and admits no caller-supplied selector — the generated context on the emitted event takes its subject, organization and audience from the code record and the session it names through the STS's session port, its credential as the credential_id this outcome issues, its correlation as the one the outcome mints for this request, and its actor, delegation and execution as absent unless the code record names them. The audience is the one published by the registration the code record's target names. The epoch whose staleness the denial names is the session's own, resolved through that same port, because a redemption presents no source credential of its own. The credential this outcome issues is recorded by mandate.credential.AuthorizationCodeRedeemed, which carries the whole mandate.credential.AccessCredential record, and the epoch snapshot it binds is the one this command answers in its response; the outcome's one subject stays the code it consumes, so the seeding is declared in this domain's header. Taken when no other outcome's condition matched. A `mandate.credential.AuthorizationCode` has moved to `Consumed`, along `consume`. The instance is the one `code_id` names. Emits `AuthorizationCodeRedeemed`, published to consumers and listed under `published`.",
         "properties": {
           "outcome": {
             "const": "accepted",
             "description": "Which declared outcome the command took."
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "items": false,
+            "maxItems": 1,
+            "minItems": 1,
+            "prefixItems": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "event": {
+                    "const": "mandate.credential.AuthorizationCodeRedeemed",
+                    "type": "string"
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/mandate.credential.AuthorizationCodeRedeemed.Event"
+                  }
+                },
+                "required": [
+                  "event",
+                  "payload"
+                ],
+                "type": "object"
+              }
+            ],
+            "type": "array"
           }
         },
         "required": [
-          "outcome"
+          "outcome",
+          "published"
         ],
         "type": "object"
       },
@@ -1384,10 +2220,16 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
+          "published",
           "error",
           "payload"
         ],
@@ -1395,7 +2237,7 @@
       },
       "mandate.credential.RedeemAuthorizationCode.wrong-state.Response": {
         "additionalProperties": false,
-        "description": "Taken when the subject is in a state none of this command's declared moves start from. Which states those are is the lifecycle's answer, not this command's.",
+        "description": "Taken when the subject is in a state none of this command's declared moves start from. Which states those are is the lifecycle's answer, not this command's. For an instance no record carries, `payload` is absent, because an instance that does not exist has nothing for the error to describe.",
         "properties": {
           "error": {
             "const": "mandate.credential.Denied",
@@ -1408,12 +2250,17 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
-          "error",
-          "payload"
+          "published",
+          "error"
         ],
         "type": "object"
       },
@@ -1449,15 +2296,42 @@
       },
       "mandate.credential.RegisterResourceServer.accepted.Response": {
         "additionalProperties": false,
-        "description": "Taken when no other outcome's condition matched. A `mandate.credential.ResourceServer` now exists, in `Enabled`. Its identity is published as `id` on `mandate.credential.ResourceServerRegistered`. Emits `ResourceServerRegistered`, published to consumers rather than returned here.",
+        "description": "Taken when no other outcome's condition matched. A `mandate.credential.ResourceServer` now exists, in `Enabled`. Its identity is published as `id` on `mandate.credential.ResourceServerRegistered`. Emits `ResourceServerRegistered`, published to consumers and listed under `published`.",
         "properties": {
           "outcome": {
             "const": "accepted",
             "description": "Which declared outcome the command took."
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "items": false,
+            "maxItems": 1,
+            "minItems": 1,
+            "prefixItems": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "event": {
+                    "const": "mandate.credential.ResourceServerRegistered",
+                    "type": "string"
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/mandate.credential.ResourceServerRegistered.Event"
+                  }
+                },
+                "required": [
+                  "event",
+                  "payload"
+                ],
+                "type": "object"
+              }
+            ],
+            "type": "array"
           }
         },
         "required": [
-          "outcome"
+          "outcome",
+          "published"
         ],
         "type": "object"
       },
@@ -1476,10 +2350,16 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
+          "published",
           "error",
           "payload"
         ],
@@ -1500,35 +2380,56 @@
           "algorithm": {
             "$ref": "#/components/schemas/mandate.core.SigningAlgorithm"
           },
-          "not_before": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "expires_at": {
-            "type": "string",
-            "format": "date-time"
+          "window": {
+            "$ref": "#/components/schemas/mandate.core.SigningKeyWindow"
           }
         },
         "required": [
           "context",
           "key_reference",
           "algorithm",
-          "not_before",
-          "expires_at"
+          "window"
         ],
         "additionalProperties": false
       },
       "mandate.credential.RegisterSigningKey.accepted.Response": {
         "additionalProperties": false,
-        "description": "The key enters the contract Recorded, which is what rotation requires — RetireSigningKey denies a retirement with no overlapping replacement published for continued verification, and no replacement can exist until a key can be registered. SigningKeyRegistered carries the whole mandate.credential.SigningKey record — the key identity, the reference the deployment resolves to the material, the thumbprint of the public key, the algorithm name and the validity window — so the credential fold materializes the key from this event alone and reads no command input or response. The mandate.core.SigningKeyId is the kid the signer publishes and a credential names; the thumbprint is the RFC 7638 JWK thumbprint of the public key this outcome resolved from key_reference, so a revocation record naming a kid and a thumbprint is rebuilt from this log without resolving the material of a key that was revoked as compromised. Both are decided by this outcome and read from its response. No key material enters the contract — KeyReference is a handle to material the deployment holds, and no event here carries a secret. The algorithm is a name and not an admitted algorithm (UNMAPPED-ALGORITHM-POLICY); the deployment's verifier-side allowlist admits it or the registration is denied. A key reference, or the key material it resolves to, already held by a recorded key is refused in every state that key can be in, including Retired and Revoked, so material the deployment revoked never returns under a second identity. The window ordering is the entity's invariant, checked by the deciding handler; the synthesized accepted scenario builds an equal window and is expected to fail until ESS's synthesizer consults entity invariants (routed to the ESS wave). No command replaces a key in place; rotation registers the successor and retires the predecessor. Taken when no other outcome's condition matched. A `mandate.credential.SigningKey` now exists, in `Recorded`. Its identity is published as `id` on `mandate.credential.SigningKeyRegistered`. Emits `SigningKeyRegistered`, published to consumers rather than returned here.",
+        "description": "The key enters the contract Recorded, which is what rotation requires — RetireSigningKey denies a retirement with no overlapping replacement published for continued verification, and no replacement can exist until a key can be registered. SigningKeyRegistered carries the whole mandate.credential.SigningKey record — the key identity, the reference the deployment resolves to the material, the thumbprint of the public key, the algorithm name and the validity window — so the credential fold materializes the key from this event alone and reads no command input or response. The mandate.core.SigningKeyId is the kid the signer publishes and a credential names; the thumbprint is the RFC 7638 JWK thumbprint of the public key this outcome resolved from key_reference, so a revocation record naming a kid and a thumbprint is rebuilt from this log without resolving the material of a key that was revoked as compromised. Both are decided by this outcome and read from its response. No key material enters the contract — KeyReference is a handle to material the deployment holds, and no event here carries a secret. The algorithm is a name and not an admitted algorithm (UNMAPPED-ALGORITHM-POLICY); the deployment's verifier-side allowlist admits it or the registration is denied. A key reference, or the key material it resolves to, already held by a recorded key is refused in every state that key can be in, including Retired and Revoked, so material the deployment revoked never returns under a second identity. The window ordering is the entity's invariant, window.not_before < window.expires_at, checked by the deciding handler; the two instants are one mandate.core.SigningKeyWindow because an invariant compares two fields only as members of one struct, and the accepted outcome sets the window from the command's input, so the invariant reads a specified value. No command replaces a key in place; rotation registers the successor and retires the predecessor. Taken when no other outcome's condition matched. A `mandate.credential.SigningKey` now exists, in `Recorded`. Its identity is published as `id` on `mandate.credential.SigningKeyRegistered`. Emits `SigningKeyRegistered`, published to consumers and listed under `published`.",
         "properties": {
           "outcome": {
             "const": "accepted",
             "description": "Which declared outcome the command took."
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "items": false,
+            "maxItems": 1,
+            "minItems": 1,
+            "prefixItems": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "event": {
+                    "const": "mandate.credential.SigningKeyRegistered",
+                    "type": "string"
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/mandate.credential.SigningKeyRegistered.Event"
+                  }
+                },
+                "required": [
+                  "event",
+                  "payload"
+                ],
+                "type": "object"
+              }
+            ],
+            "type": "array"
           }
         },
         "required": [
-          "outcome"
+          "outcome",
+          "published"
         ],
         "type": "object"
       },
@@ -1547,14 +2448,73 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
+          "published",
           "error",
           "payload"
         ],
         "type": "object"
+      },
+      "mandate.credential.ResourceServerDisabled.Event": {
+        "title": "ResourceServerDisabled payload",
+        "x-ess-name": "mandate.credential.ResourceServerDisabled",
+        "x-ess-kind": "event-payload",
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/mandate.core.VerifiedContext"
+          },
+          "id": {
+            "$ref": "#/components/schemas/mandate.core.ResourceServerId"
+          }
+        },
+        "required": [
+          "context",
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "mandate.credential.ResourceServerRegistered.Event": {
+        "title": "ResourceServerRegistered payload",
+        "x-ess-name": "mandate.credential.ResourceServerRegistered",
+        "x-ess-kind": "event-payload",
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/mandate.core.VerifiedContext"
+          },
+          "id": {
+            "$ref": "#/components/schemas/mandate.core.ResourceServerId"
+          },
+          "audience": {
+            "$ref": "#/components/schemas/mandate.core.Audience"
+          },
+          "credential_profile": {
+            "$ref": "#/components/schemas/mandate.core.CredentialProfile"
+          },
+          "allowed_exchange_sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/mandate.core.ResourceServerId"
+            }
+          }
+        },
+        "required": [
+          "context",
+          "id",
+          "audience",
+          "credential_profile",
+          "allowed_exchange_sources"
+        ],
+        "additionalProperties": false
       },
       "mandate.credential.RetireSigningKey.Input": {
         "title": "RetireSigningKey input",
@@ -1577,15 +2537,42 @@
       },
       "mandate.credential.RetireSigningKey.accepted.Response": {
         "additionalProperties": false,
-        "description": "Rotation, not revocation. A retired key signs nothing further; it remains admitted for verifying credentials already issued under it until they expire, which is the overlapping rotation period the key requirements demand. Taken when no other outcome's condition matched. A `mandate.credential.SigningKey` has moved to `Retired`, along `retire`. The instance is the one `id` names. Emits `SigningKeyRetired`, published to consumers rather than returned here.",
+        "description": "Rotation, not revocation. A retired key signs nothing further; it remains admitted for verifying credentials already issued under it until they expire, which is the overlapping rotation period the key requirements demand. Taken when no other outcome's condition matched. A `mandate.credential.SigningKey` has moved to `Retired`, along `retire`. The instance is the one `id` names. Emits `SigningKeyRetired`, published to consumers and listed under `published`.",
         "properties": {
           "outcome": {
             "const": "accepted",
             "description": "Which declared outcome the command took."
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "items": false,
+            "maxItems": 1,
+            "minItems": 1,
+            "prefixItems": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "event": {
+                    "const": "mandate.credential.SigningKeyRetired",
+                    "type": "string"
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/mandate.credential.SigningKeyRetired.Event"
+                  }
+                },
+                "required": [
+                  "event",
+                  "payload"
+                ],
+                "type": "object"
+              }
+            ],
+            "type": "array"
           }
         },
         "required": [
-          "outcome"
+          "outcome",
+          "published"
         ],
         "type": "object"
       },
@@ -1604,10 +2591,16 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
+          "published",
           "error",
           "payload"
         ],
@@ -1615,7 +2608,7 @@
       },
       "mandate.credential.RetireSigningKey.wrong-state.Response": {
         "additionalProperties": false,
-        "description": "Taken when the subject is in a state none of this command's declared moves start from. Which states those are is the lifecycle's answer, not this command's.",
+        "description": "Taken when the subject is in a state none of this command's declared moves start from. Which states those are is the lifecycle's answer, not this command's. For an instance no record carries, `payload` is absent, because an instance that does not exist has nothing for the error to describe.",
         "properties": {
           "error": {
             "const": "mandate.credential.Denied",
@@ -1628,12 +2621,17 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
-          "error",
-          "payload"
+          "published",
+          "error"
         ],
         "type": "object"
       },
@@ -1658,15 +2656,42 @@
       },
       "mandate.credential.RevokeAccessCredential.accepted.Response": {
         "additionalProperties": false,
-        "description": "Taken when no other outcome's condition matched. A `mandate.credential.AccessCredential` has moved to `Revoked`, along `revoke`. The instance is the one `id` names. Emits `AccessCredentialRevoked`, published to consumers rather than returned here.",
+        "description": "Taken when no other outcome's condition matched. A `mandate.credential.AccessCredential` has moved to `Revoked`, along `revoke`. The instance is the one `id` names. Emits `AccessCredentialRevoked`, published to consumers and listed under `published`.",
         "properties": {
           "outcome": {
             "const": "accepted",
             "description": "Which declared outcome the command took."
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "items": false,
+            "maxItems": 1,
+            "minItems": 1,
+            "prefixItems": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "event": {
+                    "const": "mandate.credential.AccessCredentialRevoked",
+                    "type": "string"
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/mandate.credential.AccessCredentialRevoked.Event"
+                  }
+                },
+                "required": [
+                  "event",
+                  "payload"
+                ],
+                "type": "object"
+              }
+            ],
+            "type": "array"
           }
         },
         "required": [
-          "outcome"
+          "outcome",
+          "published"
         ],
         "type": "object"
       },
@@ -1685,10 +2710,16 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
+          "published",
           "error",
           "payload"
         ],
@@ -1696,7 +2727,7 @@
       },
       "mandate.credential.RevokeAccessCredential.wrong-state.Response": {
         "additionalProperties": false,
-        "description": "Taken when the subject is in a state none of this command's declared moves start from. Which states those are is the lifecycle's answer, not this command's.",
+        "description": "Taken when the subject is in a state none of this command's declared moves start from. Which states those are is the lifecycle's answer, not this command's. For an instance no record carries, `payload` is absent, because an instance that does not exist has nothing for the error to describe.",
         "properties": {
           "error": {
             "const": "mandate.credential.Denied",
@@ -1709,12 +2740,17 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
-          "error",
-          "payload"
+          "published",
+          "error"
         ],
         "type": "object"
       },
@@ -1739,15 +2775,42 @@
       },
       "mandate.credential.RevokeSigningKey.accepted.Response": {
         "additionalProperties": false,
-        "description": "The emergency procedure. A revoked key is admitted for neither issuance nor verification, and the self-contained credentials it signed are refused from that point; the key record itself is kept. Taken when no other outcome's condition matched. A `mandate.credential.SigningKey` has moved to `Revoked`, along `revoke`. The instance is the one `id` names. Emits `SigningKeyRevoked`, published to consumers rather than returned here.",
+        "description": "The emergency procedure. A revoked key is admitted for neither issuance nor verification, and the self-contained credentials it signed are refused from that point; the key record itself is kept. Taken when no other outcome's condition matched. A `mandate.credential.SigningKey` has moved to `Revoked`, along `revoke`. The instance is the one `id` names. Emits `SigningKeyRevoked`, published to consumers and listed under `published`.",
         "properties": {
           "outcome": {
             "const": "accepted",
             "description": "Which declared outcome the command took."
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "items": false,
+            "maxItems": 1,
+            "minItems": 1,
+            "prefixItems": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "event": {
+                    "const": "mandate.credential.SigningKeyRevoked",
+                    "type": "string"
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/mandate.credential.SigningKeyRevoked.Event"
+                  }
+                },
+                "required": [
+                  "event",
+                  "payload"
+                ],
+                "type": "object"
+              }
+            ],
+            "type": "array"
           }
         },
         "required": [
-          "outcome"
+          "outcome",
+          "published"
         ],
         "type": "object"
       },
@@ -1766,10 +2829,16 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
+          "published",
           "error",
           "payload"
         ],
@@ -1777,7 +2846,7 @@
       },
       "mandate.credential.RevokeSigningKey.wrong-state.Response": {
         "additionalProperties": false,
-        "description": "Taken when the subject is in a state none of this command's declared moves start from. Which states those are is the lifecycle's answer, not this command's.",
+        "description": "Taken when the subject is in a state none of this command's declared moves start from. Which states those are is the lifecycle's answer, not this command's. For an instance no record carries, `payload` is absent, because an instance that does not exist has nothing for the error to describe.",
         "properties": {
           "error": {
             "const": "mandate.credential.Denied",
@@ -1790,14 +2859,134 @@
           },
           "payload": {
             "$ref": "#/components/schemas/mandate.credential.Denied.Error"
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "maxItems": 0,
+            "type": "array"
           }
         },
         "required": [
           "outcome",
-          "error",
-          "payload"
+          "published",
+          "error"
         ],
         "type": "object"
+      },
+      "mandate.credential.SigningKeyRegistered.Event": {
+        "title": "SigningKeyRegistered payload",
+        "x-ess-name": "mandate.credential.SigningKeyRegistered",
+        "x-ess-kind": "event-payload",
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/mandate.core.VerifiedContext"
+          },
+          "id": {
+            "$ref": "#/components/schemas/mandate.core.SigningKeyId"
+          },
+          "key_reference": {
+            "$ref": "#/components/schemas/mandate.core.KeyReference"
+          },
+          "thumbprint": {
+            "type": "string"
+          },
+          "algorithm": {
+            "$ref": "#/components/schemas/mandate.core.SigningAlgorithm"
+          },
+          "window": {
+            "$ref": "#/components/schemas/mandate.core.SigningKeyWindow"
+          }
+        },
+        "required": [
+          "context",
+          "id",
+          "key_reference",
+          "thumbprint",
+          "algorithm",
+          "window"
+        ],
+        "additionalProperties": false
+      },
+      "mandate.credential.SigningKeyRetired.Event": {
+        "title": "SigningKeyRetired payload",
+        "x-ess-name": "mandate.credential.SigningKeyRetired",
+        "x-ess-kind": "event-payload",
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/mandate.core.VerifiedContext"
+          },
+          "id": {
+            "$ref": "#/components/schemas/mandate.core.SigningKeyId"
+          }
+        },
+        "required": [
+          "context",
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "mandate.credential.SigningKeyRevoked.Event": {
+        "title": "SigningKeyRevoked payload",
+        "x-ess-name": "mandate.credential.SigningKeyRevoked",
+        "x-ess-kind": "event-payload",
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/mandate.core.VerifiedContext"
+          },
+          "id": {
+            "$ref": "#/components/schemas/mandate.core.SigningKeyId"
+          }
+        },
+        "required": [
+          "context",
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "mandate.credential.TokenExchangeAllowed.Event": {
+        "title": "TokenExchangeAllowed payload",
+        "x-ess-name": "mandate.credential.TokenExchangeAllowed",
+        "x-ess-kind": "event-payload",
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/mandate.core.VerifiedContext"
+          },
+          "credential_id": {
+            "$ref": "#/components/schemas/mandate.core.CredentialId"
+          },
+          "reference_verifier": {
+            "$ref": "#/components/schemas/mandate.core.CredentialVerifier"
+          },
+          "epochs": {
+            "$ref": "#/components/schemas/mandate.core.EpochSnapshotRef"
+          },
+          "issued_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "descriptor": {
+            "$ref": "#/components/schemas/mandate.core.CredentialDescriptor"
+          },
+          "target": {
+            "$ref": "#/components/schemas/mandate.core.ResourceServerId"
+          },
+          "requested_scope": {
+            "$ref": "#/components/schemas/mandate.core.AuthorityScope"
+          }
+        },
+        "required": [
+          "context",
+          "credential_id",
+          "issued_at",
+          "descriptor",
+          "target",
+          "requested_scope"
+        ],
+        "additionalProperties": false
       }
     }
   },
@@ -2104,6 +3293,27 @@
       "format": "uuid",
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
+    "mandate.core.SigningKeyWindow": {
+      "title": "SigningKeyWindow",
+      "x-ess-name": "mandate.core.SigningKeyWindow",
+      "x-ess-kind": "struct",
+      "type": "object",
+      "properties": {
+        "not_before": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "not_before",
+        "expires_at"
+      ],
+      "additionalProperties": false
+    },
     "mandate.core.SpaceId": {
       "title": "SpaceId",
       "x-ess-name": "mandate.core.SpaceId",
@@ -2342,13 +3552,8 @@
         "algorithm": {
           "$ref": "#/x-ess-entities/mandate.core.SigningAlgorithm"
         },
-        "not_before": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "expires_at": {
-          "type": "string",
-          "format": "date-time"
+        "window": {
+          "$ref": "#/x-ess-entities/mandate.core.SigningKeyWindow"
         },
         "state": {
           "$ref": "#/x-ess-entities/mandate.credential.SigningKey.State"
@@ -2359,8 +3564,7 @@
         "key_reference",
         "thumbprint",
         "algorithm",
-        "not_before",
-        "expires_at",
+        "window",
         "state"
       ],
       "additionalProperties": false

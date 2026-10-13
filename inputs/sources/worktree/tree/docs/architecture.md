@@ -86,7 +86,7 @@ A nested Git repository is listed by Git only as `<path>/` on the empty index, s
 scratch index nor the patch holds it. The adapter walks each such root without following symlinks,
 writes its canonical listing as a GNU tar image with the `tar` crate, reads the image back and
 compares the listing, and records the listing's SHA-256 as the root's fingerprint. `worktree_tree`
-and `dirty.patch` cover everything outside the imaged roots and the cargo build layout left out.
+and `dirty.patch` cover everything outside the imaged roots and the build layout left out.
 
 Cargo build layout is decided in the domain, I/O-free: `is_build_layout` and `layout_target` take
 a path below a target, the target's `TargetFacts` (a Cargo-signed tag; a profile, which `tmp/`
@@ -98,11 +98,45 @@ below a target keeps that walk from reaching it, also checks each directory a li
 (`cache::archive_target`, used only by archives; `discard-cache`'s deletions are unchanged). It
 excludes the paths HEAD or the index tracks and observes profiles on disk. The capture leaves those files out of the
 scratch index, so the patch and the fingerprint never see them, and the manifest records them per
-target as `build_output` in format `worktree.archive/3`. Verification leaves out the same layout
-only for a format 3 archive and refuses layout below a target the manifest does not name. The
-discard partitions the untracked files after the index reset into layout below a recorded target
-and everything else; the rest must match the archive as before, and each layout file is
-re-observed as layout below the same target immediately before it is deleted.
+target as `build_output` in format `worktree.archive/3`.
+
+A Flutter app's output is decided by one classifier in the domain, also I/O-free:
+`flutter_output_kind` decides whether a directory `<P>/build` or `<P>/.dart_tool` is one, and
+`flutter_output` finds the outermost one a path lies strictly below, from `FlutterFacts` its caller
+observes: whether `<P>/pubspec.yaml` is present beside it as anything but a directory, and whether
+anything is tracked at the directory's path, and whether the directory is itself a recognised
+cargo target (`FlutterFacts::cargo_target`). A directory that is both is classified by the cargo
+rule alone, so a file below it that is not cargo layout stays archived; because the classifier
+decides that, `archive`, `discard-cache` and the strip agree. The archive and `discard-cache`
+observe the disk (`cache::flutter_facts`: a real directory, a regular `pubspec.yaml`, nothing HEAD
+or the index tracks at or below it, and `cache::archive_target` for the cargo target); the strip
+observes HEAD's tree and the patch's pure additions, and its own recognised targets. The archive
+records the outer of a cargo target and a Flutter output directory (`outermost_build_directory`),
+as the strip does; `discard-cache` deletes an ignored directory the classifier recognises as
+`CacheKind::FlutterOutput`, after its cargo rules. For every kind, one walk that follows no
+symbolic link (`cache::holds_git_entry`) decides whether a recognised directory holds a `.git`
+(file, directory or symbolic link) at any depth below it, or is or holds a Git directory with no
+`.git` entry (`cache::git_directory`: `HEAD` a regular file, `objects/` and `refs/` real
+directories, as a bare repository or a `--separate-git-dir` has): a repository there may hold commits no
+remote does, so the directory is never deleted whole. A whole Cargo target holding one falls to
+its parts (each profile, nested target and `tmp/` under its own rule; a target is `cargo-target`
+only when nothing in it was retained, so by construction it holds none); a `tmp/` holding one is
+split into its direct entries, those holding none discarded as `cargo-target-tmp` and the rest
+retained; every other kind holding one is retained whole. The walk runs again immediately before
+each deletion, whatever the kind, and an unreadable directory counts as holding one.
+
+Repository content is never layout. The domain's `layout_directory` asks, besides the cargo and
+Flutter rules, whether a path has a `.git` component or lies at or below a Git directory
+(`GitDirectoryFacts`); the disk side observes that with the one predicate `discard-cache` uses, and
+the strip infers it from the `HEAD` and `objects/` paths a patch purely adds.
+
+Verification of a format 3 archive leaves layout out only below the directories the manifest
+records, so an archive written before a kind of output was recognised still holds it in its
+fingerprint and still verifies; layout below an unrecorded directory stays in the fingerprint and
+refuses, and the refusal names that directory. The discard partitions the untracked files after
+the index reset into layout below a recorded directory and everything else; the rest must match
+the archive as before, and each layout file is re-observed as layout below the same recorded
+directory, recognised now, immediately before it is deleted.
 
 ```mermaid
 flowchart LR
@@ -184,12 +218,17 @@ line, hashing it against the recorded digest, and splits it at each `diff --git`
 in a hunk starts with ` `, `+`, `-` or `\`, and a base85 line holds no space, so neither can open
 a section. Each section carries its decoded path (`diff_git_path`, with Git's C-quoting undone),
 whether its extended header holds `new file mode`, whether the file it adds begins with Cargo's
-`CACHEDIR.TAG` signature, its patch bytes and the size of the file it adds; the adapter then marks
-each section whose path HEAD's tree, read with `git ls-tree` (from the archive's bundle when the
-repository lacks HEAD), holds as a file or directory or below a file. The domain's
+`CACHEDIR.TAG` signature, its patch bytes and the size of the file it adds. The adapter returns
+them as a `ScannedPatch` with the paths of HEAD's files and directories, read with `git ls-tree`
+(from the archive's bundle when the repository lacks HEAD); `ScannedPatch::against_head`, in the
+domain, marks each section whose path HEAD holds as a file or directory or below a file. The
+adapter only observes: it reads no file contents and decides nothing. The domain's
 `plan_patch_strip` keeps every section of a path named twice, named by a section that is not
-`new file mode`, or tracked, recognises targets from the remaining pure additions alone (a signed
-tag or a profile) and marks the sections to strip. The report's prune verdict afterwards is `decide_archive_prune` over the
+`new file mode`, or tracked, recognises cargo targets from the remaining pure additions alone (a
+signed tag or a profile) and Flutter output directories (`FlutterOutputKind`: `<P>/build` or
+`<P>/.dart_tool`, where HEAD's files or the pure additions hold `<P>/pubspec.yaml` and HEAD holds
+nothing at the directory's own path), and marks the sections to strip, recording each under the
+outermost directory whose rule strips the path that claims it, cargo target or Flutter output. The report's prune verdict afterwards is `decide_archive_prune` over the
 directory as it would be (`contents_after_strip`).
 
 ```mermaid
