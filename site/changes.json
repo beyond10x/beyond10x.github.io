@@ -2,6 +2,152 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "agentplugins/0.23.0",
+      "id": "agentplugins/0.23.0",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-15T06:25:21Z",
+      "title": "Agent Plugins 0.23.0",
+      "summary": "Agent Plugins released version 0.23.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.23.0",
+        "version": "0.23.0"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep/0.73.0",
+      "id": "aep/0.73.0",
+      "repository": "aep",
+      "publishedAt": "2026-10-15T04:15:06Z",
+      "title": "AEP 0.73.0",
+      "summary": "AEP released version 0.73.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.73.0",
+        "version": "0.73.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep/0.72.1",
+      "id": "aep/0.72.1",
+      "repository": "aep",
+      "publishedAt": "2026-10-14T22:24:25Z",
+      "title": "AEP 0.72.1",
+      "summary": "AEP released version 0.72.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.72.1",
+        "version": "0.72.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "eventlog/0.9.0",
+      "id": "eventlog/0.9.0",
+      "repository": "eventlog",
+      "publishedAt": "2026-10-14T21:45:21Z",
+      "title": "Eventlog 0.9.0",
+      "summary": "Eventlog released version 0.9.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/eventlog/releases/tag/0.9.0",
+        "version": "0.9.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "eventlog/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep/0.72.0",
+      "id": "aep/0.72.0",
+      "repository": "aep",
+      "publishedAt": "2026-10-14T18:51:21Z",
+      "title": "AEP 0.72.0",
+      "summary": "AEP released version 0.72.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.72.0",
+        "version": "0.72.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.22.11",
+      "id": "agentplugins/0.22.11",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-14T13:46:21Z",
+      "title": "Agent Plugins 0.22.11",
+      "summary": "Agent Plugins released version 0.22.11.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.22.11",
+        "version": "0.22.11"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "worktree/0.18.2",
       "id": "worktree/0.18.2",
       "repository": "worktree",
@@ -23,6 +169,95 @@
       ],
       "automatic": true,
       "channel": "releases"
+    },
+    {
+      "key": "ess/composition-roles-0.60.0",
+      "id": "ess/composition-roles-0.60.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-14T00:00:00Z",
+      "title": "A composition states which component plays another's role, and which command implements or gates it",
+      "summary": "`ess-composition/4` adds `roles:`: one imported component plays another's, and each local command `implements` or `gates` a contract command, checked for input drift by `ess specify compose` ([#525](https://github.com/beyond10x/ess/issues/525)).",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.60.0",
+        "version": "0.60.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/http-routes-0.60.0",
+      "id": "ess/http-routes-0.60.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-14T00:00:00Z",
+      "title": "Commands and views bind to HTTP routes, and mutation testing covers more of a model",
+      "summary": "`ess-http/1` binds commands and views to HTTP routes, projected into OpenAPI by `--http` ([#493](https://github.com/beyond10x/ess/issues/493)). `mutate` covers `when_subject:`/`when_related:` guards and authored scenarios ([#515](https://github.com/beyond10x/ess/issues/515)). Go synthesis builds when bounded contexts reference each other in a loop.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.60.0",
+        "version": "0.60.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/http-servers-0.60.0",
+      "id": "ess/http-servers-0.60.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-14T00:00:00Z",
+      "title": "HTTP bindings declare encodings, statuses, headers and redirects, and synthesis writes Rust and Go servers",
+      "summary": "An `ess-http/1` route declares its request encoding, each outcome's status, body, headers and redirect, and the standard refusals. `--http` projects them into OpenAPI, and `ess generate synthesize --target rust` or `go` writes a server that serves the binding ([#493](https://github.com/beyond10x/ess/issues/493)).",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.60.0",
+        "version": "0.60.0"
+      },
+      "journeys": [
+        "specify",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/source-25-0.60.0",
+      "id": "ess/source-25-0.60.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-14T00:00:00Z",
+      "title": "Source format ess/25 selects an upsert's update by the stored row and adds per-row events and default view rows",
+      "summary": "`ess/25` lets a create-or-update command pick its update with `when_subject:` ([#530](https://github.com/beyond10x/ess/issues/530)), publish an event per changed row, answer an `external:` refusal before the row is read, compare `trimmed:` text, and give a view an `absent:` row. `ess-diff/19` classifies the view change.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.60.0",
+        "version": "0.60.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
     },
     {
       "key": "aep/0.71.3",

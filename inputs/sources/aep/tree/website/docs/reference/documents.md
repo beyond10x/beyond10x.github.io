@@ -300,10 +300,10 @@ else — never the submission time.
 
 A workflow says what states exist and what evidence a transition needs; it deliberately does not say
 how to obtain that evidence, which is what lets one workflow govern a Rust repository and a Terraform
-one. A step map (`aep.driver-steps/1`) is the missing half, and it is what `aep drive` reads.
+one. A step map (`aep.driver-steps/2`) is the missing half, and it is what `aep drive` reads.
 
 ```yaml
-format: aep.driver-steps/1
+format: aep.driver-steps/2
 id: development/default
 workflow: adp/default/2          # pinned to a major version, and the pin is mandatory
 title: Driving adp/default in this repository
@@ -321,6 +321,8 @@ states:
           suite: unit
       - kind: llm                # ask a model, with a tool set the protocol derived
         description: Explain what failed.
+        judgement: >-           # required: what this step decides that no command could
+          Why a red suite failed is a diagnosis; the suite says that it failed, not why.
         skills: [planning]
         harness: claude-code     # `claude-code` when the document is silent
         prompt: >-
@@ -337,6 +339,15 @@ applied to a state graph it was not written against.
 Only a `command` step may carry `evidence:`. An `llm` step cannot be given one, so anything a model
 is supposed to have achieved that is *checkable* is observed by the command step after it — which is
 what keeps `independent: true` honestly satisfiable.
+
+In an `aep.driver-steps/2` map every `llm` step carries `judgement:`, one line saying what the step
+decides that no command could. A step without one is refused at load with `missing_declaration` at
+`driver-steps[<map>].states.<state>.steps[<index>].judgement`, and a blank one with
+`empty_declaration` at the same path. An `aep.driver-steps/1` map, which every protocol tree before
+0.72.0 ships, loads as it did before the rule: its `llm` step may omit `judgement:`, and one it
+writes must not be blank. `aep drive run`, `aep drive resume` and
+`aep drive status --run <run>` print `llm steps  <declared> declared, <run> run`: the map's `llm`
+steps, and the attempts the run has made at them, retries included.
 
 Without `record:`, the driver mints the record from the program's exit status, so the kind has to be
 one an exit status can carry: `test_result`, `static_analysis`, `contract_result` or `diff`
@@ -369,6 +380,7 @@ than in the driver:
 ```yaml
       - kind: llm
         description: Make the smallest change that satisfies the unit.
+        judgement: Writing the change is authorship, which no command performs.
         scope:
           - paths: [".engineering/planning/**"]
             write: denied         # the CLI owns every mutation of the store, bodies included
