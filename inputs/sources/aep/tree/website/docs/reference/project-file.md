@@ -1,4 +1,4 @@
----
+a value that is not a non-negative integer, or a target not below its baseline is refused, naming the kind, the figure and the values; `spend` or a kind written with no value (empty, `~`, `null`, `{}`) is refused naming it ---
 title: project.yaml
 sidebar_position: 2
 description: Every field of .engineering/project.yaml, the file that makes a repository an AEP project.
@@ -10,12 +10,12 @@ description: Every field of .engineering/project.yaml, the file that makes a rep
 working directory upwards, up to twelve levels. `AEP_PROJECT_DIR` renames `.engineering`. Unknown
 keys are refused.
 
-{/* generated:release-pin:begin commit=5bf873d850120bc808c4aeb9863ebae68e642d9f — kept by `cargo xtask status` */}
+{/* generated:release-pin:begin commit=dc0598d5ca0301e05424c1007cf7d32f7a4dd5dd — kept by `cargo xtask status` */}
 ```yaml
 version: aep.project/5                 # the store format; see below
 protocol: adp/1                        # the protocol the project runs under
 profile: development.standard          # the profile whose rules apply
-protocols: git+https://github.com/beyond10x/aep#5bf873d850120bc808c4aeb9863ebae68e642d9f
+protocols: git+https://github.com/beyond10x/aep#dc0598d5ca0301e05424c1007cf7d32f7a4dd5dd
 planning_scope: shop                   # required by aep.project/5
 store:
   git: {}                              # the Git-native store, the default
@@ -38,6 +38,7 @@ providers:                             # optional: link patterns for external re
 | `summary` | no | | one line for people; nothing reads it |
 | `providers` | no | | a URL pattern per external system, each containing `{key}`; a pattern without `{key}` is refused |
 | `findings_required_since` | no | | a calendar date, `YYYY-MM-DD`, read as starting at midnight UTC. Once it is set, whatever the date, `new` refuses a `review-result` without a `findings` block unless `--prose-only <reason>` says why; `validate` reads the date and counts such a review as a problem unless it predates the date, is superseded by a review carrying a block, or was recorded prose-only. A review the store cannot date (a shallow clone, a store outside Git) is undated, never before the date. See [Reviews](../concepts/reviews.md#requiring-a-findings-block). A value that is not a calendar date, or no value at all (empty, `~`, `null`), is refused naming the key |
+| `spend` | no | | a baseline and a target per task kind and figure, `spend.<kind>.<figure>: { baseline: <n>, target: <n> }`, that `aep plan artifact spend` reports each median against. A figure is `model_calls`, `total_tokens`, `cost_micro_usd`, `wall_time_ms` or `llm_steps_run`; both values are required non-negative integers and the target is strictly below the baseline. Any other figure, a missing value or a target not below its baseline is refused, naming the kind, the figure and the values |
 | `artifacts` | no | `artifacts.yaml` | the artifact manifest for [governed tasks](../concepts/governance.md) |
 | `task` | no | `task.yaml` | the task document `govern` and `drive` use when `--task` is absent |
 | `state` | no | `state.yaml` | where execution state is kept |
