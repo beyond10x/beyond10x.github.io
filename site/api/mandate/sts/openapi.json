@@ -8,8 +8,8 @@
     "x-ess-provenance": {
       "system": "mandate",
       "specification_version": "v1",
-      "source_digest": "7db97268b1ac0201e84cff21a8eb7f0a9e309d334b9193183d009d1ba2c93182",
-      "contract_digest": "slice-sha256/2:ee37311f539a501b92f7afa7450cc34896d9793fb37bbe0152c78e93188483f8"
+      "source_digest": "751472a620cc3a7650f9a2496c9e81022fbef0887158483d3bbd761f09e76837",
+      "contract_digest": "slice-sha256/2:5a8d5657248f2a52ec1d264c97c8550c58855d619e20968d141b034265d13c31"
     }
   },
   "tags": [
@@ -450,11 +450,25 @@
         },
         "responses": {
           "202": {
-            "description": "Outcome `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers and listed under `published`.",
+            "description": "Outcomes `accepted-with-identity-token` and `accepted`: the branch the specification declares for this input. Events this branch emits are published to consumers and listed under `published`.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/mandate.credential.RedeemAuthorizationCode.accepted.Response"
+                  "discriminator": {
+                    "mapping": {
+                      "accepted": "#/components/schemas/mandate.credential.RedeemAuthorizationCode.accepted.Response",
+                      "accepted-with-identity-token": "#/components/schemas/mandate.credential.RedeemAuthorizationCode.accepted-with-identity-token.Response"
+                    },
+                    "propertyName": "outcome"
+                  },
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/mandate.credential.RedeemAuthorizationCode.accepted-with-identity-token.Response"
+                    },
+                    {
+                      "$ref": "#/components/schemas/mandate.credential.RedeemAuthorizationCode.accepted.Response"
+                    }
+                  ]
                 }
               }
             }
@@ -1063,7 +1077,8 @@
           "TenantMismatch",
           "AudienceMismatch",
           "Unavailable",
-          "StaleEpoch"
+          "StaleEpoch",
+          "InvalidClient"
         ]
       },
       "mandate.core.EpochSnapshotRef": {
@@ -1333,6 +1348,12 @@
           },
           "scope": {
             "$ref": "#/components/schemas/mandate.core.AuthorityScope"
+          },
+          "identity_scopes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/mandate.credential.IdentityScope"
+            }
           }
         },
         "required": [
@@ -1656,6 +1677,9 @@
           },
           "delegation_id": {
             "$ref": "#/components/schemas/mandate.core.DelegationId"
+          },
+          "subject_token_type": {
+            "$ref": "#/components/schemas/mandate.credential.SubjectTokenType"
           }
         },
         "required": [
@@ -1667,7 +1691,7 @@
       },
       "mandate.credential.ExchangeCredential.accepted.Response": {
         "additionalProperties": false,
-        "description": "Taken when no other outcome's condition matched. A `mandate.credential.AccessCredential` now exists, in `Active`. Its identity is published as `credential_id` on `mandate.credential.TokenExchangeAllowed`. Emits `TokenExchangeAllowed`, published to consumers and listed under `published`.",
+        "description": "An access-credential subject is admitted when its source registration is among the target's allowed_exchange_sources. An identity-token subject (subject_token_type IdToken) is an identity token this deployment signed, unexpired, under a key still admitted for verification; its source is the client it was issued to (its azp, else its one audience). It is admitted only to a target registered with a client, and only when that client lists the source client among its trusted_peers and the source client, the target's client and the target are of one organization (fork F20). Both forms are decided by this one admission and recorded by this one event; a trusted peer is never a second authority path, and a peer relation is never transitive. Taken when no other outcome's condition matched. A `mandate.credential.AccessCredential` now exists, in `Active`. Its identity is published as `credential_id` on `mandate.credential.TokenExchangeAllowed`. Emits `TokenExchangeAllowed`, published to consumers and listed under `published`.",
         "properties": {
           "outcome": {
             "const": "accepted",
@@ -1708,7 +1732,7 @@
       },
       "mandate.credential.ExchangeCredential.denied.Response": {
         "additionalProperties": false,
-        "description": "Decided outside the request: Either independently validated proof is invalid/revoked/expired/stale; actor, tenant, registered target/source, scope, space, delegation or ceiling binding fails; two current capability ceilings share one agent and organization-or-platform key; transitive delegation is requested; approval is required; or authority/expiry narrowing and durable audit fail..",
+        "description": "Decided outside the request: Either independently validated proof is invalid/revoked/expired/stale; actor, tenant, registered target/source, scope, space, delegation or ceiling binding fails; two current capability ceilings share one agent and organization-or-platform key; transitive delegation is requested; approval is required; an identity-token subject's client is not a trusted peer of the target's client, the target names no client, or the two clients are of different organizations; or authority/expiry narrowing and durable audit fail..",
         "properties": {
           "error": {
             "const": "mandate.credential.Denied",
@@ -1735,6 +1759,72 @@
           "payload"
         ],
         "type": "object"
+      },
+      "mandate.credential.IdentityScope": {
+        "title": "IdentityScope",
+        "x-ess-name": "mandate.credential.IdentityScope",
+        "x-ess-kind": "enum",
+        "type": "string",
+        "enum": [
+          "OpenId",
+          "Email",
+          "Profile",
+          "Groups",
+          "OfflineAccess"
+        ]
+      },
+      "mandate.credential.IdentityTokenId": {
+        "title": "IdentityTokenId",
+        "x-ess-name": "mandate.credential.IdentityTokenId",
+        "x-ess-kind": "newtype",
+        "type": "string",
+        "format": "uuid",
+        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+      },
+      "mandate.credential.IdentityTokenIssued.Event": {
+        "title": "IdentityTokenIssued payload",
+        "x-ess-name": "mandate.credential.IdentityTokenIssued",
+        "x-ess-kind": "event-payload",
+        "type": "object",
+        "properties": {
+          "token_id": {
+            "$ref": "#/components/schemas/mandate.credential.IdentityTokenId"
+          },
+          "code_id": {
+            "$ref": "#/components/schemas/mandate.core.AuthorizationCodeId"
+          },
+          "client_id": {
+            "$ref": "#/components/schemas/mandate.core.OAuthClientId"
+          },
+          "principal_id": {
+            "$ref": "#/components/schemas/mandate.core.PrincipalId"
+          },
+          "session_id": {
+            "$ref": "#/components/schemas/mandate.core.SessionId"
+          },
+          "signing_key_id": {
+            "$ref": "#/components/schemas/mandate.core.SigningKeyId"
+          },
+          "issued_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "token_id",
+          "code_id",
+          "client_id",
+          "principal_id",
+          "session_id",
+          "signing_key_id",
+          "issued_at",
+          "expires_at"
+        ],
+        "additionalProperties": false
       },
       "mandate.credential.IntrospectCredential.Input": {
         "title": "IntrospectCredential input",
@@ -1859,6 +1949,12 @@
           "expires_at": {
             "type": "string",
             "format": "date-time"
+          },
+          "identity_scopes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/mandate.credential.IdentityScope"
+            }
           }
         },
         "required": [
@@ -2153,6 +2249,9 @@
           },
           "redirect_uri": {
             "$ref": "#/components/schemas/mandate.core.RedirectUri"
+          },
+          "client_secret": {
+            "$ref": "#/components/schemas/mandate.core.CredentialProof"
           }
         },
         "required": [
@@ -2163,6 +2262,64 @@
           "redirect_uri"
         ],
         "additionalProperties": false
+      },
+      "mandate.credential.RedeemAuthorizationCode.accepted-with-identity-token.Response": {
+        "additionalProperties": false,
+        "description": "A code whose authorization granted openid redeems exactly as the accepted outcome below does, and in the same transaction the STS signs one identity token and records mandate.credential.IdentityTokenIssued. The token's issuer is the deployment's, its audience the client, its subject the session's principal (fork F1), its nonce the authorization request's and its lifetime the deployment's identity-token lifetime; it is signed under a signing key admitted for issuance now, and the event names that key. The event carries the token's identifier, the code, the client, the principal, the session, the signing key and the two instants, and no claim value — no email, name, groups or nonce enters this log (fork F13). A transaction that cannot sign issues neither the token nor the access credential and consumes nothing. Taken when the existing subject's stored fields satisfy `exists granted in identity_scopes: (granted == OpenId)`. A `mandate.credential.AuthorizationCode` has moved to `Consumed`, along `consume`. The instance is the one `code_id` names. Emits `AuthorizationCodeRedeemed` and `IdentityTokenIssued`, published to consumers and listed under `published`.",
+        "properties": {
+          "outcome": {
+            "const": "accepted-with-identity-token",
+            "description": "Which declared outcome the command took."
+          },
+          "published": {
+            "description": "Every event this branch published, in publication order: its qualified name and its payload.",
+            "items": false,
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "event": {
+                    "const": "mandate.credential.AuthorizationCodeRedeemed",
+                    "type": "string"
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/mandate.credential.AuthorizationCodeRedeemed.Event"
+                  }
+                },
+                "required": [
+                  "event",
+                  "payload"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "event": {
+                    "const": "mandate.credential.IdentityTokenIssued",
+                    "type": "string"
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/mandate.credential.IdentityTokenIssued.Event"
+                  }
+                },
+                "required": [
+                  "event",
+                  "payload"
+                ],
+                "type": "object"
+              }
+            ],
+            "type": "array"
+          }
+        },
+        "required": [
+          "outcome",
+          "published"
+        ],
+        "type": "object"
       },
       "mandate.credential.RedeemAuthorizationCode.accepted.Response": {
         "additionalProperties": false,
@@ -2207,7 +2364,7 @@
       },
       "mandate.credential.RedeemAuthorizationCode.denied.Response": {
         "additionalProperties": false,
-        "description": "Decided outside the request: Code proof does not match the server-resolved code_id; code is expired; client, redirect URI or S256 verifier mismatches; the bound client is disabled; source/session epoch is stale; registered target is disabled or outside the verified tenant; or narrowing/atomic issuance validation fails..",
+        "description": "Decided outside the request: Code proof does not match the server-resolved code_id; code is expired; client, redirect URI or S256 verifier mismatches; the bound client is disabled; a confidential client presents no secret or one matching none of its recorded verifiers; a public client presents a secret; source/session epoch is stale; registered target is disabled or outside the verified tenant; no signing key is admitted for issuance when an identity token is due; or narrowing/atomic issuance validation fails..",
         "properties": {
           "error": {
             "const": "mandate.credential.Denied",
@@ -2284,6 +2441,9 @@
             "items": {
               "$ref": "#/components/schemas/mandate.core.ResourceServerId"
             }
+          },
+          "client_id": {
+            "$ref": "#/components/schemas/mandate.core.OAuthClientId"
           }
         },
         "required": [
@@ -2296,7 +2456,7 @@
       },
       "mandate.credential.RegisterResourceServer.accepted.Response": {
         "additionalProperties": false,
-        "description": "Taken when no other outcome's condition matched. A `mandate.credential.ResourceServer` now exists, in `Enabled`. Its identity is published as `id` on `mandate.credential.ResourceServerRegistered`. Emits `ResourceServerRegistered`, published to consumers and listed under `published`.",
+        "description": "A registration naming a client is that client's resource server (fork F11), and an identity-token exchange admits to it exactly the clients that client lists as trusted peers (fork F20). The client is named once, here, and never changed. Taken when no other outcome's condition matched. A `mandate.credential.ResourceServer` now exists, in `Enabled`. Its identity is published as `id` on `mandate.credential.ResourceServerRegistered`. Emits `ResourceServerRegistered`, published to consumers and listed under `published`.",
         "properties": {
           "outcome": {
             "const": "accepted",
@@ -2337,7 +2497,7 @@
       },
       "mandate.credential.RegisterResourceServer.denied.Response": {
         "additionalProperties": false,
-        "description": "Decided outside the request: Caller lacks resource-server administration authority, audience registration is ambiguous, profile semantics are unadmitted, or an allowed source server is unresolved/disabled/outside the verified organization..",
+        "description": "Decided outside the request: Caller lacks resource-server administration authority, audience registration is ambiguous, profile semantics are unadmitted, an allowed source server is unresolved/disabled/outside the verified organization, or the named client is unresolved/disabled/outside the verified organization..",
         "properties": {
           "error": {
             "const": "mandate.credential.Denied",
@@ -2505,6 +2665,9 @@
             "items": {
               "$ref": "#/components/schemas/mandate.core.ResourceServerId"
             }
+          },
+          "client_id": {
+            "$ref": "#/components/schemas/mandate.core.OAuthClientId"
           }
         },
         "required": [
@@ -2945,6 +3108,16 @@
           "id"
         ],
         "additionalProperties": false
+      },
+      "mandate.credential.SubjectTokenType": {
+        "title": "SubjectTokenType",
+        "x-ess-name": "mandate.credential.SubjectTokenType",
+        "x-ess-kind": "enum",
+        "type": "string",
+        "enum": [
+          "AccessToken",
+          "IdToken"
+        ]
       },
       "mandate.credential.TokenExchangeAllowed.Event": {
         "title": "TokenExchangeAllowed payload",
@@ -3439,6 +3612,12 @@
         "scope": {
           "$ref": "#/x-ess-entities/mandate.core.AuthorityScope"
         },
+        "identity_scopes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/x-ess-entities/mandate.credential.IdentityScope"
+          }
+        },
         "state": {
           "$ref": "#/x-ess-entities/mandate.credential.AuthorizationCode.State"
         }
@@ -3466,6 +3645,19 @@
       "enum": [
         "Consumed",
         "Issued"
+      ]
+    },
+    "mandate.credential.IdentityScope": {
+      "title": "IdentityScope",
+      "x-ess-name": "mandate.credential.IdentityScope",
+      "x-ess-kind": "enum",
+      "type": "string",
+      "enum": [
+        "OpenId",
+        "Email",
+        "Profile",
+        "Groups",
+        "OfflineAccess"
       ]
     },
     "mandate.credential.ResourceServer": {
@@ -3508,6 +3700,18 @@
             "cardinality": "many",
             "via": "allowed_exchange_sources",
             "$ref": "#/x-ess-entities/mandate.credential.ResourceServer"
+          }
+        },
+        "client_id": {
+          "$ref": "#/x-ess-entities/mandate.core.OAuthClientId",
+          "x-ess-relation": {
+            "name": "client_id_record",
+            "kind": "references",
+            "source": "mandate.credential.ResourceServer",
+            "target": "mandate.federation.OAuthClient",
+            "cardinality": "one",
+            "via": "client_id",
+            "$ref": "#/x-ess-entities/mandate.federation.OAuthClient"
           }
         },
         "state": {

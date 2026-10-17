@@ -637,6 +637,17 @@ history with none is still written as `ess-history/1`, byte for byte; `check-his
 and refuses a `decision_time` in an `ess-history/1` document. A reader of `ess-history/1` only
 refuses `ess-history/2` by its `format`.
 
+`ess-history/3`, added in [0.61.0][r61], adds three optional operation fields: `input`, the command's input as
+the client sent it; `events`, each event a returned command's answer published, in order, with its
+payload; and `arranged`, the `external:` branches the client arranged before sending the call. A
+writer selects it exactly when an operation records any of them, so a history with none keeps its
+format and its bytes. A number inside `input` or a payload has one spelling, the one
+`JSON.stringify` writes, and an object there repeats no key. `check-history` reads all three
+formats, steps an operation with the input it recorded, holds it to the events and payloads it
+recorded and to the external branches somebody arranged, and refuses the new fields in an
+`ess-history/1` or `ess-history/2` document. A reader of `ess-history/1` only refuses
+`ess-history/3` by its `format`.
+
 `ess-history-adapter/1`, introduced in [0.39.0][r39], maps each field of a JSON Lines call log to a
 JSON pointer or declares it `absent`, for `ess verify conform import-history`.
 
@@ -708,6 +719,7 @@ claiming a higher number. [Formats and digests](./formats.md) says what each doc
 | `ess-prototrace/1` | [0.53.0][r53] (experimental) | Ordered protocol actions and observations bound to a model digest, with explicit model or target origin and capture completeness. |
 | `ess-build/1`, `ess-build-ir/1` | [0.9.0][r9] | An authored build and its compiled form. |
 | `ess-runtime/1`, `ess-runtime-ir/1` | [0.9.0][r9] | An authored runtime mapping and its compiled form. |
+| `ess-runtime/2`, `ess-runtime-ir/2` | Unreleased | Adds scheduled workloads, rendered as a Kubernetes `CronJob`, and pod settings (resources, security context, service-account token, secret volumes, images pinned by digest). A reader of the previous version refuses it; a version 1 document keeps its bytes and digest. |
 | `ess-release/1`, `ess-release-catalog/1` | [0.9.0][r9] | A release manifest, and the catalog of candidate releases. |
 | `ess-stack/1`, `ess-stack-lock/1` | [0.9.0][r9] | Stack constraints, and the exact releases a resolution selected. |
 | `ess-environment/1`, `ess-deployment/1`, `ess-deployment-diff/1` | [0.9.0][r9] | An environment, the deployment compiled for it, and the difference between two deployments. |
@@ -796,3 +808,4 @@ published release that carries them.
 [r58]: https://github.com/beyond10x/ess/releases/tag/0.58.0
 [r59]: https://github.com/beyond10x/ess/releases/tag/0.59.0
 [r60]: https://github.com/beyond10x/ess/releases/tag/0.60.0
+[r61]: https://github.com/beyond10x/ess/releases/tag/0.61.0
