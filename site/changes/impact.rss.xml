@@ -4,6 +4,16 @@
     <link>https://beyond10x.github.io/changes/</link>
     <description>Important releases, migrations, capabilities, and adopter actions across the public beyond10x ecosystem.</description>
     <item>
+      <guid isPermaLink="false">ess/guard-boundaries-are-held-at-a-fixed-now-0.62.0</guid>
+      <title>A suite holds a command at a fixed now, so a guard on a time boundary is tested exactly there</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.62.0</link>
+      <pubDate>Fri, 16 Oct 2026 00:00:00 GMT</pubDate>
+      <description>A conformance suite can hold the instant a target reads as `now` for one command, and synthesis adds a scenario on each `now` boundary a command decides by. Format `ess/26` holds an external refusal beside an existing row to leave it unchanged. Generated Rust decoders enforce a newtype&apos;s alphabet and length; the Go and TypeScript explorers draw timestamps.</description>
+      <category>ess</category>
+      <category>notable</category>
+      <category>impact</category>
+    </item>
+    <item>
       <guid isPermaLink="false">ess/history-records-input-and-events-0.61.0</guid>
       <title>Concurrent histories record each call&apos;s input and events, and check-history holds them</title>
       <link>https://github.com/beyond10x/ess/releases/tag/0.61.0</link>

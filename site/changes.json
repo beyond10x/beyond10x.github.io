@@ -2,6 +2,30 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "agentplugins/0.23.2",
+      "id": "agentplugins/0.23.2",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-17T14:49:49Z",
+      "title": "Agent Plugins 0.23.2",
+      "summary": "Agent Plugins released version 0.23.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.23.2",
+        "version": "0.23.2"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "mandate/v0.10.0",
       "id": "mandate/v0.10.0",
       "repository": "mandate",
@@ -141,6 +165,28 @@
       ],
       "automatic": true,
       "channel": "releases"
+    },
+    {
+      "key": "ess/guard-boundaries-are-held-at-a-fixed-now-0.62.0",
+      "id": "ess/guard-boundaries-are-held-at-a-fixed-now-0.62.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-16T00:00:00Z",
+      "title": "A suite holds a command at a fixed now, so a guard on a time boundary is tested exactly there",
+      "summary": "A conformance suite can hold the instant a target reads as `now` for one command, and synthesis adds a scenario on each `now` boundary a command decides by. Format `ess/26` holds an external refusal beside an existing row to leave it unchanged. Generated Rust decoders enforce a newtype's alphabet and length; the Go and TypeScript explorers draw timestamps.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.62.0",
+        "version": "0.62.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
     },
     {
       "key": "agentplugins/0.23.0",

@@ -2,8 +2,15 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://beyond10x.github.io/releases/ess/atom.xml</id>
   <title>ESS releases</title>
-  <updated>2026-10-15T00:00:00Z</updated>
+  <updated>2026-10-16T00:00:00Z</updated>
   <link rel="self" href="https://beyond10x.github.io/releases/ess/atom.xml"/>
+  <entry>
+    <id>ess/guard-boundaries-are-held-at-a-fixed-now-0.62.0</id>
+    <title>A suite holds a command at a fixed now, so a guard on a time boundary is tested exactly there</title>
+    <updated>2026-10-16T00:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.62.0"/>
+    <summary>A conformance suite can hold the instant a target reads as `now` for one command, and synthesis adds a scenario on each `now` boundary a command decides by. Format `ess/26` holds an external refusal beside an existing row to leave it unchanged. Generated Rust decoders enforce a newtype&apos;s alphabet and length; the Go and TypeScript explorers draw timestamps.</summary>
+  </entry>
   <entry>
     <id>ess/history-records-input-and-events-0.61.0</id>
     <title>Concurrent histories record each call&apos;s input and events, and check-history holds them</title>
