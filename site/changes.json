@@ -2,6 +2,31 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "aep/0.68.1",
+      "id": "aep/0.68.1",
+      "repository": "aep",
+      "publishedAt": "2026-10-20T10:03:44Z",
+      "title": "AEP 0.68.1",
+      "summary": "AEP released version 0.68.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.68.1",
+        "version": "0.68.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "harness/0.14.1",
       "id": "harness/0.14.1",
       "repository": "harness",
