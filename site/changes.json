@@ -2,6 +2,74 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "harness/0.14.1",
+      "id": "harness/0.14.1",
+      "repository": "harness",
+      "publishedAt": "2026-10-20T07:29:25Z",
+      "title": "Harness 0.14.1",
+      "summary": "Harness released version 0.14.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/harness/releases/tag/0.14.1",
+        "version": "0.14.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "harness/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "harness/0.14.0",
+      "id": "harness/0.14.0",
+      "repository": "harness",
+      "publishedAt": "2026-10-20T06:45:24Z",
+      "title": "Harness 0.14.0",
+      "summary": "Harness released version 0.14.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/harness/releases/tag/0.14.0",
+        "version": "0.14.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "harness/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "ess/typed-expressions-and-one-precedence-order-0.63.0",
+      "id": "ess/typed-expressions-and-one-precedence-order-0.63.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-19T00:00:00Z",
+      "title": "A value can be computed by a typed expression, and every guard answers in one precedence order",
+      "summary": "Format `ess/27` computes a value from an expression in `sets:`, payloads and view fields, reads digest functions in guards, and answers a command's guards in one precedence order, admitting the guard pairs that order settles. `ess verify conform diff` compares two suites, and a suite states the event catalog once.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.63.0",
+        "version": "0.63.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
       "key": "agentplugins/0.23.2",
       "id": "agentplugins/0.23.2",
       "repository": "agentplugins",
