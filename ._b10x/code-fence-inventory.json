@@ -1,7 +1,7 @@
 {
   "schema": "b10x-code-fence-inventory/v1",
   "phase": "rendered",
-  "sourceLockSha256": "9d06eab15b04ced56463d341e0af5c9511c1e741f3893b628c8b3648b37be792",
+  "sourceLockSha256": "580b7c9a5b57b017adf1a12fbc5ebdd63d934a9e6b1eafbd20787fd1019a63da",
   "lockedSources": [
     {
       "repository": "aep",
@@ -22,10 +22,6 @@
     {
       "repository": "agentplugins",
       "sourceRevision": "c888c719e539217d9d1b96413721bf1f6ea21293"
-    },
-    {
-      "repository": "devcenter",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792"
     },
     {
       "repository": "docs-system",
@@ -980,54 +976,6 @@
       "sourceKind": "documentation",
       "publicRoute": "/docs/agentplugins/tutorials/first-governed-plan/",
       "fenceCount": 11
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "README.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/",
-      "fenceCount": 5
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "docs/ess-deployment-model.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/ess-deployment-model/",
-      "fenceCount": 2
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "docs/frontend-review.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/frontend-review/",
-      "fenceCount": 0
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "docs/local-acceptance.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/local-acceptance/",
-      "fenceCount": 3
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "docs/production-deployment.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/production-deployment/",
-      "fenceCount": 0
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "docs/source-build.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/source-build/",
-      "fenceCount": 0
     },
     {
       "repository": "docs-system",
@@ -10259,230 +10207,6 @@
         "meaningfulTokens": true,
         "matchesExpected": true,
         "position": 11
-      }
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "README.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/",
-      "line": 30,
-      "declaredLanguage": "bash",
-      "normalizedLanguage": "bash",
-      "semanticClass": "command",
-      "expectedRendering": "prism",
-      "bodySha256": "b96d24d7c235568255a166a4333f5fab581cc53d7362a5c88c330552f0571f28",
-      "rendered": {
-        "kind": "prism",
-        "found": true,
-        "language": "bash",
-        "bodySha256": "b96d24d7c235568255a166a4333f5fab581cc53d7362a5c88c330552f0571f28",
-        "meaningfulTokens": true,
-        "matchesExpected": true,
-        "position": 1
-      }
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "README.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/",
-      "line": 50,
-      "declaredLanguage": "bash",
-      "normalizedLanguage": "bash",
-      "semanticClass": "command",
-      "expectedRendering": "prism",
-      "bodySha256": "b3f7636ec1f2ef0a29998e76207b9a8eb636e916e80d2dc808cba99122c53551",
-      "rendered": {
-        "kind": "prism",
-        "found": true,
-        "language": "bash",
-        "bodySha256": "b3f7636ec1f2ef0a29998e76207b9a8eb636e916e80d2dc808cba99122c53551",
-        "meaningfulTokens": true,
-        "matchesExpected": true,
-        "position": 2
-      }
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "README.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/",
-      "line": 66,
-      "declaredLanguage": "bash",
-      "normalizedLanguage": "bash",
-      "semanticClass": "command",
-      "expectedRendering": "prism",
-      "bodySha256": "3f24a7114b63de29a70ca067836fe03566f9e3881a86f08be1b94168ce138c3c",
-      "rendered": {
-        "kind": "prism",
-        "found": true,
-        "language": "bash",
-        "bodySha256": "3f24a7114b63de29a70ca067836fe03566f9e3881a86f08be1b94168ce138c3c",
-        "meaningfulTokens": true,
-        "matchesExpected": true,
-        "position": 3
-      }
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "README.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/",
-      "line": 88,
-      "declaredLanguage": "bash",
-      "normalizedLanguage": "bash",
-      "semanticClass": "command",
-      "expectedRendering": "prism",
-      "bodySha256": "3b4cb1812a5d2e689f09f34fbf29cc21b53e91639c400406aaa75e2160cb93ed",
-      "rendered": {
-        "kind": "prism",
-        "found": true,
-        "language": "bash",
-        "bodySha256": "3b4cb1812a5d2e689f09f34fbf29cc21b53e91639c400406aaa75e2160cb93ed",
-        "meaningfulTokens": true,
-        "matchesExpected": true,
-        "position": 4
-      }
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "README.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/",
-      "line": 206,
-      "declaredLanguage": "bash",
-      "normalizedLanguage": "bash",
-      "semanticClass": "command",
-      "expectedRendering": "prism",
-      "bodySha256": "f80b9e7a7cfa09207f591c8a7df9fa778db88c225b73d534b5c38aab284d6836",
-      "rendered": {
-        "kind": "prism",
-        "found": true,
-        "language": "bash",
-        "bodySha256": "f80b9e7a7cfa09207f591c8a7df9fa778db88c225b73d534b5c38aab284d6836",
-        "meaningfulTokens": true,
-        "matchesExpected": true,
-        "position": 5
-      }
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "docs/ess-deployment-model.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/ess-deployment-model/",
-      "line": 25,
-      "declaredLanguage": "mermaid",
-      "normalizedLanguage": "mermaid",
-      "semanticClass": "diagram",
-      "expectedRendering": "diagram",
-      "bodySha256": "b54101d573cefbc72bb1a00522b6089fa061fa27fdf4c7adc0fe3a697c0b5425",
-      "rendered": {
-        "kind": "diagram",
-        "found": false,
-        "payloadFound": true,
-        "language": "mermaid",
-        "bodySha256": "b54101d573cefbc72bb1a00522b6089fa061fa27fdf4c7adc0fe3a697c0b5425",
-        "meaningfulTokens": false,
-        "matchesExpected": true,
-        "position": 1,
-        "verification": "client-runtime"
-      }
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "docs/ess-deployment-model.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/ess-deployment-model/",
-      "line": 53,
-      "declaredLanguage": "mermaid",
-      "normalizedLanguage": "mermaid",
-      "semanticClass": "diagram",
-      "expectedRendering": "diagram",
-      "bodySha256": "e1f4ac00a8375b4b57ead6498baab3f31cef4a4053cf471a10836f64fb1d5a96",
-      "rendered": {
-        "kind": "diagram",
-        "found": false,
-        "payloadFound": true,
-        "language": "mermaid",
-        "bodySha256": "e1f4ac00a8375b4b57ead6498baab3f31cef4a4053cf471a10836f64fb1d5a96",
-        "meaningfulTokens": false,
-        "matchesExpected": true,
-        "position": 2,
-        "verification": "client-runtime"
-      }
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "docs/local-acceptance.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/local-acceptance/",
-      "line": 13,
-      "declaredLanguage": "bash",
-      "normalizedLanguage": "bash",
-      "semanticClass": "command",
-      "expectedRendering": "prism",
-      "bodySha256": "ea6539fe7c5efb120b5f05ebc2e87567436208d58fe36a6e716dfb3ca9c014db",
-      "rendered": {
-        "kind": "prism",
-        "found": true,
-        "language": "bash",
-        "bodySha256": "ea6539fe7c5efb120b5f05ebc2e87567436208d58fe36a6e716dfb3ca9c014db",
-        "meaningfulTokens": true,
-        "matchesExpected": true,
-        "position": 1
-      }
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "docs/local-acceptance.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/local-acceptance/",
-      "line": 47,
-      "declaredLanguage": "bash",
-      "normalizedLanguage": "bash",
-      "semanticClass": "command",
-      "expectedRendering": "prism",
-      "bodySha256": "b27e1048b804940aab0fdbddec8c4651864bb140255919694972480c7b647218",
-      "rendered": {
-        "kind": "prism",
-        "found": true,
-        "language": "bash",
-        "bodySha256": "b27e1048b804940aab0fdbddec8c4651864bb140255919694972480c7b647218",
-        "meaningfulTokens": true,
-        "matchesExpected": true,
-        "position": 2
-      }
-    },
-    {
-      "repository": "devcenter",
-      "sourcePath": "docs/local-acceptance.md",
-      "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-      "sourceKind": "documentation",
-      "publicRoute": "/docs/devcenter/local-acceptance/",
-      "line": 78,
-      "declaredLanguage": "bash",
-      "normalizedLanguage": "bash",
-      "semanticClass": "command",
-      "expectedRendering": "prism",
-      "bodySha256": "f0a201e0604b6f85e195b63b71235bf12e3fe58d35128df03ea6681b38edd8ad",
-      "rendered": {
-        "kind": "prism",
-        "found": true,
-        "language": "bash",
-        "bodySha256": "f0a201e0604b6f85e195b63b71235bf12e3fe58d35128df03ea6681b38edd8ad",
-        "meaningfulTokens": true,
-        "matchesExpected": true,
-        "position": 3
       }
     },
     {
@@ -27817,11 +27541,11 @@
     }
   ],
   "summary": {
-    "fenceCount": 1149,
-    "fencedSourceCount": 175,
-    "routeCount": 175,
+    "fenceCount": 1139,
+    "fencedSourceCount": 172,
+    "routeCount": 172,
     "languages": {
-      "bash": 184,
+      "bash": 176,
       "diff": 3,
       "docker": 1,
       "go": 8,
@@ -27831,7 +27555,7 @@
       "json": 39,
       "markdown": 6,
       "markup": 1,
-      "mermaid": 61,
+      "mermaid": 59,
       "rust": 10,
       "shell-session": 230,
       "text": 228,
@@ -27841,22 +27565,22 @@
       "yaml": 348
     },
     "semanticClasses": {
-      "command": 184,
-      "diagram": 61,
+      "command": 176,
+      "diagram": 59,
       "output": 228,
       "source": 446,
       "transcript": 230
     },
-    "renderedCount": 1149,
-    "meaningfullyTokenizedCount": 842,
-    "lockedRepositoryCount": 20,
-    "markdownSourceCount": 291,
+    "renderedCount": 1139,
+    "meaningfullyTokenizedCount": 834,
+    "lockedRepositoryCount": 19,
+    "markdownSourceCount": 285,
     "renderedRouteCount": 672,
-    "renderedBlockCount": 1169,
+    "renderedBlockCount": 1159,
     "unattributedRenderedCount": 0,
     "componentRenderedCount": 3,
     "fieldNoteProjectionCount": 17,
-    "clientDeferredCount": 61
+    "clientDeferredCount": 59
   },
   "renderedDocuments": [
     {
@@ -27977,7 +27701,7 @@
           "position": 1,
           "kind": "mermaid-payload",
           "language": "mermaid",
-          "bodySha256": "e8b878d0b3ad7e7a77f11c75ebc86299606784016f0df26e97bb01d43acddddf",
+          "bodySha256": "a065c5160d9a2d67d28090a74e6c5126ced61419f39b06b142212cd1a22c1301",
           "meaningfulTokens": false,
           "projectionOf": null,
           "classification": "component",
@@ -34753,126 +34477,12 @@
     {
       "publicRoute": "/docs/devcenter/",
       "outputPath": "build/docs/devcenter/index.html",
-      "renderings": [
-        {
-          "position": 1,
-          "kind": "prism",
-          "language": "bash",
-          "bodySha256": "b96d24d7c235568255a166a4333f5fab581cc53d7362a5c88c330552f0571f28",
-          "meaningfulTokens": true,
-          "projectionOf": null,
-          "classification": "source-fence",
-          "sourceFence": {
-            "repository": "devcenter",
-            "sourcePath": "README.md",
-            "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-            "publicRoute": "/docs/devcenter/",
-            "line": 30
-          }
-        },
-        {
-          "position": 2,
-          "kind": "prism",
-          "language": "bash",
-          "bodySha256": "b3f7636ec1f2ef0a29998e76207b9a8eb636e916e80d2dc808cba99122c53551",
-          "meaningfulTokens": true,
-          "projectionOf": null,
-          "classification": "source-fence",
-          "sourceFence": {
-            "repository": "devcenter",
-            "sourcePath": "README.md",
-            "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-            "publicRoute": "/docs/devcenter/",
-            "line": 50
-          }
-        },
-        {
-          "position": 3,
-          "kind": "prism",
-          "language": "bash",
-          "bodySha256": "3f24a7114b63de29a70ca067836fe03566f9e3881a86f08be1b94168ce138c3c",
-          "meaningfulTokens": true,
-          "projectionOf": null,
-          "classification": "source-fence",
-          "sourceFence": {
-            "repository": "devcenter",
-            "sourcePath": "README.md",
-            "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-            "publicRoute": "/docs/devcenter/",
-            "line": 66
-          }
-        },
-        {
-          "position": 4,
-          "kind": "prism",
-          "language": "bash",
-          "bodySha256": "3b4cb1812a5d2e689f09f34fbf29cc21b53e91639c400406aaa75e2160cb93ed",
-          "meaningfulTokens": true,
-          "projectionOf": null,
-          "classification": "source-fence",
-          "sourceFence": {
-            "repository": "devcenter",
-            "sourcePath": "README.md",
-            "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-            "publicRoute": "/docs/devcenter/",
-            "line": 88
-          }
-        },
-        {
-          "position": 5,
-          "kind": "prism",
-          "language": "bash",
-          "bodySha256": "f80b9e7a7cfa09207f591c8a7df9fa778db88c225b73d534b5c38aab284d6836",
-          "meaningfulTokens": true,
-          "projectionOf": null,
-          "classification": "source-fence",
-          "sourceFence": {
-            "repository": "devcenter",
-            "sourcePath": "README.md",
-            "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-            "publicRoute": "/docs/devcenter/",
-            "line": 206
-          }
-        }
-      ]
+      "renderings": []
     },
     {
       "publicRoute": "/docs/devcenter/ess-deployment-model/",
       "outputPath": "build/docs/devcenter/ess-deployment-model/index.html",
-      "renderings": [
-        {
-          "position": 1,
-          "kind": "mermaid-payload",
-          "language": "mermaid",
-          "bodySha256": "b54101d573cefbc72bb1a00522b6089fa061fa27fdf4c7adc0fe3a697c0b5425",
-          "meaningfulTokens": false,
-          "projectionOf": null,
-          "classification": "source-fence",
-          "sourceFence": {
-            "repository": "devcenter",
-            "sourcePath": "docs/ess-deployment-model.md",
-            "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-            "publicRoute": "/docs/devcenter/ess-deployment-model/",
-            "line": 25
-          }
-        },
-        {
-          "position": 2,
-          "kind": "mermaid-payload",
-          "language": "mermaid",
-          "bodySha256": "e1f4ac00a8375b4b57ead6498baab3f31cef4a4053cf471a10836f64fb1d5a96",
-          "meaningfulTokens": false,
-          "projectionOf": null,
-          "classification": "source-fence",
-          "sourceFence": {
-            "repository": "devcenter",
-            "sourcePath": "docs/ess-deployment-model.md",
-            "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-            "publicRoute": "/docs/devcenter/ess-deployment-model/",
-            "line": 53
-          }
-        }
-      ]
+      "renderings": []
     },
     {
       "publicRoute": "/docs/devcenter/frontend-review/",
@@ -34882,56 +34492,7 @@
     {
       "publicRoute": "/docs/devcenter/local-acceptance/",
       "outputPath": "build/docs/devcenter/local-acceptance/index.html",
-      "renderings": [
-        {
-          "position": 1,
-          "kind": "prism",
-          "language": "bash",
-          "bodySha256": "ea6539fe7c5efb120b5f05ebc2e87567436208d58fe36a6e716dfb3ca9c014db",
-          "meaningfulTokens": true,
-          "projectionOf": null,
-          "classification": "source-fence",
-          "sourceFence": {
-            "repository": "devcenter",
-            "sourcePath": "docs/local-acceptance.md",
-            "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-            "publicRoute": "/docs/devcenter/local-acceptance/",
-            "line": 13
-          }
-        },
-        {
-          "position": 2,
-          "kind": "prism",
-          "language": "bash",
-          "bodySha256": "b27e1048b804940aab0fdbddec8c4651864bb140255919694972480c7b647218",
-          "meaningfulTokens": true,
-          "projectionOf": null,
-          "classification": "source-fence",
-          "sourceFence": {
-            "repository": "devcenter",
-            "sourcePath": "docs/local-acceptance.md",
-            "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-            "publicRoute": "/docs/devcenter/local-acceptance/",
-            "line": 47
-          }
-        },
-        {
-          "position": 3,
-          "kind": "prism",
-          "language": "bash",
-          "bodySha256": "f0a201e0604b6f85e195b63b71235bf12e3fe58d35128df03ea6681b38edd8ad",
-          "meaningfulTokens": true,
-          "projectionOf": null,
-          "classification": "source-fence",
-          "sourceFence": {
-            "repository": "devcenter",
-            "sourcePath": "docs/local-acceptance.md",
-            "sourceRevision": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
-            "publicRoute": "/docs/devcenter/local-acceptance/",
-            "line": 78
-          }
-        }
-      ]
+      "renderings": []
     },
     {
       "publicRoute": "/docs/devcenter/production-deployment/",

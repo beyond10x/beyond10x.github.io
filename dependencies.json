@@ -26,10 +26,6 @@
       "label": "Connectors"
     },
     {
-      "id": "devcenter",
-      "label": "Devcenter"
-    },
-    {
       "id": "docs-system",
       "label": "Docs System"
     },
@@ -172,36 +168,6 @@
       "label": "uses"
     },
     {
-      "from": "devcenter",
-      "to": "agentide",
-      "label": "uses"
-    },
-    {
-      "from": "devcenter",
-      "to": "eventlog",
-      "label": "uses"
-    },
-    {
-      "from": "devcenter",
-      "to": "identity",
-      "label": "uses"
-    },
-    {
-      "from": "devcenter",
-      "to": "service-sdk",
-      "label": "uses"
-    },
-    {
-      "from": "devcenter",
-      "to": "workflow",
-      "label": "uses"
-    },
-    {
-      "from": "devcenter",
-      "to": "workspace",
-      "label": "uses"
-    },
-    {
       "from": "engineering-protocols",
       "to": "aep-service",
       "label": "specifies"
@@ -258,11 +224,6 @@
     },
     {
       "from": "secrets",
-      "to": "devcenter",
-      "label": "supports"
-    },
-    {
-      "from": "secrets",
       "to": "identity",
       "label": "uses"
     },
@@ -299,11 +260,6 @@
     {
       "from": "website",
       "to": "agentplugins",
-      "label": "introduces"
-    },
-    {
-      "from": "website",
-      "to": "devcenter",
       "label": "introduces"
     },
     {
