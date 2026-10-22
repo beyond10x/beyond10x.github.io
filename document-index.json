@@ -1097,7 +1097,7 @@
       "qualifiedTitle": "project.yaml | AEP",
       "project": "aep",
       "projectName": "AEP",
-      "description": "Every field of .engineering/project.yaml, the file that makes a repository an AEP project.",
+      "description": "project.yaml in the source-owned AEP documentation.",
       "documentType": "reference",
       "audiences": [
         "adopter",
@@ -3324,6 +3324,29 @@
       "sourcePath": "website/docs/guides/generate-artifacts.md"
     },
     {
+      "route": "/docs/ess/guides/http-routes/",
+      "title": "Bind commands and views to HTTP routes",
+      "qualifiedTitle": "Bind commands and views to HTTP routes | ESS",
+      "project": "ess",
+      "projectName": "ESS",
+      "description": "State the method and path a protocol fixes for a command or a view in an ess-http/1 binding beside the specification, check it, and publish it in the OpenAPI projection.",
+      "documentType": "how-to",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/guides/http-routes.md"
+    },
+    {
       "route": "/docs/ess/guides/record-realization/",
       "title": "Record a physical realization",
       "qualifiedTitle": "Record a physical realization | ESS",
@@ -3621,11 +3644,11 @@
     },
     {
       "route": "/docs/ess/guides/specify/values-and-views/",
-      "title": "Values, credentials and views",
-      "qualifiedTitle": "Values, credentials and views | ESS",
+      "title": "Values and credentials",
+      "qualifiedTitle": "Values and credentials | ESS",
       "project": "ess",
       "projectName": "ESS",
-      "description": "Value expressions, the caller's credential, inputs present after defaulting, and view consistency and paging.",
+      "description": "Value expressions, the caller's credential and inputs present after defaulting.",
       "documentType": "how-to",
       "audiences": [
         "adopter",
@@ -3641,6 +3664,29 @@
         "specify"
       ],
       "sourcePath": "website/docs/guides/specify/values-and-views.md"
+    },
+    {
+      "route": "/docs/ess/guides/specify/views/",
+      "title": "Views",
+      "qualifiedTitle": "Views | ESS",
+      "project": "ess",
+      "projectName": "ESS",
+      "description": "View consistency, replicas, who may read a view, paging, and fields derived from the lifecycle state.",
+      "documentType": "how-to",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "specify"
+      ],
+      "sourcePath": "website/docs/guides/specify/views.md"
     },
     {
       "route": "/docs/ess/guides/specify/wire-names/",
@@ -4635,473 +4681,6 @@
       "sourcePath": "docs/scenarios.md"
     },
     {
-      "route": "/docs/harness/",
-      "title": "What is Harness?",
-      "qualifiedTitle": "What is Harness? | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Harness owns the agent loop between a model API and an explicitly bounded set of tools.",
-      "documentType": "reference",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "run-agents"
-      ],
-      "sourcePath": "website/docs/index.md"
-    },
-    {
-      "route": "/docs/harness/concepts/",
-      "title": "Concepts",
-      "qualifiedTitle": "Concepts | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Browse the Concepts section of the source-owned Harness documentation.",
-      "documentType": "reference",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [
-        "build-agent-systems",
-        "understand-safe-agentic-coding"
-      ],
-      "tasks": [
-        "operate",
-        "reference",
-        "run-agents"
-      ],
-      "sourcePath": null
-    },
-    {
-      "route": "/docs/harness/concepts/agent-loop/",
-      "title": "The agent loop",
-      "qualifiedTitle": "The agent loop | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "How Harness assembles turns, performs tool round trips, and decides when a run stops.",
-      "documentType": "explanation",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [
-        "build-agent-systems",
-        "understand-safe-agentic-coding"
-      ],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "run-agents"
-      ],
-      "sourcePath": "website/docs/concepts/agent-loop.md"
-    },
-    {
-      "route": "/docs/harness/concepts/security-boundary/",
-      "title": "Security boundary",
-      "qualifiedTitle": "Security boundary | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Credentials, transcripts, tools, hooks, and the boundary Harness does and does not provide.",
-      "documentType": "explanation",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "operate"
-      ],
-      "sourcePath": "website/docs/concepts/security-boundary.md"
-    },
-    {
-      "route": "/docs/harness/concepts/tools-and-approvals/",
-      "title": "Tools and approvals",
-      "qualifiedTitle": "Tools and approvals | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "How Harness publishes capabilities, derives risk, and asks before an effect.",
-      "documentType": "explanation",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [
-        "build-agent-systems"
-      ],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "reference"
-      ],
-      "sourcePath": "website/docs/concepts/tools-and-approvals.md"
-    },
-    {
-      "route": "/docs/harness/getting-started/",
-      "title": "First read-only run",
-      "qualifiedTitle": "First read-only run | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Build Harness, inspect what it can do, and make one bounded read-only run.",
-      "documentType": "how-to",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [
-        "build-agent-systems"
-      ],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "install"
-      ],
-      "sourcePath": "website/docs/getting-started.md"
-    },
-    {
-      "route": "/docs/harness/guides/",
-      "title": "Guides",
-      "qualifiedTitle": "Guides | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Browse the Guides section of the source-owned Harness documentation.",
-      "documentType": "reference",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "tasks": [
-        "govern-work",
-        "reference",
-        "run-agents"
-      ],
-      "sourcePath": null
-    },
-    {
-      "route": "/docs/harness/guides/confinement/",
-      "title": "Confined workspaces",
-      "qualifiedTitle": "Confined workspaces | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Admit writes and process execution through a named substrate boundary.",
-      "documentType": "how-to",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "reference"
-      ],
-      "sourcePath": "website/docs/guides/confinement.md"
-    },
-    {
-      "route": "/docs/harness/guides/profiles/",
-      "title": "Configure a provider and profile",
-      "qualifiedTitle": "Configure a provider and profile | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Save connection facts and run permissions without hiding what will happen.",
-      "documentType": "how-to",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "reference"
-      ],
-      "sourcePath": "website/docs/guides/profiles.md"
-    },
-    {
-      "route": "/docs/harness/guides/sessions-and-events/",
-      "title": "Sessions and events",
-      "qualifiedTitle": "Sessions and events | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Resume conversations, use chat, and consume the JSONL run record correctly.",
-      "documentType": "how-to",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "run-agents"
-      ],
-      "sourcePath": "website/docs/guides/sessions-and-events.md"
-    },
-    {
-      "route": "/docs/harness/guides/structured-runs/",
-      "title": "Structured runs, delegates and hooks",
-      "qualifiedTitle": "Structured runs, delegates and hooks | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Opt into machine-readable answers, skills loaded on demand, fresh-context and named delegation, and operator hooks.",
-      "documentType": "how-to",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "reference"
-      ],
-      "sourcePath": "website/docs/guides/structured-runs.md"
-    },
-    {
-      "route": "/docs/harness/guides/workflows/",
-      "title": "Plan and run a workflow",
-      "qualifiedTitle": "Plan and run a workflow | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Validate a multi-step document, inspect its order, and run it under one bounded Harness invocation.",
-      "documentType": "how-to",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "govern-work",
-        "run-agents"
-      ],
-      "sourcePath": "website/docs/guides/workflows.md"
-    },
-    {
-      "route": "/docs/harness/reference/",
-      "title": "Reference",
-      "qualifiedTitle": "Reference | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Browse the Reference section of the source-owned Harness documentation.",
-      "documentType": "reference",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "tasks": [
-        "operate",
-        "reference",
-        "run-agents"
-      ],
-      "sourcePath": null
-    },
-    {
-      "route": "/docs/harness/reference/cli/",
-      "title": "Command-line reference",
-      "qualifiedTitle": "Command-line reference | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Commands, common option groups, output streams, and exit statuses.",
-      "documentType": "reference",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "reference"
-      ],
-      "sourcePath": "website/docs/reference/cli.md"
-    },
-    {
-      "route": "/docs/harness/reference/configuration/",
-      "title": "Configuration reference",
-      "qualifiedTitle": "Configuration reference | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Provider and profile fields, precedence, model aliases, credential defaults, and renewal behavior.",
-      "documentType": "reference",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "operate"
-      ],
-      "sourcePath": "website/docs/reference/configuration.md"
-    },
-    {
-      "route": "/docs/harness/reference/toolchains/",
-      "title": "Toolchains",
-      "qualifiedTitle": "Toolchains | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Toolchains in the source-owned Harness documentation.",
-      "documentType": "reference",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "reference"
-      ],
-      "sourcePath": "website/docs/reference/toolchains.md"
-    },
-    {
-      "route": "/docs/harness/reference/wires/",
-      "title": "Provider wires",
-      "qualifiedTitle": "Provider wires | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "The two model API projections, their shared transport, and continuation rules.",
-      "documentType": "reference",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "reference"
-      ],
-      "sourcePath": "website/docs/reference/wires.md"
-    },
-    {
-      "route": "/docs/harness/reference/workflows/",
-      "title": "Workflow reference",
-      "qualifiedTitle": "Workflow reference | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Workflow documents, scopes, derived output, events, sessions, hooks, and exit statuses.",
-      "documentType": "reference",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "run-agents"
-      ],
-      "sourcePath": "website/docs/reference/workflows.md"
-    },
-    {
-      "route": "/docs/harness/status/",
-      "title": "Status and limitations",
-      "qualifiedTitle": "Status and limitations | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "What Harness 0.13.3 can do today and which claims are not yet earned.",
-      "documentType": "status",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "troubleshoot"
-      ],
-      "sourcePath": "website/docs/status.md"
-    },
-    {
-      "route": "/docs/harness/tutorials/",
-      "title": "Tutorials",
-      "qualifiedTitle": "Tutorials | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Browse the Tutorials section of the source-owned Harness documentation.",
-      "documentType": "reference",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "tasks": [
-        "reference"
-      ],
-      "sourcePath": null
-    },
-    {
-      "route": "/docs/harness/tutorials/confined-change/",
-      "title": "Make a confined change",
-      "qualifiedTitle": "Make a confined change | Harness",
-      "project": "harness",
-      "projectName": "Harness",
-      "description": "Move from read-only inspection to a writing run whose paths and commands are bounded.",
-      "documentType": "tutorial",
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "experiences": [],
-      "support": "unspecified",
-      "access": "unspecified",
-      "compatibility": true,
-      "tasks": [
-        "reference"
-      ],
-      "sourcePath": "website/docs/tutorials/confined-change.md"
-    },
-    {
       "route": "/docs/identity/",
       "title": "identity",
       "qualifiedTitle": "identity",
@@ -5404,6 +4983,28 @@
       "sourcePath": "generated/docs/domains/mandate-graph.md"
     },
     {
+      "route": "/docs/mandate/generated/docs/domains/mandate-guard/",
+      "title": "guard",
+      "qualifiedTitle": "guard | Mandate",
+      "project": "mandate",
+      "projectName": "Mandate",
+      "description": "guard in the source-owned Mandate documentation.",
+      "documentType": "reference",
+      "audiences": [
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "experiences": [],
+      "support": "unspecified",
+      "access": "unspecified",
+      "compatibility": true,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "generated/docs/domains/mandate-guard.md"
+    },
+    {
       "route": "/docs/mandate/generated/docs/domains/mandate-identity/",
       "title": "identity",
       "qualifiedTitle": "identity | Mandate",
@@ -5601,11 +5202,11 @@
     },
     {
       "route": "/docs/mandate/public/development/",
-      "title": "Build and review the foundations",
-      "qualifiedTitle": "Build and review the foundations | Mandate",
+      "title": "Build and review",
+      "qualifiedTitle": "Build and review | Mandate",
       "project": "mandate",
       "projectName": "Mandate",
-      "description": "Build and review the foundations in the source-owned Mandate documentation.",
+      "description": "Build and review in the source-owned Mandate documentation.",
       "documentType": "reference",
       "audiences": [
         "adopter",

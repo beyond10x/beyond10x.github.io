@@ -10,6 +10,10 @@
       "label": "AEP Service"
     },
     {
+      "id": "agent-stack",
+      "label": "Agent stack"
+    },
+    {
       "id": "agentic-principles",
       "label": "Agentic Principles"
     },
@@ -133,18 +137,8 @@
       "label": "informs"
     },
     {
-      "from": "agentic-principles",
-      "to": "harness",
-      "label": "informs"
-    },
-    {
       "from": "agentide",
       "to": "ess",
-      "label": "uses"
-    },
-    {
-      "from": "agentide",
-      "to": "harness",
       "label": "uses"
     },
     {
@@ -191,11 +185,6 @@
       "from": "identity",
       "to": "eventlog",
       "label": "uses"
-    },
-    {
-      "from": "mcp",
-      "to": "harness",
-      "label": "supports"
     },
     {
       "from": "metaharness",
@@ -280,11 +269,6 @@
     {
       "from": "website",
       "to": "eventlog",
-      "label": "introduces"
-    },
-    {
-      "from": "website",
-      "to": "harness",
       "label": "introduces"
     },
     {
