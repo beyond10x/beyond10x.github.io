@@ -9,6 +9,22 @@ What each ESS release is worth to somebody using it: what became possible, how m
 
 This page is generated from the change records kept in the repository. A release with no entry here added nothing somebody using ESS would act on.
 
+## 0.76.0 — 2026-10-29
+
+### Schemas publish entity, Binary64, length and distinct invariants, and composition compares events and constraints
+
+capability · notable impact · [release notes](https://github.com/beyond10x/ess/releases/tag/0.76.0)
+
+Schemas carry entity invariants and publish Binary64 bounds, text lengths and distinct lists as keywords. Defined / not defined branches are exhaustive without a default. ess-composition/5 compares events, commands, constraints and variant attributes. HTTP bindings name operation ids and servers.
+
+## 0.75.0 — 2026-10-28
+
+### A seed says it does not serve a set move's filter, and the workspace compiles on rust 1.85
+
+capability · notable impact · [release notes](https://github.com/beyond10x/ess/releases/tag/0.75.0)
+
+A set-move refusal names the selected seed rows that synthesis does not apply and points to an authored scenario. Every refusal a set-move-only state causes names that state. A seeded caller-model scenario notes the swapped-caller run it skips. The workspace compiles on its declared rust-version 1.85, and CI checks it.
+
 ## 0.74.0 — 2026-10-28
 
 ### Synthesis seeds work on caller models, and a binding tries every publisher of its trigger

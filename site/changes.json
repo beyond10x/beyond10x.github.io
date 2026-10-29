@@ -2,6 +2,98 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "docs-system/0.14.0",
+      "id": "docs-system/0.14.0",
+      "repository": "docs-system",
+      "publishedAt": "2026-10-29T07:36:24Z",
+      "title": "Docs System 0.14.0",
+      "summary": "Docs System released version 0.14.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/docs-system/releases/tag/0.14.0",
+        "version": "0.14.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "docs-system/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "docs-system/0.13.0",
+      "id": "docs-system/0.13.0",
+      "repository": "docs-system",
+      "publishedAt": "2026-10-29T01:42:58Z",
+      "title": "Docs System 0.13.0",
+      "summary": "Docs System released version 0.13.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/docs-system/releases/tag/0.13.0",
+        "version": "0.13.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "docs-system/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "ess/open-issue-batch-1-0.76.0",
+      "id": "ess/open-issue-batch-1-0.76.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-29T00:00:00Z",
+      "title": "Schemas publish entity, Binary64, length and distinct invariants, and composition compares events and constraints",
+      "summary": "Schemas carry entity invariants and publish Binary64 bounds, text lengths and distinct lists as keywords. Defined / not defined branches are exhaustive without a default. ess-composition/5 compares events, commands, constraints and variant attributes. HTTP bindings name operation ids and servers.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.76.0",
+        "version": "0.76.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "agentplugins/0.25.1",
+      "id": "agentplugins/0.25.1",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-28T19:59:51Z",
+      "title": "Agent Plugins 0.25.1",
+      "summary": "Agent Plugins released version 0.25.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.25.1",
+        "version": "0.25.1"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "agentplugins/0.25.0",
       "id": "agentplugins/0.25.0",
       "repository": "agentplugins",
@@ -59,6 +151,28 @@
       "source": {
         "url": "https://github.com/beyond10x/ess/releases/tag/0.74.0",
         "version": "0.74.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/seed-set-move-limit-and-msrv-0.75.0",
+      "id": "ess/seed-set-move-limit-and-msrv-0.75.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-28T00:00:00Z",
+      "title": "A seed says it does not serve a set move's filter, and the workspace compiles on rust 1.85",
+      "summary": "A set-move refusal names the selected seed rows that synthesis does not apply and points to an authored scenario. Every refusal a set-move-only state causes names that state. A seeded caller-model scenario notes the swapped-caller run it skips. The workspace compiles on its declared rust-version 1.85, and CI checks it.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.75.0",
+        "version": "0.75.0"
       },
       "journeys": [
         "specify"

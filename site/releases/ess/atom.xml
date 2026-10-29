@@ -2,8 +2,15 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://beyond10x.github.io/releases/ess/atom.xml</id>
   <title>ESS releases</title>
-  <updated>2026-10-28T00:00:00Z</updated>
+  <updated>2026-10-29T00:00:00Z</updated>
   <link rel="self" href="https://beyond10x.github.io/releases/ess/atom.xml"/>
+  <entry>
+    <id>ess/open-issue-batch-1-0.76.0</id>
+    <title>Schemas publish entity, Binary64, length and distinct invariants, and composition compares events and constraints</title>
+    <updated>2026-10-29T00:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.76.0"/>
+    <summary>Schemas carry entity invariants and publish Binary64 bounds, text lengths and distinct lists as keywords. Defined / not defined branches are exhaustive without a default. ess-composition/5 compares events, commands, constraints and variant attributes. HTTP bindings name operation ids and servers.</summary>
+  </entry>
   <entry>
     <id>ess/binding-refusals-and-affects-arrangements-0.73.0</id>
     <title>Set-effect bindings, row sets, predicate refusal policies and affects rows past predicates get their scenarios</title>
@@ -17,6 +24,13 @@
     <updated>2026-10-28T00:00:00Z</updated>
     <link href="https://github.com/beyond10x/ess/releases/tag/0.74.0"/>
     <summary>A synthesis seed is admitted for a model whose actors declare caller attributes, and the seed row gives the seeded run its caller. A binding is witnessed through any branch that publishes its trigger, including one that publishes per changed row. A refusal names a state that only a set move reaches.</summary>
+  </entry>
+  <entry>
+    <id>ess/seed-set-move-limit-and-msrv-0.75.0</id>
+    <title>A seed says it does not serve a set move&apos;s filter, and the workspace compiles on rust 1.85</title>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.75.0"/>
+    <summary>A set-move refusal names the selected seed rows that synthesis does not apply and points to an authored scenario. Every refusal a set-move-only state causes names that state. A seeded caller-model scenario notes the swapped-caller run it skips. The workspace compiles on its declared rust-version 1.85, and CI checks it.</summary>
   </entry>
   <entry>
     <id>ess/bindings-and-disclosure-follow-ups-0.72.0</id>
