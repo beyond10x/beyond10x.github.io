@@ -4,6 +4,26 @@
     <link>https://beyond10x.github.io/changes/</link>
     <description>Important releases, migrations, capabilities, and adopter actions across the public beyond10x ecosystem.</description>
     <item>
+      <guid isPermaLink="false">ess/downstream-gaps-0.79.0</guid>
+      <title>Nested-member claims, Binary64 in conformance suites, and typed authored inputs</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.79.0</link>
+      <pubDate>Sun, 01 Nov 2026 00:00:00 GMT</pubDate>
+      <description>From ess-scenario/6 a claim may name a nested member by its dotted path, and an authored literal input its type refuses is refused at any depth. Suites /62 and /63 carry a response member path and a finite Binary64, compared by IEEE equality in Rust, Go and TypeScript. Synthesis refutes an inequality against an example.</description>
+      <category>ess</category>
+      <category>notable</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/downstream-gaps-0.78.0</guid>
+      <title>Structured input examples, rows a deployment provides, and lifecycle summaries</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.78.0</link>
+      <pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>
+      <description>From ess/33 a struct, map or Json input may carry an example that synthesis sends as written. An entity may declare that the deployment provides its rows; suites resolve such a row as an entity fixture and the interpreted target creates it. Transitions and states may carry a summary.</description>
+      <category>ess</category>
+      <category>notable</category>
+      <category>impact</category>
+    </item>
+    <item>
       <guid isPermaLink="false">ess/open-issue-batch-1-0.76.0</guid>
       <title>Schemas publish entity, Binary64, length and distinct invariants, and composition compares events and constraints</title>
       <link>https://github.com/beyond10x/ess/releases/tag/0.76.0</link>

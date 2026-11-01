@@ -2,8 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://beyond10x.github.io/releases/ess/atom.xml</id>
   <title>ESS releases</title>
-  <updated>2026-10-29T00:00:00Z</updated>
+  <updated>2026-11-01T00:00:00Z</updated>
   <link rel="self" href="https://beyond10x.github.io/releases/ess/atom.xml"/>
+  <entry>
+    <id>ess/downstream-gaps-0.79.0</id>
+    <title>Nested-member claims, Binary64 in conformance suites, and typed authored inputs</title>
+    <updated>2026-11-01T00:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.79.0"/>
+    <summary>From ess-scenario/6 a claim may name a nested member by its dotted path, and an authored literal input its type refuses is refused at any depth. Suites /62 and /63 carry a response member path and a finite Binary64, compared by IEEE equality in Rust, Go and TypeScript. Synthesis refutes an inequality against an example.</summary>
+  </entry>
+  <entry>
+    <id>ess/downstream-gaps-0.78.0</id>
+    <title>Structured input examples, rows a deployment provides, and lifecycle summaries</title>
+    <updated>2026-10-31T00:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.78.0"/>
+    <summary>From ess/33 a struct, map or Json input may carry an example that synthesis sends as written. An entity may declare that the deployment provides its rows; suites resolve such a row as an entity fixture and the interpreted target creates it. Transitions and states may carry a summary.</summary>
+  </entry>
   <entry>
     <id>ess/open-issue-batch-1-0.76.0</id>
     <title>Schemas publish entity, Binary64, length and distinct invariants, and composition compares events and constraints</title>

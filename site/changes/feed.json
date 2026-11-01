@@ -5,6 +5,20 @@
   "feed_url": "https://beyond10x.github.io/changes/feed.json",
   "items": [
     {
+      "id": "ess/downstream-gaps-0.79.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.79.0",
+      "title": "Nested-member claims, Binary64 in conformance suites, and typed authored inputs",
+      "content_text": "From ess-scenario/6 a claim may name a nested member by its dotted path, and an authored literal input its type refuses is refused at any depth. Suites /62 and /63 carry a response member path and a finite Binary64, compared by IEEE equality in Rust, Go and TypeScript. Synthesis refutes an inequality against an example.",
+      "date_published": "2026-11-01T00:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "notable",
+        "impact",
+        "specify"
+      ]
+    },
+    {
       "id": "eventlog/0.9.2",
       "url": "https://github.com/beyond10x/eventlog/releases/tag/0.9.2",
       "title": "Eventlog 0.9.2",
@@ -32,6 +46,20 @@
         "releases",
         "build-agents",
         "operate-services",
+        "specify"
+      ]
+    },
+    {
+      "id": "ess/downstream-gaps-0.78.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.78.0",
+      "title": "Structured input examples, rows a deployment provides, and lifecycle summaries",
+      "content_text": "From ess/33 a struct, map or Json input may carry an example that synthesis sends as written. An entity may declare that the deployment provides its rows; suites resolve such a row as an entity fixture and the interpreted target creates it. Transitions and states may carry a summary.",
+      "date_published": "2026-10-31T00:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "notable",
+        "impact",
         "specify"
       ]
     },

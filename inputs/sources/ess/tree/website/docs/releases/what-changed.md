@@ -9,6 +9,22 @@ What each ESS release is worth to somebody using it: what became possible, how m
 
 This page is generated from the change records kept in the repository. A release with no entry here added nothing somebody using ESS would act on.
 
+## 0.79.0 — 2026-11-01
+
+### Nested-member claims, Binary64 in conformance suites, and typed authored inputs
+
+capability · notable impact · [release post](https://beyond10x.github.io/ess/releases/nested-claims-and-binary64) · [release notes](https://github.com/beyond10x/ess/releases/tag/0.79.0)
+
+From ess-scenario/6 a claim may name a nested member by its dotted path, and an authored literal input its type refuses is refused at any depth. Suites /62 and /63 carry a response member path and a finite Binary64, compared by IEEE equality in Rust, Go and TypeScript. Synthesis refutes an inequality against an example.
+
+## 0.78.0 — 2026-10-31
+
+### Structured input examples, rows a deployment provides, and lifecycle summaries
+
+capability · notable impact · [release post](https://beyond10x.github.io/ess/releases/structured-examples-and-provided-rows) · [release notes](https://github.com/beyond10x/ess/releases/tag/0.78.0)
+
+From ess/33 a struct, map or Json input may carry an example that synthesis sends as written. An entity may declare that the deployment provides its rows; suites resolve such a row as an entity fixture and the interpreted target creates it. Transitions and states may carry a summary.
+
 ## 0.77.0 — 2026-10-29
 
 ### HTTP bindings group alike outcomes, OpenAPI import widens, and validate refuses unreachable branches
