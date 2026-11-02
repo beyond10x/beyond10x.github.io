@@ -24,6 +24,72 @@
       "channel": "impact"
     },
     {
+      "key": "ess/downstream-gaps-0.80.0",
+      "id": "ess/downstream-gaps-0.80.0",
+      "repository": "ess",
+      "publishedAt": "2026-11-01T00:00:00Z",
+      "title": "HTTP-bound inputs and short names in generated types, and input-type rules in Entity Runtime",
+      "summary": "ess generate types takes --http, so each command input is the request body its bound OpenAPI document publishes, and --names short combines with --all-commands and --all-views. Entity Runtime lowering keeps an unstored input type's invariants and prefix or refuses them by name. Synthesis decides an identity guard on the row it arranges.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.80.0",
+        "version": "0.80.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/downstream-gaps-0.81.0",
+      "id": "ess/downstream-gaps-0.81.0",
+      "repository": "ess",
+      "publishedAt": "2026-11-01T00:00:00Z",
+      "title": "Nullable Binary64 fields in generated types, name aliases in the schema, and synthesis that follows bindings",
+      "summary": "ess generate types realizes an optional, nullable Binary64 field and refuses a responseless command's response root by name. The schema admits the id: and component: name aliases. Synthesis follows bindings that rewrite a related row, sends refusals beside external branches to a present related row, and picks wrong-state rows with known stored guards.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.81.0",
+        "version": "0.81.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/downstream-gaps-0.82.0",
+      "id": "ess/downstream-gaps-0.82.0",
+      "repository": "ess",
+      "publishedAt": "2026-11-01T00:00:00Z",
+      "title": "Binding scenarios that check event identities, refusals that probe the record, and validation that names the file",
+      "summary": "Synthesized binding scenarios compare the trigger event's identity fields with the instance or row they act on. The arranged half of a refusal without an identity view probes the record through the command. ess specify validate names the file a refusal was read from in a specification of several files.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.82.0",
+        "version": "0.82.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
       "key": "eventlog/0.9.2",
       "id": "eventlog/0.9.2",
       "repository": "eventlog",

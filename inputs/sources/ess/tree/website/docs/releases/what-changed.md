@@ -9,6 +9,30 @@ What each ESS release is worth to somebody using it: what became possible, how m
 
 This page is generated from the change records kept in the repository. A release with no entry here added nothing somebody using ESS would act on.
 
+## 0.82.0 — 2026-11-01
+
+### Binding scenarios that check event identities, refusals that probe the record, and validation that names the file
+
+capability · notable impact · [release post](https://beyond10x.github.io/ess/releases/event-identities-and-file-cited-refusals) · [release notes](https://github.com/beyond10x/ess/releases/tag/0.82.0)
+
+Synthesized binding scenarios compare the trigger event's identity fields with the instance or row they act on. The arranged half of a refusal without an identity view probes the record through the command. ess specify validate names the file a refusal was read from in a specification of several files.
+
+## 0.81.0 — 2026-11-01
+
+### Nullable Binary64 fields in generated types, name aliases in the schema, and synthesis that follows bindings
+
+capability · notable impact · [release post](https://beyond10x.github.io/ess/releases/nullable-binary64-and-binding-aware-synthesis) · [release notes](https://github.com/beyond10x/ess/releases/tag/0.81.0)
+
+ess generate types realizes an optional, nullable Binary64 field and refuses a responseless command's response root by name. The schema admits the id: and component: name aliases. Synthesis follows bindings that rewrite a related row, sends refusals beside external branches to a present related row, and picks wrong-state rows with known stored guards.
+
+## 0.80.0 — 2026-11-01
+
+### HTTP-bound inputs and short names in generated types, and input-type rules in Entity Runtime
+
+capability · notable impact · [release post](https://beyond10x.github.io/ess/releases/http-bound-inputs-and-short-names) · [release notes](https://github.com/beyond10x/ess/releases/tag/0.80.0)
+
+ess generate types takes --http, so each command input is the request body its bound OpenAPI document publishes, and --names short combines with --all-commands and --all-views. Entity Runtime lowering keeps an unstored input type's invariants and prefix or refuses them by name. Synthesis decides an identity guard on the row it arranges.
+
 ## 0.79.0 — 2026-11-01
 
 ### Nested-member claims, Binary64 in conformance suites, and typed authored inputs
