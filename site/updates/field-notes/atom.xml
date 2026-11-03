@@ -2,11 +2,153 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://beyond10x.github.io/updates/field-notes/</id>
     <title>beyond10x Blog</title>
-    <updated>2026-11-01T21:00:00.000Z</updated>
+    <updated>2026-11-03T08:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://beyond10x.github.io/updates/field-notes/"/>
     <subtitle>beyond10x Blog</subtitle>
     <icon>https://beyond10x.github.io/img/favicon.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[0.84 — Generated servers refuse what their OpenAPI refuses, and generated UIs call their binding's routes]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/generated-servers-refuse-what-their-openapi-refuses/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/generated-servers-refuse-what-their-openapi-refuses/"/>
+        <updated>2026-11-03T08:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.84.0 adds no format: generated Rust servers refuse a malformed Timestamp and an undeclared JSON member at decode, authored success acts assert that no error came back, denied-grant scenarios reach ranked views and every ungranted actor, and a generated UI calls the routes its HTTP binding serves.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.84 — Generated servers refuse what their OpenAPI refuses, and generated UIs call their binding's routes | ESS</span><span data-pagefind-meta="description">0.84.0 adds no format: generated Rust servers refuse a malformed Timestamp and an undeclared JSON member at decode, authored success acts assert that no error came back, denied-grant scenarios reach ranked views and every ungranted actor, and a generated UI calls the routes its HTTP binding serves.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-11-03-0900-generated-servers-refuse-what-their-openapi-refuses.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-11-03-0900-generated-servers-refuse-what-their-openapi-refuses.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
+</blockquote></div>
+<p>0.84.0 adds no source, scenario or suite format. It changes what generated servers admit, what an
+authored success step checks, which denied-grant scenarios synthesis writes, and how generated UIs
+reach a server. The <a href="https://github.com/beyond10x/ess/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="">changelog</a> lists every
+change; this note covers each of them.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="generated-servers-refuse-what-their-openapi-refuses">Generated servers refuse what their OpenAPI refuses<a href="https://beyond10x.github.io/updates/field-notes/ess/generated-servers-refuse-what-their-openapi-refuses/#generated-servers-refuse-what-their-openapi-refuses" class="hash-link" aria-label="Direct link to Generated servers refuse what their OpenAPI refuses" title="Direct link to Generated servers refuse what their OpenAPI refuses" translate="no">​</a></h2>
+<ul>
+<li class="">The generated Rust codecs refuse at decode, before anything is stored, a <code>Timestamp</code> that is not
+an RFC 3339 <code>date-time</code> and a member a closed JSON object does not declare. The server answers
+<code>400</code>, or the binding's <code>refusals.malformed</code>, naming the member's path
+(<a href="https://github.com/beyond10x/ess/issues/707" target="_blank" rel="noopener noreferrer" class="">#707</a>).</li>
+<li class="">Before, the server stored the text or dropped the member, while the OpenAPI document it serves
+already refused the body. A struct declaring <code>undeclared_fields: ignored</code> and a <code>Json</code> value stay
+open.</li>
+<li class="">The same decoders read the log, so <code>decode_system_event</code> refuses an envelope an older server
+wrote with a free-text <code>Timestamp</code> or an extra member in a closed struct.</li>
+<li class="">The generated Go server refuses a top-level JSON command member no input field names, on bound
+and derived routes, and reads a <code>Timestamp</code> with the same grammar as the Rust server.</li>
+<li class="">Known limit: an <code>Optional</code> member sent as <code>null</code> is still taken as absent by the generated Rust
+server, while its served OpenAPI refuses the body. It is tracked as a backlog story.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="an-authored-success-act-asserts-no-error">An authored success act asserts no error<a href="https://beyond10x.github.io/updates/field-notes/ess/generated-servers-refuse-what-their-openapi-refuses/#an-authored-success-act-asserts-no-error" class="hash-link" aria-label="Direct link to An authored success act asserts no error" title="Direct link to An authored success act asserts no error" translate="no">​</a></h2>
+<ul>
+<li class="">An authored act whose <code>outcome:</code> names a branch that declares no error now also requires that no
+error came back. A target answering the success branch under its own name with an error fails the
+step; it used to pass on the outcome name alone.</li>
+<li class="">No suite format moves. A library caller assembling an authored suite by hand selects the format
+with <code>select_fresh_format_for</code> and runs it with <code>Runner::run_admitted</code>, as the CLI does.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="denied-grant-scenarios">Denied-grant scenarios<a href="https://beyond10x.github.io/updates/field-notes/ess/generated-servers-refuse-what-their-openapi-refuses/#denied-grant-scenarios" class="hash-link" aria-label="Direct link to Denied-grant scenarios" title="Direct link to Denied-grant scenarios" translate="no">​</a></h2>
+<ul>
+<li class="">Synthesis writes <code>&lt;command&gt;/grant/denied</code> for a command acting on an existing row beside a view
+ranked by <code>order_by</code> (<a href="https://github.com/beyond10x/ess/issues/712" target="_blank" rel="noopener noreferrer" class="">#712</a>).</li>
+<li class=""><code>&lt;view&gt;/grant/read/denied</code> reads the view as every ungranted actor of the view's own domain, then
+as no actor. Before, it read one actor of any domain, so a target admitting an ungranted actor of
+the view's domain passed.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="generated-uis-call-their-bindings-routes">Generated UIs call their binding's routes<a href="https://beyond10x.github.io/updates/field-notes/ess/generated-servers-refuse-what-their-openapi-refuses/#generated-uis-call-their-bindings-routes" class="hash-link" aria-label="Direct link to Generated UIs call their binding's routes" title="Direct link to Generated UIs call their binding's routes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>ess generate ui</code> and <code>ess ui run --tui</code> take <code>--http &lt;binding&gt;</code>: the generated route table
+carries the method and path the <code>ess-http/1</code> binding declares, so the UI calls the routes the
+server generated for the same binding serves
+(<a href="https://github.com/beyond10x/ess/issues/713" target="_blank" rel="noopener noreferrer" class="">#713</a>).</li>
+<li class="">A command served on <code>get</code> is sent without a body, and React refuses a path value of <code>.</code> or <code>..</code>.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="renderer-fixes">Renderer fixes<a href="https://beyond10x.github.io/updates/field-notes/ess/generated-servers-refuse-what-their-openapi-refuses/#renderer-fixes" class="hash-link" aria-label="Direct link to Renderer fixes" title="Direct link to Renderer fixes" translate="no">​</a></h2>
+<ul>
+<li class="">The terminal renderer addresses a row action's confirm by the view's row key, and a record's
+actions see the row the record shows.</li>
+<li class="">An account menu entry keeps its <code>sets</code> and <code>navigate</code> in React. <code>ess ui check</code> refuses an entry a
+renderer would drop, an entry that does not read as an action, and <code>sets</code> beside <code>does</code>,
+<code>navigate</code> or <code>opens</code>.</li>
+</ul>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.83 — Optional list appends, binding refusals that check event identities, and refusals that tell states apart]]></title>
+        <id>https://beyond10x.github.io/updates/field-notes/ess/optional-appends-and-refusals-that-tell-states-apart/</id>
+        <link href="https://beyond10x.github.io/updates/field-notes/ess/optional-appends-and-refusals-that-tell-states-apart/"/>
+        <updated>2026-11-02T13:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.83.0 adds no format: the interpreted target appends null for an absent optional list element, binding refusal scenarios compare their trigger event's identities, a row-set guard beside named rows is witnessed on every refusal order, and no-view input refusals tell the record's state apart.
+]]></summary>
+        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.83 — Optional list appends, binding refusals that check event identities, and refusals that tell states apart | ESS</span><span data-pagefind-meta="description">0.83.0 adds no format: the interpreted target appends null for an absent optional list element, binding refusal scenarios compare their trigger event's identities, a row-set guard beside named rows is witnessed on every refusal order, and no-view input refusals tell the record's state apart.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
+<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-11-02-1400-optional-appends-and-refusals-that-tell-states-apart.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-11-02-1400-optional-appends-and-refusals-that-tell-states-apart.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
+</blockquote></div>
+<p>0.83.0 adds no source, scenario or suite format, and every change in it is a fix. One is in the
+interpreted target, and the others are in the conformance suites synthesis writes. The
+<a href="https://github.com/beyond10x/ess/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="">changelog</a> lists every change; this note
+covers each of them.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="appending-an-absent-optional-element">Appending an absent optional element<a href="https://beyond10x.github.io/updates/field-notes/ess/optional-appends-and-refusals-that-tell-states-apart/#appending-an-absent-optional-element" class="hash-link" aria-label="Direct link to Appending an absent optional element" title="Direct link to Appending an absent optional element" translate="no">​</a></h2>
+<ul>
+<li class="">The interpreted target appends <code>null</code> for an absent or <code>null</code> element of
+<code>{append: input.&lt;field&gt;}</code> over a <code>List&lt;Optional&lt;T&gt;&gt;</code>, as generated Rust and Go already append
+<code>None</code> and <code>nil</code>. Synthesis expects that <code>null</code> in the view row.</li>
+<li class="">Before, the interpreted target refused the command as unsupported.</li>
+<li class="">An element over a list of required elements is unchanged.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="binding-refusal-scenarios-compare-event-identities">Binding refusal scenarios compare event identities<a href="https://beyond10x.github.io/updates/field-notes/ess/optional-appends-and-refusals-that-tell-states-apart/#binding-refusal-scenarios-compare-event-identities" class="hash-link" aria-label="Direct link to Binding refusal scenarios compare event identities" title="Direct link to Binding refusal scenarios compare event identities" translate="no">​</a></h2>
+<ul>
+<li class="">A synthesized binding refusal scenario covers a refusal the binding's policy drops, escalates or
+retries a bounded number of times. It now compares the identity fields of the trigger's event with
+the instances its invocation was sent, as the other binding scenarios do since 0.82.0.</li>
+<li class="">It also compares them with each id the invocation was sent as a literal for a field of an
+entity's identity type, such as the id a trigger naming no related row is sent. That holds where
+it sends another publisher of the event, or a trigger naming a row arranged so the predicate
+refuses it.</li>
+<li class="">Before, it expected that event by shape alone, so a target publishing a wrong id there passed.</li>
+<li class="">The suite bytes of seven fixture models move; the changelog names them.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-row-set-beside-named-rows-on-every-refusal-order">A row set beside named rows, on every refusal order<a href="https://beyond10x.github.io/updates/field-notes/ess/optional-appends-and-refusals-that-tell-states-apart/#a-row-set-beside-named-rows-on-every-refusal-order" class="hash-link" aria-label="Direct link to A row set beside named rows, on every refusal order" title="Direct link to A row set beside named rows, on every refusal order" translate="no">​</a></h2>
+<ul>
+<li class="">A command guarding on a row set beside rows its input names (<code>ess/32</code>) is witnessed on every
+refusal order.</li>
+<li class="">A refusal over a named row that also carries a <code>when:</code> is held beside the row set's rows with a
+send that holds that <code>when:</code>. Where the <code>when:</code> equates two inputs, that send names one row twice.
+Where no such send stands, the refusal is witnessed on its related row alone, so its row-set
+branch is no longer refused.</li>
+<li class="">A row-set refusal is held beside a later refusal whose <code>when:</code> compares the named rows. Where only
+a creator sent one row twice lays the selected row, that is how it is laid.</li>
+<li class="">A <code>forall</code> on the accepting branch is held on a selected row the <code>forall</code> passes, and its default
+refusal on a selected row naming the send's own rows. A target refusing on any selected row now
+fails, at <code>ess/31</code> too.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="no-view-input-refusals-tell-the-records-state-apart">No-view input refusals tell the record's state apart<a href="https://beyond10x.github.io/updates/field-notes/ess/optional-appends-and-refusals-that-tell-states-apart/#no-view-input-refusals-tell-the-records-state-apart" class="hash-link" aria-label="Direct link to No-view input refusals tell the record's state apart" title="Direct link to No-view input refusals tell the record's state apart" translate="no">​</a></h2>
+<ul>
+<li class="">These are input refusals on a command that addresses an existing record, on a model where no
+identity view shows the row.</li>
+<li class="">The arranged half of such a refusal tells the arranged state apart from every other state. Where
+the first branch addressing the record from that state also runs from other states, the scenario
+sends the shortest sequence a bounded search finds that does tell them apart. Where the bound
+stops the search first, that sequence is extended one send at a time past it. It is drawn from
+the command's branches and from other commands whose input names only that record, with a
+<code>wrong_state:</code> refusal among the answers. A free-text input beside the identity names no record.</li>
+<li class="">A refusal beside held-state branches reads the record back after each held-state send, through
+sends from that state that tell it apart from every other state. The command's own branches come
+first, its held-state refusals among them.</li>
+<li class="">A target that moves the record on refusal and publishes nothing now fails both. Before, they
+required only the error and no event, and such a target passed.</li>
+<li class="">Where the sends tried leave states untold, the scenario is withdrawn and refused as
+<code>ESS-SYNTH-001</code>, naming the states left. Where no send has a valid input, it names every branch
+tried.</li>
+<li class="">A model with an identity view keeps its suite bytes. The test model <code>occurrence-clock-offers.yaml</code>,
+which has none, moves its suite bytes: its <code>AcceptOffer/outcome/malformed</code> scenario reads the
+offer back in each of its three states, with its scenario count and refusals unchanged.</li>
+</ul>]]></content>
+        <category label="release" term="release"/>
+        <category label="ess" term="ess"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[0.82 — Binding scenarios that check event identities, refusals that probe the record, and validation that names the file]]></title>
         <id>https://beyond10x.github.io/updates/field-notes/ess/event-identities-and-file-cited-refusals/</id>
@@ -16,7 +158,7 @@
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.82 — Binding scenarios that check event identities, refusals that probe the record, and validation that names the file | ESS</span><span data-pagefind-meta="description">0.82.0 adds no format: synthesized binding scenarios compare the identity fields of their trigger event, the arranged half of a refusal without an identity view probes the record through the command, and ess specify validate names the file a refusal was read from.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-11-01-2200-event-identities-and-file-cited-refusals.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-11-01-2200-event-identities-and-file-cited-refusals.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-11-01-2200-event-identities-and-file-cited-refusals.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-11-01-2200-event-identities-and-file-cited-refusals.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.82.0 adds no source, scenario or suite format, and every change in it is a fix. Two are in the
 conformance suites synthesis writes, and one is in what <code>ess specify validate</code> cites. The
@@ -72,7 +214,7 @@ record; <code>diagnose_locating</code> is unchanged.</li>
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.81 — Nullable Binary64 fields in generated types, name aliases in the schema, and synthesis that follows bindings | ESS</span><span data-pagefind-meta="description">0.81.0 adds no format: ess generate types realizes a nullable optional Binary64 field and refuses the response root of a command without a response by name, the published schema admits the id: and component: name aliases, and synthesis sends related-row and wrong-state scenarios to rows that keep their branch.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-11-01-1600-nullable-binary64-and-binding-aware-synthesis.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-11-01-1600-nullable-binary64-and-binding-aware-synthesis.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-11-01-1600-nullable-binary64-and-binding-aware-synthesis.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-11-01-1600-nullable-binary64-and-binding-aware-synthesis.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.81.0 adds no source, scenario or suite format, and every change in it is a fix. Two are in
 <code>ess generate types</code>, one is in the published document schema, and three are in how synthesis picks
@@ -127,7 +269,7 @@ serves, the scenario is refused as <code>ESS-SYNTH-003</code> naming the guard.<
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.80 — HTTP-bound inputs and short names in generated types, and input-type rules in Entity Runtime | ESS</span><span data-pagefind-meta="description">0.80.0 adds no format: ess generate types takes --http, so a command's input type is the request body its bound OpenAPI document publishes, --names short combines with --all-commands and --all-views, and Entity Runtime lowering keeps an unstored input type's rules.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-11-01-1200-http-bound-inputs-and-short-names.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-11-01-1200-http-bound-inputs-and-short-names.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-11-01-1200-http-bound-inputs-and-short-names.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-11-01-1200-http-bound-inputs-and-short-names.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.80.0 adds no source, scenario or suite format. It changes what <code>ess generate types</code> writes under
 two flags, what Entity Runtime lowering does with a command input's type, and how synthesis decides
@@ -192,7 +334,7 @@ was sent an identity no row carries and the target answered <code>unknown</code>
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.79 — Nested-member claims, Binary64 in conformance suites, and typed authored inputs | ESS</span><span data-pagefind-meta="description">0.79.0 adds scenario format ess-scenario/6 and suite pair ess-conformance/62 and /63: an authored claim may name a nested member by its path, an authored literal input is held to its type, and a model that reaches a finite Binary64 runs a conformance suite.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-11-01-0130-nested-claims-and-binary64.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-11-01-0130-nested-claims-and-binary64.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-11-01-0130-nested-claims-and-binary64.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-11-01-0130-nested-claims-and-binary64.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.79.0 adds no source format: a specification keeps its meaning, its IR bytes and its compiled
 digest. It adds scenario format <code>ess-scenario/6</code> and suite pair <code>ess-conformance/62</code> (ordinary) and
@@ -252,7 +394,7 @@ on related identities, parent rows and cascades get the rows they read.</li>
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.78 — Structured input examples, rows a deployment provides, and lifecycle summaries | ESS</span><span data-pagefind-meta="description">0.78.0 adds source format ess/33: a struct, map or Json input may carry an example, an entity may declare that the deployment provides its rows, and lifecycle transitions and states may carry a summary.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-10-31-1600-structured-examples-and-provided-rows.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-31-1600-structured-examples-and-provided-rows.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-10-31-1600-structured-examples-and-provided-rows.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-31-1600-structured-examples-and-provided-rows.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.78.0 adds source format <code>ess/33</code>. A model that does not use its new keys keeps its meaning, its IR
 bytes and its compiled digest. The <a href="https://github.com/beyond10x/ess/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="">changelog</a>
@@ -298,7 +440,7 @@ guard reads.</li>
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.77 — Alike HTTP outcomes, wider OpenAPI import, and branches an earlier refusal hides | ESS</span><span data-pagefind-meta="description">0.77.0 lets an HTTP route answer two outcomes alike, imports open objects from OpenAPI, keeps declared field order in generated types on request, and refuses a branch an earlier refusal always answers first.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-10-29-1100-alike-outcomes-and-unreachable-branches.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-29-1100-alike-outcomes-and-unreachable-branches.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-10-29-1100-alike-outcomes-and-unreachable-branches.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-29-1100-alike-outcomes-and-unreachable-branches.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.77.0 is a feature release with no new source format: every model keeps its meaning, its IR bytes
 and its compiled digest. The <a href="https://github.com/beyond10x/ess/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="">changelog</a>
@@ -360,7 +502,7 @@ it refused before.</li>
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.70 — Named rows beside a row set, state wire spellings, and replays that finish | ESS</span><span data-pagefind-meta="description">0.70.0 adds source format <code>ess/32</code>: one command may guard on rows its input names beside a row-set guard, a struct may declare no fields, and a lifecycle state may declare its wire spelling.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-10-26-2000-named-rows-beside-a-row-set.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-26-2000-named-rows-beside-a-row-set.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-10-26-2000-named-rows-beside-a-row-set.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-26-2000-named-rows-beside-a-row-set.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.70.0 is a feature release. It adds the source format <code>ess/32</code> and the suite formats
 <code>ess-conformance/58</code> and <code>/59</code>. A model below <code>ess/32</code> keeps its meaning, its IR bytes and its
@@ -405,7 +547,7 @@ synthesizes (<a href="https://github.com/beyond10x/ess/issues/662" target="_blan
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.63 — Values computed by typed expressions, and one precedence order for guards | ESS</span><span data-pagefind-meta="description">0.63.0 adds source format <code>ess/27</code>: a value may be computed by a typed expression, a guard may read a digest of its input, and every command's guards answer in one precedence order.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-10-19-1200-typed-expressions-and-one-precedence-order.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-19-1200-typed-expressions-and-one-precedence-order.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-10-19-1200-typed-expressions-and-one-precedence-order.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-19-1200-typed-expressions-and-one-precedence-order.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.63.0 is a feature release. It adds the source format <code>ess/27</code>, the suite formats
 <code>ess-conformance/52</code> and <code>/53</code>, the delta format <code>ess-diff/20</code> and the suite comparison
@@ -462,7 +604,7 @@ unions, and await a command the system issues itself
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.59 — An authored act states the caller its command is sent as | ESS</span><span data-pagefind-meta="description">0.59.0 lets an authored scenario state the caller attributes its command reads, and fixes two cases where synthesis refused or mis-chose a scenario.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-10-11-0230-authored-caller-attributes.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-11-0230-authored-caller-attributes.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-10-11-0230-authored-caller-attributes.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-11-0230-authored-caller-attributes.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.59.0 is a feature release. It adds the authored scenario format <code>ess-scenario/5</code>; specifications,
 suites and deltas keep their formats. The
@@ -505,7 +647,7 @@ struct sent as a literal keeps its scenarios byte for byte (<a href="https://git
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.55 — Json in CLI results, and optional values an implementation supplies | ESS</span><span data-pagefind-meta="description">0.55.0 lets a CLI result carry a JSON document as JSON, and routes an optional generated value through a port the implementation answers.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-10-06-2200-json-cli-results-and-optional-generator-ports.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-06-2200-json-cli-results-and-optional-generator-ports.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-10-06-2200-json-cli-results-and-optional-generator-ports.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-06-2200-json-cli-results-and-optional-generator-ports.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.55.0 is a feature release. Specifications, suites and deltas keep their formats. It follows
 0.54.0, released the same day with source format <code>ess/23</code>; the
@@ -545,7 +687,7 @@ demonstration context answers it absent.</li>
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.51 — Branches selected by existence, and output that regenerates anywhere | ESS</span><span data-pagefind-meta="description">0.51.0 generates the existence lookup a Rust server needs to choose between creating and refusing, and lets committed generated output regenerate in another checkout.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-10-01-2330-existence-lookup-and-portable-output.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-01-2330-existence-lookup-and-portable-output.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-10-01-2330-existence-lookup-and-portable-output.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-01-2330-existence-lookup-and-portable-output.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.51.0 is a feature and fix release. Specifications, suites and deltas keep their formats.</p>
 <!-- -->
@@ -584,7 +726,7 @@ with <code>ess generate output adopt</code>;</li>
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.50 — Aggregates over rows a when_related guard admits | ESS</span><span data-pagefind-meta="description">0.50.0 is one synthesis fix: an aggregate view whose creating command has a when_related guard gets its aggregate scenario instead of being refused with ESS-SYNTH-017.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-10-01-2200-aggregates-over-related-guards.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-01-2200-aggregates-over-related-guards.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-10-01-2200-aggregates-over-related-guards.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-01-2200-aggregates-over-related-guards.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.50.0 is a fix release. Specifications, suites and deltas keep their formats.</p>
 <!-- -->
@@ -614,7 +756,7 @@ groups under the wrong owner fails.</li>
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.49 — Served surfaces enforce actor grants, and a related row's state | ESS</span><span data-pagefind-meta="description">0.49.0 makes generated servers refuse a caller the specification does not grant a command, with suites that witness the refusal, adds ess/20 for a related row's lifecycle state in a when_related guard, and closes six synthesis and diff gaps.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-10-01-1800-actor-grants-and-related-state.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-01-1800-actor-grants-and-related-state.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-10-01-1800-actor-grants-and-related-state.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-10-01-1800-actor-grants-and-related-state.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.49.0 adds the source format <code>ess/20</code>, described in
 <a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the format history</a>. It changes the signature of generated
@@ -668,7 +810,7 @@ removal, not <code>unclassified-changed</code>.</li>
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.48 — UI tests by node path, and reports from an outside runner | ESS</span><span data-pagefind-meta="description">0.48.0 runs ess-ui-test/1 tests against the terminal renderer and emits a Playwright spec from the same file, turns an outside runner's per-scenario results into a conformance report, and marks a served 501 whose effect was committed.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-09-30-2300-ui-tests-and-supplied-results.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-30-2300-ui-tests-and-supplied-results.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-09-30-2300-ui-tests-and-supplied-results.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-30-2300-ui-tests-and-supplied-results.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.48.0 adds three formats, <code>ess-ui-test/1</code>, <code>ess-ui-test-report/1</code> and
 <code>ess-conformance-results/1</code>, described in <a class="" href="https://beyond10x.github.io/docs/ess/reference/formats/">the formats reference</a>.
@@ -712,7 +854,7 @@ shells see the second case as <code>Refused::Undelivered</code>.</p>
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.47 — UI documents, and generated servers that answer with what a command published | ESS</span><span data-pagefind-meta="description">0.47.0 adds ess-ui/1, a renderer-neutral UI document that loads, checks, runs in the terminal and generates a React project, and makes the generated Rust and Go servers answer with the events a command published, deliver each binding on its own, and keep request headers.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-09-30-1800-ui-documents-and-published-answers.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-30-1800-ui-documents-and-published-answers.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-09-30-1800-ui-documents-and-published-answers.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-30-1800-ui-documents-and-published-answers.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.47.0 adds two formats, <code>ess-ui/1</code> and <code>ess-ui-check/1</code>, described in
 <a class="" href="https://beyond10x.github.io/docs/ess/reference/formats/">the formats reference</a>. Specifications, suites and deltas keep their
@@ -760,7 +902,7 @@ view (beyond10x/ess#256).</p>]]></content>
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.43 — instance references inside structured values, one refusal order, and unstated external answers | ESS</span><span data-pagefind-meta="description">0.43.0 lets an authored step name a created instance inside a list, a map or a struct, puts every command's refusals in one declared order, refuses an authored claim that holds only on an external answer the act does not state, and lets synthesis witness guards it refused before.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-09-29-2200-instance-references-in-structured-values.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-29-2200-instance-references-in-structured-values.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-09-29-2200-instance-references-in-structured-values.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-29-2200-instance-references-in-structured-values.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.43.0 adds the suite formats <code>ess-conformance/32</code> and <code>ess-conformance/33</code>, described in
 <a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a>. A suite that does not use what they add
@@ -814,7 +956,7 @@ on rows that hold several entries, so a target reading only the first or last en
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.42 — unkillable mutants scored apart, overlap precedence, and counter limits | ESS</span><span data-pagefind-meta="description">0.42.0 scores a mutant no scenario could kill apart from a survivor, gives two overlapping accepting guards a declared answer, witnesses a stored counter at its limit and a guard over a link field, and lets a relation ride on the identity.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-09-29-2000-unkillable-mutants.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-29-2000-unkillable-mutants.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-09-29-2000-unkillable-mutants.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-29-2000-unkillable-mutants.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.42.0 adds <code>ess-diff/11</code>, <code>ess-mutation-report/3</code> and <code>ess-mutation-manifest/3</code>, described in
 <a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a>.</p>
@@ -846,7 +988,7 @@ actors declare <code>attributes:</code> records that model's digests.</p>
 ]]></summary>
         <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.41 — state-scoped refusals, guards over a related row, and a delivery context | ESS</span><span data-pagefind-meta="description">0.41.0 adds source format <code>ess/18</code>: a refusal scoped to some held states, <code>state</code> in a <code>when_subject</code> predicate, a guard over the row of another entity, and a binding that reads the context its event was delivered with.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
 <div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-09-29-1800-state-scoped-refusals.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-29-1800-state-scoped-refusals.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
+<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/b89faaa411bdc6cbcdb9791777e36baded3bc278/website/blog/2026-09-29-1800-state-scoped-refusals.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-29-1800-state-scoped-refusals.md</a> · revision <code class="b10x-revision" title="b89faaa411bdc6cbcdb9791777e36baded3bc278">b89faaa411bd</code></p>
 </blockquote></div>
 <p>0.41.0 adds the source format <code>ess/18</code>, described in
 <a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a>.</p>
@@ -865,62 +1007,6 @@ subject, so a command can answer differently in states its moves do not start fr
 <p>Map inputs, view filters over identities and links, every creating command, and the record an
 input refusal needs are now witnessed. The mutation audit scores gained refusals and skipped
 baselines apart from survivors.</p>]]></content>
-        <category label="release" term="release"/>
-        <category label="ess" term="ess"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[0.40 — generated runtimes run every suite, and reader-side composition]]></title>
-        <id>https://beyond10x.github.io/updates/field-notes/ess/runtime-parity/</id>
-        <link href="https://beyond10x.github.io/updates/field-notes/ess/runtime-parity/"/>
-        <updated>2026-09-29T10:00:00.000Z</updated>
-        <summary type="html"><![CDATA[0.40.0 runs suites `ess-conformance/22` to `/27` in the generated Go and TypeScript runtimes with the Rust runner's verdicts, and `ess-composition/3` admits the widenings a consumer reads.
-]]></summary>
-        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.40 — generated runtimes run every suite, and reader-side composition | ESS</span><span data-pagefind-meta="description">0.40.0 runs suites <code>ess-conformance/22</code> to <code>/27</code> in the generated Go and TypeScript runtimes with the Rust runner's verdicts, and <code>ess-composition/3</code> admits the widenings a consumer reads.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
-<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-09-29-1200-runtime-parity.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-29-1200-runtime-parity.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
-</blockquote></div>
-<p>0.40.0 adds the composition format <code>ess-composition/3</code>, described in
-<a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a>.</p>
-<!-- -->
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="one-verdict-in-every-runtime">One verdict in every runtime<a href="https://beyond10x.github.io/updates/field-notes/ess/runtime-parity/#one-verdict-in-every-runtime" class="hash-link" aria-label="Direct link to One verdict in every runtime" title="Direct link to One verdict in every runtime" translate="no">​</a></h2>
-<p>The generated Go and TypeScript runtimes run suites <code>ess-conformance/22</code> to <code>/27</code>, which 0.38.0
-refused, and reach the Rust runner's verdict on each scenario.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="reader-side-composition">Reader-side composition<a href="https://beyond10x.github.io/updates/field-notes/ess/runtime-parity/#reader-side-composition" class="hash-link" aria-label="Direct link to Reader-side composition" title="Direct link to Reader-side composition" translate="no">​</a></h2>
-<p>A <code>conformances</code> entry in <code>ess-composition/3</code> may carry <code>reader: true</code>: the consumer's type reads
-every value the provider's type admits, so a widening the consumer can read is admitted rather than
-refused.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="names">Names<a href="https://beyond10x.github.io/updates/field-notes/ess/runtime-parity/#names" class="hash-link" aria-label="Direct link to Names" title="Direct link to Names" translate="no">​</a></h2>
-<p>A duplicate name is refused once, where it is declared, and the published schema states the
-characters each kind of name may use.</p>]]></content>
-        <category label="release" term="release"/>
-        <category label="ess" term="ess"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[0.39 — concurrent histories and direct library returns]]></title>
-        <id>https://beyond10x.github.io/updates/field-notes/ess/concurrent-histories/</id>
-        <link href="https://beyond10x.github.io/updates/field-notes/ess/concurrent-histories/"/>
-        <updated>2026-09-28T19:00:00.000Z</updated>
-        <summary type="html"><![CDATA[0.39.0 checks a run of several clients against the specification's own model, records such runs from the Go and TypeScript explorers and from production logs, and adds typed direct returns.
-]]></summary>
-        <content type="html"><![CDATA[<div class="b10x-search-attributes" data-pagefind-ignore="true"><span data-pagefind-meta="qualified_title">0.39 — concurrent histories and direct library returns | ESS</span><span data-pagefind-meta="description">0.39.0 checks a run of several clients against the specification's own model, records such runs from the Go and TypeScript explorers and from production logs, and adds typed direct returns.</span><span data-pagefind-meta="project">ESS</span><span data-pagefind-meta="document_type">field-note</span><span data-pagefind-filter="project">ess</span><span data-pagefind-filter="document_type">field-note</span><span data-pagefind-filter="audience">adopter</span><span data-pagefind-filter="audience">developer</span><span data-pagefind-filter="experience">try-spec-driven-development</span><span data-pagefind-filter="task">research</span></div>
-<div class="b10x-source-banner" data-pagefind-ignore="true"><blockquote>
-<p>Source-owned field note · <a href="https://github.com/beyond10x/ess/blob/6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f/website/blog/2026-09-28-2100-concurrent-histories.md" target="_blank" rel="noopener noreferrer" class="">website/blog/2026-09-28-2100-concurrent-histories.md</a> · revision <code class="b10x-revision" title="6437975cb8bf474b001e13eb6c2bc9f2b9db9d7f">6437975cb8bf</code></p>
-</blockquote></div>
-<p>0.39.0 adds the history format <code>ess-history/1</code> and the source format <code>ess/17</code>, described in
-<a class="" href="https://beyond10x.github.io/docs/ess/reference/spec-versions/">the version history</a>.</p>
-<!-- -->
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="several-clients-at-once">Several clients at once<a href="https://beyond10x.github.io/updates/field-notes/ess/concurrent-histories/#several-clients-at-once" class="hash-link" aria-label="Direct link to Several clients at once" title="Direct link to Several clients at once" translate="no">​</a></h2>
-<p>Every earlier check drives a target with one client and one call at a time. <code>ess verify conform check-history</code> reads a run of several clients, each call with its invoke and return instants, and
-searches for an order the specification's own model accepts. Each view read is held to the
-consistency the view declares.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="where-histories-come-from">Where histories come from<a href="https://beyond10x.github.io/updates/field-notes/ess/concurrent-histories/#where-histories-come-from" class="hash-link" aria-label="Direct link to Where histories come from" title="Direct link to Where histories come from" translate="no">​</a></h2>
-<p>The generated Go and TypeScript explorers record concurrent histories against a target and can
-inject the faults a specification declares. <code>ess verify conform import-history</code> reads a recorded
-production log through an <code>ess-history-adapter/1</code> document. <code>ess verify conform web --history</code>
-draws a failing history as client lanes.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="direct-returns">Direct returns<a href="https://beyond10x.github.io/updates/field-notes/ess/concurrent-histories/#direct-returns" class="hash-link" aria-label="Direct link to Direct returns" title="Direct link to Direct returns" translate="no">​</a></h2>
-<p><code>returns: true</code> in <code>ess/17</code> declares that a command answers with a typed value. Authored scenarios
-assert literal responses, and the Rust runner checks the actual return values.</p>]]></content>
         <category label="release" term="release"/>
         <category label="ess" term="ess"/>
     </entry>

@@ -2,6 +2,75 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "ess/downstream-gaps-0.84.0",
+      "id": "ess/downstream-gaps-0.84.0",
+      "repository": "ess",
+      "publishedAt": "2026-11-03T00:00:00Z",
+      "title": "Generated servers refuse what their OpenAPI refuses, and generated UIs call their binding's routes",
+      "summary": "Generated Rust servers refuse a malformed Timestamp and an undeclared JSON member at decode, and the Go server an undeclared top-level member. Authored success acts assert no error. Denied-grant scenarios reach ranked views and every ungranted actor. Generated UIs call their binding's routes.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.84.0",
+        "version": "0.84.0"
+      },
+      "journeys": [
+        "specify",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "agentplugins/0.26.0",
+      "id": "agentplugins/0.26.0",
+      "repository": "agentplugins",
+      "publishedAt": "2026-11-02T22:46:41Z",
+      "title": "Agent Plugins 0.26.0",
+      "summary": "Agent Plugins released version 0.26.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.26.0",
+        "version": "0.26.0"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "ess/downstream-gaps-0.83.0",
+      "id": "ess/downstream-gaps-0.83.0",
+      "repository": "ess",
+      "publishedAt": "2026-11-02T00:00:00Z",
+      "title": "Optional list appends, binding refusals that check event identities, and refusals that tell states apart",
+      "summary": "The interpreted target appends null for an absent optional list element. Binding refusal scenarios compare trigger event identities. A row-set guard beside named rows is witnessed on every refusal order. No-view input refusals read the record back through sends that tell its state apart.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.83.0",
+        "version": "0.83.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
       "key": "ess/downstream-gaps-0.79.0",
       "id": "ess/downstream-gaps-0.79.0",
       "repository": "ess",
