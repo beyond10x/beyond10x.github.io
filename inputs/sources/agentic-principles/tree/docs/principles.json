@@ -1,0 +1,108 @@
+{
+  "schema": "urn:beyond10x:agentic-principles:schema:registry:1",
+  "updated": "2026-08-25T02:37:37+02:00",
+  "principles": [
+    {
+      "id": "AP-001",
+      "title": "Bound autonomy with invariants",
+      "maturity": "seed",
+      "claim": "Specify what must remain true, the capability boundary, and required evidence; leave agents freedom only inside that envelope.",
+      "source": "/research/research/2026-08-25T001613+0200_seed",
+      "sourceLabel": "Atlas-derived research seed",
+      "themes": ["control", "authority"],
+      "featured": true
+    },
+    {
+      "id": "AP-002",
+      "title": "Separate proposer, executor, and evaluator",
+      "maturity": "seed",
+      "claim": "Intent, execution, and evaluation should remain independently inspectable even when one agent participates in all three.",
+      "source": "/research/research/2026-08-25T001613+0200_seed",
+      "sourceLabel": "Atlas-derived research seed",
+      "themes": ["verification", "separation"]
+    },
+    {
+      "id": "AP-003",
+      "title": "Make effects attributable and replayable",
+      "maturity": "seed",
+      "claim": "Consequential operations must leave enough durable evidence to reconstruct authority, starting state, attempted effect, result, and completion check.",
+      "source": "/research/research/2026-08-25T001613+0200_seed",
+      "sourceLabel": "Atlas-derived research seed",
+      "themes": ["observability", "evidence"]
+    },
+    {
+      "id": "AP-004",
+      "title": "Test the test",
+      "maturity": "seed",
+      "claim": "A verifier is not established until a controlled violation proves it can fail and recovery proves it can return to green.",
+      "source": "/research/research/2026-08-25T001613+0200_seed",
+      "sourceLabel": "Atlas-derived research seed",
+      "themes": ["evaluation", "verification"],
+      "featured": true
+    },
+    {
+      "id": "AP-005",
+      "title": "Treat boundary bytes as versioned commitments",
+      "maturity": "seed",
+      "claim": "A value another component stores, hashes, authorizes, parses, or verifies is a migration across a dependency graph—not a local string edit.",
+      "source": "/research/research/2026-08-25T001613+0200_seed",
+      "sourceLabel": "Atlas-derived research seed",
+      "themes": ["interfaces", "migration"]
+    },
+    {
+      "id": "AP-006",
+      "title": "Preserve provenance and publish corrections",
+      "maturity": "seed",
+      "claim": "Retain navigable evidence, record corrections beside original decisions, and update active rules without rewriting history to look prescient.",
+      "source": "/research/research/2026-08-25T001613+0200_seed",
+      "sourceLabel": "Atlas-derived research seed",
+      "themes": ["provenance", "learning"]
+    },
+    {
+      "id": "AP-007",
+      "title": "Place each rule at the narrowest shared scope",
+      "maturity": "seed",
+      "claim": "Put an invariant at the nearest governance boundary shared by every component that must obey it.",
+      "source": "/research/research/2026-08-25T001613+0200_seed",
+      "sourceLabel": "Atlas-derived research seed",
+      "themes": ["governance", "architecture"]
+    },
+    {
+      "id": "AP-008",
+      "title": "Distinguish proposed, observed, accepted, and committed state",
+      "maturity": "seed",
+      "claim": "Working-tree edits, local checks, commits, deployments, and observed production effects are different claims and must not collapse into done.",
+      "source": "/research/research/2026-08-25T001613+0200_seed",
+      "sourceLabel": "Atlas-derived research seed",
+      "themes": ["state", "completion"]
+    },
+    {
+      "id": "AP-009",
+      "title": "Make exceptions explicit and load-bearing",
+      "maturity": "seed",
+      "claim": "Every exception should name the external fact requiring it, the risk of removal, and the event that permits retirement.",
+      "source": "/research/research/2026-08-25T001613+0200_seed",
+      "sourceLabel": "Atlas-derived research seed",
+      "themes": ["exceptions", "risk"]
+    },
+    {
+      "id": "AP-010",
+      "title": "Fix the source, not the adopter",
+      "maturity": "seed",
+      "claim": "When an owned shared component violates its declared contract, repair the defect there instead of encoding it as downstream architecture.",
+      "source": "/research/research/2026-08-25T005715+0200_fix-the-source-not-the-adopter",
+      "sourceLabel": "Source-resolution incident seed",
+      "themes": ["architecture", "technical-debt"]
+    },
+    {
+      "id": "AP-011",
+      "title": "Contain the failure, continue the safe frontier",
+      "maturity": "candidate",
+      "claim": "Checkpoint blocked work and continue only independently verifiable safe tasks; uncertainty about consequential dependencies is itself a stop boundary.",
+      "source": "/research/research/2026-08-25T023000+0200_scoped-progress-under-partial-failure",
+      "sourceLabel": "Partial-failure mixed-method study",
+      "themes": ["resilience", "recovery"],
+      "featured": true
+    }
+  ]
+}

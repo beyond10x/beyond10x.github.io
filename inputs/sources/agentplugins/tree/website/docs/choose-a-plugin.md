@@ -1,0 +1,52 @@
+---
+sidebar_position: 2
+title: Choose a plugin
+---
+
+# Choose by the decision you need to make
+
+Start with the narrowest plugin that covers the task.
+
+## Finding the right surface or creating a plugin
+
+Use **`b10x`** when you are unsure which specialist owns the work, need the public resource map,
+or want to create or port a plugin. Its plugin creator makes shared skills the canonical workflow
+so the capability works in Codex and Claude Code, while keeping host-specific wrappers explicit.
+
+## Planning or understanding work
+
+Use **`aep`** (its `planning` skill) when the repository has a governed artifact store, or when you need to turn a
+goal into reviewable epics, stories, and tasks. Its agents can decompose, review, or reverse-engineer
+work, but `aep:planning` remains responsible for legal lifecycle moves.
+
+## Delivering a development story
+
+Use **`aep:implementing`** when an accepted story is ready to scope and implement. Its wave mode
+defines coordination and review roles for an interactive session; its drive mode hands one story to
+the reference driver instead, where the bounds are decided by the engine rather than followed by
+an agent — and it says before it launches that the driven walk has not yet reached `complete`.
+Neither makes a draft plan implementation-ready.
+
+## Specifying a system contract
+
+Use **`ess`** (its `specifying` skill) when writing, editing or reviewing an Executable System
+Specification, or generating documentation, OpenAPI or a conformance suite from one; `retrofitting`
+derives one for a system that already runs, and `testing-conformance` holds an implementation to it.
+It reports unsupported semantics instead of inventing them. New to ESS: start with the
+[tutorial](tutorials/first-ess-specification.md).
+
+## Managing repository workspaces
+
+Use **`worktree`** before an agent changes a repository or when linked worktrees need an
+inventory or cleanup sweep. Every command its skills spell is checked against the newest `worktree`
+release, so the documented commands and the executable safety policy stay aligned. The plugin does not delete unmanaged trees
+or replace the standalone toolchain.
+
+## Using configured integrations
+
+Use **`connectors`** to set up providers, diagnose readiness, and list, describe, and invoke
+admitted operations through the standalone `connectors` CLI. Both hosts load the same skill;
+credentials and grants remain owned by the Connector. See [installation](plugins/connectors.md).
+
+Installing more than one is reasonable when the work crosses those boundaries. Their scopes are
+complementary. The `b10x` front door routes to them; it does not absorb their instructions.
