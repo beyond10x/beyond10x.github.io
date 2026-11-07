@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "worktree/0.19.4",
+      "id": "worktree/0.19.4",
+      "repository": "worktree",
+      "publishedAt": "2026-11-07T11:11:13Z",
+      "title": "Worktree 0.19.4",
+      "summary": "Worktree released version 0.19.4.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.19.4",
+        "version": "0.19.4"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "worktree/0.19.3",
       "id": "worktree/0.19.3",
       "repository": "worktree",
