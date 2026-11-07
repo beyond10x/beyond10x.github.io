@@ -40,7 +40,7 @@ flowchart LR
     clean -->|yes| advertise["read every configured remote's<br/>exact advertised refs"]
     advertise -->|offline / malformed| refuse
     advertise --> fetch["fetch required missing objects<br/>without creating local refs"]
-    fetch --> recovery{"re-advertise; exact HEAD reachable, or every<br/>unique commit patch-equivalent on one ref,<br/>with local ancestry overrides disabled?"}
+    fetch --> recovery{"re-advertise after a fetch; exact HEAD reachable, or every<br/>unique commit patch-equivalent on one ref,<br/>with local ancestry overrides disabled?"}
     recovery -->|no| refuse
     recovery -->|yes| reobserve["re-observe clean tree<br/>and exact proven HEAD"]
     reobserve -->|changed| refuse
@@ -54,23 +54,36 @@ flowchart LR
 
 Dry-run garbage collection traverses the proof without claiming lifecycle state, writing the
 registry, or removing a worktree; it may refresh remote advertisements and fetch missing objects
-into the local object database. Apply requires the exact ids reviewed in a preceding assessment.
-Final observations are repeated before mutation; the proof-bearing removal intent makes an
-interruption after filesystem removal recoverable.
+into the local object database. It reads each repository's remotes once for every tree it
+assesses, as does the planning pass of an apply; the proof immediately before a removal reads
+them again for that tree. Apply requires the exact ids reviewed in a preceding assessment. Final
+observations are repeated before mutation; the proof-bearing removal intent makes an interruption
+after filesystem removal recoverable.
 
 Remote evidence is derived from `ls-remote --refs` advertisements, so any advertised branch, tag,
 pull-request ref, or custom namespace can qualify. Required missing objects are fetched with
-source-only refspecs and blob filtering, then the remote is read again before ancestry is checked.
+source-only refspecs and blob filtering, then the remote is read again before ancestry is checked;
+a remote nothing was fetched from is read once. Which advertised objects are commits the
+repository holds is asked in one `cat-file --batch-check`, and which of them contain HEAD in one
+`rev-list --parents`, so a proof costs a bounded number of Git calls per remote, not two per
+advertised ref.
 Local tags and local remote-tracking refs are never proof by themselves. Unknown, offline, dirty,
 locked, live, local-only, changed, and ambiguous states retain the tree.
 
 Ancestry is tried first. When no advertised ref contains the exact HEAD, the adapter lists the
 commits HEAD adds over every confirmed advertised tip. Each must have exactly one parent and a
-non-empty patch. One tip must then pass two checks: Git's `--cherry-pick` equivalence leaves no
-commit on the HEAD side, and `git patch-id --verbatim` over `--binary` patches finds every unique
-commit's whitespace-exact patch among the tip's own commits. Default branches are tried first. The
-resulting proof has kind `patch-equivalent` and names the unique commits it covers; the final
-re-observation before removal repeats the same two-kind check.
+non-empty patch. One tip must then pass two checks: `git patch-id --verbatim` over `--binary`
+patches finds every unique commit's whitespace-exact patch among the tip's own commits, and Git's
+`--cherry-pick` equivalence leaves no commit on the HEAD side. The work is bounded by the unique
+commits, not by the advertisement: a verbatim carrier touches the same paths, so one
+`rev-list --full-history --no-merges` over every tip with those paths lists the only possible
+carriers, one `git log --patch` over them yields their verbatim ids, and one `rev-list --parents`
+per carrier names the tips containing it. A tip containing a carrier of every unique commit
+qualifies; Git's `--cherry-pick` is asked only when that tip lacks other commits of HEAD, since a
+verbatim match is already a loose one. Default branches are tried first. The resulting proof has
+kind `patch-equivalent` and names the unique commits it covers; the final re-observation before
+removal repeats the same two-kind check. A unique commit touching a path with a newline in it
+stays unproven: `rev-list --stdin` cannot carry that path.
 
 ## Archive proof
 
