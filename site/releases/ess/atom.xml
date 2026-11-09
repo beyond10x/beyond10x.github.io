@@ -2,8 +2,29 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://beyond10x.github.io/releases/ess/atom.xml</id>
   <title>ESS releases</title>
-  <updated>2026-11-07T00:00:00Z</updated>
+  <updated>2026-11-09T03:42:41Z</updated>
   <link rel="self" href="https://beyond10x.github.io/releases/ess/atom.xml"/>
+  <entry>
+    <id>ess/0.91.2</id>
+    <title>ESS 0.91.2</title>
+    <updated>2026-11-09T03:42:41Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.91.2"/>
+    <summary>ESS released version 0.91.2.</summary>
+  </entry>
+  <entry>
+    <id>ess/expression-measures-and-host-slot-checks-0.91.1</id>
+    <title>Aggregate measures compute expressions, enums can be ordered, and host slots are checked</title>
+    <updated>2026-11-09T00:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.91.1"/>
+    <summary>From format ess/36 an aggregate measure may compute an expression of its source row, sum and avg admit a Duration, and an enum declaring ordered true gives min and max an order. ess ui check holds a host slot&apos;s reads and commands to the specification, and a client-paged collection takes a pager. 0.91.0 had no release; 0.91.1 carries its content.</summary>
+  </entry>
+  <entry>
+    <id>ess/host-slots-generated-and-drawn-0.92.0</id>
+    <title>React projects register host slots, and the terminal draws them as labelled regions</title>
+    <updated>2026-11-09T00:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.92.0"/>
+    <summary>A UI document holding host slots now generates for React: the project exports a registry type with one entry per slot, each component receiving a data adapter narrowed to the slot&apos;s declared reads and commands. The terminal draws each slot as a labelled placeholder, and a UI test step that acts inside a slot is refused by one rule in both renderers.</summary>
+  </entry>
   <entry>
     <id>ess/host-slots-and-list-guard-witnesses-0.90.0</id>
     <title>UI documents declare host slots, and synthesis witnesses guards over lists of identities</title>

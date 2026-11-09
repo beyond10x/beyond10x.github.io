@@ -4,6 +4,36 @@
     <link>https://beyond10x.github.io/releases/</link>
     <description>Important releases, migrations, capabilities, and adopter actions across the public beyond10x ecosystem.</description>
     <item>
+      <guid isPermaLink="false">ess/0.91.2</guid>
+      <title>ESS 0.91.2</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.91.2</link>
+      <pubDate>Mon, 09 Nov 2026 03:42:41 GMT</pubDate>
+      <description>ESS released version 0.91.2.</description>
+      <category>ess</category>
+      <category>notable</category>
+      <category>releases</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/expression-measures-and-host-slot-checks-0.91.1</guid>
+      <title>Aggregate measures compute expressions, enums can be ordered, and host slots are checked</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.91.1</link>
+      <pubDate>Mon, 09 Nov 2026 00:00:00 GMT</pubDate>
+      <description>From format ess/36 an aggregate measure may compute an expression of its source row, sum and avg admit a Duration, and an enum declaring ordered true gives min and max an order. ess ui check holds a host slot&apos;s reads and commands to the specification, and a client-paged collection takes a pager. 0.91.0 had no release; 0.91.1 carries its content.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/host-slots-generated-and-drawn-0.92.0</guid>
+      <title>React projects register host slots, and the terminal draws them as labelled regions</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.92.0</link>
+      <pubDate>Mon, 09 Nov 2026 00:00:00 GMT</pubDate>
+      <description>A UI document holding host slots now generates for React: the project exports a registry type with one entry per slot, each component receiving a data adapter narrowed to the slot&apos;s declared reads and commands. The terminal draws each slot as a labelled placeholder, and a UI test step that acts inside a slot is refused by one rule in both renderers.</description>
+      <category>ess</category>
+      <category>significant</category>
+      <category>impact</category>
+    </item>
+    <item>
       <guid isPermaLink="false">ess/host-slots-and-list-guard-witnesses-0.90.0</guid>
       <title>UI documents declare host slots, and synthesis witnesses guards over lists of identities</title>
       <link>https://github.com/beyond10x/ess/releases/tag/0.90.0</link>

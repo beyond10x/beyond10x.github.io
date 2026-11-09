@@ -5,6 +5,66 @@
   "feed_url": "https://beyond10x.github.io/changes/feed.json",
   "items": [
     {
+      "id": "ess/0.91.2",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.91.2",
+      "title": "ESS 0.91.2",
+      "content_text": "ESS released version 0.91.2.",
+      "date_published": "2026-11-09T03:42:41Z",
+      "tags": [
+        "ess",
+        "release",
+        "notable",
+        "releases",
+        "operate-services",
+        "specify"
+      ]
+    },
+    {
+      "id": "ess/expression-measures-and-host-slot-checks-0.91.1",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.91.1",
+      "title": "Aggregate measures compute expressions, enums can be ordered, and host slots are checked",
+      "content_text": "From format ess/36 an aggregate measure may compute an expression of its source row, sum and avg admit a Duration, and an enum declaring ordered true gives min and max an order. ess ui check holds a host slot's reads and commands to the specification, and a client-paged collection takes a pager. 0.91.0 had no release; 0.91.1 carries its content.",
+      "date_published": "2026-11-09T00:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "significant",
+        "impact",
+        "specify",
+        "operate-services"
+      ]
+    },
+    {
+      "id": "ess/host-slots-generated-and-drawn-0.92.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.92.0",
+      "title": "React projects register host slots, and the terminal draws them as labelled regions",
+      "content_text": "A UI document holding host slots now generates for React: the project exports a registry type with one entry per slot, each component receiving a data adapter narrowed to the slot's declared reads and commands. The terminal draws each slot as a labelled placeholder, and a UI test step that acts inside a slot is refused by one rule in both renderers.",
+      "date_published": "2026-11-09T00:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "significant",
+        "impact",
+        "specify",
+        "operate-services"
+      ]
+    },
+    {
+      "id": "docs-system/0.15.0",
+      "url": "https://github.com/beyond10x/docs-system/releases/tag/0.15.0",
+      "title": "Docs System 0.15.0",
+      "content_text": "Docs System released version 0.15.0.",
+      "date_published": "2026-11-08T23:53:31Z",
+      "tags": [
+        "docs-system",
+        "release",
+        "notable",
+        "releases",
+        "build-agents",
+        "operate-services"
+      ]
+    },
+    {
       "id": "worktree/0.19.4",
       "url": "https://github.com/beyond10x/worktree/releases/tag/0.19.4",
       "title": "Worktree 0.19.4",
@@ -793,36 +853,6 @@
         "notable",
         "impact",
         "specify"
-      ]
-    },
-    {
-      "id": "agentide/0.3.9",
-      "url": "https://github.com/beyond10x/agentide/releases/tag/0.3.9",
-      "title": "AgentIDE 0.3.9",
-      "content_text": "AgentIDE released version 0.3.9.",
-      "date_published": "2026-10-20T15:38:46Z",
-      "tags": [
-        "agentide",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "agentide/0.3.8",
-      "url": "https://github.com/beyond10x/agentide/releases/tag/0.3.8",
-      "title": "AgentIDE 0.3.8",
-      "content_text": "AgentIDE released version 0.3.8.",
-      "date_published": "2026-10-20T13:16:16Z",
-      "tags": [
-        "agentide",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
       ]
     },
     {
@@ -3166,21 +3196,6 @@
       ]
     },
     {
-      "id": "service-sdk/0.7.0",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.7.0",
-      "title": "Service SDK 0.7.0",
-      "content_text": "Service SDK released version 0.7.0.",
-      "date_published": "2026-09-26T05:31:48Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
       "id": "entity-runtime/0.24.1",
       "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.24.1",
       "title": "Entity Runtime 0.24.1",
@@ -3415,21 +3430,6 @@
         "build-agents",
         "plan-work",
         "specify"
-      ]
-    },
-    {
-      "id": "service-sdk/0.6.0",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.6.0",
-      "title": "Service SDK 0.6.0",
-      "content_text": "Service SDK released version 0.6.0.",
-      "date_published": "2026-09-25T12:08:42Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
       ]
     },
     {
@@ -4540,36 +4540,6 @@
       ]
     },
     {
-      "id": "agentide/0.3.5",
-      "url": "https://github.com/beyond10x/agentide/releases/tag/0.3.5",
-      "title": "AgentIDE 0.3.5",
-      "content_text": "AgentIDE released version 0.3.5.",
-      "date_published": "2026-09-05T00:05:51Z",
-      "tags": [
-        "agentide",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "agentide/0.3.4",
-      "url": "https://github.com/beyond10x/agentide/releases/tag/0.3.4",
-      "title": "AgentIDE 0.3.4",
-      "content_text": "AgentIDE released version 0.3.4.",
-      "date_published": "2026-09-04T23:32:20Z",
-      "tags": [
-        "agentide",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
       "id": "ess/0.17.0",
       "url": "https://github.com/beyond10x/ess/releases/tag/0.17.0",
       "title": "ESS 0.17.0",
@@ -4656,21 +4626,6 @@
       ]
     },
     {
-      "id": "service-sdk/0.5.8",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.5.8",
-      "title": "Service SDK 0.5.8",
-      "content_text": "Service SDK released version 0.5.8.",
-      "date_published": "2026-09-04T12:57:57Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
       "id": "aep/0.54.0",
       "url": "https://github.com/beyond10x/aep/releases/tag/0.54.0",
       "title": "AEP 0.54.0",
@@ -4703,21 +4658,6 @@
       ]
     },
     {
-      "id": "service-sdk/0.5.7",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.5.7",
-      "title": "Service SDK 0.5.7",
-      "content_text": "Service SDK released version 0.5.7.",
-      "date_published": "2026-09-04T07:05:51Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
       "id": "aep-service/0.1.8",
       "url": "https://github.com/beyond10x/aep-service/releases/tag/0.1.8",
       "title": "AEP Service 0.1.8",
@@ -4733,21 +4673,6 @@
       ]
     },
     {
-      "id": "agentide/0.3.3",
-      "url": "https://github.com/beyond10x/agentide/releases/tag/0.3.3",
-      "title": "AgentIDE 0.3.3",
-      "content_text": "AgentIDE released version 0.3.3.",
-      "date_published": "2026-09-04T05:15:39Z",
-      "tags": [
-        "agentide",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
       "id": "ess/0.13.5",
       "url": "https://github.com/beyond10x/ess/releases/tag/0.13.5",
       "title": "ESS 0.13.5",
@@ -4760,36 +4685,6 @@
         "releases",
         "operate-services",
         "specify"
-      ]
-    },
-    {
-      "id": "service-sdk/0.5.6",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.5.6",
-      "title": "Service SDK 0.5.6",
-      "content_text": "Service SDK released version 0.5.6.",
-      "date_published": "2026-09-04T04:13:44Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "service-sdk/0.5.5",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.5.5",
-      "title": "Service SDK 0.5.5",
-      "content_text": "Service SDK released version 0.5.5.",
-      "date_published": "2026-09-04T04:07:14Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
       ]
     },
     {
@@ -5090,21 +4985,6 @@
       ]
     },
     {
-      "id": "agentide/0.3.1",
-      "url": "https://github.com/beyond10x/agentide/releases/tag/0.3.1",
-      "title": "AgentIDE 0.3.1",
-      "content_text": "AgentIDE released version 0.3.1.",
-      "date_published": "2026-09-03T17:52:25Z",
-      "tags": [
-        "agentide",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
       "id": "workflow/0.2.0",
       "url": "https://github.com/beyond10x/workflow/releases/tag/0.2.0",
       "title": "Workflow 0.2.0",
@@ -5112,51 +4992,6 @@
       "date_published": "2026-09-03T17:44:01Z",
       "tags": [
         "workflow",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "agentide/0.3.0",
-      "url": "https://github.com/beyond10x/agentide/releases/tag/0.3.0",
-      "title": "AgentIDE 0.3.0",
-      "content_text": "AgentIDE released version 0.3.0.",
-      "date_published": "2026-09-03T17:41:51Z",
-      "tags": [
-        "agentide",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "service-sdk/0.4.2",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.4.2",
-      "title": "Service SDK 0.4.2",
-      "content_text": "Service SDK released version 0.4.2.",
-      "date_published": "2026-09-03T17:41:21Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "service-sdk/0.4.1",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.4.1",
-      "title": "Service SDK 0.4.1",
-      "content_text": "Service SDK released version 0.4.1.",
-      "date_published": "2026-09-03T17:38:27Z",
-      "tags": [
-        "service-sdk",
         "release",
         "notable",
         "releases",
@@ -5194,21 +5029,6 @@
         "operate-services",
         "plan-work",
         "specify"
-      ]
-    },
-    {
-      "id": "service-sdk/0.4.0",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.4.0",
-      "title": "Service SDK 0.4.0",
-      "content_text": "Service SDK released version 0.4.0.",
-      "date_published": "2026-09-03T17:24:06Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
       ]
     },
     {
@@ -5336,21 +5156,6 @@
       ]
     },
     {
-      "id": "agentide/0.2.1",
-      "url": "https://github.com/beyond10x/agentide/releases/tag/0.2.1",
-      "title": "AgentIDE 0.2.1",
-      "content_text": "AgentIDE released version 0.2.1.",
-      "date_published": "2026-09-03T13:39:02Z",
-      "tags": [
-        "agentide",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
       "id": "workspace/0.2.8",
       "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.8",
       "title": "Workspace 0.2.8",
@@ -5358,36 +5163,6 @@
       "date_published": "2026-09-03T13:31:28Z",
       "tags": [
         "workspace",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "agentide/0.2.0",
-      "url": "https://github.com/beyond10x/agentide/releases/tag/0.2.0",
-      "title": "AgentIDE 0.2.0",
-      "content_text": "AgentIDE released version 0.2.0.",
-      "date_published": "2026-09-03T12:48:57Z",
-      "tags": [
-        "agentide",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "agentide/0.1.4",
-      "url": "https://github.com/beyond10x/agentide/releases/tag/0.1.4",
-      "title": "AgentIDE 0.1.4",
-      "content_text": "AgentIDE released version 0.1.4.",
-      "date_published": "2026-09-03T12:19:15Z",
-      "tags": [
-        "agentide",
         "release",
         "notable",
         "releases",
@@ -5410,21 +5185,6 @@
         "operate-services",
         "plan-work",
         "specify"
-      ]
-    },
-    {
-      "id": "service-sdk/0.3.4",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.3.4",
-      "title": "Service SDK 0.3.4",
-      "content_text": "Service SDK released version 0.3.4.",
-      "date_published": "2026-09-03T12:07:25Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
       ]
     },
     {
@@ -5451,51 +5211,6 @@
       "date_published": "2026-09-03T10:57:30Z",
       "tags": [
         "workspace",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "agentide/0.1.3",
-      "url": "https://github.com/beyond10x/agentide/releases/tag/0.1.3",
-      "title": "AgentIDE 0.1.3",
-      "content_text": "AgentIDE released version 0.1.3.",
-      "date_published": "2026-09-03T10:55:51Z",
-      "tags": [
-        "agentide",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "agentide/0.1.2",
-      "url": "https://github.com/beyond10x/agentide/releases/tag/0.1.2",
-      "title": "AgentIDE 0.1.2",
-      "content_text": "AgentIDE released version 0.1.2.",
-      "date_published": "2026-09-03T10:51:25Z",
-      "tags": [
-        "agentide",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "service-sdk/0.3.3",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.3.3",
-      "title": "Service SDK 0.3.3",
-      "content_text": "Service SDK released version 0.3.3.",
-      "date_published": "2026-09-03T10:40:56Z",
-      "tags": [
-        "service-sdk",
         "release",
         "notable",
         "releases",
@@ -5870,36 +5585,6 @@
       ]
     },
     {
-      "id": "service-sdk/0.3.0",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.3.0",
-      "title": "Service SDK 0.3.0",
-      "content_text": "Service SDK released version 0.3.0.",
-      "date_published": "2026-09-02T19:38:19Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "agentide/0.1.1",
-      "url": "https://github.com/beyond10x/agentide/releases/tag/0.1.1",
-      "title": "AgentIDE 0.1.1",
-      "content_text": "AgentIDE released version 0.1.1.",
-      "date_published": "2026-09-02T19:37:32Z",
-      "tags": [
-        "agentide",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
       "id": "aep/second-adopter-0.42.0",
       "url": "https://github.com/beyond10x/aep/releases/tag/0.42.0",
       "title": "aep doctor, classified ambiguities in the templates, and the install path that exists",
@@ -5991,81 +5676,6 @@
       ]
     },
     {
-      "id": "service-sdk/0.2.4",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.2.4",
-      "title": "Service SDK 0.2.4",
-      "content_text": "Service SDK released version 0.2.4.",
-      "date_published": "2026-09-02T13:55:33Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "service-sdk/0.2.3",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.2.3",
-      "title": "Service SDK 0.2.3",
-      "content_text": "Service SDK released version 0.2.3.",
-      "date_published": "2026-09-02T13:16:20Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "agentide/0.1.0",
-      "url": "https://github.com/beyond10x/agentide/releases/tag/0.1.0",
-      "title": "AgentIDE 0.1.0",
-      "content_text": "AgentIDE released version 0.1.0.",
-      "date_published": "2026-09-02T12:54:08Z",
-      "tags": [
-        "agentide",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "service-sdk/0.2.2",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.2.2",
-      "title": "Service SDK 0.2.2",
-      "content_text": "Service SDK released version 0.2.2.",
-      "date_published": "2026-09-02T12:47:11Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
-      "id": "service-sdk/0.2.0",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.2.0",
-      "title": "Service SDK 0.2.0",
-      "content_text": "Service SDK released version 0.2.0.",
-      "date_published": "2026-09-02T12:36:41Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
       "id": "agentplugins/0.3.6",
       "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.6",
       "title": "Agent Plugins 0.3.6",
@@ -6113,21 +5723,6 @@
       ]
     },
     {
-      "id": "service-sdk/0.1.1",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.1.1",
-      "title": "Service SDK 0.1.1",
-      "content_text": "Service SDK released version 0.1.1.",
-      "date_published": "2026-09-02T11:50:02Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
-      ]
-    },
-    {
       "id": "agentplugins/0.3.4",
       "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.4",
       "title": "Agent Plugins 0.3.4",
@@ -6141,21 +5736,6 @@
         "build-agents",
         "plan-work",
         "specify"
-      ]
-    },
-    {
-      "id": "service-sdk/0.1.0",
-      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.1.0",
-      "title": "Service SDK 0.1.0",
-      "content_text": "Service SDK released version 0.1.0.",
-      "date_published": "2026-09-02T08:53:16Z",
-      "tags": [
-        "service-sdk",
-        "release",
-        "notable",
-        "releases",
-        "build-agents",
-        "operate-services"
       ]
     },
     {
