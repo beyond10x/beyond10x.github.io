@@ -2,6 +2,102 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "eventlog/0.9.3",
+      "id": "eventlog/0.9.3",
+      "repository": "eventlog",
+      "publishedAt": "2026-11-11T02:47:23Z",
+      "title": "Eventlog 0.9.3",
+      "summary": "Eventlog released version 0.9.3.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/eventlog/releases/tag/0.9.3",
+        "version": "0.9.3"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "eventlog/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep/0.80.0",
+      "id": "aep/0.80.0",
+      "repository": "aep",
+      "publishedAt": "2026-11-11T00:06:00Z",
+      "title": "AEP 0.80.0",
+      "summary": "AEP released version 0.80.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.80.0",
+        "version": "0.80.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "ess/gateway-api-scan-ui-tones-and-covered-refusals-0.93.0",
+      "id": "ess/gateway-api-scan-ui-tones-and-covered-refusals-0.93.0",
+      "repository": "ess",
+      "publishedAt": "2026-11-11T00:00:00Z",
+      "title": "Kubernetes scans read the Gateway API, UI values take tones, and an authored scenario retires a refusal",
+      "summary": "A full Kubernetes scan reads Gateway API gateways and routes into `infra-ir/4`. UI columns and fields take a tone, React draws the declared tokens, and a UI test declares how each read and command is answered. An authored `ess-scenario/7` scenario can retire the refusal it covers. Format `ess/37` opens.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.93.0",
+        "version": "0.93.0"
+      },
+      "journeys": [
+        "specify",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "aep/0.79.1",
+      "id": "aep/0.79.1",
+      "repository": "aep",
+      "publishedAt": "2026-11-10T13:04:46Z",
+      "title": "AEP 0.79.1",
+      "summary": "AEP released version 0.79.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.79.1",
+        "version": "0.79.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "worktree/0.20.0",
       "id": "worktree/0.20.0",
       "repository": "worktree",

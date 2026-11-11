@@ -2,8 +2,15 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://beyond10x.github.io/releases/ess/atom.xml</id>
   <title>ESS releases</title>
-  <updated>2026-11-09T03:42:41Z</updated>
+  <updated>2026-11-11T00:00:00Z</updated>
   <link rel="self" href="https://beyond10x.github.io/releases/ess/atom.xml"/>
+  <entry>
+    <id>ess/gateway-api-scan-ui-tones-and-covered-refusals-0.93.0</id>
+    <title>Kubernetes scans read the Gateway API, UI values take tones, and an authored scenario retires a refusal</title>
+    <updated>2026-11-11T00:00:00Z</updated>
+    <link href="https://github.com/beyond10x/ess/releases/tag/0.93.0"/>
+    <summary>A full Kubernetes scan reads Gateway API gateways and routes into `infra-ir/4`. UI columns and fields take a tone, React draws the declared tokens, and a UI test declares how each read and command is answered. An authored `ess-scenario/7` scenario can retire the refusal it covers. Format `ess/37` opens.</summary>
+  </entry>
   <entry>
     <id>ess/0.91.2</id>
     <title>ESS 0.91.2</title>
