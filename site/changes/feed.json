@@ -5,6 +5,21 @@
   "feed_url": "https://beyond10x.github.io/changes/feed.json",
   "items": [
     {
+      "id": "eventlog/0.9.4",
+      "url": "https://github.com/beyond10x/eventlog/releases/tag/0.9.4",
+      "title": "Eventlog 0.9.4",
+      "content_text": "Eventlog released version 0.9.4.",
+      "date_published": "2026-11-11T13:46:47Z",
+      "tags": [
+        "eventlog",
+        "release",
+        "notable",
+        "releases",
+        "build-agents",
+        "operate-services"
+      ]
+    },
+    {
       "id": "eventlog/0.9.3",
       "url": "https://github.com/beyond10x/eventlog/releases/tag/0.9.3",
       "title": "Eventlog 0.9.3",
@@ -34,6 +49,21 @@
         "operate-services",
         "plan-work",
         "specify"
+      ]
+    },
+    {
+      "id": "ess/fixture-effects-and-struct-invariant-checks-0.94.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.94.0",
+      "title": "Fixture mode applies a command's effect, and generated decoders check struct invariants",
+      "content_text": "In fixture mode a confirmed command now changes the fixture rows as the model says, in the generated React project and in `ess ui test --model`. Generated Go and Rust decoders answer 400 for a struct that breaks a declared invariant. Synthesis witnesses a held-state guard without a view publishing `state`.",
+      "date_published": "2026-11-11T00:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "notable",
+        "impact",
+        "specify",
+        "operate-services"
       ]
     },
     {

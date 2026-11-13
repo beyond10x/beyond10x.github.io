@@ -117,6 +117,7 @@ Each bracketed validation name is reported under the class below. Its family is 
 | `null_comparison` | `017` `NULL_COMPARISON` |
 | `implied_relation` | `019` `IMPLIED_RELATION` |
 | `path_segment_wire_name` | `012` `OTHER` |
+| `inexact_decimal_literal` | `002` `TYPE_MISMATCH` |
 
 ## Authored scenarios: `ESS-AUTHOR`
 
@@ -215,6 +216,7 @@ refusal[ESS-SYNTH-011]: entity billing.invoice.Invoice has no scenario `…`
 | `ESS-SYNTH-022` | No input was found where one child of an `any`/`all` alone decides it and it decides the guard; the branch's scenario stands without that input. An admitted authored scenario that sends such an input and expects the branch withdraws the refusal. | Cover the child with an authored scenario (ess-scenario/1) that sends an input where it alone decides the connective, or write the guard so that such an input exists. |
 | `ESS-SYNTH-023` | A command the system issues itself, whose outcome addresses no existing record (`creates:`, or no `instance:`), has no awaited scenario, and is not driven in its place. | A step the system takes to create a record, or over rows with no subject, is not awaited in this release; grant the command to a caller as well to keep it driven, or move the step onto an existing record that its outcomes name with `instance:`. |
 | `ESS-SYNTH-024` | A refusal of a command the system issues itself is decided by its input, or by rows its input names, which the system chooses; no scenario claims it. | Cover the refusal with an authored scenario (ess-scenario/1) that arranges the rows the system chooses among, so that every choice is refused, and expects nothing to be issued. |
+| `ESS-SYNTH-025` | A branch copies an input into an entity and no guard keeps the input inside one of its invariants, so the model declares no outcome for an input outside it; the invariant scenario stands without that input. | Guard the branch on the input, or declare a refusal branch whose `when:` answers it. |
 
 ## Mutation audit: `ESS-MUTATE`
 

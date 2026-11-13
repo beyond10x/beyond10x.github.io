@@ -4,6 +4,16 @@
     <link>https://beyond10x.github.io/changes/</link>
     <description>Important releases, migrations, capabilities, and adopter actions across the public beyond10x ecosystem.</description>
     <item>
+      <guid isPermaLink="false">eventlog/0.9.4</guid>
+      <title>Eventlog 0.9.4</title>
+      <link>https://github.com/beyond10x/eventlog/releases/tag/0.9.4</link>
+      <pubDate>Wed, 11 Nov 2026 13:46:47 GMT</pubDate>
+      <description>Eventlog released version 0.9.4.</description>
+      <category>eventlog</category>
+      <category>notable</category>
+      <category>releases</category>
+    </item>
+    <item>
       <guid isPermaLink="false">eventlog/0.9.3</guid>
       <title>Eventlog 0.9.3</title>
       <link>https://github.com/beyond10x/eventlog/releases/tag/0.9.3</link>
@@ -22,6 +32,16 @@
       <category>aep</category>
       <category>notable</category>
       <category>releases</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/fixture-effects-and-struct-invariant-checks-0.94.0</guid>
+      <title>Fixture mode applies a command&apos;s effect, and generated decoders check struct invariants</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.94.0</link>
+      <pubDate>Wed, 11 Nov 2026 00:00:00 GMT</pubDate>
+      <description>In fixture mode a confirmed command now changes the fixture rows as the model says, in the generated React project and in `ess ui test --model`. Generated Go and Rust decoders answer 400 for a struct that breaks a declared invariant. Synthesis witnesses a held-state guard without a view publishing `state`.</description>
+      <category>ess</category>
+      <category>notable</category>
+      <category>impact</category>
     </item>
     <item>
       <guid isPermaLink="false">ess/gateway-api-scan-ui-tones-and-covered-refusals-0.93.0</guid>

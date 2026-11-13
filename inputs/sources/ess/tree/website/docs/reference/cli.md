@@ -64,7 +64,9 @@ refused rather than ignored. `--scenarios` reads the same manifest's `scenarios:
 refusals.
 
 `format: ess-inputs/2` can pin the `ess` release with `requires:`. An older `ess` refuses and a
-newer one warns; the global `--strict-requires`, accepted in any position, refuses instead. See
+newer one warns; the global `--strict-requires`, accepted in any position, refuses instead. An exact
+pin of another release in a manifest below the working directory is refused by name in both cases,
+because `ess` does not run it from there. See
 [the release a project runs](#the-release-a-project-runs).
 
 A manifest selects inputs; it does not permit writing generated output into the specification's
@@ -96,6 +98,14 @@ prints both releases' lines. A release that cannot be installed is refused,
 naming the newest cached one. This walk upwards reads only the pin; input selection still reads
 only the manifest of the directory it is given. The `toolchain` commands always run in the `ess`
 you called.
+
+A pin in a manifest below the working directory decides nothing: run from the repository root,
+`ess` stays on the release you called. `ess specify toolchain which` names the one it finds below,
+with the `cd` and the `ESS_TOOLCHAIN=X.Y.Z` that run it, and refuses when two manifests below pin
+different releases. A command given a path to such a manifest (`ess specify validate --path spec`)
+refuses where its exact pin names another release than this `ess`, older or newer, naming the
+manifest, `cd <directory>` and `ESS_TOOLCHAIN=X.Y.Z`. A minor line `ess X.Y`, and a command run
+under `ESS_TOOLCHAIN`, keep the checks above.
 
 ### CLI presentation bindings
 
@@ -795,6 +805,7 @@ ess generate ui [OPTIONS] --target <TARGET> --path <PATH> --out <OUT>
 | `--path` | `<PATH>` | yes |  | The `ess-ui/1` document |
 | `--out` | `<OUT>` | yes |  | Directory the project is written to |
 | `--model` | `<MODEL>` | no |  | The ESS specification the document's `model:` names (a directory, its `ess-inputs.yaml`, or one file): the app is bound to the HTTP surface the specification's `reached_by: network` components serve, instead of answering from fixtures |
+| `--fixtures` |  | no |  | With `--model`: keep the app on its fixtures, as without it, and apply what the model says a confirmed command does to the fixture rows, in memory, so every view that reads them shows the change |
 | `--http` | `<HTTP>` | no |  | The `ess-http/1` binding the server was synthesized with (`ess generate synthesize --http`): the UI calls the methods and paths it declares, each path variable filled from the field it carries. Every view and command the document names must be routed there |
 | `--refines` | `<REFINES>` | no |  | The `ess-http/1` binding `--http` refines, whose bytes its `refines:` digest pins |
 
@@ -1590,7 +1601,7 @@ Derives mutants from the specification — one altering edit each — synthesize
 
 `--scenarios DIR --target interpreted` runs authored scenarios the other way: each runs against the interpreter of the specification as part of the baseline, and against the interpreter of each mutant beside that mutant's synthesized suite. One that fails against a mutant's interpreter kills it and is named among its killers; one the baseline fails refuses the audit with ESS-MUTATE-001. Without `--scenarios` no authored scenario is run.
 
-A baseline scenario the target reports unsupported or skipped did not execute: it is listed, not scored, and each mutant is scored on the scenarios the baseline executed. A mutant that no scored scenario killed is inconclusive when a scenario it changed was not scored; otherwise equivalent (ESS-MUTATE-005) when it left its outcome's guard satisfied by no input, decided only for equality, membership and truth tests of input fields against literals and presence tests of input fields, and beside a `when_subject:` predicate when no input it admits leaves that predicate able to hold on any row (a comparison with an absent input is unknown); otherwise unwitnessed (ESS-MUTATE-004) when its suite gained synthesis refusals the baseline does not have, when it is on an outcome whose scenario the baseline refused, or when it is a from-drop or transition-to mutant on a transition only such outcomes perform, or when its synthesized suite asks what the baseline's asks (the suite does not change), unless authored scenarios ran. It survives when every scored scenario passed and each scenario it left unscored is the baseline's own, unchanged.
+A baseline scenario the target reports unsupported or skipped did not execute: it is listed, not scored, and each mutant is scored on the scenarios the baseline executed. A mutant that no scored scenario killed is inconclusive when a scenario it changed was not scored; otherwise equivalent (ESS-MUTATE-005) when it left its outcome's guard satisfied by no input, decided only for equality, membership and truth tests of input fields against literals and presence tests of input fields, and beside a `when_subject:` predicate when no input it admits leaves that predicate able to hold on any row (a comparison with an absent input is unknown); otherwise unwitnessed (ESS-MUTATE-004) when its suite gained synthesis refusals the baseline does not have, when it is on an outcome whose scenario the baseline refused, or when it is a from-drop or transition-to mutant on a transition only such outcomes perform, or when it is an order-flip on a view key the baseline holds a standing tie gap for (a key after the identity, or behind a key no creating command writes from its input), or when its synthesized suite asks what the baseline's asks (the suite does not change), unless authored scenarios ran. It survives when every scored scenario passed and each scenario it left unscored is the baseline's own, unchanged.
 
 emit-swap replaces an outcome's only event with another declared event of exactly the same fields that every component accepting the command publishes. A site with no such event is listed as unavailable (`no_compatible_event_alternative`): single-event substitution was not audited there, which is neither a kill nor a stillborn mutant.
 
@@ -1853,6 +1864,6 @@ ess ui test [OPTIONS] --path <PATH> <TESTS>...
 | `--path` | `<PATH>` | yes |  | The `ess-ui/1` document under test; every test file must name it |
 | `--format` | `<FORMAT>` | no | `text` | Report format. One of `text`, `json`. |
 | `--playwright` | `<OUT>` | no |  | Write the tests as a Playwright spec for the generated React project to this file, instead of running them |
-| `--model` | `<MODEL>` | no |  | The ESS specification the document's `model:` names (a directory, its `ess-inputs.yaml`, or one file): a choice's `options` naming one of its enums list that enum's variants. Reads still come from the fixtures |
+| `--model` | `<MODEL>` | no |  | The ESS specification the document's `model:` names (a directory, its `ess-inputs.yaml`, or one file): a choice's `options` naming one of its enums list that enum's variants. Reads still come from the fixtures, and a confirmed command changes them the way the model says it does |
 
 [ess-cli-end]: #

@@ -52,6 +52,11 @@ Every fragment below is placed into this one specification before it is run. A `
 replaces the guard of outcome `placed`. An `invariants:` fragment replaces the invariants of
 `shop.order.Order`. A `filter:` fragment replaces the filter of `shop.order.OpenOrders`.
 
+`placed` stores `quantity: 1` rather than copying the input. Copied with no guard keeping it inside
+`quantity >= 1`, the input would leave the model without an outcome for a quantity of 0, and a
+`when:` fragment that says nothing about `quantity` would then draw `ESS-SYNTH-025` (see
+[an input outside an entity invariant](#an-input-outside-an-entity-invariant)).
+
 ```yaml ess-check="model"
 format: ess/15
 system: shop
@@ -108,7 +113,7 @@ commands:
             order_id: {generated: true}
         sets:
           channel: input.channel
-          quantity: input.quantity
+          quantity: 1
           sku: input.sku
           tags: input.tags
           labels: input.labels
@@ -352,9 +357,11 @@ The source leaves the key's type out; the canonical form writes it, as
 write the one its declarations give. A mapping under `distinct` without `as` is a constraint on a
 fact named `distinct`, as it always was. It is an `ess/22` form, refused below it, and a suite
 carrying it is `ess-conformance/40` or `/41`, whose readers require `kind` and read a view row's
-lists element by element. Generated Rust and Go behaviour owes a guard or a view filter reading it
-by name, an entity invariant with it refuses the generated target by name, and Entity Runtime
-refuses it as `DistinctUnsupported`.
+lists element by element. The generated Rust and Go decoders check it in a struct's `invariants:`,
+by the equality above, and answer a request whose list repeats a key with a decode error at the
+struct's path naming the invariant. Generated Rust and Go behaviour owes a guard or a view filter
+reading it by name, an entity or newtype invariant with it refuses the generated target by name,
+and Entity Runtime refuses it as `DistinctUnsupported`.
 
 The published JSON Schema asserts it where a keyword says it exactly (beyond10x/ess#686). Over a
 list of scalars, or a list newtype's `value`, it is `uniqueItems: true` on the list. Where an
@@ -1217,7 +1224,9 @@ whether it is empty fails. The row is arranged with several entries where the co
 from an input: where one element decides the quantifier (an `exists` that holds, a `forall` that
 fails), that element is neither the first nor the last in key order, so a target reading only one
 value, or `forall` for `exists`, fails; where the whole collection decides it, the row holds two or
-more elements. Where no arrangement reaches that shape, the row with one entry is used. An entity
+more elements. Where no arrangement reaches that shape (no input writes the collection, or a
+`Boolean`-keyed map holds two entries at most), the row with one entry is used and
+`ess verify conform synthesize` prints a `note:` naming the scenario and the quantifier. An entity
 that declares a stored field named `input` keeps reading `input.<member>` as that field.
 
 ### From `ess/29`: an external branch narrowed to some records
@@ -1811,7 +1820,7 @@ It reports a refusal naming the scenario it could not build, and `synthesize` st
 | a bare path over a `Boolean` | yes |
 | a bare path over text (`when: sku`) | no. The falsy side needs an empty text, which is not a literal of the guard. `ESS-SYNTH-003` |
 | `defined(x)`, `not defined(x)`, `x: {exists: …}` over an `Optional` | yes. One candidate omits the field. |
-| `.count`, `exists`, `forall` over an input list | yes. The list is built from the guard's own literal: a one-element list satisfies the guard, and `[]` or a list of other text refutes it. |
+| `.count`, `exists`, `forall` over an input list | yes. The list is built from the guard's own literal, as the one element of a list of three that sits neither first nor last, so a target reading only the first element, only the last, or `forall` for `exists` fails; `[]` or a list of other text refutes it. |
 | `.count`, `exists`, `forall` over an input map | yes. The map holds one entry, and its value is tried at the guard's own literal as a list element is. |
 | a list element by position (`tags.0`) | yes |
 | text ordering | yes, byte-wise |
@@ -1964,6 +1973,24 @@ reported beside it with `ESS-SYNTH-005`. Filter on `state` wherever the rule all
 ```yaml ess-check="filter" ess-expect="unwitnessed:ESS-SYNTH-005" ess-says="note == hello"
 filter: note == hello
 ```
+
+### An input outside an entity invariant
+
+Sending only inputs inside the invariants leaves a question open: what answers an input outside
+them. Where a branch copies an input into a field an entity invariant reads and no guard keeps the
+input inside the invariant, the model declares no outcome for such an input. The branch's
+`invariant/after` scenario is still written. Beside it, synthesis refuses the hole with
+`ESS-SYNTH-025`, naming the branch, the invariant and the input that breaks it, for example
+`sets: {quantity: input.quantity}` beside `quantity >= 1` with no `when:` on the quantity.
+
+A specification that synthesized with no refusal before can gain one. `ess verify conform
+synthesize` now prints `refused:` lines and a refusal count where it printed none, and a coverage
+suite (`--suite-format 5`) is written at suite `ess-conformance/65`, with exit status 1 until the
+refusal is answered. An ordinary suite keeps its bytes and its exit status, and so does `ess
+specify validate`, which lists the refusal under `completeness`. Answer it by guarding the branch
+on the input (`when: quantity >= 1`) or by declaring a refusal branch ahead of it whose `when:`
+answers the input (`when: quantity < 1`, `error: …`). The search is bounded, one neighbour per
+comparison, so a hole it does not reach is not reported.
 
 ## Limits
 

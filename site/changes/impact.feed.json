@@ -5,6 +5,21 @@
   "feed_url": "https://beyond10x.github.io/changes/feed.json",
   "items": [
     {
+      "id": "ess/fixture-effects-and-struct-invariant-checks-0.94.0",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.94.0",
+      "title": "Fixture mode applies a command's effect, and generated decoders check struct invariants",
+      "content_text": "In fixture mode a confirmed command now changes the fixture rows as the model says, in the generated React project and in `ess ui test --model`. Generated Go and Rust decoders answer 400 for a struct that breaks a declared invariant. Synthesis witnesses a held-state guard without a view publishing `state`.",
+      "date_published": "2026-11-11T00:00:00Z",
+      "tags": [
+        "ess",
+        "capability",
+        "notable",
+        "impact",
+        "specify",
+        "operate-services"
+      ]
+    },
+    {
       "id": "ess/gateway-api-scan-ui-tones-and-covered-refusals-0.93.0",
       "url": "https://github.com/beyond10x/ess/releases/tag/0.93.0",
       "title": "Kubernetes scans read the Gateway API, UI values take tones, and an authored scenario retires a refusal",
