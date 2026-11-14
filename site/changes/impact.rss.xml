@@ -4,6 +4,26 @@
     <link>https://beyond10x.github.io/changes/</link>
     <description>Important releases, migrations, capabilities, and adopter actions across the public beyond10x ecosystem.</description>
     <item>
+      <guid isPermaLink="false">ess/record-groups-header-badges-and-struct-distinct-decoders-0.95.0</guid>
+      <title>Records group their fields, a page header takes a badge, and generated decoders check a struct&apos;s distinct keys</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.95.0</link>
+      <pubDate>Fri, 13 Nov 2026 00:00:00 GMT</pubDate>
+      <description>In `ess-ui/1` a record groups its fields under headings and a page header takes a badge. Generated Rust and Go build again for a struct that declares `distinct:` and answer 400 for a list with duplicate keys. `ess specify validate` refuses a `Decimal` literal that binary64 cannot hold exactly.</description>
+      <category>ess</category>
+      <category>notable</category>
+      <category>impact</category>
+    </item>
+    <item>
+      <guid isPermaLink="false">ess/ui-check-binding-paths-and-distinct-overlap-0.96.0</guid>
+      <title>ess ui check resolves every binding path, and two more refusals are told apart</title>
+      <link>https://github.com/beyond10x/ess/releases/tag/0.96.0</link>
+      <pubDate>Fri, 13 Nov 2026 00:00:00 GMT</pubDate>
+      <description>`ess ui check` resolves the root and the section of every binding path and reports a state, parameter or section that is not in scope. Two errors of one wire name bind on one status where a field tells their bodies apart. Synthesis sends the overlap of two refusals when one guard is a `distinct` predicate over a list.</description>
+      <category>ess</category>
+      <category>notable</category>
+      <category>impact</category>
+    </item>
+    <item>
       <guid isPermaLink="false">ess/fixture-effects-and-struct-invariant-checks-0.94.0</guid>
       <title>Fixture mode applies a command&apos;s effect, and generated decoders check struct invariants</title>
       <link>https://github.com/beyond10x/ess/releases/tag/0.94.0</link>

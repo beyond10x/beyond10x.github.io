@@ -2,6 +2,52 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "ess/record-groups-header-badges-and-struct-distinct-decoders-0.95.0",
+      "id": "ess/record-groups-header-badges-and-struct-distinct-decoders-0.95.0",
+      "repository": "ess",
+      "publishedAt": "2026-11-13T00:00:00Z",
+      "title": "Records group their fields, a page header takes a badge, and generated decoders check a struct's distinct keys",
+      "summary": "In `ess-ui/1` a record groups its fields under headings and a page header takes a badge. Generated Rust and Go build again for a struct that declares `distinct:` and answer 400 for a list with duplicate keys. `ess specify validate` refuses a `Decimal` literal that binary64 cannot hold exactly.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.95.0",
+        "version": "0.95.0"
+      },
+      "journeys": [
+        "specify",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/ui-check-binding-paths-and-distinct-overlap-0.96.0",
+      "id": "ess/ui-check-binding-paths-and-distinct-overlap-0.96.0",
+      "repository": "ess",
+      "publishedAt": "2026-11-13T00:00:00Z",
+      "title": "ess ui check resolves every binding path, and two more refusals are told apart",
+      "summary": "`ess ui check` resolves the root and the section of every binding path and reports a state, parameter or section that is not in scope. Two errors of one wire name bind on one status where a field tells their bodies apart. Synthesis sends the overlap of two refusals when one guard is a `distinct` predicate over a list.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.96.0",
+        "version": "0.96.0"
+      },
+      "journeys": [
+        "specify",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
       "key": "eventlog/0.9.4",
       "id": "eventlog/0.9.4",
       "repository": "eventlog",
