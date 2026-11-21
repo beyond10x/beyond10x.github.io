@@ -3562,7 +3562,7 @@
       "qualifiedTitle": "Runners and reports | ESS",
       "project": "ess",
       "projectName": "ESS",
-      "description": "Run a suite against a built-in target, a generated Go or TypeScript package, or a Rust target, and read what the report counts and proves.",
+      "description": "Run a suite against a built-in target, a generated Go or TypeScript package, an adapter process in any language, or a Rust target, and read what the report counts and proves.",
       "documentType": "how-to",
       "audiences": [
         "adopter",
@@ -3601,6 +3601,29 @@
         "reference"
       ],
       "sourcePath": "website/docs/guides/verify/synthesize-a-suite.md"
+    },
+    {
+      "route": "/docs/ess/guides/verify/target-process/",
+      "title": "An implementation in any language",
+      "qualifiedTitle": "An implementation in any language | ESS",
+      "project": "ess",
+      "projectName": "ESS",
+      "description": "Hold a program written in any language to a suite: ess starts your adapter, asks it the suite's questions as JSON lines on its standard input and output, and judges the answers itself.",
+      "documentType": "how-to",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "experiences": [
+        "try-spec-driven-development"
+      ],
+      "support": "preview",
+      "access": "public",
+      "compatibility": false,
+      "tasks": [
+        "reference"
+      ],
+      "sourcePath": "website/docs/guides/verify/target-process.md"
     },
     {
       "route": "/docs/ess/guides/write-a-specification/",
