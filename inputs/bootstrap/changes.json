@@ -2,6 +2,53 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "agentplugins/0.27.0",
+      "id": "agentplugins/0.27.0",
+      "repository": "agentplugins",
+      "publishedAt": "2026-11-23T20:37:14Z",
+      "title": "Agent Plugins 0.27.0",
+      "summary": "Agent Plugins released version 0.27.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.27.0",
+        "version": "0.27.0"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "identity/0.5.9",
+      "id": "identity/0.5.9",
+      "repository": "identity",
+      "publishedAt": "2026-11-23T15:53:53Z",
+      "title": "Identity 0.5.9",
+      "summary": "Identity released version 0.5.9.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/identity/releases/tag/0.5.9",
+        "version": "0.5.9"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "identity/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "entity-runtime/0.33.1",
       "id": "entity-runtime/0.33.1",
       "repository": "entity-runtime",
